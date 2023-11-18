@@ -25,7 +25,7 @@ export default function DashboardPage() {
   return (
     <>
       <div className="h-screen w-full bg-zinc-50 flex">
-        <div className="flex flex-col justify-between h-full w-[250px] pt-5 px-3">
+        <div className="flex flex-col justify-between min-h-[600px] h-full w-[250px] pt-5 px-3">
           <div>
             <div className="flex items-center">
               <div className="flex items-center justify-center w-7 h-7 bg-black text-white rounded-full text-md font-extrabold">
@@ -99,7 +99,9 @@ export default function DashboardPage() {
             />
           </div>
         </div>
-        <div className="flex-auto bg-white mt-3 rounded-tl-2xl shadow-sm border-zinc-950/5 border"></div>
+        <div className="flex-auto bg-white mt-3 rounded-tl-2xl shadow-sm border-zinc-950/5 border p-4">
+          <div className="font-extrabold text-xl">Home</div>
+        </div>
       </div>
     </>
   );
