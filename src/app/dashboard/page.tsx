@@ -1,9 +1,10 @@
 "use client";
 
+import NavItem from "@/components/menu/nav-item";
+import NavUser from "@/components/menu/nav-user";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import NavItem from "@/components/ui/menu/nav-item";
-import NavUser from "@/components/ui/menu/nav-user";
 import { Separator } from "@/components/ui/separator";
 import {
   Briefcase,
@@ -40,6 +41,7 @@ export default function DashboardPage() {
               icon={House}
               label="Home"
               onClick={() => router.push("dashboard")}
+              selected={true}
             />
             <NavItem
               icon={Calendar}
@@ -101,6 +103,25 @@ export default function DashboardPage() {
         </div>
         <div className="flex-auto bg-white mt-3 rounded-tl-2xl shadow-sm border-zinc-950/5 border p-4">
           <div className="font-extrabold text-xl">Home</div>
+          <div className="flex items-center justify-between shadow-sm border-green-500/25 border rounded-md p-3 mt-2 bg-green-50">
+            <div>
+              <div className="font-bold ">Welcome to Hirer!</div>
+              <div className="font-light mt-1">
+                Hirer is your go-to AI assistant for managing your
+                business&apos;s job postings, candidates and interviews.
+              </div>
+              <div className="font-light">
+                Get started by adding your first job for hire.
+              </div>
+            </div>
+            <Button
+              variant="default"
+              className="bg-green-900 hover:bg-green-800"
+            >
+              Create Job
+              <Briefcase className="ml-2" />
+            </Button>
+          </div>
         </div>
       </div>
     </>
