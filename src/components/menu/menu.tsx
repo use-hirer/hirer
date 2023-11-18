@@ -16,17 +16,10 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "../ui/alert-dialog";
 import { Badge } from "../ui/badge";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
+import FeatureModal from "./feature-modal";
 import NavAction from "./nav-action";
 import NavLink from "./nav-link";
 import NavUser from "./nav-user";
@@ -53,24 +46,6 @@ type SeparatorMenuItem = {
 };
 
 type MenuItem = LinkMenuItem | SeparatorMenuItem | ActionMenuItem;
-
-interface FeatureProps {
-  icon: string;
-  title: string;
-  description: string;
-}
-
-const Feature: React.FC<FeatureProps> = ({ icon, title, description }) => {
-  return (
-    <div className="flex items-start space-x-3">
-      <div className="text-xl">{icon}</div>
-      <div>
-        <h3 className="text-md font-semibold">{title}</h3>
-        <p className="text-xs text-gray-600">{description}</p>
-      </div>
-    </div>
-  );
-};
 
 const NavigationMenu: React.FC = () => {
   const pathname = usePathname();
@@ -194,42 +169,7 @@ const NavigationMenu: React.FC = () => {
           />
         </div>
       </div>
-      <AlertDialog
-        open={interviewModal}
-        onOpenChange={(open) => setInterviewModal(open)}
-      >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Elevate Your Hiring Experience!</AlertDialogTitle>
-            <div className="text-zinc-700 text-sm">
-              Get ready to revolutionize your interview process with Hirer
-              interviews. This innovative tool brings the power of AI directly
-              into your hiring sessions, ensuring a more efficient and
-              insightful experience.
-            </div>
-            <div className="py-3 flex gap-3 flex-col">
-              <Feature
-                icon="📝"
-                title="AI-Driven Note-Taking"
-                description="Never miss a detail! Our AI system meticulously captures key points from each interview, allowing you to focus fully on the candidate."
-              />
-              <Feature
-                icon="🤔"
-                title="Smart Question Suggestions"
-                description="Unsure what to ask next? Let AI assist you with context-relevant, tailored questions that delve deeper into candidates' skills and potential."
-              />
-              <Feature
-                icon="🛡️"
-                title="Bias-Reduced Assessments"
-                description="Our sophisticated algorithms help mitigate unconscious biases, promoting a fair and inclusive evaluation process."
-              />
-            </div>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction>Close</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <FeatureModal open={interviewModal} setOpen={setInterviewModal} />
     </>
   );
 };
