@@ -1,9 +1,8 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
-import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { UserAuthForm } from "./use-auth-form";
 
 export const metadata: Metadata = {
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
 export default function AuthenticationPage() {
   return (
     <>
-      <div className="container relative h-[100dvh] min-h-[600px] flex-col grid place-items-center lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="container relative h-screen min-h-[600px] flex-col grid place-items-center lg:max-w-none lg:grid-cols-2 lg:px-0">
         <Link
           href="/examples/authentication"
           className={cn(
