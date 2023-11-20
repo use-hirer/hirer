@@ -55,13 +55,13 @@ const NavigationMenu: React.FC = () => {
     {
       title: "Home",
       icon: House,
-      path: "/dashboard",
+      path: "/",
       type: "Link",
     },
     {
       title: "Activity",
       icon: Calendar,
-      path: "/dashboard/activity",
+      path: "/activity",
       type: "Link",
     },
     {
@@ -70,13 +70,13 @@ const NavigationMenu: React.FC = () => {
     {
       title: "Jobs",
       icon: Briefcase,
-      path: "/dashboard/jobs",
+      path: "/jobs",
       type: "Link",
     },
     {
       title: "Candidates",
       icon: Users,
-      path: "/dashboard/candidates",
+      path: "/candidates",
       type: "Link",
     },
     {
@@ -85,19 +85,19 @@ const NavigationMenu: React.FC = () => {
     {
       title: "Question Pool",
       icon: SealQuestion,
-      path: "/dashboard/question-pool",
+      path: "/question-pool",
       type: "Link",
     },
     {
       title: "Screeners",
       icon: Webcam,
-      path: "/dashboard/screeners",
+      path: "/screeners",
       type: "Link",
     },
     {
       title: "Interviews",
       icon: ChatsCircle,
-      path: "/dashboard/interviews",
+      path: "/interviews",
       action: () => {
         setInterviewModal(true);
       },
@@ -153,12 +153,12 @@ const NavigationMenu: React.FC = () => {
           })}
         </div>
         <div className="mb-3">
-          <NavLink icon={Info} label="Help" href="/dashboard/help" />
+          <NavLink icon={Info} label="Help" href="/settings" />
           <NavLink
             icon={Gear}
             label="Settings"
-            href="/dashboard/settings"
-            selected={pathname === "/dashboard/settings"}
+            href="/settings"
+            selected={pathname === "/settings"}
           />
           <Separator className="mt-2 mb-3" />
           <NavUser

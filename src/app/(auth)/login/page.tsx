@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { UserAuthForm } from "../components/auth/use-auth-form";
+import { UserAuthForm } from "../../../components/auth/use-auth-form";
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -25,7 +25,7 @@ export default function AuthenticationPage() {
         </Link>
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-zinc-900" />
-          <div className="relative z-20 flex items-center text-lg font-medium">
+          <div className="relative z-20 flex items-center text-lg font-extrabold">
             Hirer
           </div>
           <div className="relative z-20 mt-auto">
