@@ -112,9 +112,9 @@ const NavigationMenu: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-shrink-0 flex-col justify-between min-h-[600px] h-full w-[250px] pt-5 px-3">
+      <div className="hidden md:flex flex-shrink-0 flex-col top-0 left-0 justify-between min-h-[600px] h-screen fixed w-[250px] pt-5 px-3">
         <div>
-          <Link className="flex items-center select-none" href={"/dashboard"}>
+          <Link className="flex items-center select-none" href="/">
             <div className="flex items-center justify-center w-7 h-7 bg-black text-white rounded-full text-md font-extrabold">
               <Sparkle />
             </div>
