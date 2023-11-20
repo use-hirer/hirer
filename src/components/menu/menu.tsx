@@ -112,7 +112,7 @@ const NavigationMenu: React.FC = () => {
 
   return (
     <>
-      <div className="hidden md:flex flex-shrink-0 flex-col top-0 left-0 justify-between min-h-[600px] h-screen fixed w-[250px] pt-5 px-3">
+      <div className="hidden md:flex flex-shrink-0 flex-col top-0 left-0 justify-between h-screen fixed w-[250px] pt-5 px-3 overflow-y-auto">
         <div>
           <Link className="flex items-center select-none" href="/">
             <div className="flex items-center justify-center w-7 h-7 bg-black text-white rounded-full text-md font-extrabold">
@@ -152,7 +152,7 @@ const NavigationMenu: React.FC = () => {
             }
           })}
         </div>
-        <div className="mb-3">
+        <div className="mb-3 pt-10">
           <NavLink icon={Info} label="Help" href="/settings" />
           <NavLink
             icon={Gear}
