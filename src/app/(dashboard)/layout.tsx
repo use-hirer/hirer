@@ -9,7 +9,7 @@ export default function DashboardLayout({
     <>
       <div className="h-screen w-full bg-zinc-50 flex">
         <NavigationMenu />
-        <div className="flex-auto bg-white mt-3 rounded-tl-2xl rounded-bl-2xl shadow-sm border-zinc-950/5 border p-4 md:ml-[250px]">
+        <div className="overflow-y-scroll flex-auto bg-white mt-3 rounded-tl-2xl shadow-sm border-zinc-950/5 border p-4 md:ml-[250px]">
           {children}
         </div>
       </div>
