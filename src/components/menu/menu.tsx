@@ -13,6 +13,7 @@ import {
   Users,
   Webcam,
 } from "@phosphor-icons/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -110,9 +111,11 @@ const NavigationMenu: React.FC = () => {
     },
   ];
 
+  const session = useSession();
+
   return (
     <>
-      <div className="hidden md:flex flex-shrink-0 flex-col top-0 left-0 justify-between h-screen fixed w-[250px] pt-5 px-3 overflow-y-auto">
+      <div className="hidden md:flex flex-shrink-0 flex-col top-0 left-0 justify-between h-screen fixed w-[250px] pt-5 px-3 overflow-y-auto scroll-bar">
         <div>
           <Link className="flex items-center select-none" href="/">
             <div className="flex items-center justify-center w-7 h-7 bg-black text-white rounded-full text-md font-extrabold">
@@ -162,8 +165,8 @@ const NavigationMenu: React.FC = () => {
           />
           <Separator className="mt-2 mb-3" />
           <NavUser
-            avatarUrl="https://github.com/NickMandylas.png"
-            name="Nick Mandylas"
+            avatarUrl={session.data?.user?.image || ""}
+            name={session.data?.user?.name as string}
             role="Admin"
             fallbackInitials="NM"
           />

@@ -1,3 +1,4 @@
+import { Providers } from "@/components/providers";
 import { cn } from "@/lib/utils";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
@@ -22,7 +23,7 @@ export default function RootLayout({
           GeistSans.variable
         )}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
