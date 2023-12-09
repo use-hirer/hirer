@@ -38,7 +38,7 @@ export const MagicLink = ({ email, loginLink }: VercelInviteUserEmailProps) => {
                 src={`${baseUrl}/hirer-icon.png`}
                 width="50"
                 height="50"
-                alt="Vercel"
+                alt="Hirer"
                 className="my-0 mx-auto"
               />
             </Section>
