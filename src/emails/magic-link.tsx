@@ -70,8 +70,8 @@ export const MagicLink = ({ email, loginLink }: VercelInviteUserEmailProps) => {
               This invitation was intended for{" "}
               <span className="text-black">{email} </span>. If you were not
               expecting this invitation, you can ignore this email. If you are
-              concerned about your account's safety, please reply to this email
-              to get in touch with us.
+              concerned about your account&apos;s safety, please reply to this
+              email to get in touch with us.
             </Text>
           </Container>
         </Body>
