@@ -2,7 +2,8 @@
 
 import { CaretUpDown, CreditCard, Gear, User } from "@phosphor-icons/react";
 import { signOut } from "next-auth/react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import Image from "next/image";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,10 +30,19 @@ const NavUser: React.FC<NavUserProps> = ({
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none min-w-full">
         <div className="flex items-center gap-2 text-left">
-          <Avatar className="h-8 w-8 bg-black">
-            <AvatarImage src={avatarUrl} />
-            <AvatarFallback>{fallbackInitials}</AvatarFallback>
-          </Avatar>
+          {avatarUrl ? (
+            <Image
+              src={avatarUrl}
+              height={32}
+              width={32}
+              alt="Avatar Image"
+              className="rounded-full"
+            />
+          ) : (
+            <Avatar className="h-8 w-8 bg-black">
+              <AvatarFallback>{fallbackInitials}</AvatarFallback>
+            </Avatar>
+          )}
           <div>
             <div className="text-sm font-medium">{name}</div>
             <div className="text-xs font-normal">{role}</div>

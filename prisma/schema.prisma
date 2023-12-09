@@ -52,3 +52,10 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Jobs {
+  id          String    @id @default(cuid())
+  name        String
+  description String
+  expiration  DateTime?
+}
