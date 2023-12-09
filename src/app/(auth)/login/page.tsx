@@ -3,14 +3,22 @@ import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { getServerSession } from "next-auth";
+import { RedirectType, redirect } from "next/navigation";
 import { UserAuthForm } from "../../../components/auth/use-auth-form";
 
 export const metadata: Metadata = {
-  title: "Authentication",
-  description: "Authentication forms built using the components.",
+  title: "Hirer | Login",
+  description: "Login into the Hirer console.",
 };
 
-export default function AuthenticationPage() {
+export default async function AuthenticationPage() {
+  const session = await getServerSession();
+
+  if (session?.user) {
+    redirect("/", RedirectType.push);
+  }
+
   return (
     <>
       <div className="container relative h-screen min-h-[600px] flex-col grid place-items-center lg:max-w-none lg:grid-cols-2 lg:px-0">

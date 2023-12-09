@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import { IconProps } from "@phosphor-icons/react";
 import Link from "next/link";

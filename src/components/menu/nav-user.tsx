@@ -1,3 +1,5 @@
+"use client";
+
 import { CaretUpDown, CreditCard, Gear, User } from "@phosphor-icons/react";
 import { signOut } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";

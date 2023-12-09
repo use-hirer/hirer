@@ -1,117 +1,16 @@
-"use client";
+"use server";
 
-import {
-  Briefcase,
-  Calendar,
-  ChatsCircle,
-  Gear,
-  House,
-  Icon,
-  Info,
-  SealQuestion,
-  Sparkle,
-  Users,
-  Webcam,
-} from "@phosphor-icons/react";
-import { useSession } from "next-auth/react";
+import { Gear, Info, Sparkle } from "@phosphor-icons/react/dist/ssr";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { Badge } from "../ui/badge";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
-import FeatureModal from "./feature-modal";
-import NavAction from "./nav-action";
+import MenuLayout from "./layout";
 import NavLink from "./nav-link";
 import NavUser from "./nav-user";
 
-type LinkMenuItem = {
-  title: string;
-  icon: Icon;
-  path: string;
-  suffix?: React.ReactNode;
-  type: "Link";
-};
-
-type ActionMenuItem = {
-  title: string;
-  icon: Icon;
-  path: string;
-  action: () => void;
-  suffix?: React.ReactNode;
-  type: "Action";
-};
-
-type SeparatorMenuItem = {
-  type: "Separator";
-};
-
-type MenuItem = LinkMenuItem | SeparatorMenuItem | ActionMenuItem;
-
-const NavigationMenu: React.FC = () => {
-  const pathname = usePathname();
-  const [interviewModal, setInterviewModal] = useState(false);
-
-  const MenuLayout: MenuItem[] = [
-    {
-      title: "Home",
-      icon: House,
-      path: "/",
-      type: "Link",
-    },
-    {
-      title: "Activity",
-      icon: Calendar,
-      path: "/activity",
-      type: "Link",
-    },
-    {
-      type: "Separator",
-    },
-    {
-      title: "Jobs",
-      icon: Briefcase,
-      path: "/jobs",
-      type: "Link",
-    },
-    {
-      title: "Candidates",
-      icon: Users,
-      path: "/candidates",
-      type: "Link",
-    },
-    {
-      type: "Separator",
-    },
-    {
-      title: "Question Pool",
-      icon: SealQuestion,
-      path: "/question-pool",
-      type: "Link",
-    },
-    {
-      title: "Screeners",
-      icon: Webcam,
-      path: "/screeners",
-      type: "Link",
-    },
-    {
-      title: "Interviews",
-      icon: ChatsCircle,
-      path: "/interviews",
-      action: () => {
-        setInterviewModal(true);
-      },
-      suffix: (
-        <Badge variant="outline" className="ml-2 text-[10px]">
-          Coming Soon
-        </Badge>
-      ),
-      type: "Action",
-    },
-  ];
-
-  const session = useSession();
+const NavigationMenu: React.FC = async () => {
+  const session = await getServerSession();
 
   return (
     <>
@@ -126,34 +25,7 @@ const NavigationMenu: React.FC = () => {
           <Separator className="my-3" />
           <Input className="bg-white h-8" placeholder="Search" />
           <Separator className="my-3" />
-          {MenuLayout.map((item, index) => {
-            switch (item.type) {
-              case "Link":
-                return (
-                  <NavLink
-                    key={index}
-                    icon={item.icon}
-                    label={item.title}
-                    href={item.path}
-                    suffix={item.suffix}
-                    selected={pathname === item.path}
-                  />
-                );
-              case "Action":
-                return (
-                  <NavAction
-                    key={index}
-                    icon={item.icon}
-                    label={item.title}
-                    onClick={item.action}
-                    suffix={item.suffix}
-                    selected={pathname === item.path}
-                  />
-                );
-              case "Separator":
-                return <Separator className="my-2" key={index} />;
-            }
-          })}
+          <MenuLayout />
         </div>
         <div className="mb-3 pt-10">
           <NavLink icon={Info} label="Help" href="/settings" />
@@ -161,18 +33,17 @@ const NavigationMenu: React.FC = () => {
             icon={Gear}
             label="Settings"
             href="/settings"
-            selected={pathname === "/settings"}
+            selected={"/settings" === "/settings"}
           />
           <Separator className="mt-2 mb-3" />
           <NavUser
-            avatarUrl={session.data?.user?.image || ""}
-            name={session.data?.user?.name as string}
+            avatarUrl={session?.user?.image || ""}
+            name={session?.user?.name as string}
             role="Admin"
             fallbackInitials="NM"
           />
         </div>
       </div>
-      <FeatureModal open={interviewModal} setOpen={setInterviewModal} />
     </>
   );
 };
