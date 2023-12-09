@@ -13,13 +13,14 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [email, setEmail] = React.useState("");
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoading(true);
 
     await signIn("email", {
-      email: "nickmandylas@gmail.com",
+      email: email,
       callbackUrl: "/",
     });
 
@@ -41,6 +42,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
+              value={email}
+              onChange={(e) => setEmail(e.currentTarget.value)}
               disabled={isLoading}
             />
           </div>
