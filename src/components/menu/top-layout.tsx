@@ -41,7 +41,7 @@ type SeparatorMenuItem = {
 
 type MenuItem = LinkMenuItem | SeparatorMenuItem | ActionMenuItem;
 
-const MenuLayout: React.FC = () => {
+const TopMenuLayout: React.FC = () => {
   const pathname = usePathname();
   const [interviewModal, setInterviewModal] = useState(false);
 
@@ -139,4 +139,4 @@ const MenuLayout: React.FC = () => {
   );
 };
 
-export default MenuLayout;
+export default TopMenuLayout;

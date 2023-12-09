@@ -1,13 +1,13 @@
 "use server";
 
-import { Gear, Info, Sparkle } from "@phosphor-icons/react/dist/ssr";
+import { Sparkle } from "@phosphor-icons/react/dist/ssr";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
-import MenuLayout from "./layout";
-import NavLink from "./nav-link";
+import BottomMenuLayout from "./bottom-layout";
 import NavUser from "./nav-user";
+import TopMenuLayout from "./top-layout";
 
 const NavigationMenu: React.FC = async () => {
   const session = await getServerSession();
@@ -25,16 +25,10 @@ const NavigationMenu: React.FC = async () => {
           <Separator className="my-3" />
           <Input className="bg-white h-8" placeholder="Search" />
           <Separator className="my-3" />
-          <MenuLayout />
+          <TopMenuLayout />
         </div>
         <div className="mb-3 pt-10">
-          <NavLink icon={Info} label="Help" href="/settings" />
-          <NavLink
-            icon={Gear}
-            label="Settings"
-            href="/settings"
-            selected={"/settings" === "/settings"}
-          />
+          <BottomMenuLayout />
           <Separator className="mt-2 mb-3" />
           <NavUser
             avatarUrl={session?.user?.image || ""}
