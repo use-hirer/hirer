@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { CircleNotch, GoogleLogo } from "@phosphor-icons/react";
+import { signIn } from "next-auth/react";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -17,9 +18,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     event.preventDefault();
     setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    await signIn("email", {
+      email: "nickmandylas@gmail.com",
+      callbackUrl: "/",
+    });
+
+    setIsLoading(false);
   }
 
   return (

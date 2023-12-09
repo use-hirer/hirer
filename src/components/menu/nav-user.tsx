@@ -1,6 +1,7 @@
 "use client";
 
 import { CaretUpDown, CreditCard, Gear, User } from "@phosphor-icons/react";
+import { signOut } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
@@ -59,7 +60,9 @@ const NavUser: React.FC<NavUserProps> = ({
           <CreditCard className="ml-auto" />
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Log Out</DropdownMenuItem>
+        <DropdownMenuItem onClick={async () => await signOut()}>
+          Log Out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
