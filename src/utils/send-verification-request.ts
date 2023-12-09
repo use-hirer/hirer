@@ -15,10 +15,10 @@ export const sendVerificationRequest = async (
     } else {
       await resend.emails.send({
         from: "team@updates.usehirer.com",
-        to: params.identifier,
-        subject: `Log in to ${host}`,
+        to: identifier,
+        subject: `Your Hirer Login Link`,
         text: text(url, host),
-        react: MagicLinkEmail({ url, host }),
+        react: MagicLinkEmail({ email: identifier, loginLink: url }),
       });
     }
   } catch (error) {

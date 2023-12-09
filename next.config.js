@@ -8,6 +8,12 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    serverComponentsExternalPackages: [
+      "@react-email/render",
+      "@react-email/tailwind",
+    ],
+  },
 };
 
 module.exports = nextConfig;
