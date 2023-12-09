@@ -19,12 +19,9 @@ interface VercelInviteUserEmailProps {
   loginLink: string;
 }
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3001";
-
 export const MagicLink = ({ email, loginLink }: VercelInviteUserEmailProps) => {
   const previewText = `Your Hirer Login Link`;
+  const { host } = new URL(loginLink);
 
   return (
     <Html>
@@ -35,7 +32,7 @@ export const MagicLink = ({ email, loginLink }: VercelInviteUserEmailProps) => {
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
             <Section className="mt-[32px]">
               <Img
-                src={`${baseUrl}/hirer-icon.png`}
+                src={`${host}/hirer-icon.png`}
                 width="50"
                 height="50"
                 alt="Hirer"
