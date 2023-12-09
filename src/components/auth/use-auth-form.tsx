@@ -60,12 +60,25 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
+      <Button
+        variant="outline"
+        type="button"
+        disabled={isLoading}
+        onClick={async () => {
+          setIsLoading(true);
+
+          await signIn("google", {
+            callbackUrl: "/",
+          });
+
+          setIsLoading(false);
+        }}
+      >
         {isLoading ? (
           <CircleNotch className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <GoogleLogo className="mr-2 h-4 w-4" />
-        )}{" "}
+        )}
         Google
       </Button>
     </div>
