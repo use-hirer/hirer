@@ -14,7 +14,7 @@ export const sendVerificationRequest = async (
       return;
     } else {
       await resend.emails.send({
-        from: "team@updates.usehirer.com",
+        from: "Hirer <team@updates.usehirer.com>",
         to: identifier,
         subject: `Your Hirer Login Link`,
         text: text(url, host),
