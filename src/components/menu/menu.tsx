@@ -33,6 +33,7 @@ const NavigationMenu: React.FC = async () => {
           <NavUser
             avatarUrl={session?.user?.image || ""}
             name={session?.user?.name as string}
+            email={session?.user?.email as string}
             role="Admin"
             fallbackInitials="NM"
           />

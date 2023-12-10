@@ -3,7 +3,6 @@
 import { CaretUpDown, CreditCard, Gear, User } from "@phosphor-icons/react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
-import { Avatar, AvatarFallback } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,21 +15,16 @@ import {
 interface NavUserProps {
   name: string;
   role: string;
+  email: string;
   avatarUrl: string;
-  fallbackInitials: string;
 }
 
-const NavUser: React.FC<NavUserProps> = ({
-  name,
-  role,
-  avatarUrl,
-  fallbackInitials,
-}) => {
+const NavUser: React.FC<NavUserProps> = ({ name, role, email, avatarUrl }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none min-w-full">
         <div className="flex items-center gap-2 text-left">
-          {avatarUrl ? (
+          {false ? (
             <Image
               src={avatarUrl}
               height={32}
@@ -39,9 +33,13 @@ const NavUser: React.FC<NavUserProps> = ({
               className="rounded-full"
             />
           ) : (
-            <Avatar className="h-8 w-8 bg-black">
-              <AvatarFallback>{fallbackInitials}</AvatarFallback>
-            </Avatar>
+            <Image
+              src={"/user-image-default.png"}
+              height={32}
+              width={32}
+              alt="Avatar Image"
+              className="rounded-full"
+            />
           )}
           <div>
             <div className="text-sm font-medium">{name}</div>
@@ -53,7 +51,7 @@ const NavUser: React.FC<NavUserProps> = ({
       <DropdownMenuContent side="top" align="end">
         <DropdownMenuLabel>
           <div className="text-sm font-medium">{name}</div>
-          <div className="text-xs font-normal">nickmandylas@gmail.com</div>
+          <div className="text-xs font-normal">{email}</div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
