@@ -41,9 +41,9 @@ export default async function AuthenticationPage() {
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
               <p className="text-lg">
-                Did you know? Hirer's AI-driven search efficiently scours every
-                detail in applicant resumes, guaranteeing that no information
-                goes unnoticed.
+                Did you know? Hirer&apos;s AI-driven search efficiently scours
+                every detail in applicant resumes, guaranteeing that no
+                information goes unnoticed.
               </p>
               <footer className="text-sm text-orange-500">
                 usehirer.com tip #4
