@@ -35,7 +35,6 @@ const NavigationMenu: React.FC = async () => {
             name={session?.user?.name as string}
             email={session?.user?.email as string}
             role="Admin"
-            fallbackInitials="NM"
           />
         </div>
       </div>
