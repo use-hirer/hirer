@@ -37,8 +37,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       email: email,
       callbackUrl: "/",
     });
-
-    setIsLoading(false);
   }
 
   return (
@@ -90,8 +88,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           await signIn("google", {
             callbackUrl: "/",
           });
-
-          setIsLoading(false);
         }}
       >
         {isLoading && selectedMethod === "Google" ? (
