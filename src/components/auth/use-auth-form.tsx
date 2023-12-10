@@ -37,6 +37,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       email: email,
       callbackUrl: "/",
     });
+
+    setIsLoading(false);
   }
 
   return (
