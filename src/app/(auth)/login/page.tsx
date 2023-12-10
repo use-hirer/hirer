@@ -21,7 +21,7 @@ export default async function AuthenticationPage() {
 
   return (
     <>
-      <div className="container relative h-screen min-h-[600px] flex-col grid place-items-center lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="container relative h-screen min-h-[600px] flex-col grid place-items-center lg:max-w-none lg:grid-cols-2 lg:px-0 bg-white">
         <Link
           href="/examples/authentication"
           className={cn(
