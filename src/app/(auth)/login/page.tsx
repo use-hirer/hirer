@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Sparkle } from "@phosphor-icons/react/dist/ssr";
 import { getServerSession } from "next-auth";
 import { RedirectType, redirect } from "next/navigation";
+import { Toaster } from "sonner";
 import { UserAuthForm } from "../../../components/auth/use-auth-form";
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export default async function AuthenticationPage() {
     <>
       <div className="container relative h-screen min-h-[600px] flex-col grid place-items-center lg:max-w-none lg:grid-cols-2 lg:px-0 bg-white">
         <Link
-          href="/examples/authentication"
+          href="/sign-up"
           className={cn(
             buttonVariants({ variant: "outline" }),
             "absolute right-4 top-4 md:right-8 md:top-8"
@@ -62,26 +63,10 @@ export default async function AuthenticationPage() {
               </p>
             </div>
             <UserAuthForm />
-            <p className="px-8 text-center text-sm text-muted-foreground">
-              By clicking continue, you agree to our{" "}
-              <Link
-                href="/terms"
-                className="underline underline-offset-4 hover:text-primary"
-              >
-                Terms of Service
-              </Link>{" "}
-              and{" "}
-              <Link
-                href="/privacy"
-                className="underline underline-offset-4 hover:text-primary"
-              >
-                Privacy Policy
-              </Link>
-              .
-            </p>
           </div>
         </div>
       </div>
+      <Toaster richColors position="top-right" closeButton />
     </>
   );
 }

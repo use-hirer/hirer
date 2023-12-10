@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { CircleNotch } from "@phosphor-icons/react";
 import { signIn } from "next-auth/react";
+import { toast } from "sonner";
 import GoogleIcon from "../icons/google";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -15,9 +16,21 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState("");
+  const [selectedMethod, setSelectedMethod] = React.useState<
+    "Email" | "Google" | null
+  >(null);
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
+
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    setSelectedMethod("Email");
     setIsLoading(true);
 
     await signIn("email", {
@@ -49,7 +62,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             />
           </div>
           <Button disabled={isLoading}>
-            {isLoading && <CircleNotch className="mr-2 h-4 w-4 animate-spin" />}
+            {isLoading && selectedMethod === "Email" && (
+              <CircleNotch className="mr-2 h-4 w-4 animate-spin" />
+            )}
             Sign In with Email
           </Button>
         </div>
@@ -69,6 +84,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         type="button"
         disabled={isLoading}
         onClick={async () => {
+          setSelectedMethod("Google");
           setIsLoading(true);
 
           await signIn("google", {
@@ -78,7 +94,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           setIsLoading(false);
         }}
       >
-        {isLoading ? (
+        {isLoading && selectedMethod === "Google" ? (
           <CircleNotch className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           // <GoogleLogo className="mr-2 h-4 w-4" />

@@ -24,7 +24,7 @@ const NavUser: React.FC<NavUserProps> = ({ name, role, email, avatarUrl }) => {
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none min-w-full">
         <div className="flex items-center gap-2 text-left">
-          {false ? (
+          {avatarUrl ? (
             <Image
               src={avatarUrl}
               height={32}
