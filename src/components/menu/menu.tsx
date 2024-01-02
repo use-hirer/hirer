@@ -1,5 +1,6 @@
 "use server";
 
+import { authOptions } from "@/lib/auth";
 import { Sparkle } from "@phosphor-icons/react/dist/ssr";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
@@ -10,7 +11,7 @@ import NavUser from "./nav-user";
 import TopMenuLayout from "./top-layout";
 
 const NavigationMenu: React.FC = async () => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   return (
     <>
