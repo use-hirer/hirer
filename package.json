@@ -26,6 +26,7 @@
     "@react-email/components": "^0.0.12",
     "@react-email/render": "^0.0.10",
     "@tanstack/react-table": "^8.11.2",
+    "@tremor/react": "^3.12.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",

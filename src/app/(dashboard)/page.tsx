@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
+import KPICard from "@/components/dashboard/kpi-card";
 import { Separator } from "@/components/ui/separator";
 import { List } from "@phosphor-icons/react/dist/ssr";
 // import { Metadata } from "next";
@@ -23,23 +23,39 @@ export default function DashboardPage() {
         <div className="w-full">
           <div className="font-extrabold text-xl">Dashboard</div>
           <Separator className="mt-2 mb-4" />
-          <div className="grid grid-cols-4 gap-4">
-            <Card className="shadow-none rounded p-4 border-neutral-200">
-              <div className="font-bold text-sm">Vistors last 30 days</div>
-              <div className="text-xs font-light text-zinc-500">
-                Last 4 weeks
-              </div>
-              <div className="text-3xl font-extrabold pt-2">3277</div>
-            </Card>
-            <Card className="shadow-none rounded p-4 border-neutral-200">
-              2
-            </Card>
-            <Card className="shadow-none rounded p-4 border-neutral-200">
-              3
-            </Card>
-            <Card className="shadow-none rounded p-4 border-neutral-200">
-              4
-            </Card>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <KPICard
+              increase="positive"
+              percentageChange={3.7}
+              value="3277"
+              timePeriod="Last 4 weeks"
+              title="Vistors"
+              deltaType="moderateIncrease"
+            />
+            <KPICard
+              increase="negative"
+              percentageChange={1.8}
+              value="52"
+              timePeriod="Last 4 weeks"
+              title="Applications"
+              deltaType="moderateIncrease"
+            />
+            <KPICard
+              increase="positive"
+              percentageChange={12.8}
+              value="41"
+              timePeriod="Last 4 weeks"
+              title="Active Applications"
+              deltaType="increase"
+            />
+            <KPICard
+              increase="positive"
+              percentageChange={0}
+              value="89"
+              timePeriod="Last 4 weeks"
+              title="Total Followers"
+              deltaType="unchanged"
+            />
           </div>
         </div>
       </div>
