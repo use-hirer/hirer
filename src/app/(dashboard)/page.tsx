@@ -1,13 +1,7 @@
 import KPICard from "@/components/dashboard/kpi-card";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 // import { Metadata } from "next";
 import Link from "next/link";
@@ -68,34 +62,42 @@ export default function DashboardPage() {
                 <ArrowRight />
               </Link>
             </div>
-            <div className="bg-gray-100/50 text-gray-600 border rounded-sm mt-2">
-              <Table>
-                <TableHeader className="text-gray-600">
-                  <TableRow className="w-full border-none ">
-                    <TableHead>Job Title</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Location</TableHead>
-                    <TableHead>Department</TableHead>
-                    <TableHead>Hiring Manager</TableHead>
-                  </TableRow>
-                </TableHeader>
-              </Table>
-            </div>
-            <div className="mt-2 border rounded-sm">
-              <Table>
-                <TableBody className="text-gray-600">
-                  <TableRow className="w-full border-none">
-                    <TableCell className="font-bold text-black">
-                      Senior Product Designer
-                    </TableCell>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Location</TableHead>
-                    <TableHead>Department</TableHead>
-                    <TableHead>Hiring Manager</TableHead>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <table className="min-w-full border-separate border-spacing-0 mt-2">
+              <thead className="bg-gray-100/50">
+                <tr>
+                  <th className="pl-2 py-2.5 text-left text-sm font-medium text-muted-foreground border border-r-0 rounded-sm">
+                    Job Title
+                  </th>
+                  <th className="pl-2 py-2 text-left text-sm font-medium text-muted-foreground border border-l-0 border-r-0">
+                    Status
+                  </th>
+                  <th className="pl-2 py-2 text-left text-sm font-medium text-muted-foreground border border-l-0 border-r-0">
+                    Location
+                  </th>
+                  <th className="pl-2 py-2 text-left text-sm font-medium text-muted-foreground border border-l-0 border-r-0">
+                    Department
+                  </th>
+                  <th className="pl-2 py-2 text-left text-sm font-medium text-muted-foreground border border-l-0 border-r-0">
+                    Hiring Manager
+                  </th>
+                  <th className="pl-2 py-2 text-left text-sm font-medium text-muted-foreground border border-l-0 rounded-sm" />
+                </tr>
+              </thead>
+              <TableBody className="text-gray-600">
+                <TableRow className="w-full border-none">
+                  <TableCell className="font-bold text-black">
+                    Senior Product Designer
+                  </TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Location</TableCell>
+                  <TableCell>Department</TableCell>
+                  <TableCell>Hiring Manager</TableCell>
+                  <TableCell>
+                    <Button>Archive</Button>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </table>
           </div>
           <div className="mt-4">
             <div className="flex gap-2 items-center">
