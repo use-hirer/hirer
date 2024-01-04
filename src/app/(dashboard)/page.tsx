@@ -1,3 +1,4 @@
+import CandidatesTable from "@/components/dashboard/candidates-table";
 import JobsTable from "@/components/dashboard/jobs-table";
 import KPICard from "@/components/dashboard/kpi-card";
 import { Separator } from "@/components/ui/separator";
@@ -74,6 +75,7 @@ export default function DashboardPage() {
                 <ArrowRight />
               </Link>
             </div>
+            <CandidatesTable />
           </div>
         </div>
       </div>
