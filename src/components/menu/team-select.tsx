@@ -10,6 +10,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandSeparator,
 } from "@/components/ui/command";
 import {
   Popover,
@@ -17,7 +18,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { Cube, SmileySad } from "@phosphor-icons/react";
+import { Cube, PlusCircle, SmileySad } from "@phosphor-icons/react";
 
 const frameworks = [
   {
@@ -84,6 +85,12 @@ export function TeamSelect() {
               </CommandItem>
             ))}
           </CommandGroup>
+        </Command>
+        <Command>
+          <CommandSeparator />
+          <div className="text-sm flex items-center justify-center py-3 gap-1 cursor-pointer select-none hover:bg-black hover:text-white m-1 rounded">
+            Create Team <PlusCircle size={16} />
+          </div>
         </Command>
       </PopoverContent>
     </Popover>
