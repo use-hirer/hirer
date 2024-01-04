@@ -2,6 +2,14 @@
 
 import KPICard from "@/components/dashboard/kpi-card";
 import { Separator } from "@/components/ui/separator";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { ArrowRight, List } from "@phosphor-icons/react/dist/ssr";
 // import { Metadata } from "next";
 import { signOut } from "next-auth/react";
@@ -69,7 +77,7 @@ export default function DashboardPage() {
                 <ArrowRight />
               </Link>
             </div>
-            {/* <div className="bg-gray-100/50 text-gray-600 border rounded-sm mt-2">
+            <div className="bg-gray-100/50 text-gray-600 border rounded-sm mt-2">
               <Table>
                 <TableHeader className="text-gray-600">
                   <TableRow className="w-full border-none ">
@@ -96,7 +104,7 @@ export default function DashboardPage() {
                   </TableRow>
                 </TableBody>
               </Table>
-            </div> */}
+            </div>
           </div>
           <div className="mt-4">
             <div className="flex gap-2 items-center">

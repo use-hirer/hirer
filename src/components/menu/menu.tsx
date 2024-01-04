@@ -4,10 +4,10 @@ import { authOptions } from "@/lib/auth";
 import { Sparkle } from "@phosphor-icons/react/dist/ssr";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 import BottomMenuLayout from "./bottom-layout";
 import NavUser from "./nav-user";
+import { TeamSelect } from "./team-select";
 import TopMenuLayout from "./top-layout";
 
 const NavigationMenu: React.FC = async () => {
@@ -24,7 +24,8 @@ const NavigationMenu: React.FC = async () => {
             <div className="font-bold text-xl ml-1">Hirer</div>
           </Link>
           <Separator className="my-3" />
-          <Input className="bg-white h-8" placeholder="Search" />
+          {/* <Input className="bg-white h-8" placeholder="Search" /> */}
+          <TeamSelect />
           <Separator className="my-3" />
           <TopMenuLayout />
         </div>
