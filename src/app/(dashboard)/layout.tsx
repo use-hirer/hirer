@@ -1,4 +1,6 @@
 import NavigationMenu from "@/components/menu/menu";
+import Notifications from "@/components/menu/notifications";
+import { List } from "@phosphor-icons/react/dist/ssr";
 
 export default function DashboardLayout({
   children,
@@ -7,9 +9,16 @@ export default function DashboardLayout({
 }) {
   return (
     <>
-      <div className="h-screen w-full bg-zinc-50 flex">
+      <div className="h-screen w-full bg-zinc-50 flex flex-col lg:flex-row">
         <NavigationMenu />
-        <div className="overflow-y-scroll flex-auto bg-white mt-[7px] rounded-tl-2xl shadow-sm border-zinc-950/5 border p-4 lg:ml-[250px]">
+        <div className="lg:hidden px-4 pt-2 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <List weight="bold" size={20} />
+            <div className="font-bold">Hirer</div>
+          </div>
+          <Notifications />
+        </div>
+        <div className="overflow-y-scroll flex-auto bg-white mt-[7px] lg:rounded-tl-2xl shadow-sm border-zinc-950/5 border p-4 lg:ml-[250px]">
           {children}
         </div>
       </div>
