@@ -1,5 +1,3 @@
-"use client";
-
 import KPICard from "@/components/dashboard/kpi-card";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -10,9 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowRight, List } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 // import { Metadata } from "next";
-import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 // export const metadata: Metadata = {
@@ -23,12 +20,6 @@ export default function DashboardPage() {
   return (
     <>
       <div className="flex items-center gap-2">
-        <button
-          className="bg-zinc-100 rounded-full p-2 md:hidden"
-          onClick={() => signOut()}
-        >
-          <List weight="bold" size={20} />
-        </button>
         <div className="w-full">
           <div className="font-extrabold text-xl">Dashboard</div>
           <Separator className="mt-2 mb-4" />

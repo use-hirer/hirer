@@ -57,10 +57,10 @@ export function TeamSelect() {
       </PopoverTrigger>
       <PopoverContent className="w-[228px] p-0">
         <Command>
-          <CommandInput placeholder="Search Team..." className="h-9" />
+          <CommandInput placeholder="Find Team..." className="h-9" />
           <CommandEmpty>
             <div className="flex items-center justify-center gap-1">
-              No team found!{" "}
+              No team found!
               <SmileySad weight="duotone" color="orange" size={18} />
             </div>
           </CommandEmpty>
