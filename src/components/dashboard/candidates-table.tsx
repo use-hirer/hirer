@@ -1,7 +1,13 @@
-import { DotsThree } from "@phosphor-icons/react/dist/ssr";
+import { Copy, DotsThree } from "@phosphor-icons/react/dist/ssr";
 import { Badge } from "@tremor/react";
 import Link from "next/link";
 import React from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 type Candidate = {
   name: string;
@@ -75,11 +81,11 @@ const CandidatesTable: React.FC<CandidatesTableProps> = () => {
             </td>
             <td className="px-2 py-3 text-left text-sm border-b">
               {candidate.stage === "New" ? (
-                <Badge className="rounded-sm" color="emerald">
+                <Badge className="rounded-md" color="emerald">
                   New
                 </Badge>
               ) : (
-                <Badge className="rounded-sm" color="blue">
+                <Badge className="rounded-md" color="blue">
                   Screener
                 </Badge>
               )}
@@ -94,7 +100,17 @@ const CandidatesTable: React.FC<CandidatesTableProps> = () => {
               {candidate.position}
             </td>
             <td className="px-2 py-4 text-left text-sm border-b flex items-center gap-2">
-              <DotsThree size={18} />
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <DotsThree size={18} />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem className="flex gap-1">
+                    <div>Copy Link</div>
+                    <Copy />
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </td>
           </tr>
         ))}

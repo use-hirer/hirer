@@ -1,7 +1,13 @@
-import { DotsThree } from "@phosphor-icons/react/dist/ssr";
+import { Copy, DotsThree } from "@phosphor-icons/react/dist/ssr";
 import { Badge } from "@tremor/react";
 import Link from "next/link";
 import React from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 type Job = {
   title: string;
@@ -23,7 +29,7 @@ const jobsData: Job[] = [
   },
   {
     title: "Receptionist",
-    status: "Active",
+    status: "Closed",
     location: "Sydney, AU",
     department: "Sales",
     published: "03 Jan 2024",
@@ -82,9 +88,15 @@ const JobsTable: React.FC<JobsTableProps> = () => {
               <Link href={"/"}>{job.title}</Link>
             </td>
             <td className="px-2 py-3 text-left text-sm border-b">
-              <Badge className="rounded-sm" color="emerald">
-                {job.status}
-              </Badge>
+              {job.status === "Active" ? (
+                <Badge className="rounded-md" color="emerald">
+                  {job.status}
+                </Badge>
+              ) : (
+                <Badge className="rounded-md" color="orange">
+                  {job.status}
+                </Badge>
+              )}
             </td>
             <td className="px-2 py-3 text-left text-sm border-b">
               {job.location}
@@ -99,7 +111,17 @@ const JobsTable: React.FC<JobsTableProps> = () => {
               {job.hiringManager}
             </td>
             <td className="px-2 py-4 text-left text-sm border-b flex items-center gap-2">
-              <DotsThree size={18} />
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <DotsThree size={18} />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem className="flex gap-1">
+                    <div>Copy Link</div>
+                    <Copy />
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </td>
           </tr>
         ))}
