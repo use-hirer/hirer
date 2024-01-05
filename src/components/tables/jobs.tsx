@@ -31,10 +31,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
-  Table,
   TableBody,
   TableCell,
-  TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
@@ -215,25 +213,72 @@ export function JobsTable() {
         </DropdownMenu>
       </div>
       <div className="rounded-md border">
-        <Table>
-          <TableHeader>
+        <table className="min-w-full border-separate border-spacing-0 mt-2">
+          <thead className="bg-gray-100/50 shadow-sm">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header, index) => {
                   return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
+                    <>
+                      {index === 0 && (
+                        <th className="pl-2 py-2.5 text-left text-sm font-semibold text-muted-foreground border border-r-0 rounded-l-sm">
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </th>
+                      )}
+                      {index === headerGroup.headers.length - 1 && (
+                        <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 rounded-r-sm">
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </th>
+                      )}
+                      {index !== 0 &&
+                        index === headerGroup.headers.length - 1 && (
+                          <th className="pl-2 py-2.5 text-left text-sm font-semibold text-muted-foreground border border-r-0 rounded-l-sm">
+                            {header.isPlaceholder
+                              ? null
+                              : flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
+                          </th>
+                        )}
+                    </>
                   );
                 })}
-              </TableRow>
+              </tr>
             ))}
-          </TableHeader>
+            <tr>
+              <th className="pl-2 py-2.5 text-left text-sm font-semibold text-muted-foreground border border-r-0 rounded-l-sm">
+                Job Title
+              </th>
+              <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0">
+                Status
+              </th>
+              <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0">
+                Location
+              </th>
+              <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0">
+                Department
+              </th>
+              <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0">
+                Published
+              </th>
+              <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0">
+                Hiring Manager
+              </th>
+              <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 rounded-r-sm"></th>
+            </tr>
+          </thead>
+          <TableHeader></TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
@@ -262,7 +307,7 @@ export function JobsTable() {
               </TableRow>
             )}
           </TableBody>
-        </Table>
+        </table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">

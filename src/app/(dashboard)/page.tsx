@@ -57,10 +57,25 @@ export default function DashboardPage() {
           <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm mt-4">
             <div className="font-bold text-sm">Visitor Statistics</div>
             <LineChart
-              data={[]}
+              data={[
+                { date: "Feb 23", visitors: 12 },
+                { date: "Mar 23", visitors: 41 },
+                { date: "Apr 23", visitors: 84 },
+                { date: "May 23", visitors: 138 },
+                { date: "Jun 23", visitors: 294 },
+                { date: "Jul 23", visitors: 83 },
+                { date: "Aug 23", visitors: 64 },
+                { date: "Sep 23", visitors: 132 },
+                { date: "Oct 23", visitors: 120 },
+                { date: "Nov 23", visitors: 187 },
+                { date: "Dec 23", visitors: 119 },
+                { date: "Jan 24", visitors: 14 },
+              ]}
               className="mt-2"
-              categories={[]}
-              index="Visitor Chart"
+              categories={["visitors"]}
+              index="date"
+              curveType="natural"
+              colors={["emerald"]}
             />
           </Card>
           <div className="mt-4">
