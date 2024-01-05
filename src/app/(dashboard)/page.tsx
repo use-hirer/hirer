@@ -1,14 +1,17 @@
 import CandidatesTable from "@/components/dashboard/candidates-table";
 import JobsTable from "@/components/dashboard/jobs-table";
 import KPICard from "@/components/dashboard/kpi-card";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
-// import { Metadata } from "next";
+import { LineChart } from "@tremor/react";
+import { Metadata } from "next";
 import Link from "next/link";
 
-// export const metadata: Metadata = {
-//   title: "Hirer: Dashboard",
-// };
+export const metadata: Metadata = {
+  title: "Hirer: Dashboard",
+};
 
 export default function DashboardPage() {
   return (
@@ -51,29 +54,48 @@ export default function DashboardPage() {
               deltaType="unchanged"
             />
           </div>
+          <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm mt-4">
+            <div className="font-bold text-sm">Visitor Statistics</div>
+            <LineChart
+              data={[]}
+              className="mt-2"
+              categories={[]}
+              index="Visitor Chart"
+            />
+          </Card>
           <div className="mt-4">
-            <div className="flex gap-2 items-center">
-              <div className="font-bold text-xl">Jobs</div>
-              <Link
-                href={"/jobs"}
-                className="flex items-center font-light text-xs text-neutral-700 gap-1"
-              >
-                <div>view all jobs</div>
-                <ArrowRight />
-              </Link>
+            <div className="flex gap-2 items-center justify-between">
+              <div className="font-bold text-xl flex w-full gap-2 items-center">
+                Jobs
+                <Link
+                  href={"/jobs"}
+                  className="flex items-center font-light text-xs text-neutral-700 gap-1"
+                >
+                  <div>view all jobs</div>
+                  <ArrowRight />
+                </Link>
+              </div>
+              <Button size="sm" variant="outline">
+                Create Job
+              </Button>
             </div>
             <JobsTable />
           </div>
           <div className="mt-4">
-            <div className="flex gap-2 items-center">
-              <div className="font-bold text-xl">Candidates</div>
-              <Link
-                href={"/candidates"}
-                className="flex items-center font-light text-xs text-neutral-700 gap-1"
-              >
-                <div>view all candidates</div>
-                <ArrowRight />
-              </Link>
+            <div className="flex items-center justify-between">
+              <div className="font-bold text-xl flex gap-2 items-center">
+                Candidates
+                <Link
+                  href={"/candidates"}
+                  className="flex items-center font-light text-xs text-neutral-700 gap-1"
+                >
+                  <div>view all candidates</div>
+                  <ArrowRight />
+                </Link>
+              </div>
+              <Button size="sm" variant="outline">
+                Create Candidate
+              </Button>
             </div>
             <CandidatesTable />
           </div>
