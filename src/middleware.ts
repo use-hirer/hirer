@@ -7,5 +7,5 @@ export default withAuth({
 });
 
 export const config = {
-  matcher: ["/((?!favicon.ico|hirer-icon.png|sign-up).*)"],
+  matcher: ["/((?!favicon.ico|hirer-icon.png|sign-up|dashboard-snip.png).*)"],
 };

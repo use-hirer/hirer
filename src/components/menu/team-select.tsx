@@ -26,7 +26,7 @@ const frameworks = [
     label: (
       <div className="flex items-center gap-2">
         <Cube size={16} />
-        <div>Team Nick</div>
+        <div>ACME Inc</div>
       </div>
     ),
   },
@@ -50,7 +50,7 @@ export function TeamSelect() {
           ) : (
             <div className="flex items-center gap-2">
               <Cube size={16} />
-              <div>Team Nick</div>
+              <div>ACME Inc</div>
             </div>
           )}
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
