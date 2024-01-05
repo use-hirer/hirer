@@ -26,9 +26,9 @@ const candidatesData: Candidate[] = [
     position: "Senior Software Engineer",
   },
   {
-    name: "Jenna Smith",
+    name: "Salma Sanad",
     stage: "Screener",
-    contact: "jenna.smith@yahoo.com",
+    contact: "salma.sanad@yahoo.com",
     applicationDate: "03 Jan 2024",
     position: "Head of HR",
   },
@@ -53,7 +53,7 @@ interface CandidatesTableProps {}
 const CandidatesTable: React.FC<CandidatesTableProps> = () => {
   return (
     <table className="min-w-full border-separate border-spacing-0 mt-2">
-      <thead className="bg-gray-100/50">
+      <thead className="bg-gray-100/50 shadow-sm">
         <tr>
           <th className="pl-2 py-2.5 text-left text-sm font-semibold text-muted-foreground border border-r-0 rounded-l-sm">
             Candidate

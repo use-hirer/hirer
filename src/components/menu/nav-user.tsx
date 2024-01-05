@@ -3,6 +3,7 @@
 import { CaretUpDown, CreditCard, Gear, User } from "@phosphor-icons/react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +21,8 @@ interface NavUserProps {
 }
 
 const NavUser: React.FC<NavUserProps> = ({ name, role, email, avatarUrl }) => {
+  const router = useRouter();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none min-w-full">
@@ -54,12 +57,12 @@ const NavUser: React.FC<NavUserProps> = ({ name, role, email, avatarUrl }) => {
           <div className="text-xs font-normal">{email}</div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => router.push("/profile")}>
           Profile
           <User className="ml-auto" />
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => router.push("/settings")}>
           Settings
           <Gear className="ml-auto" />
         </DropdownMenuItem>

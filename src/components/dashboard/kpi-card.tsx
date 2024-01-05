@@ -25,7 +25,7 @@ const KPICard: React.FC<KPICardProps> = ({
   deltaType,
 }) => {
   return (
-    <Card className="shadow-none rounded p-4 border-neutral-200 flex-grow-0">
+    <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm">
       <div className="font-bold text-sm">{title}</div>
       <div className="text-xs font-light text-zinc-500">{timePeriod}</div>
       <div className="flex justify-between items-center pt-2">
