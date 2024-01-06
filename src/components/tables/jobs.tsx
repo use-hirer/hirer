@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { TableHeader } from "@/components/ui/table";
+import { Checkbox } from "../ui/checkbox";
 
 const data: Payment[] = [
   {
@@ -73,6 +74,28 @@ export type Payment = {
 };
 
 export const columns: ColumnDef<Payment>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: "status",
     header: "Status",
@@ -223,15 +246,15 @@ export function JobsTable() {
                   if (isFirst) {
                     // First th element
                     className =
-                      "pl-2 py-2.5 text-left text-sm font-semibold text-muted-foreground border border-r-0 rounded-l-sm";
+                      "pl-2 text-left text-sm font-semibold text-muted-foreground border border-r-0 rounded-l-sm";
                   } else if (isLast) {
                     // Last th element
                     className =
-                      "pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 rounded-r-sm";
+                      "pl-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 rounded-r-sm";
                   } else {
                     // Middle th elements
                     className =
-                      "pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0";
+                      "pl-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0";
                   }
 
                   return (
