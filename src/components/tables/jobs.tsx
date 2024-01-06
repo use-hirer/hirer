@@ -212,71 +212,48 @@ export function JobsTable() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md">
         <table className="min-w-full border-separate border-spacing-0 mt-2">
           <thead className="bg-gray-100/50 shadow-sm">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header, index) => {
+                  // Determine if it's the first, last, or a middle th
+                  const isFirst = index === 0;
+                  const isLast = index === headerGroup.headers.length - 1;
+
+                  // Determine class names based on position
+                  let className;
+
+                  if (isFirst) {
+                    // First th element
+                    className =
+                      "pl-2 py-2.5 text-left text-sm font-semibold text-muted-foreground border border-r-0 rounded-l-sm";
+                  } else if (isLast) {
+                    // Last th element
+                    className =
+                      "pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 rounded-r-sm";
+                  } else {
+                    // Middle th elements
+                    className =
+                      "pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0";
+                  }
+
                   return (
-                    <>
-                      {index === 0 && (
-                        <th className="pl-2 py-2.5 text-left text-sm font-semibold text-muted-foreground border border-r-0 rounded-l-sm">
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
-                        </th>
-                      )}
-                      {index === headerGroup.headers.length - 1 && (
-                        <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 rounded-r-sm">
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
-                        </th>
-                      )}
-                      {index !== 0 &&
-                        index === headerGroup.headers.length - 1 && (
-                          <th className="pl-2 py-2.5 text-left text-sm font-semibold text-muted-foreground border border-r-0 rounded-l-sm">
-                            {header.isPlaceholder
-                              ? null
-                              : flexRender(
-                                  header.column.columnDef.header,
-                                  header.getContext()
-                                )}
-                          </th>
-                        )}
-                    </>
+                    <React.Fragment key={index}>
+                      <th className={className}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </th>
+                    </React.Fragment>
                   );
                 })}
               </tr>
             ))}
-            <tr>
-              <th className="pl-2 py-2.5 text-left text-sm font-semibold text-muted-foreground border border-r-0 rounded-l-sm">
-                Job Title
-              </th>
-              <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0">
-                Status
-              </th>
-              <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0">
-                Location
-              </th>
-              <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0">
-                Department
-              </th>
-              <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0">
-                Published
-              </th>
-              <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0">
-                Hiring Manager
-              </th>
-              <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 rounded-r-sm"></th>
-            </tr>
           </thead>
           <TableHeader></TableHeader>
           <TableBody>

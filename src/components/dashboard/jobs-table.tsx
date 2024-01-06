@@ -60,7 +60,7 @@ const JobsTable: React.FC<JobsTableProps> = () => {
     <table className="min-w-full border-separate border-spacing-0 mt-2">
       <thead className="bg-gray-100/50 shadow-sm">
         <tr>
-          <th className="pl-2 py-2.5 text-left text-sm font-semibold text-muted-foreground border border-r-0 rounded-l-sm">
+          <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-r-0 rounded-l-sm">
             Job Title
           </th>
           <th className="pl-2 py-2 text-left text-sm font-semibold text-muted-foreground border border-l-0 border-r-0">
