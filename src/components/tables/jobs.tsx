@@ -30,12 +30,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import {
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { TableHeader } from "@/components/ui/table";
 
 const data: Payment[] = [
   {
@@ -256,34 +251,38 @@ export function JobsTable() {
             ))}
           </thead>
           <TableHeader></TableHeader>
-          <TableBody>
+          <tbody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
+                <tr
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className="border-b border-b-red-700"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <td
+                      className="px-2 py-3 text-left text-sm border-b"
+                      key={cell.id}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
                       )}
-                    </TableCell>
+                    </td>
                   ))}
-                </TableRow>
+                </tr>
               ))
             ) : (
-              <TableRow>
-                <TableCell
+              <tr className="border-b border-b-red-700">
+                <td
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-24 text-center text-sm"
                 >
                   No results.
-                </TableCell>
-              </TableRow>
+                </td>
+              </tr>
             )}
-          </TableBody>
+          </tbody>
         </table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
