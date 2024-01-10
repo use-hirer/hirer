@@ -1,3 +1,4 @@
+import CandidatesTable from "@/components/dashboard/candidates-table";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 
@@ -11,6 +12,7 @@ export default function CandidatesPage() {
       <div className="w-full">
         <div className="font-extrabold text-xl">Candidates</div>
         <Separator className="mt-2 mb-4" />
+        <CandidatesTable />
       </div>
     </div>
   );
