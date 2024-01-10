@@ -41,7 +41,7 @@ type SeparatorMenuItem = {
 
 type MenuItem = LinkMenuItem | SeparatorMenuItem | ActionMenuItem;
 
-const TopMenuLayout: React.FC = () => {
+const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
   const pathname = usePathname();
   const [interviewModal, setInterviewModal] = useState(false);
 
@@ -117,7 +117,7 @@ const TopMenuLayout: React.FC = () => {
                 href={item.path}
                 suffix={item.suffix}
                 selected={pathname === item.path}
-                collapsed={false}
+                collapsed={collapsed}
               />
             );
           case "Action":
@@ -129,6 +129,7 @@ const TopMenuLayout: React.FC = () => {
                 onClick={item.action}
                 suffix={item.suffix}
                 selected={pathname === item.path}
+                collapsed={collapsed}
               />
             );
           case "Separator":

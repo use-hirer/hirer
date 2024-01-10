@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import NavLink from "./nav-link";
 
-const BottomMenuLayout: React.FC = () => {
+const BottomMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
   const pathname = usePathname();
 
   return (
@@ -15,12 +15,14 @@ const BottomMenuLayout: React.FC = () => {
         label="Help"
         href="/settings"
         selected={pathname === "/help"}
+        collapsed={collapsed}
       />
       <NavLink
         icon={Gear}
         label="Settings"
         href="/settings"
         selected={pathname === "/settings"}
+        collapsed={collapsed}
       />
     </>
   );

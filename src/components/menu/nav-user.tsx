@@ -18,37 +18,68 @@ interface NavUserProps {
   role: string;
   email: string;
   avatarUrl: string;
+  collapsed?: boolean;
 }
 
-const NavUser: React.FC<NavUserProps> = ({ name, role, email, avatarUrl }) => {
+const NavUser: React.FC<NavUserProps> = ({
+  name,
+  role,
+  email,
+  avatarUrl,
+  collapsed,
+}) => {
   const router = useRouter();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none min-w-full">
         <div className="flex items-center gap-2 text-left">
-          {avatarUrl ? (
-            <Image
-              src={avatarUrl}
-              height={32}
-              width={32}
-              alt="Avatar Image"
-              className="rounded-full"
-            />
+          {collapsed ? (
+            <>
+              {avatarUrl ? (
+                <Image
+                  src={avatarUrl}
+                  height={32}
+                  width={32}
+                  alt="Avatar Image"
+                  className="rounded-full"
+                />
+              ) : (
+                <Image
+                  src={"/user-image-default.png"}
+                  height={32}
+                  width={32}
+                  alt="Avatar Image"
+                  className="rounded-full"
+                />
+              )}
+            </>
           ) : (
-            <Image
-              src={"/user-image-default.png"}
-              height={32}
-              width={32}
-              alt="Avatar Image"
-              className="rounded-full"
-            />
+            <>
+              {avatarUrl ? (
+                <Image
+                  src={avatarUrl}
+                  height={32}
+                  width={32}
+                  alt="Avatar Image"
+                  className="rounded-full"
+                />
+              ) : (
+                <Image
+                  src={"/user-image-default.png"}
+                  height={32}
+                  width={32}
+                  alt="Avatar Image"
+                  className="rounded-full"
+                />
+              )}
+              <div>
+                <div className="text-sm font-medium">{name}</div>
+                <div className="text-xs font-normal">{role}</div>
+              </div>
+              <CaretUpDown className="ml-auto" size={20} />
+            </>
           )}
-          <div>
-            <div className="text-sm font-medium">{name}</div>
-            <div className="text-xs font-normal">{role}</div>
-          </div>
-          <CaretUpDown className="ml-auto" size={20} />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="top" align="end">
