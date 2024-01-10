@@ -40,7 +40,6 @@ const NavigationMenu: React.FC<{ collapsed: boolean }> = async ({
               <Separator className="my-3" />
             </>
           )}
-
           <TopMenuLayout collapsed={collapsed} />
         </div>
         <div className="mb-3 pt-10">
