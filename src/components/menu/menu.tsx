@@ -15,7 +15,7 @@ const NavigationMenu: React.FC = async () => {
 
   return (
     <>
-      <div className="hidden lg:flex flex-shrink-0 flex-col top-0 left-0 justify-between h-screen fixed w-[250px] pt-5 px-3 overflow-y-auto scroll-bar">
+      <nav className="hidden lg:flex flex-shrink-0 flex-col top-0 left-0 justify-between h-screen fixed w-[250px] pt-5 px-3 overflow-y-auto scroll-bar">
         <div>
           <Link className="flex items-center select-none" href="/">
             <div className="flex items-center justify-center w-7 h-7 bg-black text-white rounded-full text-md font-extrabold">
@@ -39,7 +39,7 @@ const NavigationMenu: React.FC = async () => {
             role="Admin"
           />
         </div>
-      </div>
+      </nav>
     </>
   );
 };

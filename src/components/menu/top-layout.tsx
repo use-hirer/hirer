@@ -117,6 +117,7 @@ const TopMenuLayout: React.FC = () => {
                 href={item.path}
                 suffix={item.suffix}
                 selected={pathname === item.path}
+                collapsed={false}
               />
             );
           case "Action":
