@@ -1,6 +1,6 @@
 import NavigationMenu from "@/components/menu/menu";
 import Notifications from "@/components/menu/notifications";
-import { List } from "@phosphor-icons/react/dist/ssr";
+import { CaretLeft, List } from "@phosphor-icons/react/dist/ssr";
 
 export default function DashboardLayout({
   children,
@@ -20,9 +20,9 @@ export default function DashboardLayout({
           </div>
           <Notifications />
         </div>
-        {/* <div className="absolute hidden lg:ml-[242px] w-5 h-5 lg:flex items-center justify-center bg-black rounded-full mt-[50px] cursor-pointer shadow-md">
-          <CaretLeft color="white" />
-        </div> */}
+        <div className="absolute hidden lg:ml-[242px] w-5 h-5 lg:flex items-center justify-center bg-neutral-100 rounded-full mt-[50px] cursor-pointer shadow-md border-neutral-200 border">
+          <CaretLeft color="black" size={12} />
+        </div>
         <div
           data-collapsed={isCollapsed}
           className="overflow-y-scroll flex-auto bg-white mt-[7px] lg:rounded-tl-2xl shadow-sm border-zinc-950/5 border p-4 lg:ml-[250px] lg:data-[collapsed=true]:ml-[60px]"
