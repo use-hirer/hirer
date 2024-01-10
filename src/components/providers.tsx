@@ -1,5 +1,6 @@
 "use client";
 
+import { CollapseProvider } from "@/context/CollapseContext";
 import { SessionProvider } from "next-auth/react";
 
 interface ProvidersProps {
@@ -7,5 +8,9 @@ interface ProvidersProps {
 }
 
 export function Providers({ children, ...props }: ProvidersProps) {
-  return <SessionProvider {...props}>{children}</SessionProvider>;
+  return (
+    <SessionProvider {...props}>
+      <CollapseProvider>{children}</CollapseProvider>
+    </SessionProvider>
+  );
 }
