@@ -34,14 +34,14 @@ const NavAction: React.FC<NavActionProps> = ({
             <TooltipTrigger asChild>
               <div
                 className={cn([
-                  "flex items-center px-2 py-2 rounded-md cursor-pointer",
+                  "flex items-center justify-center px-2 py-2 rounded-md cursor-pointer",
                   selected && "bg-black",
                   !selected && "hover:bg-zinc-300/30",
                 ])}
                 onClick={onClick}
               >
                 <Icon
-                  className="h-4 w-4"
+                  className="h-[18px] w-[18px]"
                   color={selected ? "white" : "black"}
                 />
               </div>

@@ -7,10 +7,12 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const isCollapsed = false;
+
   return (
     <>
       <div className="h-screen w-full bg-zinc-50 flex flex-col lg:flex-row">
-        <NavigationMenu />
+        <NavigationMenu collapsed={isCollapsed} />
         <div className="lg:hidden px-4 pt-2 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <List weight="bold" size={20} />
@@ -18,7 +20,10 @@ export default function DashboardLayout({
           </div>
           <Notifications />
         </div>
-        <div className="overflow-y-scroll flex-auto bg-white mt-[7px] lg:rounded-tl-2xl shadow-sm border-zinc-950/5 border p-4 lg:ml-[250px]">
+        <div
+          data-collapsed={isCollapsed}
+          className="overflow-y-scroll flex-auto bg-white mt-[7px] lg:rounded-tl-2xl shadow-sm border-zinc-950/5 border p-4 lg:ml-[250px] lg:data-[collapsed=true]:ml-[60px]"
+        >
           {children}
         </div>
       </div>
