@@ -1,5 +1,4 @@
 import NavigationMenu from "@/components/menu/menu";
-import NavCollapseButton from "@/components/menu/nav-collapse-button";
 import Notifications from "@/components/menu/notifications";
 import { List } from "@phosphor-icons/react/dist/ssr";
 
@@ -21,7 +20,7 @@ export default function DashboardLayout({
           </div>
           <Notifications />
         </div>
-        <NavCollapseButton />
+        {/* <NavCollapseButton /> */}
         <div
           data-collapsed={isCollapsed}
           className="overflow-y-scroll flex-auto bg-white mt-[7px] lg:rounded-tl-2xl shadow-sm border-zinc-950/5 border p-4 lg:ml-[250px] lg:data-[collapsed=true]:ml-[60px]"
