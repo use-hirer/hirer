@@ -64,6 +64,7 @@ model Team {
   updatedAt  DateTime     @updatedAt
   members    TeamMember[]
   TeamInvite TeamInvite[]
+  Job        Job[]
 }
 
 model TeamInvite {
@@ -94,4 +95,16 @@ model TeamMember {
 enum TeamMemberRole {
   Member
   Owner
+}
+
+model Job {
+  id        String   @id @default(cuid())
+  title     String
+  teamId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@index([teamId])
 }
