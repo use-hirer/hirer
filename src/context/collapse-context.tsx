@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import React, { createContext, useContext, useState } from "react";
 
 // Define the context shape
@@ -26,16 +27,17 @@ export const useCollapse = () => {
 export const CollapseProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const defaultCollapsed =
-    typeof window !== undefined
+  const defaultCollapse =
+    typeof window !== "undefined"
       ? localStorage.getItem("hirer:collapsed") === "true"
       : false;
 
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(defaultCollapsed);
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(defaultCollapse);
 
   const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-    localStorage.setItem("hirer:collapsed", String(!isCollapsed));
+    const newState = !isCollapsed;
+    setIsCollapsed(newState);
+    localStorage.setItem("hirer:collapsed", String(newState));
   };
 
   return (
@@ -44,3 +46,5 @@ export const CollapseProvider: React.FC<{ children: React.ReactNode }> = ({
     </CollapseContext.Provider>
   );
 };
+
+export default dynamic(() => Promise.resolve(CollapseProvider), { ssr: false });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCollapse } from "@/context/CollapseContext";
+import { useCollapse } from "@/context/collapse-context";
 import { Sparkle } from "@phosphor-icons/react/dist/ssr";
 import { Session } from "next-auth";
 import { Separator } from "../ui/separator";

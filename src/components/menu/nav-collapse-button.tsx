@@ -1,6 +1,6 @@
 "use client";
 
-import { useCollapse } from "@/context/CollapseContext";
+import { useCollapse } from "@/context/collapse-context";
 import { CaretLeft } from "@phosphor-icons/react";
 import React from "react";
 

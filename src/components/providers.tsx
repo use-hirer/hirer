@@ -1,6 +1,6 @@
 "use client";
 
-import { CollapseProvider } from "@/context/CollapseContext";
+import CollapseProvider from "@/context/collapse-context";
 import { SessionProvider } from "next-auth/react";
 
 interface ProvidersProps {
