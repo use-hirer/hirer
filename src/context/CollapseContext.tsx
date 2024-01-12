@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useContext, useState } from "react";
 
 // Define the context shape
@@ -30,7 +32,9 @@ export const CollapseProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
-    localStorage.setItem("hirer:collapsed", String(!isCollapsed));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("hirer:collapsed", String(!isCollapsed));
+    }
   };
 
   return (
