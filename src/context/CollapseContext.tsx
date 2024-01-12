@@ -26,8 +26,8 @@ export const useCollapse = () => {
 export const CollapseProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  let defaultCollapsed =
-    typeof window! === undefined
+  const defaultCollapsed =
+    typeof window !== undefined
       ? localStorage.getItem("hirer:collapsed") === "true"
       : false;
 
