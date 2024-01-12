@@ -24,10 +24,13 @@ export const useCollapse = () => {
 export const CollapseProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+  const defaultCollapsed = localStorage.getItem("hirer:collapsed") === "true";
+
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(defaultCollapsed);
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
+    localStorage.setItem("hirer:collapsed", String(!isCollapsed));
   };
 
   return (
