@@ -23,7 +23,7 @@ const NavigationMenu: React.FC<{
         <div>
           <div
             data-collapsed={isCollapsed}
-            className="flex items-center data-[collapsed=true]:justify-center select-none"
+            className="flex items-center data-[collapsed=true]:justify-center select-none cursor-pointer"
             onClick={toggleCollapse}
           >
             <div className="flex items-center justify-center w-7 h-7 bg-black text-white rounded-full text-md font-extrabold">
