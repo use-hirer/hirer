@@ -24,5 +24,6 @@ export const authOptions: NextAuthOptions = {
 
   pages: {
     signIn: "/login",
+    verifyRequest: "/verify-request",
   },
 };
