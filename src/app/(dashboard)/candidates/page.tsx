@@ -1,4 +1,4 @@
-import CandidatesTable from "@/components/dashboard/candidates-table";
+import { CandidatesTable } from "@/components/tables/candidates";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 
