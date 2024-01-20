@@ -13,5 +13,8 @@
     "npm": "use pnpm please!",
     "yarn": "use pnpm please!",
     "pnpm": ">=7.19.0"
+  },
+  "devDependencies": {
+    "turbo": "^1.11.3"
   }
 }
