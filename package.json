@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "Nick Mandylas",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "npm": "use pnpm please!",
+    "yarn": "use pnpm please!",
+    "pnpm": ">=7.19.0"
+  }
 }
