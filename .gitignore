@@ -15,4 +15,4 @@
 # Local ENV files
 /.env*.local
 
-.vercel
+.vercel.turbo
