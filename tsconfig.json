@@ -11,7 +11,8 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@console/*": ["./apps/console/src/*"]
+      "@console/*": ["./apps/console/src/*"],
+      "@database/*": ["./packages/database/*"]
     }
   }
 }
