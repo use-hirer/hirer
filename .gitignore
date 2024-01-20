@@ -16,3 +16,4 @@
 /.env*.local
 
 .vercel.turbo
+/.turbo
