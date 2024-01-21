@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev"
+    "dev": "turbo run dev",
+    "ui:add": "pnpm --filter ui ui:add"
   },
   "keywords": [],
   "author": "Nick Mandylas",
