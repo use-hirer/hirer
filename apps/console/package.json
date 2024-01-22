@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "email-dev": "email dev -d src/emails"
+    "email-dev": "email dev -d src/emails",
+    "gen:env-types": "npx gen-env-types .env -o src/types/env.d.ts -e ."
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
