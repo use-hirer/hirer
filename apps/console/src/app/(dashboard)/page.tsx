@@ -1,6 +1,6 @@
 import CandidatesTable from "@console/components/dashboard/candidates-table";
-import JobsTable from "@console/components/dashboard/jobs-table";
 import KPICard from "@console/components/dashboard/kpi-card";
+import { JobsTable } from "@console/components/tables/jobs-table";
 import { Button } from "@console/components/ui/button";
 import { Card } from "@console/components/ui/card";
 import { Separator } from "@console/components/ui/separator";
@@ -94,7 +94,7 @@ export default function DashboardPage() {
                 Create Job
               </Button>
             </div>
-            <JobsTable />
+            <JobsTable preview />
           </div>
           <div className="mt-4">
             <div className="flex items-center justify-between">
