@@ -1,4 +1,4 @@
-import { JobsTable } from "@console/components/tables/jobs";
+import { JobsTable } from "@console/components/tables/jobs-table";
 import { Separator } from "@console/components/ui/separator";
 import { Metadata } from "next";
 
