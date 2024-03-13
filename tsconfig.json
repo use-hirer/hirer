@@ -12,7 +12,7 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@console/*": ["./apps/console/src/*"],
-      "@demo/*": ["./apps/demo/src/*"],
+      "@server/*": ["./apps/server/src/*"],
       "@database/*": ["./packages/database/*"],
       "@ui/*": ["./packages/ui/*"]
     }
