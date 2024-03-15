@@ -19,8 +19,10 @@
     "@nestjs/platform-fastify": "^10.3.3",
     "@ts-rest/core": "^3.33.1",
     "@ts-rest/nest": "^3.33.1",
+    "database": "workspace:*",
     "reflect-metadata": "^0.2.1",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.3.2",
