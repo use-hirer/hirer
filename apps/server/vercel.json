@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "turbo run build --filter=server",
   "builds": [
     {
       "src": "dist/main.js",
