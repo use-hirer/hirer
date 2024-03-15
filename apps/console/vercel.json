@@ -1,3 +1,3 @@
 {
-  "buildCommand": "turbo run build"
+  "buildCommand": "turbo run build --filter=console"
 }
