@@ -3,16 +3,26 @@
 import { Button } from "@console/components/ui/button";
 import { Input } from "@console/components/ui/input";
 import { Sparkle } from "@phosphor-icons/react/dist/ssr";
+import { motion } from "framer-motion";
 
 export default function OnboardingPage() {
   return (
     <>
-      <div className="flex items-center data-[collapsed=true]:justify-center select-none cursor-pointer my-4">
+      <motion.div
+        className="flex items-center data-[collapsed=true]:justify-center select-none cursor-pointer my-4"
+        initial={{ scale: 0 }}
+        animate={{ rotate: 360, scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 20,
+        }}
+      >
         <div className="flex items-center justify-center w-8 h-8 bg-black text-white rounded-full text-md font-extrabold">
           <Sparkle />
         </div>
         <div className="font-bold text-2xl ml-1">Hirer</div>
-      </div>
+      </motion.div>
 
       <div className="flex flex-col items-center mb-4">
         <div className="font-light text-sm">
