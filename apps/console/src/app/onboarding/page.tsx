@@ -101,9 +101,14 @@ export default function OnboardingPage() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="CEO">CEO</SelectItem>
-                    <SelectItem value="CTO">CTO</SelectItem>
-                    <SelectItem value="Developer">Developer</SelectItem>
-                    <SelectItem value="Designer">Designer</SelectItem>
+                    <SelectItem value="Entrepreneur">Entrepreneur</SelectItem>
+                    <SelectItem value="Business_Owner">
+                      Business Owner
+                    </SelectItem>
+                    <SelectItem value="Hiring_Manager">
+                      Hiring Manager
+                    </SelectItem>
+                    <SelectItem value="AI_Overlord">AI Overlord</SelectItem>
                   </SelectContent>
                 </Select>
               )}
