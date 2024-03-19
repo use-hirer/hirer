@@ -22,8 +22,12 @@ const companyFormSchema = z.object({
   name: z.string().min(1, { message: "Every business needs a name!" }),
   website: z
     .string()
-    .url({ message: "Please enter a valid website URL." })
+    // .url({
+    //   message:
+    //     "Please enter a valid website URL. Include the https:// or http://",
+    // })
     .optional(),
+  // .or(z.literal("")),
   description: z.string().optional(),
   logo: z
     .instanceof(File)
