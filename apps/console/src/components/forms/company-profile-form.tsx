@@ -94,7 +94,7 @@ const CompanyProfileForm: React.FC<CompanyProfileFormProps> = () => {
               <FormLabel>Bio</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="We're building a world powered by solar energy, running on batteries and transported by electric vehicles. Explore the most recent impact of our products, people and supply chain."
+                  placeholder="Join a global team of expert engineers, production workers and safety professionals building some of the most exciting cars on the planet."
                   className="resize-none min-h-32"
                   {...field}
                 />
