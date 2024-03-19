@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "../ui/button";
 import {
@@ -17,6 +16,8 @@ import {
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 
+const MAX_FILE_SIZE = 1024 * 1024 * 2; // 2MB
+
 const companyFormSchema = z.object({
   name: z.string().min(1, { message: "Every business needs a name!" }),
   website: z
@@ -24,7 +25,10 @@ const companyFormSchema = z.object({
     .url({ message: "Please enter a valid website URL." })
     .optional(),
   description: z.string().optional(),
-  logo: z.instanceof(FileList).optional(),
+  logo: z
+    .instanceof(File)
+    .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 2MB.`)
+    .optional(),
 });
 
 type ProfileFormValues = z.infer<typeof companyFormSchema>;
@@ -35,10 +39,16 @@ const CompanyProfileForm: React.FC<CompanyProfileFormProps> = () => {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(companyFormSchema),
     mode: "onChange",
+    defaultValues: {
+      logo: undefined,
+      name: "",
+      website: "",
+      description: "",
+    },
   });
 
   function onSubmit(data: ProfileFormValues) {
-    toast.info(JSON.stringify(data));
+    console.log(data);
   }
 
   return (
@@ -92,18 +102,26 @@ const CompanyProfileForm: React.FC<CompanyProfileFormProps> = () => {
         <FormField
           control={form.control}
           name="logo"
-          render={({ field }) => (
+          render={({}) => (
             <FormItem>
               <FormLabel>Logo</FormLabel>
               <FormControl>
                 <Controller
                   name="logo"
                   control={form.control}
-                  render={({ field: { onChange, value, ref } }) => (
+                  render={({ field: { onChange, ref } }) => (
                     <Input
                       type="file"
+                      accept=".jpg,.jpeg,.png"
                       onChange={(event) => {
-                        onChange(event.target.files?.[0]);
+                        const file = event.target.files?.[0];
+                        if (file && file.size <= MAX_FILE_SIZE) {
+                          onChange(file);
+                        } else {
+                          onChange(undefined);
+                          alert("File size exceeds the maximum limit of 2MB.");
+                          event.target.value = "";
+                        }
                       }}
                       ref={ref}
                     />
