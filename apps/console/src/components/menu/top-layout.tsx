@@ -104,6 +104,14 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
     },
   ];
 
+  const isSelected = (path: string) => {
+    if (path === "/") {
+      return pathname === "/";
+    } else {
+      return pathname.startsWith(path);
+    }
+  };
+
   return (
     <>
       {MenuLayout.map((item, index) => {
@@ -116,7 +124,7 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
                 label={item.title}
                 href={item.path}
                 suffix={item.suffix}
-                selected={pathname === item.path}
+                selected={isSelected(item.path)} // Update this line
                 collapsed={collapsed}
               />
             );
@@ -128,7 +136,7 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
                 label={item.title}
                 onClick={item.action}
                 suffix={item.suffix}
-                selected={pathname === item.path}
+                selected={isSelected(item.path)}
                 collapsed={collapsed}
               />
             );
