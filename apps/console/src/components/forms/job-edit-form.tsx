@@ -26,9 +26,9 @@ const jobFormSchema = z.object({
 
 type JobFormValues = z.infer<typeof jobFormSchema>;
 
-interface JobCreateFormProps {}
+interface JobEditFormProps {}
 
-const JobCreateForm: React.FC<JobCreateFormProps> = () => {
+const JobEditForm: React.FC<JobEditFormProps> = () => {
   const form = useForm<JobFormValues>({
     resolver: zodResolver(jobFormSchema),
     mode: "onChange",
@@ -111,4 +111,4 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
   );
 };
 
-export default JobCreateForm;
+export default JobEditForm;

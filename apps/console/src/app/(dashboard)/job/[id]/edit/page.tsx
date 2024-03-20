@@ -1,4 +1,4 @@
-import JobCreateForm from "@console/components/forms/job-create-form";
+import JobEditForm from "@console/components/forms/job-edit-form";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -46,7 +46,7 @@ export default function JobEditPage() {
         <Separator className="my-2" />
         <div className="my-4 text-sm"></div>
         <div>
-          <JobCreateForm />
+          <JobEditForm />
         </div>
       </div>
     </div>
