@@ -6,7 +6,6 @@ import {
   Calendar,
   ChatsCircle,
   House,
-  SealQuestion,
   Users,
   Webcam,
 } from "@phosphor-icons/react/dist/ssr";
@@ -77,16 +76,15 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
       type: "Separator",
     },
     {
-      title: "Question Pool",
-      icon: SealQuestion,
-      path: "/question-pool",
-      type: "Link",
-    },
-    {
       title: "Screeners",
       icon: Webcam,
       path: "/screeners",
       type: "Link",
+      suffix: (
+        <Badge variant="outline" className="ml-2 text-[10px]">
+          Coming Soon
+        </Badge>
+      ),
     },
     {
       title: "Interviews",
