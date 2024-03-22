@@ -74,6 +74,38 @@ export default function JobEditPage() {
     }
   };
 
+  const getMinSalaryPlaceholder = () => {
+    switch (payFrequency) {
+      case "hourly":
+        return "15.00";
+      case "daily":
+        return "120.00";
+      case "weekly":
+        return "600.00";
+      case "monthly":
+        return "2500.00";
+      case "yearly":
+      default:
+        return "30000.00";
+    }
+  };
+
+  const getMaxSalaryPlaceholder = () => {
+    switch (payFrequency) {
+      case "hourly":
+        return "25.00";
+      case "daily":
+        return "200.00";
+      case "weekly":
+        return "1000.00";
+      case "monthly":
+        return "4000.00";
+      case "yearly":
+      default:
+        return "50000.00";
+    }
+  };
+
   return (
     <div className="flex items-center gap-2">
       <div className="w-full">
@@ -116,7 +148,7 @@ export default function JobEditPage() {
         <div className="my-4">
           <h3 className="text-md font-semibold">Salary</h3>
           <p className="text-sm text-muted-foreground">
-            Salary range for the job position.
+            Pay/Salary range & details for the job position.
           </p>
           <div className="mt-4">
             <div>
@@ -147,7 +179,7 @@ export default function JobEditPage() {
                   <Input
                     type="number"
                     className="pl-7"
-                    placeholder="50000"
+                    placeholder={getMinSalaryPlaceholder()}
                     step="0.01"
                     min="0"
                   />
@@ -162,7 +194,7 @@ export default function JobEditPage() {
                   <Input
                     type="number"
                     className="pl-7"
-                    placeholder="75000"
+                    placeholder={getMaxSalaryPlaceholder()}
                     step="0.01"
                     min="0"
                   />
