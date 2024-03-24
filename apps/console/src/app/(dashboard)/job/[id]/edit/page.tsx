@@ -231,6 +231,16 @@ export default function JobEditPage() {
           </p>
           <div className="mt-4"></div>
         </div>
+        <Separator className="my-2" />
+        <div className="my-4">
+          <h3 className="text-md font-semibold">Clarification Questions</h3>
+          <p className="text-sm text-muted-foreground">
+            Ask additional questions to applicants. This may result in fewer
+            applications, but those who do apply are likely to be more
+            qualified.
+          </p>
+          <div className="mt-4"></div>
+        </div>
       </div>
     </div>
   );

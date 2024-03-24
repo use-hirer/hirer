@@ -87,7 +87,9 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
                   <FormLabel>
                     Job description <span className="text-red-600">*</span>
                   </FormLabel>
-                  <Button size={"sm"}>Generate with AI</Button>
+                  <Button size={"sm"} variant={"outline"}>
+                    Generate with AI
+                  </Button>
                 </div>
                 <FormControl>
                   <Textarea

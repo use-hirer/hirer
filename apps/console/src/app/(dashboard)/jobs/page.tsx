@@ -1,5 +1,5 @@
-import { JobsTable } from "@console/components/tables/jobs-table";
 import { Separator } from "@console/components/ui/separator";
+import NoJobsExist from "@console/modules/jobs/no-jobs-exist";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,11 +8,13 @@ export const metadata: Metadata = {
 
 export default function JobsPage() {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-col h-full">
       <div className="w-full">
         <div className="font-extrabold text-xl">Jobs</div>
         <Separator className="my-2" />
-        <JobsTable />
+      </div>
+      <div className="flex-1">
+        <NoJobsExist className="h-full" />
       </div>
     </div>
   );
