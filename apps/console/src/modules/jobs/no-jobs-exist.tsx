@@ -18,7 +18,7 @@ const NoJobsExist: React.FC<NoJobsExistProps> = ({ className }) => {
     >
       <div className="flex flex-col items-center gap-1 text-center">
         <FlagPennant size={32} />
-        <h3 className="text-2xl font-bold tracking-tight">Yp\o</h3>
+        <h3 className="text-2xl font-bold tracking-tight">No Jobs Found</h3>
         <p className="text-sm text-muted-foreground">
           You currently have no jobs posted. Start hiring by creating a new job
           listing.
