@@ -76,7 +76,7 @@ export const validateRequest = cache(
 export const google = new Google(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  `${process.env.NODE_ENV === "production" ? "https://" : "http://"}${
+  `${process.env.NODE_ENV === "development" ? "http://" : "https://"}${
     process.env.VERCEL_URL || process.env.AUTH_URL
   }/api/auth/google/callback`
 );
