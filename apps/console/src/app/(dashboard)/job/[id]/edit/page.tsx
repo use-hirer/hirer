@@ -20,8 +20,6 @@ import {
   SelectValue,
 } from "@console/components/ui/select";
 import { Separator } from "@console/components/ui/separator";
-import { validateRequest } from "@console/lib/auth";
-import { redirect } from "next/navigation";
 import { useState } from "react";
 
 const currencies = [
@@ -37,13 +35,7 @@ const currencies = [
   { code: "SGD", symbol: "$", name: "Singapore Dollar" },
 ];
 
-export default async function JobEditPage() {
-  const { user } = await validateRequest();
-
-  if (!user) {
-    return redirect("/login");
-  }
-
+export default function JobEditPage() {
   const [payFrequency, setPayFrequency] = useState("yearly");
 
   const handlePayFrequencyChange = (value: string) => {
