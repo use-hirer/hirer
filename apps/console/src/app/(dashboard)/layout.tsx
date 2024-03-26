@@ -1,8 +1,6 @@
 import NavigationMenu from "@console/components/menu/menu";
 import Notifications from "@console/components/menu/notifications";
-import { authOptions } from "@console/lib/auth";
 import { List } from "@phosphor-icons/react/dist/ssr";
-import { getServerSession } from "next-auth";
 import ContentShell from "./content-shell";
 
 export default async function DashboardLayout({
@@ -10,7 +8,7 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
+  const session = null;
 
   return (
     <>
