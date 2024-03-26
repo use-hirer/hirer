@@ -1,10 +1,7 @@
 import MagicLinkEmail from "@console/emails/magic-link";
-import { SendVerificationRequestParams } from "next-auth/providers/email";
 import { resend } from "../lib/resend";
 
-export const sendVerificationRequest = async (
-  params: SendVerificationRequestParams
-) => {
+export const sendVerificationRequest = async (params: any) => {
   const { identifier, url, provider, theme } = params;
   const { host } = new URL(url);
 

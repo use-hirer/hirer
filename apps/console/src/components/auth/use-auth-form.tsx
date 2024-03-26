@@ -7,7 +7,6 @@ import { Input } from "@console/components/ui/input";
 import { Label } from "@console/components/ui/label";
 import { cn } from "@console/lib/utils";
 import { CircleNotch } from "@phosphor-icons/react";
-import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 import GoogleIcon from "../icons/google";
 
@@ -32,11 +31,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
     setSelectedMethod("Email");
     setIsLoading(true);
-
-    await signIn("email", {
-      email: email,
-      callbackUrl: "/",
-    });
 
     setIsLoading(false);
   }
@@ -86,21 +80,16 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         onClick={async () => {
           setSelectedMethod("Google");
           setIsLoading(true);
-
-          await signIn("google", {
-            callbackUrl: "/",
-          });
+          window.location.href = "/api/auth/google";
         }}
       >
         {isLoading && selectedMethod === "Google" ? (
           <CircleNotch className="mr-2 h-4 w-4 animate-spin" />
         ) : (
-          // <GoogleLogo className="mr-2 h-4 w-4" />
           <GoogleIcon className="h-4 w-4 mr-2" />
         )}
         Google
       </Button>
-      <a href="/api/auth/google">Sign in with GitHub</a>
     </div>
   );
 }

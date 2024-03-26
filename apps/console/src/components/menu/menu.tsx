@@ -2,7 +2,7 @@
 
 import { useCollapse } from "@console/context/collapse-context";
 import { Sparkle } from "@phosphor-icons/react/dist/ssr";
-import { Session } from "next-auth";
+import type { User } from "lucia";
 import { Separator } from "../ui/separator";
 import BottomMenuLayout from "./bottom-layout";
 import NavUser from "./nav-user";
@@ -10,7 +10,7 @@ import { TeamSelect } from "./team-select";
 import TopMenuLayout from "./top-layout";
 
 const NavigationMenu: React.FC<{
-  userSession: Session | null;
+  userSession: User;
 }> = ({ userSession }) => {
   const { isCollapsed, toggleCollapse } = useCollapse();
 
@@ -47,9 +47,9 @@ const NavigationMenu: React.FC<{
           <BottomMenuLayout collapsed={isCollapsed} />
           <Separator className="mt-2 mb-3" />
           <NavUser
-            avatarUrl={userSession?.user?.image || ""}
-            name={userSession?.user?.name as string}
-            email={userSession?.user?.email as string}
+            avatarUrl={userSession.image || ""}
+            name={userSession.name}
+            email={userSession.email}
             role="Admin"
             collapsed={isCollapsed}
           />

@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 import { buttonVariants } from "@console/components/ui/button";
+import { validateRequest } from "@console/lib/auth";
 import { cn } from "@console/lib/utils";
 import { Sparkle } from "@phosphor-icons/react/dist/ssr";
-import { getServerSession } from "next-auth";
 import { RedirectType, redirect } from "next/navigation";
 import { Toaster } from "sonner";
 import { UserAuthForm } from "../../../components/auth/use-auth-form";
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 };
 
 export default async function AuthenticationPage() {
-  const session = await getServerSession();
+  const { user } = await validateRequest();
 
-  if (session?.user) {
+  if (user) {
     redirect("/", RedirectType.push);
   }
 
