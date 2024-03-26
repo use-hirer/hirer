@@ -13,14 +13,22 @@ import {
   BreadcrumbSeparator,
 } from "@console/components/ui/breadcrumb";
 import { Separator } from "@console/components/ui/separator";
+import { validateRequest } from "@console/lib/auth";
 import { ReadCvLogo } from "@phosphor-icons/react/dist/ssr";
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Hirer: Create a Job",
 };
 
-export default function JobCreatePage() {
+export default async function JobCreatePage() {
+  const { user } = await validateRequest();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
   return (
     <div className="flex items-center gap-2">
       <div className="w-full">
