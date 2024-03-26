@@ -106,7 +106,9 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">Create Job</Button>
+          <div className="flex justify-end">
+            <Button type="submit">Create Job</Button>
+          </div>
         </form>
       </Form>
     </div>
