@@ -40,8 +40,6 @@ export async function GET(request: Request): Promise<Response> {
 
     const googleUser: GoogleUser = await response.json();
 
-    console.log(googleUser);
-
     const existingAccount = await prisma.account.findUnique({
       where: {
         provider_providerAccountId: {
@@ -72,6 +70,7 @@ export async function GET(request: Request): Promise<Response> {
         name: googleUser.name,
         email: googleUser.email,
         image: googleUser.picture,
+        emailVerified: true,
       },
     });
 
@@ -99,7 +98,6 @@ export async function GET(request: Request): Promise<Response> {
       },
     });
   } catch (e) {
-    console.log(e);
     if (
       e instanceof OAuth2RequestError &&
       e.message === "bad_verification_code"
