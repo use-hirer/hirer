@@ -100,6 +100,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         )}
         Google
       </Button>
+      <a href="/api/auth/google">Sign in with GitHub</a>
     </div>
   );
 }

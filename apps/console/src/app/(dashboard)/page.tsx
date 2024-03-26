@@ -4,16 +4,24 @@ import { JobsTable } from "@console/components/tables/jobs-table";
 import { Button } from "@console/components/ui/button";
 import { Card } from "@console/components/ui/card";
 import { Separator } from "@console/components/ui/separator";
+import { validateRequest } from "@console/lib/auth";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { LineChart } from "@tremor/react";
 import { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Hirer: Dashboard",
 };
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const { user } = await validateRequest();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
   return (
     <>
       <div className="flex items-center gap-2">
