@@ -19,7 +19,7 @@ export default async function VerifyRequestPage() {
                 </div>
               </div>
               <h1 className="text-2xl font-semibold tracking-tight">
-                Oops! Can't log you in!
+                Oops! Can&apos;t log you in!
               </h1>
               <p className="text-sm text-muted-foreground">
                 Your login code has either expired or there was an error in your
