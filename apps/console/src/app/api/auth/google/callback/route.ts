@@ -40,56 +40,85 @@ export async function GET(request: Request): Promise<Response> {
 
     const googleUser: GoogleUser = await response.json();
 
-    const existingAccount = await prisma.account.findUnique({
+    if (googleUser.email_verified === false) {
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: "/login/unverified-email",
+        },
+      });
+    }
+
+    const user = await prisma.user.findUnique({
       where: {
-        provider_providerAccountId: {
-          provider: "google",
-          providerAccountId: googleUser.sub,
+        email: googleUser.email,
+      },
+      include: {
+        accounts: {
+          where: {
+            provider: {
+              equals: "google",
+            },
+          },
         },
       },
     });
 
-    if (existingAccount) {
-      const session = await lucia.createSession(existingAccount.userId, {});
+    if (user) {
+      if (user.accounts.length === 0) {
+        await prisma.account.create({
+          data: {
+            provider: "google",
+            providerAccountId: googleUser.sub,
+            userId: user.id,
+          },
+        });
+
+        await prisma.user.update({
+          where: {
+            id: user.id,
+          },
+          data: {
+            image: googleUser.picture,
+          },
+        });
+      }
+
+      const session = await lucia.createSession(user.id, {});
       const sessionCookie = lucia.createSessionCookie(session.id);
+
       cookies().set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
       );
-      return new Response(null, {
-        status: 302,
-        headers: {
-          Location: "/",
+    } else {
+      const user = await prisma.user.create({
+        data: {
+          name: googleUser.name,
+          email: googleUser.email,
+          image: googleUser.picture,
+          emailVerified: true,
         },
       });
+
+      await prisma.account.create({
+        data: {
+          provider: "google",
+          providerAccountId: googleUser.sub,
+          userId: user.id,
+        },
+      });
+
+      const session = await lucia.createSession(user.id, {});
+      const sessionCookie = lucia.createSessionCookie(session.id);
+
+      cookies().set(
+        sessionCookie.name,
+        sessionCookie.value,
+        sessionCookie.attributes
+      );
     }
-
-    const user = await prisma.user.create({
-      data: {
-        name: googleUser.name,
-        email: googleUser.email,
-        image: googleUser.picture,
-        emailVerified: true,
-      },
-    });
-
-    await prisma.account.create({
-      data: {
-        provider: "google",
-        providerAccountId: googleUser.sub,
-        userId: user.id,
-      },
-    });
-
-    const session = await lucia.createSession(user.id, {});
-    const sessionCookie = lucia.createSessionCookie(session.id);
-
-    cookies().set(
-      sessionCookie.name,
-      sessionCookie.value,
-      sessionCookie.attributes
-    );
 
     return new Response(null, {
       status: 302,

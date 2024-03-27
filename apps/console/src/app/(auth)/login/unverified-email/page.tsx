@@ -1,4 +1,4 @@
-import { Envelope } from "@phosphor-icons/react/dist/ssr";
+import { Warning } from "@phosphor-icons/react/dist/ssr";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,14 +15,15 @@ export default async function VerifyRequestPage() {
             <div className="flex flex-col space-y-2 text-center">
               <div className="flex items-center justify-center select-none">
                 <div className="flex items-center justify-center w-9 h-9 bg-black shadow-sm text-white rounded-full text-md font-extrabold">
-                  <Envelope />
+                  <Warning />
                 </div>
               </div>
               <h1 className="text-2xl font-semibold tracking-tight">
-                Check your email!
+                Cannot login via Google!
               </h1>
               <p className="text-sm text-muted-foreground">
-                A sign in link has been sent to your email address.
+                Your google account that you've selected if using an unverified
+                email. Please verify your email on Google, before logging in.
               </p>
             </div>
           </div>
