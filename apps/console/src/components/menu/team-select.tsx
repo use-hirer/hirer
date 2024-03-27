@@ -1,8 +1,17 @@
 "use client";
 
-import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
+import {
+  CaretSortIcon,
+  CheckIcon,
+  PlusCircledIcon,
+} from "@radix-ui/react-icons";
 import * as React from "react";
 
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@console/components/ui/avatar";
 import { Button } from "@console/components/ui/button";
 import {
   Command,
@@ -10,89 +19,189 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
   CommandSeparator,
 } from "@console/components/ui/command";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@console/components/ui/dialog";
+import { Input } from "@console/components/ui/input";
+import { Label } from "@console/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@console/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@console/components/ui/select";
 import { cn } from "@console/lib/utils";
-import { Cube, PlusCircle, SmileySad } from "@phosphor-icons/react";
 
-const frameworks = [
+const groups = [
   {
-    value: "Team Nick",
-    label: (
-      <div className="flex items-center gap-2">
-        <Cube size={16} />
-        <div>ACME Inc</div>
-      </div>
-    ),
+    label: "Teams",
+    teams: [
+      {
+        label: "Acme Inc.",
+        value: "acme-inc",
+      },
+      {
+        label: "Monsters Inc.",
+        value: "monsters",
+      },
+    ],
   },
 ];
 
-export function TeamSelect() {
+type Team = (typeof groups)[number]["teams"][number];
+
+type PopoverTriggerProps = React.ComponentPropsWithoutRef<
+  typeof PopoverTrigger
+>;
+
+interface TeamSwitcherProps extends PopoverTriggerProps {}
+
+export default function TeamSwitcher({ className }: TeamSwitcherProps) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [showNewTeamDialog, setShowNewTeamDialog] = React.useState(false);
+  const [selectedTeam, setSelectedTeam] = React.useState<Team>(
+    groups[0].teams[0]
+  );
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-full justify-between bg-white px-2"
-        >
-          {value ? (
-            frameworks.find((framework) => framework.value === value)?.label
-          ) : (
-            <div className="flex items-center gap-2">
-              <Cube size={16} />
-              <div>ACME Inc</div>
+    <Dialog open={showNewTeamDialog} onOpenChange={setShowNewTeamDialog}>
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            aria-label="Select a team"
+            className={cn("w-full justify-between bg-white", className)}
+          >
+            <Avatar className="mr-2 h-5 w-5">
+              <AvatarImage
+                src={`https://avatar.vercel.sh/${selectedTeam.value}.png`}
+                alt={selectedTeam.label}
+                className="grayscale"
+              />
+              <AvatarFallback>acme-inc</AvatarFallback>
+            </Avatar>
+            {selectedTeam.label}
+            <CaretSortIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-[200px] p-0">
+          <Command>
+            <CommandList>
+              <CommandInput placeholder="Search team..." />
+              <CommandEmpty>No team found.</CommandEmpty>
+              {groups.map((group) => (
+                <CommandGroup key={group.label} heading={group.label}>
+                  {group.teams.map((team) => (
+                    <CommandItem
+                      key={team.value}
+                      onSelect={() => {
+                        setSelectedTeam(team);
+                        setOpen(false);
+                      }}
+                      className="text-sm"
+                    >
+                      <Avatar className="mr-2 h-5 w-5">
+                        <AvatarImage
+                          src={`https://avatar.vercel.sh/${team.value}.png`}
+                          alt={team.label}
+                          className="grayscale"
+                        />
+                        <AvatarFallback>SC</AvatarFallback>
+                      </Avatar>
+                      {team.label}
+                      <CheckIcon
+                        className={cn(
+                          "ml-auto h-4 w-4",
+                          selectedTeam.value === team.value
+                            ? "opacity-100"
+                            : "opacity-0"
+                        )}
+                      />
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              ))}
+            </CommandList>
+            <CommandSeparator />
+            <CommandList>
+              <CommandGroup>
+                <DialogTrigger asChild>
+                  <CommandItem
+                    onSelect={() => {
+                      setOpen(false);
+                      setShowNewTeamDialog(true);
+                    }}
+                  >
+                    <PlusCircledIcon className="mr-2 h-5 w-5" />
+                    Create Team
+                  </CommandItem>
+                </DialogTrigger>
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create team</DialogTitle>
+          <DialogDescription>
+            Add a new team to manage products and customers.
+          </DialogDescription>
+        </DialogHeader>
+        <div>
+          <div className="space-y-4 py-2 pb-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">Team name</Label>
+              <Input id="name" placeholder="Acme Inc." />
             </div>
-          )}
-          <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[228px] p-0">
-        <Command>
-          <CommandInput placeholder="Find Team..." className="h-9" />
-          <CommandEmpty>
-            <div className="flex items-center justify-center gap-1">
-              No team found!
-              <SmileySad weight="duotone" color="orange" size={18} />
+            <div className="space-y-2">
+              <Label htmlFor="plan">Subscription plan</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a plan" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="free">
+                    <span className="font-medium">Free</span> -{" "}
+                    <span className="text-muted-foreground">
+                      Trial for two weeks
+                    </span>
+                  </SelectItem>
+                  <SelectItem value="pro">
+                    <span className="font-medium">Pro</span> -{" "}
+                    <span className="text-muted-foreground">
+                      $9/month per user
+                    </span>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-          </CommandEmpty>
-          <CommandGroup>
-            {frameworks.map((framework) => (
-              <CommandItem
-                key={framework.value}
-                value={framework.value}
-                onSelect={(currentValue) => {
-                  setValue(currentValue === value ? "" : currentValue);
-                  setOpen(false);
-                }}
-              >
-                {framework.label}
-                <CheckIcon
-                  className={cn(
-                    "ml-auto h-4 w-4",
-                    value === framework.value ? "opacity-100" : "opacity-0"
-                  )}
-                />
-              </CommandItem>
-            ))}
-          </CommandGroup>
-        </Command>
-        <Command>
-          <CommandSeparator />
-          <div className="text-sm flex items-center justify-center py-3 gap-1 cursor-pointer select-none hover:bg-black hover:text-white m-1 rounded">
-            Create Team <PlusCircle size={16} />
           </div>
-        </Command>
-      </PopoverContent>
-    </Popover>
+        </div>
+        <DialogFooter>
+          <Button variant="outline" onClick={() => setShowNewTeamDialog(false)}>
+            Cancel
+          </Button>
+          <Button type="submit">Continue</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

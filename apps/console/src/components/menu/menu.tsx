@@ -6,7 +6,7 @@ import type { User } from "lucia";
 import { Separator } from "../ui/separator";
 import BottomMenuLayout from "./bottom-layout";
 import NavUser from "./nav-user";
-import { TeamSelect } from "./team-select";
+import TeamSwitcher from "./team-select";
 import TopMenuLayout from "./top-layout";
 
 const NavigationMenu: React.FC<{
@@ -37,7 +37,7 @@ const NavigationMenu: React.FC<{
           {/* <Input className="bg-white h-8" placeholder="Search" /> */}
           {!isCollapsed && (
             <>
-              <TeamSelect />
+              <TeamSwitcher />
               <Separator className="my-3" />
             </>
           )}
