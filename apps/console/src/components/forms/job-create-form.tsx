@@ -105,7 +105,7 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
 
                       if (position === "" || location === "") {
                         toast.error(
-                          "You need both Job Title and Location to generate a job description!"
+                          "We need both the job title & location to generate a description!"
                         );
                       } else {
                         const result = await GenerateJobDescription(
