@@ -2,8 +2,16 @@
 
 import prisma from "@console/lib/prisma";
 import { sendVerificationRequest } from "@console/utils/send-verification-request";
+import { Ratelimit } from "@upstash/ratelimit";
+import { kv } from "@vercel/kv";
 import { generateId } from "lucia";
+import { headers } from "next/headers";
 import { TimeSpan, createDate } from "oslo";
+
+const ratelimit = new Ratelimit({
+  redis: kv,
+  limiter: Ratelimit.slidingWindow(5, "30 s"),
+});
 
 async function generateEmailVerificationToken(
   userId: string,
@@ -31,6 +39,11 @@ async function generateEmailVerificationToken(
 
 export async function emailLogin(email: string) {
   try {
+    if (process.env.NODE_ENV === "production") {
+      const ip = headers().get("x-forwarded-for");
+      await ratelimit.limit(ip as string);
+    }
+
     const user = await prisma.user.upsert({
       where: {
         email: email,
