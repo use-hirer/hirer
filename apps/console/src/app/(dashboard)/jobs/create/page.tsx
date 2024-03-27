@@ -17,6 +17,7 @@ import { validateRequest } from "@console/lib/auth";
 import { ReadCvLogo } from "@phosphor-icons/react/dist/ssr";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Hirer: Create a Job",
@@ -67,6 +68,7 @@ export default async function JobCreatePage() {
           <JobCreateForm />
         </div>
       </div>
+      <Toaster richColors position="top-right" closeButton />
     </div>
   );
 }

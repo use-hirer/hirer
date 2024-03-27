@@ -49,6 +49,7 @@ model User {
   sessions          Session[]
   teams             TeamMember[]
   verificationCodes VerificationCode[]
+  activity          Activity[]
 }
 
 model Team {
@@ -60,6 +61,7 @@ model Team {
   jobs        Job[]
   members     TeamMember[]
   teamInvites TeamInvite[]
+  activity    Activity[]
 }
 
 model TeamInvite {
@@ -99,7 +101,28 @@ model Job {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  team     Team       @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  activity Activity[]
 
   @@index([teamId])
+}
+
+model Activity {
+  id        String   @id @default(cuid())
+  type      String
+  data      Json
+  userId    String?
+  jobId     String?
+  teamId    String?
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  job  Job?  @relation(fields: [jobId], references: [id], onDelete: SetNull)
+  team Team? @relation(fields: [teamId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([jobId])
+  @@index([teamId])
+  @@index([type])
+  @@index([createdAt])
 }

@@ -1,7 +1,11 @@
 "use client";
 
+import { GenerateJobDescription } from "@console/actions/generate-text";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CircleNotch } from "@phosphor-icons/react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "../ui/button";
 import {
@@ -29,6 +33,8 @@ type JobFormValues = z.infer<typeof jobFormSchema>;
 interface JobCreateFormProps {}
 
 const JobCreateForm: React.FC<JobCreateFormProps> = () => {
+  const [generateDescription, setGeneratingDescription] = useState(false);
+
   const form = useForm<JobFormValues>({
     resolver: zodResolver(jobFormSchema),
     mode: "onChange",
@@ -87,14 +93,42 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
                   <FormLabel>
                     Job description <span className="text-red-600">*</span>
                   </FormLabel>
-                  <Button size={"sm"} variant={"outline"}>
+                  <Button
+                    type="button"
+                    size={"sm"}
+                    variant={"outline"}
+                    disabled={generateDescription}
+                    onClick={async () => {
+                      setGeneratingDescription(true);
+                      const position = form.getValues("position");
+                      const location = form.getValues("location");
+
+                      if (position === "" || location === "") {
+                        toast.error(
+                          "You need both Job Title and Location to generate a job description!"
+                        );
+                      } else {
+                        const result = await GenerateJobDescription(
+                          form.getValues("position"),
+                          form.getValues("location")
+                        );
+
+                        form.setValue("description", "");
+                        form.setValue("description", result);
+                      }
+                      setGeneratingDescription(false);
+                    }}
+                  >
+                    {generateDescription && (
+                      <CircleNotch className="mr-2 h-4 w-4 animate-spin" />
+                    )}
                     Generate with AI
                   </Button>
                 </div>
                 <FormControl>
                   <Textarea
                     placeholder="We are seeking a talented Software Engineer to join our dynamic team in building cutting-edge software solutions. As a Software Engineer, you will play a crucial role in designing, developing, and maintaining high-quality software applications."
-                    className="min-h-32"
+                    className="min-h-96"
                     {...field}
                   />
                 </FormControl>
