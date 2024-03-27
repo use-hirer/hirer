@@ -22,8 +22,9 @@ export default async function VerifyRequestPage() {
                 Cannot login via Google!
               </h1>
               <p className="text-sm text-muted-foreground">
-                Your google account that you've selected if using an unverified
-                email. Please verify your email on Google, before logging in.
+                Your google account that you&apos;ve selected if using an
+                unverified email. Please verify your email on Google, before
+                logging in.
               </p>
             </div>
           </div>
