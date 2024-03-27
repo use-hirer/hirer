@@ -4,6 +4,14 @@ import { BedrockChat } from "@langchain/community/chat_models/bedrock/web";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { RunnableSequence } from "@langchain/core/runnables";
+import { Ratelimit } from "@upstash/ratelimit";
+import { kv } from "@vercel/kv";
+import { headers } from "next/headers";
+
+const ratelimit = new Ratelimit({
+  redis: kv,
+  limiter: Ratelimit.slidingWindow(2, "60 s"),
+});
 
 const model = new BedrockChat({
   model: "anthropic.claude-3-sonnet-20240229-v1:0",
@@ -37,14 +45,27 @@ export async function GenerateJobDescription(
   jobTitle: string,
   location: string
 ): Promise<string> {
-  const template = PromptTemplate.fromTemplate(prompt);
-  const outputParser = new StringOutputParser();
-  const chain = RunnableSequence.from([template, model, outputParser]);
+  try {
+    if (process.env.NODE_ENV === "production") {
+      const ip = headers().get("x-forwarded-for");
+      const { success } = await ratelimit.limit(ip as string);
 
-  const result = await chain.invoke({
-    job_title: jobTitle,
-    location: location,
-  });
+      if (!success) {
+        return "Please wait. You can only generate 2 descriptions every 60 seconds.";
+      }
+    }
 
-  return result;
+    const template = PromptTemplate.fromTemplate(prompt);
+    const outputParser = new StringOutputParser();
+    const chain = RunnableSequence.from([template, model, outputParser]);
+
+    const result = await chain.invoke({
+      job_title: jobTitle,
+      location: location,
+    });
+
+    return result;
+  } catch (e) {
+    return "An error occurred. Unable to generate description.";
+  }
 }

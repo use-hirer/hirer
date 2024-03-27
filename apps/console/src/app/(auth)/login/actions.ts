@@ -41,7 +41,11 @@ export async function emailLogin(email: string) {
   try {
     if (process.env.NODE_ENV === "production") {
       const ip = headers().get("x-forwarded-for");
-      await ratelimit.limit(ip as string);
+      const { success } = await ratelimit.limit(ip as string);
+
+      if (!success) {
+        throw Error("Rate limit hit. Please wait 30 seconds.");
+      }
     }
 
     const user = await prisma.user.upsert({
