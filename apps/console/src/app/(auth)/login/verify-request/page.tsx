@@ -1,5 +1,7 @@
+import { validateRequest } from "@console/lib/auth";
 import { Envelope } from "@phosphor-icons/react/dist/ssr";
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Hirer | Verify Request",
@@ -7,6 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default async function VerifyRequestPage() {
+  const user = await validateRequest();
+
+  if (user) {
+    redirect("/");
+  }
+
   return (
     <>
       <div className="flex items-center justify-center container relative h-screen min-h-[600px] flex-col place-items-center lg:max-w-none lg:grid-cols-2 lg:px-0 bg-white">
