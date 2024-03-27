@@ -2,18 +2,19 @@
 
 import * as React from "react";
 
+import { emailLogin } from "@console/app/(auth)/login/actions";
 import { Button } from "@console/components/ui/button";
 import { Input } from "@console/components/ui/input";
 import { Label } from "@console/components/ui/label";
 import { cn } from "@console/lib/utils";
 import { CircleNotch } from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import GoogleIcon from "../icons/google";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+export function UserAuthForm() {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const router = useRouter();
   const [email, setEmail] = React.useState("");
   const [selectedMethod, setSelectedMethod] = React.useState<
     "Email" | "Google" | null
@@ -32,11 +33,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setSelectedMethod("Email");
     setIsLoading(true);
 
+    await emailLogin(email);
+    router.push("/login/verify-request");
+
     setIsLoading(false);
   }
 
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
+    <div className={cn("grid gap-6")}>
       <form onSubmit={onSubmit}>
         <div className="grid gap-2">
           <div className="grid gap-1">

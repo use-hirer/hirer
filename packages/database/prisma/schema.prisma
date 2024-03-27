@@ -26,28 +26,40 @@ model Session {
   user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
 
+model VerificationCode {
+  id        String   @id @default(cuid())
+  code      String
+  userId    String
+  email     String
+  expiresAt DateTime
+
+  user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
 model User {
   id            String   @id @default(cuid())
   name          String?
-  email         String?  @unique
+  email         String   @unique
   emailVerified Boolean? @default(false)
   image         String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  accounts Account[]
-  sessions Session[]
-  teams    TeamMember[]
+  accounts          Account[]
+  sessions          Session[]
+  teams             TeamMember[]
+  verificationCodes VerificationCode[]
 }
 
 model Team {
-  id         String       @id @default(cuid())
-  name       String       @unique
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  members    TeamMember[]
-  TeamInvite TeamInvite[]
-  Job        Job[]
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  jobs        Job[]
+  members     TeamMember[]
+  teamInvites TeamInvite[]
 }
 
 model TeamInvite {

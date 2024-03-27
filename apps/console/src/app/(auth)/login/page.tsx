@@ -1,9 +1,6 @@
 import { Metadata } from "next";
-import Link from "next/link";
 
-import { buttonVariants } from "@console/components/ui/button";
 import { validateRequest } from "@console/lib/auth";
-import { cn } from "@console/lib/utils";
 import { Sparkle } from "@phosphor-icons/react/dist/ssr";
 import { RedirectType, redirect } from "next/navigation";
 import { Toaster } from "sonner";
@@ -24,15 +21,6 @@ export default async function AuthenticationPage() {
   return (
     <>
       <div className="container relative h-screen min-h-[600px] flex-col grid place-items-center lg:max-w-none lg:grid-cols-2 lg:px-0 bg-white">
-        <Link
-          href="/sign-up"
-          className={cn(
-            buttonVariants({ variant: "outline" }),
-            "absolute right-4 top-4 md:right-8 md:top-8"
-          )}
-        >
-          Sign Up 👋
-        </Link>
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-zinc-900" />
           <div className="relative z-20 flex items-center text-lg font-extrabold gap-1">

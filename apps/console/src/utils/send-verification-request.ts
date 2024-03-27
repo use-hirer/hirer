@@ -1,8 +1,15 @@
 import MagicLinkEmail from "@console/emails/magic-link";
 import { resend } from "../lib/resend";
 
-export const sendVerificationRequest = async (params: any) => {
-  const { identifier, url, provider, theme } = params;
+interface sendVerificationProps {
+  email: string;
+  url: string;
+}
+
+export const sendVerificationRequest = async ({
+  email,
+  url,
+}: sendVerificationProps) => {
   const { host } = new URL(url);
 
   try {
@@ -12,10 +19,10 @@ export const sendVerificationRequest = async (params: any) => {
     } else {
       await resend.emails.send({
         from: "Hirer <team@updates.usehirer.com>",
-        to: identifier,
+        to: email,
         subject: `Your Hirer Login Link`,
         text: text(url, host),
-        react: MagicLinkEmail({ email: identifier, loginLink: url }),
+        react: MagicLinkEmail({ email: email, loginLink: url }),
       });
     }
   } catch (error) {

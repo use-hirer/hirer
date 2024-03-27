@@ -18,6 +18,7 @@ export const lucia = new Lucia(adapter, {
   getUserAttributes: (attributes) => {
     return {
       email: attributes.email,
+      emailVerified: attributes.emailVerified,
       name: attributes.name,
       image: attributes.image,
     };
@@ -33,6 +34,7 @@ declare module "lucia" {
 
 interface DatabaseUserAttributes {
   email: string;
+  emailVerified: boolean;
   name: string;
   image: string;
 }
