@@ -14,7 +14,7 @@ const ratelimit = new Ratelimit({
 });
 
 const model = new BedrockChat({
-  model: "anthropic.claude-3-sonnet-20240229-v1:0",
+  model: "anthropic.claude-3-haiku-20240307-v1:0",
   region: process.env.AWS_REGION,
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
