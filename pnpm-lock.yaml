@@ -302,6 +302,10 @@ importers:
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.1
+    devDependencies:
+      '@types/node':
+        specifier: ^20.11.28
+        version: 20.11.28
 
 packages:
 
