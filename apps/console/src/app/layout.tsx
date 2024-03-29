@@ -1,5 +1,5 @@
 import { Providers } from "@console/components/providers";
-import { cn } from "@console/lib/utils";
+import { cn } from "@hirer/ui";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import "./globals.css";

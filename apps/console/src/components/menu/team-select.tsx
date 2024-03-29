@@ -7,7 +7,7 @@ import {
 } from "@radix-ui/react-icons";
 import * as React from "react";
 
-import { cn } from "@console/lib/utils";
+import { cn } from "@hirer/ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@hirer/ui/avatar";
 import { Button } from "@hirer/ui/button";
 import {

@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import { emailLogin } from "@console/app/(auth)/login/actions";
-import { cn } from "@console/lib/utils";
+import { cn } from "@hirer/ui";
 import { Button } from "@hirer/ui/button";
 import { Input } from "@hirer/ui/input";
 import { Label } from "@hirer/ui/label";

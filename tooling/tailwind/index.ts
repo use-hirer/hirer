@@ -18,8 +18,6 @@ export default {
       screens: {
         "2xl": "1400px",
       },
-      transparent: "transparent", // Tremor
-      current: "currentColor", // Tremor
     },
     extend: {
       fontFamily: {

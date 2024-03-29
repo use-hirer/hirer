@@ -1,4 +1,4 @@
-import { cn } from "@console/lib/utils";
+import { cn } from "@hirer/ui";
 import {
   Tooltip,
   TooltipContent,

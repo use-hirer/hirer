@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@console/lib/utils";
+import { cn } from "@hirer/ui";
 import { buttonVariants } from "@hirer/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
