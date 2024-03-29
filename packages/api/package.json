@@ -1,0 +1,21 @@
+{
+  "name": "@hirer/api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tanstack/react-query": "^5.28.9",
+    "@trpc/client": "11.0.0-next.327",
+    "@trpc/next": "11.0.0-next.327",
+    "@trpc/react-query": "11.0.0-next.327",
+    "@trpc/server": "11.0.0-next.327",
+    "superjson": "^2.2.1",
+    "zod": "^3.22.4"
+  }
+}

@@ -12,14 +12,6 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-  server:
-    container_name: server
-    build:
-      context: .
-      dockerfile: ./apps/server/Dockerfile
-    restart: always
-    ports:
-      - 3000:3000
 
 volumes:
   postgres_data:
