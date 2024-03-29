@@ -41,6 +41,8 @@
     "@smithy/util-utf8": "^2.3.0",
     "@tanstack/react-table": "^8.15.0",
     "@tremor/react": "^3.14.1",
+    "@ts-rest/core": "^3.38.0",
+    "@ts-rest/next": "^3.38.0",
     "@upstash/ratelimit": "^1.0.1",
     "@vercel/kv": "^1.0.1",
     "arctic": "^1.2.1",
