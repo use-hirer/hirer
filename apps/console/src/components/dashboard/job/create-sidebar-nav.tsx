@@ -1,7 +1,7 @@
 "use client";
 
-import { buttonVariants } from "@console/components/ui/button";
 import { cn } from "@console/lib/utils";
+import { buttonVariants } from "@hirer/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

@@ -1,13 +1,7 @@
 "use client";
 
 import { GenerateJobDescription } from "@console/actions/generate-text";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { CircleNotch } from "@phosphor-icons/react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-import { Button } from "../ui/button";
+import { Button } from "@hirer/ui/button";
 import {
   Form,
   FormControl,
@@ -16,9 +10,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
+} from "@hirer/ui/form";
+import { Input } from "@hirer/ui/input";
+import { Textarea } from "@hirer/ui/textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CircleNotch } from "@phosphor-icons/react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const jobFormSchema = z.object({
   position: z.string().min(1, "Every job needs a title."),

@@ -8,18 +8,18 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@console/components/ui/breadcrumb";
-import { Button } from "@console/components/ui/button";
-import { Input } from "@console/components/ui/input";
-import { Label } from "@console/components/ui/label";
+} from "@hirer/ui/breadcrumb";
+import { Button } from "@hirer/ui/button";
+import { Input } from "@hirer/ui/input";
+import { Label } from "@hirer/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@console/components/ui/select";
-import { Separator } from "@console/components/ui/separator";
+} from "@hirer/ui/select";
+import { Separator } from "@hirer/ui/separator";
 import { useState } from "react";
 
 const currencies = [

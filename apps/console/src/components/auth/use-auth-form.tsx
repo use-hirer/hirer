@@ -3,10 +3,10 @@
 import * as React from "react";
 
 import { emailLogin } from "@console/app/(auth)/login/actions";
-import { Button } from "@console/components/ui/button";
-import { Input } from "@console/components/ui/input";
-import { Label } from "@console/components/ui/label";
 import { cn } from "@console/lib/utils";
+import { Button } from "@hirer/ui/button";
+import { Input } from "@hirer/ui/input";
+import { Label } from "@hirer/ui/label";
 import { CircleNotch } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";

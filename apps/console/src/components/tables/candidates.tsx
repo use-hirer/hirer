@@ -19,7 +19,8 @@ import {
 } from "@tanstack/react-table";
 import * as React from "react";
 
-import { Button } from "@console/components/ui/button";
+import { Input } from "@hirer/ui/input";
+import { Button } from "packages/ui/src/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -28,10 +29,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@console/components/ui/dropdown-menu";
-import { Input } from "@console/components/ui/input";
-import { TableHeader } from "@console/components/ui/table";
-import { Checkbox } from "../ui/checkbox";
+} from "packages/ui/src/dropdown-menu";
+import { TableHeader } from "packages/ui/src/table";
+import { Checkbox } from "../../../../../packages/ui/src/checkbox";
 
 const data: Payment[] = [
   {

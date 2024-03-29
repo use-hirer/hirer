@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@console/components/ui/button";
 import { FlagPennant } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
+import { Button } from "packages/ui/src/button";
 import React from "react";
 
 interface NoJobsExistProps {

@@ -1,6 +1,6 @@
 import { CandidatesTable } from "@console/components/tables/candidates";
-import { Separator } from "@console/components/ui/separator";
 import { validateRequest } from "@console/lib/auth";
+import { Separator } from "@hirer/ui/separator";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 

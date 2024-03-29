@@ -2,16 +2,16 @@
 
 import { AnimatedLogo } from "@console/components/logo";
 import StepIndicator from "@console/components/steps-indicator";
-import { Button } from "@console/components/ui/button";
-import { Form, FormControl, FormField } from "@console/components/ui/form";
-import { Input } from "@console/components/ui/input";
+import { Button } from "@hirer/ui/button";
+import { Form, FormControl, FormField } from "@hirer/ui/form";
+import { Input } from "@hirer/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@console/components/ui/select";
+} from "@hirer/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleNotch } from "@phosphor-icons/react/dist/ssr";
 import { useState } from "react";

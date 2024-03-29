@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@console/components/ui/button";
+import { Button } from "packages/ui/src/button";
 import React from "react";
 import Confetti from "react-confetti";
 

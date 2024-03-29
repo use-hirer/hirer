@@ -1,8 +1,8 @@
-/** @type {import('tailwindcss').Config} */
-const { fontFamily } = require("tailwindcss/defaultTheme");
-const colors = require("tailwindcss/colors");
+import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
-module.exports = {
+export default {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -134,7 +134,7 @@ module.exports = {
           "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
       },
       fontSize: {
-        "tremor-label": ["0.75rem"],
+        "tremor-label": ["0.75rem", {}],
         "tremor-default": ["0.875rem", { lineHeight: "1.25rem" }],
         "tremor-title": ["1.125rem", { lineHeight: "1.75rem" }],
         "tremor-metric": ["1.875rem", { lineHeight: "2.25rem" }],
@@ -143,20 +143,18 @@ module.exports = {
         "tremor-small": "0.375rem",
         "tremor-default": "0.5rem",
         "tremor-full": "9999px",
-      },
-      borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
         "accordion-down": {
-          from: { height: 0 },
+          from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
+          to: { height: "0" },
         },
         "caret-blink": {
           "0%,70%,100%": { opacity: "1" },
@@ -200,4 +198,4 @@ module.exports = {
     },
   ],
   plugins: [require("tailwindcss-animate")],
-};
+} satisfies Config;

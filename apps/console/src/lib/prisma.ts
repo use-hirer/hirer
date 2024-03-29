@@ -1,6 +1,6 @@
+import { PrismaClient } from "@hirer/database";
 import { Pool, neonConfig } from "@neondatabase/serverless";
 import { PrismaNeon } from "@prisma/adapter-neon";
-import { PrismaClient } from "database";
 import ws from "ws";
 
 declare global {

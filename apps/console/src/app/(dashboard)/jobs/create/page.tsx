@@ -1,9 +1,6 @@
 import JobCreateForm from "@console/components/forms/job-create-form";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@console/components/ui/alert";
+import { validateRequest } from "@console/lib/auth";
+import { Alert, AlertDescription, AlertTitle } from "@hirer/ui/alert";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,9 +8,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@console/components/ui/breadcrumb";
-import { Separator } from "@console/components/ui/separator";
-import { validateRequest } from "@console/lib/auth";
+} from "@hirer/ui/breadcrumb";
+import { Separator } from "@hirer/ui/separator";
 import { ReadCvLogo } from "@phosphor-icons/react/dist/ssr";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";

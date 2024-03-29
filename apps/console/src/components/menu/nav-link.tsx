@@ -1,12 +1,12 @@
 import { cn } from "@console/lib/utils";
-import { IconProps } from "@phosphor-icons/react";
-import Link from "next/link";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "../ui/tooltip";
+} from "@hirer/ui/tooltip";
+import { IconProps } from "@phosphor-icons/react";
+import Link from "next/link";
 
 interface NavLinkProps {
   icon: React.ElementType<IconProps>;

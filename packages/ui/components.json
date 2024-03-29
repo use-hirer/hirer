@@ -10,7 +10,7 @@
     "cssVariables": true
   },
   "aliases": {
-    "components": "@console/components",
-    "utils": "@console/lib/utils"
+    "components": "src",
+    "utils": "src/lib/utils"
   }
 }

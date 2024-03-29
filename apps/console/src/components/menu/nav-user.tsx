@@ -1,9 +1,6 @@
 "use client";
 
 import { logout } from "@console/actions/logout";
-import { CaretUpDown, CreditCard, Gear, User } from "@phosphor-icons/react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +8,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@hirer/ui/dropdown-menu";
+import { CaretUpDown, CreditCard, Gear, User } from "@phosphor-icons/react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface NavUserProps {
   name: string;

@@ -1,13 +1,13 @@
-import { Copy, DotsThree } from "@phosphor-icons/react/dist/ssr";
-import { Badge } from "@tremor/react";
-import Link from "next/link";
-import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@hirer/ui/dropdown-menu";
+import { Copy, DotsThree } from "@phosphor-icons/react/dist/ssr";
+import { Badge } from "@tremor/react";
+import Link from "next/link";
+import React from "react";
 
 type Job = {
   title: string;

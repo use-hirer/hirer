@@ -1,5 +1,7 @@
 "use client";
 
+import { Badge } from "@hirer/ui/badge";
+import { Separator } from "@hirer/ui/separator";
 import { Icon } from "@phosphor-icons/react";
 import {
   Briefcase,
@@ -11,8 +13,6 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import { Badge } from "../ui/badge";
-import { Separator } from "../ui/separator";
 import FeatureModal from "./feature-modal";
 import NavAction from "./nav-action";
 import NavLink from "./nav-link";

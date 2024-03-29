@@ -1,18 +1,18 @@
 "use client";
 
-import { Button } from "@console/components/ui/button";
+import { Job, JobStatus } from "@console/model/Job";
+import { Button } from "@hirer/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@console/components/ui/dropdown-menu";
-import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { ColumnDef, Column } from "@tanstack/react-table";
-import * as React from "react";
-import { Badge } from "@tremor/react";
+} from "@hirer/ui/dropdown-menu";
 import { Copy } from "@phosphor-icons/react";
-import { Job, JobStatus } from "@console/model/Job";
+import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { Column, ColumnDef } from "@tanstack/react-table";
+import { Badge } from "@tremor/react";
+import * as React from "react";
 
 const JOB_STATUS_COLOUR: Record<JobStatus, string> = {
   ["Active"]: "emerald",

@@ -1,9 +1,9 @@
 "use client";
 
 import { useCollapse } from "@console/context/collapse-context";
+import { Separator } from "@hirer/ui/separator";
 import { Sparkle } from "@phosphor-icons/react/dist/ssr";
 import type { User } from "lucia";
-import { Separator } from "../ui/separator";
 import BottomMenuLayout from "./bottom-layout";
 import NavUser from "./nav-user";
 import TeamSwitcher from "./team-select";

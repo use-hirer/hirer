@@ -1,14 +1,14 @@
 "use client";
 
-import { Bell, Confetti } from "@phosphor-icons/react";
-import React from "react";
 import {
   Drawer,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from "../ui/drawer";
+} from "@hirer/ui/drawer";
+import { Bell, Confetti } from "@phosphor-icons/react";
+import React from "react";
 
 interface NotificationsProps {}
 

@@ -1,7 +1,7 @@
 import CompanyProfileForm from "@console/components/forms/company-profile-form";
 import { AnimatedLogo } from "@console/components/logo";
-import { Button } from "@console/components/ui/button";
 import { validateRequest } from "@console/lib/auth";
+import { Button } from "@hirer/ui/button";
 import { redirect } from "next/navigation";
 
 export default async function OnboardingCompanyPage() {

@@ -1,13 +1,13 @@
 "use client";
 
 import { cn } from "@console/lib/utils";
-import { IconProps } from "@phosphor-icons/react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "../ui/tooltip";
+} from "@hirer/ui/tooltip";
+import { IconProps } from "@phosphor-icons/react";
 
 interface NavActionProps {
   icon: React.ElementType<IconProps>;

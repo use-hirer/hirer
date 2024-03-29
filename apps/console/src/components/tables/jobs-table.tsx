@@ -1,31 +1,30 @@
 "use client";
 
-import { Button } from "@console/components/ui/button";
+import { JOB_DATA } from "@console/components/tables/job-data";
+import { Job } from "@console/model/Job";
+import { Button } from "@hirer/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@console/components/ui/dropdown-menu";
+} from "@hirer/ui/dropdown-menu";
+import { TableHeader } from "@hirer/ui/table";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import {
   ColumnFiltersState,
   SortingState,
+  Table,
   VisibilityState,
+  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  flexRender,
-  Table,
 } from "@tanstack/react-table";
 import * as React from "react";
-
-import { JOB_DATA } from "@console/components/tables/job-data";
 import { JOBS_TABLE_COLUMNS } from "./job-columns";
-import { TableHeader } from "../ui/table";
-import { Job } from "@console/model/Job";
 
 interface NavigationPanelProps {
   table: Table<Job>;

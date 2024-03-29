@@ -1,6 +1,6 @@
+import { Card } from "@hirer/ui/card";
 import { BadgeDelta } from "@tremor/react";
 import React from "react";
-import { Card } from "../ui/card";
 
 interface KPICardProps {
   title: string;

@@ -1,4 +1,4 @@
-import MagicLinkEmail from "emails/templates/magic-link";
+import MagicLinkEmail from "@hirer/emails/templates/magic-link";
 import { resend } from "../lib/resend";
 
 interface sendVerificationProps {
