@@ -19,9 +19,19 @@ interface VercelInviteUserEmailProps {
   loginLink: string;
 }
 
-export const MagicLink = ({ email, loginLink }: VercelInviteUserEmailProps) => {
+export const MagicLink = ({
+  email = "test@email.com",
+  loginLink = "https://console.usehirer.com/",
+}: VercelInviteUserEmailProps) => {
   const previewText = `Your Hirer Login Link`;
-  const { host } = new URL(loginLink);
+  let baseUrl: string;
+
+  try {
+    const url = new URL(loginLink);
+    baseUrl = url.host;
+  } catch {
+    baseUrl = "https://console.usehirer.com";
+  }
 
   return (
     <Html>
@@ -32,7 +42,7 @@ export const MagicLink = ({ email, loginLink }: VercelInviteUserEmailProps) => {
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
             <Section className="mt-[32px]">
               <Img
-                src={`${host}/hirer-icon.png`}
+                src={`${baseUrl}/hirer-icon.png`}
                 width="50"
                 height="50"
                 alt="Hirer"
