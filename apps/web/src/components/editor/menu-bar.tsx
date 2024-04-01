@@ -52,7 +52,7 @@ const MenuItem = ({
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger type="button">
           <button
             type="button"
             className={cn([
