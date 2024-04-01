@@ -62,7 +62,6 @@ const JobEditForm: React.FC<JobEditFormProps> = () => {
               </FormItem>
             )}
           />
-
           <FormField
             name="location"
             control={form.control}

@@ -194,6 +194,7 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
 
                 form.setValue("description", "");
                 form.setValue("description", result);
+                form.clearErrors("description");
 
                 setGeneratingDescription(false);
                 setOpenGenerateModal(false);
