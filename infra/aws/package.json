@@ -5,7 +5,7 @@
     "infra": "bin/infra.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build:infra": "tsc",
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk"
