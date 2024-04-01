@@ -54,6 +54,7 @@ const MenuItem = ({
       <Tooltip>
         <TooltipTrigger>
           <button
+            type="button"
             className={cn([
               "bg-transparent border-none rounded-md flex items-center justify-center text-white cursor-pointer h-7 mr-1 p-1 w-7",
               "hover:bg-[#303030]",
