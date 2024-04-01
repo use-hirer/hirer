@@ -40,11 +40,11 @@ const Editor: React.FC<EditorProps> = ({ value, setValue, placeholder }) => {
   }, [editor, value]);
 
   return (
-    <div className="bg-white border-3 border-gray-900 rounded-xl text-gray-900 flex flex-col max-h-104">
+    <div className="rounded-md text-gray-900 flex flex-col max-h-104">
       {editor && <MenuBar editor={editor} />}
       <div className="w-full" onClick={() => editor?.chain().focus().run()}>
         <EditorContent
-          className="flex-1 w-full overflow-x-hidden overflow-y-auto p-5 pr-4 outline-none min-h-96"
+          className="flex-1 w-full overflow-x-hidden overflow-y-auto p-5 pr-4 outline-none min-h-96 bg-white"
           editor={editor}
         />
       </div>

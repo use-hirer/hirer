@@ -191,7 +191,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
   ];
 
   return (
-    <div className="flex items-center bg-gray-900 border-b-3 border-gray-900 rounded-t-sm flex-none flex-wrap p-1">
+    <div className="flex items-center bg-gray-900 border-b-3 rounded-t-md flex-none flex-wrap p-1">
       {items.map((item, index) => (
         <Fragment key={index}>
           <MenuItem {...item} />
