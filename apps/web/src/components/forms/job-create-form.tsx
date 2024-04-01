@@ -3,6 +3,15 @@
 import { GenerateJobDescription } from "@/actions/generate-text";
 import { Button } from "@hirer/ui/button";
 import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@hirer/ui/dialog";
+import {
   Form,
   FormControl,
   FormDescription,
@@ -12,6 +21,7 @@ import {
   FormMessage,
 } from "@hirer/ui/form";
 import { Input } from "@hirer/ui/input";
+import { Label } from "@hirer/ui/label";
 import { Textarea } from "@hirer/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleNotch } from "@phosphor-icons/react";
@@ -34,6 +44,8 @@ interface JobCreateFormProps {}
 
 const JobCreateForm: React.FC<JobCreateFormProps> = () => {
   const [generateDescription, setGeneratingDescription] = useState(false);
+  const [openGenerateModal, setOpenGenerateModal] = useState(false);
+  const [additionalInformation, setAdditionalInformation] = useState("");
 
   const form = useForm<JobFormValues>({
     resolver: zodResolver(jobFormSchema),
@@ -99,7 +111,6 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
                     variant={"outline"}
                     disabled={generateDescription}
                     onClick={async () => {
-                      setGeneratingDescription(true);
                       const position = form.getValues("position");
                       const location = form.getValues("location");
 
@@ -108,15 +119,8 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
                           "We need both the job title & location to generate a description!"
                         );
                       } else {
-                        const result = await GenerateJobDescription(
-                          form.getValues("position"),
-                          form.getValues("location")
-                        );
-
-                        form.setValue("description", "");
-                        form.setValue("description", result);
+                        setOpenGenerateModal(true);
                       }
-                      setGeneratingDescription(false);
                     }}
                   >
                     {generateDescription && (
@@ -145,6 +149,61 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
           </div>
         </form>
       </Form>
+      <Dialog
+        open={openGenerateModal}
+        onOpenChange={() => setOpenGenerateModal(!openGenerateModal)}
+      >
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Generate Description</DialogTitle>
+            <DialogDescription>
+              Add additional job details to improve the generation.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid flex-1 gap-2">
+            <Label htmlFor="link" className="sr-only">
+              Link
+            </Label>
+            <Textarea
+              placeholder="Include a section on how we offer employee benefits such as public transport & gym membership reimbursement."
+              className="min-h-48"
+              value={additionalInformation}
+              onChange={(e) => setAdditionalInformation(e.currentTarget.value)}
+            />
+          </div>
+          <DialogFooter className="sm:justify-end">
+            <DialogClose asChild>
+              <Button type="button" variant="secondary">
+                Close
+              </Button>
+            </DialogClose>
+            <Button
+              disabled={generateDescription}
+              type="submit"
+              onClick={async () => {
+                setGeneratingDescription(true);
+
+                const result = await GenerateJobDescription(
+                  form.getValues("position"),
+                  form.getValues("location"),
+                  additionalInformation
+                );
+
+                form.setValue("description", "");
+                form.setValue("description", result);
+
+                setGeneratingDescription(false);
+                setOpenGenerateModal(false);
+              }}
+            >
+              {generateDescription && (
+                <CircleNotch className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              Generate
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

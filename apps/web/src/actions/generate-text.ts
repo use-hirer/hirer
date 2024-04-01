@@ -34,6 +34,8 @@ The job description should include:
 
 Write the job description in a tone that matches the seniority and type of role. For example, use a more formal tone for senior executive positions and a more casual, energetic tone for creative or startup roles.
 
+If there is additional information/instructions: {additionalInformation}, also consider this when writing the job description, whether in a different section or as part of existing sections, depending on the instructions.
+
 If the {location} includes multiple options, mention that the role can be in any of those locations or remote. If the {location} is empty, do not mention a location.
 
 The job description should be 4-6 paragraphs long, with a compelling headline at the top that includes the {job_title}.
@@ -43,7 +45,8 @@ At the end, summarize the key highlights of the role and company, and provide a 
 
 export async function GenerateJobDescription(
   jobTitle: string,
-  location: string
+  location: string,
+  additionalInformation: string
 ): Promise<string> {
   try {
     if (process.env.NODE_ENV === "production") {
@@ -62,6 +65,7 @@ export async function GenerateJobDescription(
     const result = await chain.invoke({
       job_title: jobTitle,
       location: location,
+      additionalInformation: additionalInformation,
     });
 
     return result;

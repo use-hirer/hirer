@@ -14,7 +14,7 @@ const NoJobsExist: React.FC<NoJobsExistProps> = ({ className }) => {
 
   return (
     <div
-      className={`flex flex-col items-center justify-center rounded-lg border border-dashed  ${className}`}
+      className={`flex flex-col items-center justify-center rounded-lg border border-dashed ${className}`}
     >
       <div className="flex flex-col items-center gap-1 text-center">
         <FlagPennant size={32} />
