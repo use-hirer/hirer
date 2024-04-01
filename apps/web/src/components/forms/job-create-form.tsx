@@ -29,6 +29,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import Editor from "../editor/editor";
 
 const jobFormSchema = z.object({
   position: z.string().min(1, "Every job needs a title."),
@@ -80,7 +81,6 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
               </FormItem>
             )}
           />
-
           <FormField
             name="location"
             control={form.control}
@@ -96,6 +96,7 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
               </FormItem>
             )}
           />
+
           <FormField
             name="description"
             control={form.control}
@@ -130,11 +131,13 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
                   </Button>
                 </div>
                 <FormControl>
-                  <Textarea
-                    placeholder="We are seeking a talented Software Engineer to join our dynamic team in building cutting-edge software solutions. As a Software Engineer, you will play a crucial role in designing, developing, and maintaining high-quality software applications."
-                    className="min-h-96"
-                    {...field}
-                  />
+                  <div className="min-h-[60px] w-full rounded-md border border-input bg-transparent text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50">
+                    <Editor
+                      value={field.value}
+                      setValue={field.onChange}
+                      placeholder="We are seeking a talented Software Engineer to join our dynamic team in building cutting-edge software solutions. As a Software Engineer, you will play a crucial role in designing, developing, and maintaining high-quality software applications."
+                    />
+                  </div>
                 </FormControl>
                 <FormMessage />
                 <FormDescription>

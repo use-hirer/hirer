@@ -31,16 +31,19 @@ The job description should include:
 - The key qualifications and skills required
 - The company culture and benefits (you can make up details as needed)
 - A call to action for qualified candidates to apply
+- If there is additional information/instructions: {additionalInformation}, also consider this when writing the job description, whether in a different section or as part of existing sections, depending on the instructions.
 
-Write the job description in a tone that matches the seniority and type of role. For example, use a more formal tone for senior executive positions and a more casual, energetic tone for creative or startup roles.
 
-If there is additional information/instructions: {additionalInformation}, also consider this when writing the job description, whether in a different section or as part of existing sections, depending on the instructions.
+Here are some rules to note for the job description:
 
-If the {location} includes multiple options, mention that the role can be in any of those locations or remote. If the {location} is empty, do not mention a location.
-
-The job description should be 4-6 paragraphs long, with a compelling headline at the top that includes the {job_title}.
-
-At the end, summarize the key highlights of the role and company, and provide a clear call-to-action for candidates to apply.
+<Rules>
+- Do not have a title at the beginning. Only write the job description.
+- Write the job description in a tone that matches the seniority and type of role. For example, use a more formal tone for senior executive positions and a more casual, energetic tone for creative or startup roles.
+- If the {location} includes multiple options, mention that the role can be in any of those locations or remote. If the {location} is empty, do not mention a location.
+- Use markdown for styling where possible.
+- The job description should be 4-6 paragraphs long.
+- At the end, summarize the key highlights of the role and company, and provide a clear call-to-action for candidates to apply.
+</Rules>
 `;
 
 export async function GenerateJobDescription(
