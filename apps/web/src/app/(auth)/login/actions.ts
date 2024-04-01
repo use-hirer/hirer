@@ -1,10 +1,10 @@
 "use server";
 
-import prisma from "@/lib/prisma";
 import { sendVerificationRequest } from "@/utils/send-verification-request";
+import { generateId } from "@hirer/auth/lucia";
+import prisma from "@hirer/database";
 import { Ratelimit } from "@upstash/ratelimit";
 import { kv } from "@vercel/kv";
-import { generateId } from "lucia";
 import { headers } from "next/headers";
 import { TimeSpan, createDate } from "oslo";
 

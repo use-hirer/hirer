@@ -4,9 +4,13 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "dependencies": {
-    "@prisma/client": "5.11.0"
+    "@neondatabase/serverless": "^0.9.0",
+    "@prisma/client": "5.11.0",
+    "bufferutil": "^4.0.8",
+    "ws": "^8.16.0"
   },
   "devDependencies": {
+    "@types/ws": "^8.5.10",
     "prisma": "5.11.0"
   },
   "scripts": {

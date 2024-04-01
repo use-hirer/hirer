@@ -1,5 +1,5 @@
-import { lucia } from "@/lib/auth";
-import prisma from "@/lib/prisma";
+import { lucia } from "@hirer/auth";
+import prisma from "@hirer/database";
 import { cookies } from "next/headers";
 import { type NextRequest } from "next/server";
 import { isWithinExpirationDate } from "oslo";

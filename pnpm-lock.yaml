@@ -20,12 +20,15 @@ importers:
       '@heroicons/react':
         specifier: ^2.1.3
         version: 2.1.3(react@18.2.0)
+      '@hirer/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
       '@hirer/database':
         specifier: workspace:*
         version: link:../../packages/database
-      '@hirer/emails':
+      '@hirer/email':
         specifier: workspace:*
-        version: link:../../packages/emails
+        version: link:../../packages/email
       '@hirer/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -34,16 +37,13 @@ importers:
         version: 3.3.4(react-hook-form@7.51.2)
       '@langchain/community':
         specifier: ^0.0.43
-        version: 0.0.43(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)(ws@8.16.0)
+        version: 0.0.43(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)
       '@langchain/core':
         specifier: ^0.1.52
         version: 0.1.52
       '@lucia-auth/adapter-prisma':
         specifier: ^4.0.1
         version: 4.0.1(@prisma/client@5.11.0)(lucia@3.1.1)
-      '@neondatabase/serverless':
-        specifier: ^0.9.0
-        version: 0.9.0
       '@phosphor-icons/react':
         specifier: ^2.1.4
         version: 2.1.4(react-dom@18.2.0)(react@18.2.0)
@@ -104,9 +104,6 @@ importers:
       arctic:
         specifier: ^1.5.0
         version: 1.5.0
-      bufferutil:
-        specifier: ^4.0.8
-        version: 4.0.8
       country-list:
         specifier: ^2.3.0
         version: 2.3.0
@@ -118,10 +115,7 @@ importers:
         version: 1.3.0(next@14.1.4)
       langchain:
         specifier: ^0.1.30
-        version: 0.1.30(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)(ws@8.16.0)
-      lucia:
-        specifier: ^3.1.1
-        version: 3.1.1
+        version: 0.1.30(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)
       next:
         specifier: ^14.1.4
         version: 14.1.4(react-dom@18.2.0)(react@18.2.0)
@@ -164,9 +158,6 @@ importers:
       tiptap-markdown:
         specifier: ^0.8.10
         version: 0.8.10(@tiptap/core@2.2.4)
-      ws:
-        specifier: ^8.16.0
-        version: 8.16.0(bufferutil@4.0.8)
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -235,6 +226,9 @@ importers:
 
   packages/api:
     dependencies:
+      '@hirer/database':
+        specifier: workspace:*
+        version: link:../database
       '@tanstack/react-query':
         specifier: ^5.28.9
         version: 5.28.9(react@18.2.0)
@@ -257,17 +251,41 @@ importers:
         specifier: ^3.22.4
         version: 3.22.4
 
+  packages/auth:
+    dependencies:
+      '@hirer/database':
+        specifier: workspace:*
+        version: link:../database
+      arctic:
+        specifier: ^1.5.0
+        version: 1.5.0
+      lucia:
+        specifier: ^3.1.1
+        version: 3.1.1
+
   packages/database:
     dependencies:
+      '@neondatabase/serverless':
+        specifier: ^0.9.0
+        version: 0.9.0
       '@prisma/client':
         specifier: 5.11.0
         version: 5.11.0(prisma@5.11.0)
+      bufferutil:
+        specifier: ^4.0.8
+        version: 4.0.8
+      ws:
+        specifier: ^8.16.0
+        version: 8.16.0(bufferutil@4.0.8)
     devDependencies:
+      '@types/ws':
+        specifier: ^8.5.10
+        version: 8.5.10
       prisma:
         specifier: 5.11.0
         version: 5.11.0
 
-  packages/emails:
+  packages/email:
     dependencies:
       '@react-email/components':
         specifier: ^0.0.15
@@ -281,6 +299,13 @@ importers:
       react-email:
         specifier: ^2.1.0
         version: 2.1.0(eslint@8.57.0)
+      resend:
+        specifier: ^3.2.0
+        version: 3.2.0
+    devDependencies:
+      '@types/node':
+        specifier: ^20.12.2
+        version: 20.12.2
 
   packages/ui:
     dependencies:
@@ -992,7 +1017,7 @@ packages:
   /@jridgewell/source-map@0.3.5:
     resolution: {integrity: sha512-UTYAUj/wviwdsMfzoSJspJxbkH5o1snzwX0//0ENX1u/55kkZZkcTZP6u9bwKGkv+dkk9at4m1Cpt0uY80kcpQ==}
     dependencies:
-      '@jridgewell/gen-mapping': 0.3.3
+      '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
     dev: false
 
@@ -1019,7 +1044,7 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@langchain/community@0.0.43(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)(ws@8.16.0):
+  /@langchain/community@0.0.43(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1):
     resolution: {integrity: sha512-60TjV3knGGOPHfbJxLpuwARr8oA0r6Txm8wTFvFx+TjRUrloyBUcWSbJIdm62gAwBJDEHmdjjyWOOzU+eewcuA==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -1307,7 +1332,6 @@ packages:
       flat: 5.0.2
       langsmith: 0.1.14
       uuid: 9.0.1
-      ws: 8.16.0(bufferutil@4.0.8)
       zod: 3.22.4
     transitivePeerDependencies:
       - encoding
@@ -4187,7 +4211,7 @@ packages:
   /@types/cors@2.8.17:
     resolution: {integrity: sha512-8CGDvrBj1zgo2qE+oS3pOCyYNqCPryMWY2bGfwA0dcfopWGgxs+78df0Rs3rc9THP4JkOhLsAa+15VdpAqkcUA==}
     dependencies:
-      '@types/node': 20.11.28
+      '@types/node': 20.12.2
     dev: false
 
   /@types/d3-array@3.2.1:
@@ -4331,6 +4355,11 @@ packages:
     dependencies:
       undici-types: 5.26.5
 
+  /@types/node@20.12.2:
+    resolution: {integrity: sha512-zQ0NYO87hyN6Xrclcqp7f8ZbXNbRfoGWNcMvHTPQp9UUrwI0mI7XBz+cu7/W6/VClYo2g63B0cjull/srU7LgQ==}
+    dependencies:
+      undici-types: 5.26.5
+
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
     dev: false
@@ -4384,7 +4413,7 @@ packages:
   /@types/webpack@5.28.5(@swc/core@1.3.101)(esbuild@0.19.11):
     resolution: {integrity: sha512-wR87cgvxj3p6D0Crt1r5avwqffqPXUkNlnQ1mjU93G7gCuFjufZR4I6j8cz5g1F1tTYpfOOFvly+cmIQwL9wvw==}
     dependencies:
-      '@types/node': 20.11.28
+      '@types/node': 20.12.2
       tapable: 2.2.1
       webpack: 5.90.1(@swc/core@1.3.101)(esbuild@0.19.11)
     transitivePeerDependencies:
@@ -5795,7 +5824,7 @@ packages:
     dependencies:
       '@types/cookie': 0.4.1
       '@types/cors': 2.8.17
-      '@types/node': 20.11.28
+      '@types/node': 20.12.2
       accepts: 1.3.8
       base64id: 2.0.0
       cookie: 0.4.2
@@ -5922,6 +5951,7 @@ packages:
   /esbuild@0.19.11:
     resolution: {integrity: sha512-HJ96Hev2hX/6i5cDVwcqiJBBtuo9+FeIJOtZ9W1kA5M6AMJRHUZlpYZ1/SbEwtO0ioNAW8rUooVpC/WehY2SfA==}
     engines: {node: '>=12'}
+    hasBin: true
     requiresBuild: true
     optionalDependencies:
       '@esbuild/aix-ppc64': 0.19.11
@@ -6570,6 +6600,7 @@ packages:
   /glob@10.3.4:
     resolution: {integrity: sha512-6LFElP3A+i/Q8XQKEvZjkEWEOTgAIALR9AO2rwT8bgPhDd1anmqDJDZ6lLddI4ehxxxR1S5RIqKe1uapMQfYaQ==}
     engines: {node: '>=16 || 14 >=14.17'}
+    hasBin: true
     dependencies:
       foreground-child: 3.1.1
       jackspeak: 2.3.6
@@ -7067,7 +7098,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.11.28
+      '@types/node': 20.12.2
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: false
@@ -7165,7 +7196,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /langchain@0.1.30(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)(ws@8.16.0):
+  /langchain@0.1.30(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1):
     resolution: {integrity: sha512-5h/vNMmutQ98tbB0sPDlAileZVca6A2McFgGa3+D56Dm8mSSCzTQL2DngPA6h09DlKDpSr7+6PdFw5Hoj0ZDSw==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -7325,7 +7356,7 @@ packages:
         optional: true
     dependencies:
       '@anthropic-ai/sdk': 0.9.1
-      '@langchain/community': 0.0.43(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)(ws@8.16.0)
+      '@langchain/community': 0.0.43(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)
       '@langchain/core': 0.1.52
       '@langchain/openai': 0.0.23
       '@vercel/kv': 1.0.1
@@ -7339,7 +7370,6 @@ packages:
       openapi-types: 12.1.3
       p-retry: 4.6.2
       uuid: 9.0.1
-      ws: 8.16.0(bufferutil@4.0.8)
       yaml: 2.3.4
       zod: 3.22.4
       zod-to-json-schema: 3.22.4(zod@3.22.4)
@@ -7579,6 +7609,7 @@ packages:
   /marked@7.0.4:
     resolution: {integrity: sha512-t8eP0dXRJMtMvBojtkcsA7n48BkauktUKzfkPSCq85ZMTJ0v76Rke4DYz01omYpPTUh4p/f7HePgRo3ebG8+QQ==}
     engines: {node: '>= 16'}
+    hasBin: true
     dev: false
 
   /md-to-react-email@4.1.0(react-email@2.1.0)(react@18.2.0):
@@ -8860,6 +8891,7 @@ packages:
   /react-email@2.1.0(eslint@8.57.0):
     resolution: {integrity: sha512-fTt85ca1phsBu57iy32wn4LTR37rOzDZoY2AOWVq3JQYVwk6GlBdUuQWif2cudkwWINL9COf9kRMS4/QWtKtAQ==}
     engines: {node: '>=18.0.0'}
+    hasBin: true
     dependencies:
       '@radix-ui/colors': 1.0.1
       '@radix-ui/react-collapsible': 1.0.3(@types/react-dom@18.2.22)(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0)
@@ -9292,6 +9324,7 @@ packages:
 
   /semver@5.7.2:
     resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
+    hasBin: true
     dev: false
 
   /semver@6.3.1:
@@ -9361,6 +9394,7 @@ packages:
   /shelljs@0.8.5:
     resolution: {integrity: sha512-TiwcRcrkhHvbrZbnRcFYMLl30Dfov3HKqzp5tO5b4pt6G/SezKcYhmDg15zXVBswHmctSAQKznqNW2LO5tTDow==}
     engines: {node: '>=4'}
+    hasBin: true
     dependencies:
       glob: 7.2.3
       interpret: 1.4.0
@@ -9798,6 +9832,7 @@ packages:
   /tailwindcss@3.4.0:
     resolution: {integrity: sha512-VigzymniH77knD1dryXbyxR+ePHihHociZbXnLZHUyzf2MMs2ZVqlUrZ3FvpXP8pno9JzmILt1sZPD19M3IxtA==}
     engines: {node: '>=14.0.0'}
+    hasBin: true
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -9887,6 +9922,7 @@ packages:
   /terser@5.27.0:
     resolution: {integrity: sha512-bi1HRwVRskAjheeYl291n3JC4GgO/Ty4z1nVs5AAsmonJulGxpSektecnNedrwK9C7vpvVtcX3cw00VSLt7U2A==}
     engines: {node: '>=10'}
+    hasBin: true
     dependencies:
       '@jridgewell/source-map': 0.3.5
       acorn: 8.11.3
@@ -9948,6 +9984,7 @@ packages:
   /tree-cli@0.6.7:
     resolution: {integrity: sha512-jfnB5YKY6Glf6bsFmQ9W97TtkPVLnHsjOR6ZdRf4zhyFRQeLheasvzE5XBJI2Hxt7ZyMyIbXUV7E2YPZbixgtA==}
     engines: {node: '>=8.10.9'}
+    hasBin: true
     dependencies:
       bluebird: 3.7.2
       chalk: 1.1.3
@@ -10168,6 +10205,7 @@ packages:
   /typescript@5.1.6:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
     engines: {node: '>=14.17'}
+    hasBin: true
     dev: false
 
   /typescript@5.4.3:

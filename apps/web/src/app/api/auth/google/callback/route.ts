@@ -1,5 +1,6 @@
-import { google, lucia } from "@/lib/auth";
-import prisma from "@/lib/prisma";
+import { lucia } from "@hirer/auth";
+import { google } from "@hirer/auth/providers/google";
+import prisma from "@hirer/database";
 import { OAuth2RequestError } from "arctic";
 import { cookies } from "next/headers";
 

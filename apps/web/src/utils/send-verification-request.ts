@@ -1,5 +1,5 @@
-import { resend } from "@/lib/resend";
-import MagicLinkEmail from "@hirer/emails/templates/magic-link";
+import { resend } from "@hirer/email/resend";
+import MagicLinkEmail from "@hirer/email/templates/magic-link";
 
 interface sendVerificationProps {
   email: string;
