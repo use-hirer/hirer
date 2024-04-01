@@ -10,7 +10,7 @@ import {
   BreadcrumbSeparator,
 } from "@hirer/ui/breadcrumb";
 import { Separator } from "@hirer/ui/separator";
-import { ReadCvLogo } from "@phosphor-icons/react/dist/ssr";
+import { HandsClapping } from "@phosphor-icons/react/dist/ssr";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Toaster } from "sonner";
@@ -50,8 +50,8 @@ export default async function JobCreatePage() {
         <div className="font-extrabold text-xl py-2">Create a Job</div>
         <Separator className="my-2" />
         <div className="my-4 text-sm">
-          <Alert>
-            <ReadCvLogo className="h-4 w-4" />
+          <Alert className="bg-zinc-50">
+            <HandsClapping className="h-5 w-5" />
             <AlertTitle>You&apos;re on your way!</AlertTitle>
             <AlertDescription>
               After creating a job, you&apos;ll be directed to the configuration
