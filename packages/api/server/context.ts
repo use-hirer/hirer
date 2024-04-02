@@ -1,3 +1,8 @@
+import prisma from "@hirer/database";
+import { initTRPC } from "@trpc/server";
+import superjson from "superjson";
+import { ZodError } from "zod";
+import { validateRequest } from "../lib/auth";
 
 /**
  * 1. CONTEXT
@@ -12,11 +17,11 @@
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const { session, user } = await uncachedValidateRequest();
+  const { session, user } = await validateRequest();
   return {
     session,
     user,
-    db: ,
+    db: prisma,
     headers: opts.headers,
   };
 };
@@ -28,7 +33,7 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
  * ZodErrors so that you get typesafety on the frontend if your procedure fails due to validation
  * errors on the backend.
  */
-const t = initTRPC.context<typeof createTRPCContext>().create({
+export const t = initTRPC.context<typeof createTRPCContext>().create({
   transformer: superjson,
   errorFormatter({ shape, error }) {
     return {

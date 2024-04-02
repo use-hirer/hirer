@@ -10,12 +10,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hirer/auth": "workspace:*",
     "@hirer/database": "workspace:*",
+    "@langchain/community": "^0.0.43",
+    "@langchain/core": "^0.1.52",
     "@tanstack/react-query": "^5.28.9",
-    "@trpc/client": "11.0.0-next.327",
     "@trpc/next": "11.0.0-next.327",
-    "@trpc/react-query": "11.0.0-next.327",
     "@trpc/server": "11.0.0-next.327",
+    "@upstash/ratelimit": "^1.0.1",
+    "@vercel/kv": "^1.0.1",
+    "next": "^14.1.4",
     "superjson": "^2.2.1",
     "zod": "^3.22.4"
   }
