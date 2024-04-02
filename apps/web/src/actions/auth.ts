@@ -12,7 +12,7 @@ export async function authCheck() {
   }
 
   if (!user.onboarded) {
-    if (!user.data.userOnboarding) {
+    if (user.data?.userOnboarding !== true) {
       return redirect("/onboarding");
     }
 
