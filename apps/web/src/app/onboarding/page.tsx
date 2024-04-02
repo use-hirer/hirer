@@ -9,5 +9,9 @@ export default async function OnboardingPage() {
     return redirect("/login");
   }
 
+  if (user.data && user.data?.userOnboarding === true) {
+    return redirect("/onboarding/company");
+  }
+
   return <OnboardingForm />;
 }

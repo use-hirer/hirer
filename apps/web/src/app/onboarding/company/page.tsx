@@ -11,6 +11,10 @@ export default async function OnboardingCompanyPage() {
     return redirect("/login");
   }
 
+  if (!user.data || user.data.userOnboarding === false) {
+    return redirect("/onboarding");
+  }
+
   return (
     <>
       <AnimatedLogo />
