@@ -15,8 +15,9 @@ import { Textarea } from "@hirer/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleNotch } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const MAX_FILE_SIZE = 1024 * 1024 * 2; // 2MB
@@ -54,18 +55,25 @@ const CompanyProfileForm: React.FC<CompanyProfileFormProps> = () => {
     },
   });
 
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
-
   const createCompany = api.team.create.useMutation({});
 
   async function onSubmit(data: ProfileFormValues) {
-    await createCompany.mutateAsync({
-      name: data.name,
-      bio: data.description,
-      website: data.website,
-    });
+    setLoading(true);
 
-    router.push("/");
+    try {
+      await createCompany.mutateAsync({
+        name: data.name,
+        bio: data.description,
+        website: data.website,
+      });
+
+      router.push("/");
+    } catch (e) {
+      toast.error("An error occurred! Please try again.");
+      setLoading(false);
+    }
   }
 
   return (
@@ -149,12 +157,8 @@ const CompanyProfileForm: React.FC<CompanyProfileFormProps> = () => {
             </FormItem>
           )}
         />
-        <Button
-          className="flex w-full"
-          type="submit"
-          disabled={createCompany.isPending}
-        >
-          {createCompany.isPending ? (
+        <Button className="flex w-full" type="submit" disabled={loading}>
+          {loading ? (
             <CircleNotch className="mr-2 h-4 w-4 animate-spin" />
           ) : (
             "Get Started"

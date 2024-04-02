@@ -18,6 +18,7 @@ import { CircleNotch } from "@phosphor-icons/react/dist/ssr";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
 const FormSchema = z.object({
@@ -28,9 +29,8 @@ const FormSchema = z.object({
 
 export default function OnboardingForm() {
   const [step, setStep] = useState(1);
-
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
-
   const onboardUser = api.user.onboard.useMutation({});
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -48,13 +48,20 @@ export default function OnboardingForm() {
   };
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    await onboardUser.mutateAsync({
-      name: data.fullName,
-      role: data.role,
-      source: data.referral,
-    });
+    setLoading(true);
 
-    router.push("/onboarding/company");
+    try {
+      await onboardUser.mutateAsync({
+        name: data.fullName,
+        role: data.role,
+        source: data.referral,
+      });
+
+      router.push("/onboarding/company");
+    } catch (e) {
+      toast.error("An error occurred! Please try again.");
+      setLoading(false);
+    }
   };
 
   const renderStep = () => {
@@ -176,10 +183,10 @@ export default function OnboardingForm() {
                 </div>
                 <Button
                   className="min-w-[295px] mt-4"
-                  disabled={!form.watch("referral") || onboardUser.isPending}
+                  disabled={!form.watch("referral") || loading}
                   type="submit"
                 >
-                  {onboardUser.isPending ? (
+                  {loading ? (
                     <CircleNotch className="mr-2 h-4 w-4 animate-spin" />
                   ) : (
                     "Submit"
