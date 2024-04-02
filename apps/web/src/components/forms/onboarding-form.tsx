@@ -28,7 +28,6 @@ const FormSchema = z.object({
 
 export default function OnboardingForm() {
   const [step, setStep] = useState(1);
-  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -49,8 +48,6 @@ export default function OnboardingForm() {
   };
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    setLoading(true);
-
     await onboardUser.mutateAsync({
       name: data.fullName,
       role: data.role,
@@ -179,10 +176,10 @@ export default function OnboardingForm() {
                 </div>
                 <Button
                   className="min-w-[295px] mt-4"
-                  disabled={!form.watch("referral") || loading}
+                  disabled={!form.watch("referral") || onboardUser.isPending}
                   type="submit"
                 >
-                  {loading ? (
+                  {onboardUser.isPending ? (
                     <CircleNotch className="mr-2 h-4 w-4 animate-spin" />
                   ) : (
                     "Submit"
