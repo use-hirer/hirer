@@ -44,5 +44,5 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  return NextResponse.redirect("https://nick.net.au");
+  return NextResponse.redirect("https://console.usehirer.com");
 }
