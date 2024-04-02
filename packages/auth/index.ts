@@ -1,4 +1,5 @@
 import prisma from "@hirer/database";
+import { UserDataType } from "@hirer/database/types";
 import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 import { Lucia } from "lucia";
 
@@ -18,6 +19,7 @@ export const lucia = new Lucia(adapter, {
       name: attributes.name,
       image: attributes.image,
       onboarded: attributes.onboarded,
+      data: attributes.data,
     };
   },
 });
@@ -35,6 +37,7 @@ interface DatabaseUserAttributes {
   name: string;
   image: string;
   onboarded: boolean;
+  data: UserDataType;
 }
 
 export default lucia;

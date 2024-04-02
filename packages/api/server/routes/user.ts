@@ -20,9 +20,9 @@ export const jobRouter = createTRPCRouter({
           id: ctx.user.id,
         },
         data: {
-          onboarded: true,
           name: ctx.user.name.length > 0 ? ctx.user.name : input.name,
           data: {
+            userOnboarding: true,
             onboardingInfo: {
               role: input.role,
               source: input.source,

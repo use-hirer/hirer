@@ -2,9 +2,15 @@ import { Pool, neonConfig } from "@neondatabase/serverless";
 import { PrismaNeon } from "@prisma/adapter-neon";
 import { PrismaClient } from "@prisma/client";
 import ws from "ws";
+import { ActivityDataType, UserDataType } from "./types";
 
 declare global {
   var prisma: PrismaClient | undefined;
+
+  namespace PrismaJson {
+    type ActivityData = ActivityDataType;
+    type UserData = UserDataType;
+  }
 }
 
 neonConfig.webSocketConstructor = ws;
