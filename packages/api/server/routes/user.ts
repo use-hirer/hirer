@@ -20,7 +20,10 @@ export const userRouter = createTRPCRouter({
           id: ctx.user.id,
         },
         data: {
-          name: ctx.user.name.length > 0 ? ctx.user.name : input.name,
+          name:
+            ctx.user.name === "" || ctx.user.name === null
+              ? ctx.user.name
+              : input.name,
           data: {
             userOnboarding: true,
             onboardingInfo: {
