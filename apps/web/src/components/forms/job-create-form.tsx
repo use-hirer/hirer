@@ -1,6 +1,6 @@
 "use client";
 
-import { GenerateJobDescription } from "@/actions/generate-text";
+import { api } from "@/lib/api/react";
 import { Button } from "@hirer/ui/button";
 import {
   Dialog,
@@ -47,6 +47,8 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
   const [generateDescription, setGeneratingDescription] = useState(false);
   const [openGenerateModal, setOpenGenerateModal] = useState(false);
   const [additionalInformation, setAdditionalInformation] = useState("");
+
+  const generateJobDescription = api.ai.generateJobDescription.useMutation({});
 
   const form = useForm<JobFormValues>({
     resolver: zodResolver(jobFormSchema),
@@ -186,11 +188,11 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
               onClick={async () => {
                 setGeneratingDescription(true);
 
-                const result = await GenerateJobDescription(
-                  form.getValues("position"),
-                  form.getValues("location"),
-                  additionalInformation
-                );
+                const result = await generateJobDescription.mutateAsync({
+                  jobTitle: form.getValues("position"),
+                  location: form.getValues("location"),
+                  additionalInformation: additionalInformation,
+                });
 
                 form.setValue("description", "");
                 form.setValue("description", result);
