@@ -21,7 +21,7 @@ export const userRouter = createTRPCRouter({
         },
         data: {
           name:
-            ctx.user.name === "" || ctx.user.name === null
+            ctx.user.name !== "" || ctx.user.name !== null
               ? ctx.user.name
               : input.name,
           data: {
