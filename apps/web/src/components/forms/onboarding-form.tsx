@@ -103,6 +103,9 @@ export default function OnboardingForm() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
+                      <SelectItem value="Entrepreneur">
+                        Business Owner
+                      </SelectItem>
                       <SelectItem value="Recruiter">Recruiter</SelectItem>
                       <SelectItem value="Hiring_Manager">
                         Hiring Manager
@@ -110,6 +113,7 @@ export default function OnboardingForm() {
                       <SelectItem value="Executive">Executive</SelectItem>
                       <SelectItem value="Entrepreneur">Entrepreneur</SelectItem>
                       <SelectItem value="Developer">Developer</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
