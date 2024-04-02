@@ -2,6 +2,7 @@
 
 import { AnimatedLogo } from "@/components/logo";
 import StepIndicator from "@/components/steps-indicator";
+import { api } from "@/lib/api/react";
 import { Button } from "@hirer/ui/button";
 import { Form, FormControl, FormField } from "@hirer/ui/form";
 import { Input } from "@hirer/ui/input";
@@ -14,6 +15,7 @@ import {
 } from "@hirer/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleNotch } from "@phosphor-icons/react/dist/ssr";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -27,6 +29,10 @@ const FormSchema = z.object({
 export default function OnboardingForm() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
+
+  const onboardUser = api.user.onboard.useMutation({});
 
   const form = useForm<z.infer<typeof FormSchema>>({
     mode: "onChange",
@@ -43,8 +49,15 @@ export default function OnboardingForm() {
   };
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    console.log(data);
     setLoading(true);
+
+    await onboardUser.mutateAsync({
+      name: data.fullName,
+      role: data.role,
+      source: data.referral,
+    });
+
+    router.push("/onboarding/company");
   };
 
   const renderStep = () => {
@@ -103,7 +116,7 @@ export default function OnboardingForm() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Entrepreneur">
+                      <SelectItem value="Business_Owner">
                         Business Owner
                       </SelectItem>
                       <SelectItem value="Recruiter">Recruiter</SelectItem>

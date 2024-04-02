@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
-export const jobRouter = createTRPCRouter({
+export const userRouter = createTRPCRouter({
   onboard: protectedProcedure
     .input(
       z.object({
@@ -10,7 +10,7 @@ export const jobRouter = createTRPCRouter({
         source: z.string(),
       })
     )
-    .query(async ({ ctx, input }) => {
+    .mutation(async ({ ctx, input }) => {
       if (ctx.user.onboarded) {
         return false;
       }
