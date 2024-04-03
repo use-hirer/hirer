@@ -32,7 +32,7 @@ export default async function middleware(req: NextRequest) {
   }
 
   // rewrites for app pages
-  if (hostname == `console.usehirer.com`) {
+  if (hostname == `console.hirer.so`) {
     return NextResponse.next();
   }
 
@@ -44,5 +44,5 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  return NextResponse.redirect("https://console.usehirer.com");
+  return NextResponse.redirect("https://console.hirer.so");
 }
