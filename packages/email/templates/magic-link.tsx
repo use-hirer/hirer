@@ -21,7 +21,7 @@ interface VercelInviteUserEmailProps {
 
 export const MagicLink = ({
   email = "test@email.com",
-  loginLink = "https://console.usehirer.com/",
+  loginLink = "https://console.hirer.so/",
 }: VercelInviteUserEmailProps) => {
   const previewText = `Your Hirer Login Link`;
   let baseUrl: string;
@@ -30,7 +30,7 @@ export const MagicLink = ({
     const url = new URL(loginLink);
     baseUrl = url.host;
   } catch {
-    baseUrl = "https://console.usehirer.com";
+    baseUrl = "https://console.hirer.so";
   }
 
   return (

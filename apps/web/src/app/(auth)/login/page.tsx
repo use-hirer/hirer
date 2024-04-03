@@ -34,7 +34,7 @@ export default async function AuthenticationPage() {
                 information goes unnoticed.
               </p>
               <footer className="text-sm text-orange-500">
-                usehirer.com tip #4
+                hirer.so tip #4
               </footer>
             </blockquote>
           </div>
