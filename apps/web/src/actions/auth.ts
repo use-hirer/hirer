@@ -4,7 +4,7 @@ import { validateRequest } from "@/lib/auth";
 import prisma from "@hirer/database";
 import { redirect } from "next/navigation";
 
-export async function authCheck() {
+export async function authCheck(route?: boolean) {
   const { user } = await validateRequest();
 
   if (!user) {

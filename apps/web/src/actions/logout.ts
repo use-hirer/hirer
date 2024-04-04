@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 
 export async function logout(): Promise<ActionResult> {
   const { session } = await validateRequest();
+
   if (!session) {
     return {
       error: "Unauthorized",
@@ -21,6 +22,7 @@ export async function logout(): Promise<ActionResult> {
     sessionCookie.value,
     sessionCookie.attributes
   );
+
   return redirect("/login");
 }
 
