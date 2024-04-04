@@ -42,6 +42,11 @@ export default async function AuthenticationPage() {
         <div className="lg:p-8">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
+              <div className="flex w-full justify-center">
+                <div className="lg:hidden flex items-center justify-center w-8 h-8 bg-black text-white rounded-full text-md font-extrabold">
+                  <Sparkle />
+                </div>
+              </div>
               <h1 className="text-2xl font-semibold tracking-tight">
                 Login to Hirer
               </h1>
