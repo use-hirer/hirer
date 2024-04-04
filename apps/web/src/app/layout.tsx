@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     "AI-driven hiring platform for efficient interviews, tailored questions, and enhanced, bias-reduced candidate assessments.",
 };
 
+export const runtime = "edge";
+
 export default function RootLayout({
   children,
 }: {

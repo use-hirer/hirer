@@ -3,6 +3,8 @@ import prisma from "@hirer/database";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+export const runtime = "edge";
+
 export default async function RootPage() {
   const user = await authCheck(true);
 
