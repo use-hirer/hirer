@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
@@ -72,6 +73,8 @@ export const teamRouter = createTRPCRouter({
         });
       }
 
-      return true;
+      cookies().set("scope", team.slug);
+
+      return team;
     }),
 });

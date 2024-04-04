@@ -17,6 +17,14 @@ import FeatureModal from "./feature-modal";
 import NavAction from "./nav-action";
 import NavLink from "./nav-link";
 
+function removeFirstPart(str: string): string {
+  const index = str.indexOf("/");
+  if (index !== -1) {
+    return str.slice(index + 1);
+  }
+  return str;
+}
+
 type LinkMenuItem = {
   title: string;
   icon: Icon;
@@ -103,10 +111,11 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
   ];
 
   const isSelected = (path: string) => {
-    if (path === "/") {
+    const modifiedPath = removeFirstPart(path);
+    if (modifiedPath === "/") {
       return pathname === "/";
     } else {
-      return pathname.startsWith(path);
+      return pathname.startsWith(modifiedPath);
     }
   };
 
