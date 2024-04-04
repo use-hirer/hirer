@@ -4,8 +4,6 @@ import Notifications from "@/components/menu/notifications";
 import { List } from "@phosphor-icons/react/dist/ssr";
 import ContentShell from "./content-shell";
 
-export const runtime = "edge";
-
 export default async function DashboardLayout({
   children,
 }: {

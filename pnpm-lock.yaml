@@ -295,6 +295,9 @@ importers:
       '@neondatabase/serverless':
         specifier: ^0.9.0
         version: 0.9.0
+      '@prisma/adapter-neon':
+        specifier: ^5.11.0
+        version: 5.11.0(@neondatabase/serverless@0.9.0)
       '@prisma/client':
         specifier: 5.12.1
         version: 5.12.1(prisma@5.12.1)
@@ -302,6 +305,9 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4(prisma@5.12.1)(typescript@5.4.3)
     devDependencies:
+      '@types/ws':
+        specifier: ^8.5.10
+        version: 8.5.10
       prisma:
         specifier: 5.12.1
         version: 5.12.1

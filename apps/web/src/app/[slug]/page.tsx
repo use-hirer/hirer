@@ -14,8 +14,6 @@ export const metadata: Metadata = {
   title: "Hirer: Dashboard",
 };
 
-export const runtime = "edge";
-
 export default async function DashboardPage() {
   await authCheck();
 
