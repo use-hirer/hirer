@@ -85,6 +85,10 @@ export const teamRouter = createTRPCRouter({
         where: { slug: input.slug },
         select: {
           id: true,
+          avatar: true,
+          bio: true,
+          website: true,
+          createdAt: true,
           members: {
             where: {
               userId: ctx.session.userId,

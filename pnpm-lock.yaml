@@ -39,20 +39,17 @@ importers:
         specifier: ^3.3.4
         version: 3.3.4(react-hook-form@7.51.2)
       '@langchain/community':
-        specifier: ^0.0.43
-        version: 0.0.43(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)
+        specifier: ^0.0.44
+        version: 0.0.44(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.1)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)
       '@langchain/core':
-        specifier: ^0.1.52
-        version: 0.1.52
+        specifier: ^0.1.54
+        version: 0.1.54
       '@lucia-auth/adapter-prisma':
         specifier: ^4.0.1
         version: 4.0.1(@prisma/client@5.12.1)(lucia@3.1.1)
       '@phosphor-icons/react':
         specifier: ^2.1.4
         version: 2.1.4(react-dom@18.2.0)(react@18.2.0)
-      '@prisma/adapter-neon':
-        specifier: ^5.11.0
-        version: 5.11.0(@neondatabase/serverless@0.9.0)
       '@radix-ui/react-icons':
         specifier: ^1.3.0
         version: 1.3.0(react@18.2.0)
@@ -63,14 +60,14 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0
       '@smithy/signature-v4':
-        specifier: ^2.2.0
-        version: 2.2.0
+        specifier: ^2.2.1
+        version: 2.2.1
       '@smithy/util-utf8':
         specifier: ^2.3.0
         version: 2.3.0
       '@tanstack/react-query':
-        specifier: ^5.28.9
-        version: 5.28.9(react@18.2.0)
+        specifier: ^5.28.14
+        version: 5.28.14(react@18.2.0)
       '@tanstack/react-table':
         specifier: ^8.15.3
         version: 8.15.3(react-dom@18.2.0)(react@18.2.0)
@@ -96,14 +93,14 @@ importers:
         specifier: ^3.15.0
         version: 3.15.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.1)
       '@trpc/client':
-        specifier: 11.0.0-rc.329
-        version: 11.0.0-rc.329(@trpc/server@11.0.0-rc.329)
+        specifier: next
+        version: 11.0.0-rc.332(@trpc/server@11.0.0-rc.332)
       '@trpc/react-query':
-        specifier: 11.0.0-rc.329
-        version: 11.0.0-rc.329(@tanstack/react-query@5.28.9)(@trpc/client@11.0.0-rc.329)(@trpc/server@11.0.0-rc.329)(react-dom@18.2.0)(react@18.2.0)
+        specifier: next
+        version: 11.0.0-rc.332(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-rc.332)(@trpc/server@11.0.0-rc.332)(react-dom@18.2.0)(react@18.2.0)
       '@trpc/server':
-        specifier: 11.0.0-rc.329
-        version: 11.0.0-rc.329
+        specifier: next
+        version: 11.0.0-rc.332
       '@upstash/ratelimit':
         specifier: ^1.0.1
         version: 1.0.1
@@ -111,14 +108,11 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       ai:
-        specifier: ^3.0.16
-        version: 3.0.16(react@18.2.0)(solid-js@1.8.16)(svelte@4.2.12)(vue@3.4.21)(zod@3.22.4)
+        specifier: ^3.0.18
+        version: 3.0.18(react@18.2.0)(solid-js@1.8.16)(svelte@4.2.12)(vue@3.4.21)(zod@3.22.4)
       arctic:
         specifier: ^1.5.0
         version: 1.5.0
-      country-list:
-        specifier: ^2.3.0
-        version: 2.3.0
       framer-motion:
         specifier: ^11.0.24
         version: 11.0.24(react-dom@18.2.0)(react@18.2.0)
@@ -126,8 +120,8 @@ importers:
         specifier: ^1.3.0
         version: 1.3.0(next@14.1.4)
       langchain:
-        specifier: ^0.1.30
-        version: 0.1.30(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)
+        specifier: ^0.1.31
+        version: 0.1.31(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.1)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)
       next:
         specifier: ^14.1.4
         version: 14.1.4(react-dom@18.2.0)(react@18.2.0)
@@ -149,9 +143,6 @@ importers:
       react-markdown:
         specifier: ^9.0.1
         version: 9.0.1(@types/react@18.2.66)(react@18.2.0)
-      remixicon:
-        specifier: ^4.2.0
-        version: 4.2.0
       resend:
         specifier: ^3.2.0
         version: 3.2.0
@@ -249,7 +240,7 @@ importers:
         version: link:../database
       '@langchain/community':
         specifier: ^0.0.44
-        version: 0.0.44(@vercel/kv@1.0.1)
+        version: 0.0.44(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.1)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)
       '@langchain/core':
         specifier: ^0.1.54
         version: 0.1.54
@@ -1071,300 +1062,7 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@langchain/community@0.0.43(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1):
-    resolution: {integrity: sha512-60TjV3knGGOPHfbJxLpuwARr8oA0r6Txm8wTFvFx+TjRUrloyBUcWSbJIdm62gAwBJDEHmdjjyWOOzU+eewcuA==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@aws-crypto/sha256-js': ^5.0.0
-      '@aws-sdk/client-bedrock-agent-runtime': ^3.485.0
-      '@aws-sdk/client-bedrock-runtime': ^3.422.0
-      '@aws-sdk/client-dynamodb': ^3.310.0
-      '@aws-sdk/client-kendra': ^3.352.0
-      '@aws-sdk/client-lambda': ^3.310.0
-      '@aws-sdk/client-sagemaker-runtime': ^3.310.0
-      '@aws-sdk/client-sfn': ^3.310.0
-      '@aws-sdk/credential-provider-node': ^3.388.0
-      '@azure/search-documents': ^12.0.0
-      '@clickhouse/client': ^0.2.5
-      '@cloudflare/ai': '*'
-      '@datastax/astra-db-ts': ^0.1.4
-      '@elastic/elasticsearch': ^8.4.0
-      '@getmetal/metal-sdk': '*'
-      '@getzep/zep-js': ^0.9.0
-      '@gomomento/sdk': ^1.51.1
-      '@gomomento/sdk-core': ^1.51.1
-      '@google-ai/generativelanguage': ^0.2.1
-      '@gradientai/nodejs-sdk': ^1.2.0
-      '@huggingface/inference': ^2.6.4
-      '@mozilla/readability': '*'
-      '@opensearch-project/opensearch': '*'
-      '@pinecone-database/pinecone': '*'
-      '@planetscale/database': ^1.8.0
-      '@premai/prem-sdk': ^0.3.25
-      '@qdrant/js-client-rest': ^1.2.0
-      '@raycast/api': ^1.55.2
-      '@rockset/client': ^0.9.1
-      '@smithy/eventstream-codec': ^2.0.5
-      '@smithy/protocol-http': ^3.0.6
-      '@smithy/signature-v4': ^2.0.10
-      '@smithy/util-utf8': ^2.0.0
-      '@supabase/postgrest-js': ^1.1.1
-      '@supabase/supabase-js': ^2.10.0
-      '@tensorflow-models/universal-sentence-encoder': '*'
-      '@tensorflow/tfjs-converter': '*'
-      '@tensorflow/tfjs-core': '*'
-      '@upstash/redis': ^1.20.6
-      '@upstash/vector': ^1.0.2
-      '@vercel/kv': ^0.2.3
-      '@vercel/postgres': ^0.5.0
-      '@writerai/writer-sdk': ^0.40.2
-      '@xata.io/client': ^0.28.0
-      '@xenova/transformers': ^2.5.4
-      '@zilliz/milvus2-sdk-node': '>=2.2.7'
-      better-sqlite3: ^9.4.0
-      cassandra-driver: ^4.7.2
-      cborg: ^4.1.1
-      chromadb: '*'
-      closevector-common: 0.1.3
-      closevector-node: 0.1.6
-      closevector-web: 0.1.6
-      cohere-ai: '*'
-      convex: ^1.3.1
-      couchbase: ^4.3.0
-      discord.js: ^14.14.1
-      dria: ^0.0.3
-      faiss-node: ^0.5.1
-      firebase-admin: ^11.9.0 || ^12.0.0
-      google-auth-library: ^8.9.0
-      googleapis: ^126.0.1
-      hnswlib-node: ^1.4.2
-      html-to-text: ^9.0.5
-      interface-datastore: ^8.2.11
-      ioredis: ^5.3.2
-      it-all: ^3.0.4
-      jsdom: '*'
-      jsonwebtoken: ^9.0.2
-      llmonitor: ^0.5.9
-      lodash: ^4.17.21
-      lunary: ^0.6.11
-      mongodb: '>=5.2.0'
-      mysql2: ^3.3.3
-      neo4j-driver: '*'
-      node-llama-cpp: '*'
-      pg: ^8.11.0
-      pg-copy-streams: ^6.0.5
-      pickleparser: ^0.2.1
-      portkey-ai: ^0.1.11
-      redis: '*'
-      replicate: ^0.18.0
-      typeorm: ^0.3.12
-      typesense: ^1.5.3
-      usearch: ^1.1.1
-      vectordb: ^0.1.4
-      voy-search: 0.6.2
-      weaviate-ts-client: '*'
-      web-auth-library: ^1.0.3
-      ws: ^8.14.2
-    peerDependenciesMeta:
-      '@aws-crypto/sha256-js':
-        optional: true
-      '@aws-sdk/client-bedrock-agent-runtime':
-        optional: true
-      '@aws-sdk/client-bedrock-runtime':
-        optional: true
-      '@aws-sdk/client-dynamodb':
-        optional: true
-      '@aws-sdk/client-kendra':
-        optional: true
-      '@aws-sdk/client-lambda':
-        optional: true
-      '@aws-sdk/client-sagemaker-runtime':
-        optional: true
-      '@aws-sdk/client-sfn':
-        optional: true
-      '@aws-sdk/credential-provider-node':
-        optional: true
-      '@azure/search-documents':
-        optional: true
-      '@clickhouse/client':
-        optional: true
-      '@cloudflare/ai':
-        optional: true
-      '@datastax/astra-db-ts':
-        optional: true
-      '@elastic/elasticsearch':
-        optional: true
-      '@getmetal/metal-sdk':
-        optional: true
-      '@getzep/zep-js':
-        optional: true
-      '@gomomento/sdk':
-        optional: true
-      '@gomomento/sdk-core':
-        optional: true
-      '@google-ai/generativelanguage':
-        optional: true
-      '@gradientai/nodejs-sdk':
-        optional: true
-      '@huggingface/inference':
-        optional: true
-      '@mozilla/readability':
-        optional: true
-      '@opensearch-project/opensearch':
-        optional: true
-      '@pinecone-database/pinecone':
-        optional: true
-      '@planetscale/database':
-        optional: true
-      '@premai/prem-sdk':
-        optional: true
-      '@qdrant/js-client-rest':
-        optional: true
-      '@raycast/api':
-        optional: true
-      '@rockset/client':
-        optional: true
-      '@smithy/eventstream-codec':
-        optional: true
-      '@smithy/protocol-http':
-        optional: true
-      '@smithy/signature-v4':
-        optional: true
-      '@smithy/util-utf8':
-        optional: true
-      '@supabase/postgrest-js':
-        optional: true
-      '@supabase/supabase-js':
-        optional: true
-      '@tensorflow-models/universal-sentence-encoder':
-        optional: true
-      '@tensorflow/tfjs-converter':
-        optional: true
-      '@tensorflow/tfjs-core':
-        optional: true
-      '@upstash/redis':
-        optional: true
-      '@upstash/vector':
-        optional: true
-      '@vercel/kv':
-        optional: true
-      '@vercel/postgres':
-        optional: true
-      '@writerai/writer-sdk':
-        optional: true
-      '@xata.io/client':
-        optional: true
-      '@xenova/transformers':
-        optional: true
-      '@zilliz/milvus2-sdk-node':
-        optional: true
-      better-sqlite3:
-        optional: true
-      cassandra-driver:
-        optional: true
-      cborg:
-        optional: true
-      chromadb:
-        optional: true
-      closevector-common:
-        optional: true
-      closevector-node:
-        optional: true
-      closevector-web:
-        optional: true
-      cohere-ai:
-        optional: true
-      convex:
-        optional: true
-      couchbase:
-        optional: true
-      discord.js:
-        optional: true
-      dria:
-        optional: true
-      faiss-node:
-        optional: true
-      firebase-admin:
-        optional: true
-      google-auth-library:
-        optional: true
-      googleapis:
-        optional: true
-      hnswlib-node:
-        optional: true
-      html-to-text:
-        optional: true
-      interface-datastore:
-        optional: true
-      ioredis:
-        optional: true
-      it-all:
-        optional: true
-      jsdom:
-        optional: true
-      jsonwebtoken:
-        optional: true
-      llmonitor:
-        optional: true
-      lodash:
-        optional: true
-      lunary:
-        optional: true
-      mongodb:
-        optional: true
-      mysql2:
-        optional: true
-      neo4j-driver:
-        optional: true
-      node-llama-cpp:
-        optional: true
-      pg:
-        optional: true
-      pg-copy-streams:
-        optional: true
-      pickleparser:
-        optional: true
-      portkey-ai:
-        optional: true
-      redis:
-        optional: true
-      replicate:
-        optional: true
-      typeorm:
-        optional: true
-      typesense:
-        optional: true
-      usearch:
-        optional: true
-      vectordb:
-        optional: true
-      voy-search:
-        optional: true
-      weaviate-ts-client:
-        optional: true
-      web-auth-library:
-        optional: true
-      ws:
-        optional: true
-    dependencies:
-      '@aws-crypto/sha256-js': 5.2.0
-      '@langchain/core': 0.1.52
-      '@langchain/openai': 0.0.23
-      '@smithy/eventstream-codec': 2.2.0
-      '@smithy/protocol-http': 3.3.0
-      '@smithy/signature-v4': 2.2.0
-      '@smithy/util-utf8': 2.3.0
-      '@vercel/kv': 1.0.1
-      expr-eval: 2.0.2
-      flat: 5.0.2
-      langsmith: 0.1.14
-      uuid: 9.0.1
-      zod: 3.22.4
-    transitivePeerDependencies:
-      - encoding
-    dev: false
-
-  /@langchain/community@0.0.44(@vercel/kv@1.0.1):
+  /@langchain/community@0.0.44(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.1)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1):
     resolution: {integrity: sha512-II9Hz90jJmfWRICtxTg1auQWzFw0npqacWiiOpaxNhzs6rptdf56gyfC48Z6n1ii4R8FfAlfX6YxhOE7lGGKXg==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -1643,8 +1341,13 @@ packages:
       ws:
         optional: true
     dependencies:
+      '@aws-crypto/sha256-js': 5.2.0
       '@langchain/core': 0.1.54
       '@langchain/openai': 0.0.23
+      '@smithy/eventstream-codec': 2.2.0
+      '@smithy/protocol-http': 3.3.0
+      '@smithy/signature-v4': 2.2.1
+      '@smithy/util-utf8': 2.3.0
       '@vercel/kv': 1.0.1
       expr-eval: 2.0.2
       flat: 5.0.2
@@ -1654,23 +1357,6 @@ packages:
       zod-to-json-schema: 3.22.5(zod@3.22.4)
     transitivePeerDependencies:
       - encoding
-    dev: false
-
-  /@langchain/core@0.1.52:
-    resolution: {integrity: sha512-AEyP99r7jijF33pyzaWtqCkiO9crotgethqq7jznAGlIojMCL9BT/id2DjVyN32SGFTpet273kkjsmEdFSHqpA==}
-    engines: {node: '>=18'}
-    dependencies:
-      ansi-styles: 5.2.0
-      camelcase: 6.3.0
-      decamelize: 1.2.0
-      js-tiktoken: 1.0.10
-      langsmith: 0.1.14
-      ml-distance: 4.0.1
-      p-queue: 6.6.2
-      p-retry: 4.6.2
-      uuid: 9.0.1
-      zod: 3.22.4
-      zod-to-json-schema: 3.22.4(zod@3.22.4)
     dev: false
 
   /@langchain/core@0.1.54:
@@ -1687,7 +1373,7 @@ packages:
       p-retry: 4.6.2
       uuid: 9.0.1
       zod: 3.22.4
-      zod-to-json-schema: 3.22.4(zod@3.22.4)
+      zod-to-json-schema: 3.22.5(zod@3.22.4)
     dev: false
 
   /@langchain/openai@0.0.23:
@@ -1699,6 +1385,19 @@ packages:
       openai: 4.29.2
       zod: 3.22.4
       zod-to-json-schema: 3.22.4(zod@3.22.4)
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  /@langchain/openai@0.0.26:
+    resolution: {integrity: sha512-FpqYvVRP2CkFFjTLrj2tbXeY6JTIgbq8tRoi0rvGzmhRpoi6cWHlfgclSzDm+e6P9DqKBkzDjo6SPTJgTOabNA==}
+    engines: {node: '>=18'}
+    dependencies:
+      '@langchain/core': 0.1.54
+      js-tiktoken: 1.0.10
+      openai: 4.32.2
+      zod: 3.22.4
+      zod-to-json-schema: 3.22.5(zod@3.22.4)
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -3924,11 +3623,10 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@smithy/signature-v4@2.2.0:
-    resolution: {integrity: sha512-+B5TNzj/fRZzVW3z8UUJOkNx15+4E0CLuvJmJUA1JUIZFp3rdJ/M2H5r2SqltaVPXL0oIxv/6YK92T9TsFGbFg==}
+  /@smithy/signature-v4@2.2.1:
+    resolution: {integrity: sha512-j5fHgL1iqKTsKJ1mTcw88p0RUcidDu95AWSeZTgiYJb+QcfwWU/UpBnaqiB59FNH5MiAZuSbOBnZlwzeeY2tIw==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@smithy/eventstream-codec': 2.2.0
       '@smithy/is-array-buffer': 2.2.0
       '@smithy/types': 2.12.0
       '@smithy/util-hex-encoding': 2.2.0
@@ -4131,25 +3829,12 @@ packages:
     resolution: {integrity: sha512-C3+CCOcza+mrZ7LglQbjeYEOTEC3LV0VN0eYaIN6GvqAZ8Foegdgch7n6QYPtT4FuLae5ALy+m+ZMEKpD6tMCQ==}
     dev: false
 
-  /@tanstack/query-core@5.28.9:
-    resolution: {integrity: sha512-hNlfCiqZevr3GRVPXS3MhaGW5hjcxvCsIQ4q6ff7EPlvFwYZaS+0d9EIIgofnegDaU2BbCDlyURoYfRl5rmzow==}
-    dev: false
-
   /@tanstack/react-query@5.28.14(react@18.2.0):
     resolution: {integrity: sha512-cZqt03Igb3I9tM72qNX5TAAmeYl75Z+k4Mv92VkXIXc2hCrv0fIywd7GN3JV1BBJl4mr7Cc+OOKKOPy8sNVOkA==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
       '@tanstack/query-core': 5.28.13
-      react: 18.2.0
-    dev: false
-
-  /@tanstack/react-query@5.28.9(react@18.2.0):
-    resolution: {integrity: sha512-vwifBkGXsydsLxFOBMe3+f8kvtDoqDRDwUNjPHVDDt+FoBetCbOWAUHgZn4k+CVeZgLmy7bx6aKeDbe3e8koOQ==}
-    peerDependencies:
-      react: ^18.0.0
-    dependencies:
-      '@tanstack/query-core': 5.28.9
       react: 18.2.0
     dev: false
 
@@ -4498,12 +4183,12 @@ packages:
       '@trpc/server': 11.0.0-next.327
     dev: false
 
-  /@trpc/client@11.0.0-rc.329(@trpc/server@11.0.0-rc.329):
-    resolution: {integrity: sha512-3evV+4Y2jgw3s4Q2PeMjrDUUrR9lxwNbDkgFRMyKgpO+7syh226gFzuGFd2RQKDeUo7fMTLPvuF/wWXHo4J2CA==}
+  /@trpc/client@11.0.0-rc.332(@trpc/server@11.0.0-rc.332):
+    resolution: {integrity: sha512-f9vpTwAZWI5VvbLDq22nzQI94Pe7nlt/SJH2PC/KzOheNoSxm+CoQ1PjriMPUePr69GjxG0OOGH8RDWG+vseKw==}
     peerDependencies:
-      '@trpc/server': 11.0.0-rc.329+fdcb4a7d8
+      '@trpc/server': 11.0.0-rc.332+67c093749
     dependencies:
-      '@trpc/server': 11.0.0-rc.329
+      '@trpc/server': 11.0.0-rc.332
     dev: false
 
   /@trpc/next@11.0.0-next.327(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-next.327)(@trpc/server@11.0.0-next.327)(next@14.1.4)(react-dom@18.2.0)(react@18.2.0):
@@ -4530,18 +4215,18 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@trpc/react-query@11.0.0-rc.329(@tanstack/react-query@5.28.9)(@trpc/client@11.0.0-rc.329)(@trpc/server@11.0.0-rc.329)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-JVm0nXiuu9iqxwPtwRvgOmYJx2oWub7+t/7a1KLAIV1E/7uMOhCIoIp1/HzXJ83jILRyJ03igA+xeWD4H1dAmQ==}
+  /@trpc/react-query@11.0.0-rc.332(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-rc.332)(@trpc/server@11.0.0-rc.332)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-9+jhHg2xLJo3ig3YkgQvHmS1VgcQOXqOQRI23gpXxEfEkuObi0lELowiKFoFI6aua2Tm04tzfD5AWFctJwroDQ==}
     peerDependencies:
       '@tanstack/react-query': ^5.25.0
-      '@trpc/client': 11.0.0-rc.329+fdcb4a7d8
-      '@trpc/server': 11.0.0-rc.329+fdcb4a7d8
+      '@trpc/client': 11.0.0-rc.332+67c093749
+      '@trpc/server': 11.0.0-rc.332+67c093749
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
     dependencies:
-      '@tanstack/react-query': 5.28.9(react@18.2.0)
-      '@trpc/client': 11.0.0-rc.329(@trpc/server@11.0.0-rc.329)
-      '@trpc/server': 11.0.0-rc.329
+      '@tanstack/react-query': 5.28.14(react@18.2.0)
+      '@trpc/client': 11.0.0-rc.332(@trpc/server@11.0.0-rc.332)
+      '@trpc/server': 11.0.0-rc.332
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -4550,8 +4235,8 @@ packages:
     resolution: {integrity: sha512-Lw4knzW1z0RpiGjur5gU/d67pl1NEkpIokTefuPqb63FlWCfwfHG3FHfvOaNoQ1lt3xMlw/A+pAMeU/q8YWp4Q==}
     dev: false
 
-  /@trpc/server@11.0.0-rc.329:
-    resolution: {integrity: sha512-jiXh4vLRmtwqnuQstuVEAkpOIPe6HAuUxSjcsetT7zWcH5YnSy7ioxRjLmkTcA7RxmN5q4uoveFmMayLWns3NQ==}
+  /@trpc/server@11.0.0-rc.332:
+    resolution: {integrity: sha512-K+cyJm2MmD4uxhfcMH0oHl/KNy8J23h/Bl9nisWOjjtYjNB6fTiO35uTuN8+CkKfXjc+873snT2QyaQXwjp1SA==}
     dev: false
 
   /@tsconfig/node10@1.0.11:
@@ -5146,8 +4831,8 @@ packages:
       humanize-ms: 1.2.1
     dev: false
 
-  /ai@3.0.16(react@18.2.0)(solid-js@1.8.16)(svelte@4.2.12)(vue@3.4.21)(zod@3.22.4):
-    resolution: {integrity: sha512-P6GGUYbE8PDUVeGT9D7tT9nF7lufDjbieZ97YVIVL/eZkGcfXQMvJleO1VzJ1eutoI8f5Llazmhg4K66Gs5q3Q==}
+  /ai@3.0.18(react@18.2.0)(solid-js@1.8.16)(svelte@4.2.12)(vue@3.4.21)(zod@3.22.4):
+    resolution: {integrity: sha512-EmsheRpda0VWowljK1oinShgzmxFxe92ycRR5YhynsquM+CNaV51aflw/jxatdnf6jq0+pGzC9LVUOkkIo2e/A==}
     engines: {node: '>=14.6'}
     peerDependencies:
       react: ^18.2.0
@@ -5181,7 +4866,7 @@ packages:
       swrv: 1.0.4(vue@3.4.21)
       vue: 3.4.21(typescript@5.4.3)
       zod: 3.22.4
-      zod-to-json-schema: 3.22.4(zod@3.22.4)
+      zod-to-json-schema: 3.22.5(zod@3.22.4)
     dev: false
 
   /ajv-keywords@3.5.2(ajv@6.12.6):
@@ -5840,10 +5525,6 @@ packages:
     dependencies:
       object-assign: 4.1.1
       vary: 1.1.2
-    dev: false
-
-  /country-list@2.3.0:
-    resolution: {integrity: sha512-qZk66RlmQm7fQjMYWku1AyjlKPogjPEorAZJG88owPExoPV8EsyCcuFLvO2afTXHEhi9liVOoyd+5A6ZS5QwaA==}
     dev: false
 
   /create-require@1.1.1:
@@ -6777,6 +6458,7 @@ packages:
 
   /flat@5.0.2:
     resolution: {integrity: sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==}
+    hasBin: true
     dev: false
 
   /flatted@3.2.9:
@@ -7568,8 +7250,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /langchain@0.1.30(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1):
-    resolution: {integrity: sha512-5h/vNMmutQ98tbB0sPDlAileZVca6A2McFgGa3+D56Dm8mSSCzTQL2DngPA6h09DlKDpSr7+6PdFw5Hoj0ZDSw==}
+  /langchain@0.1.31(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.1)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1):
+    resolution: {integrity: sha512-J2iZZL48Nwdo1XDU5cS5YYm91b2L6sL3a8hH1gBljvDzCY7jbtUOTuIoRVx5iHN3DXuuLnszS4lhqg0u9hQxBQ==}
     engines: {node: '>=18'}
     peerDependencies:
       '@aws-sdk/client-s3': ^3.310.0
@@ -7728,9 +7410,9 @@ packages:
         optional: true
     dependencies:
       '@anthropic-ai/sdk': 0.9.1
-      '@langchain/community': 0.0.43(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.0)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)
-      '@langchain/core': 0.1.52
-      '@langchain/openai': 0.0.23
+      '@langchain/community': 0.0.44(@aws-crypto/sha256-js@5.2.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.2.1)(@smithy/util-utf8@2.3.0)(@vercel/kv@1.0.1)
+      '@langchain/core': 0.1.54
+      '@langchain/openai': 0.0.26
       '@vercel/kv': 1.0.1
       binary-extensions: 2.2.0
       js-tiktoken: 1.0.10
@@ -7744,7 +7426,7 @@ packages:
       uuid: 9.0.1
       yaml: 2.3.4
       zod: 3.22.4
-      zod-to-json-schema: 3.22.4(zod@3.22.4)
+      zod-to-json-schema: 3.22.5(zod@3.22.4)
     transitivePeerDependencies:
       - '@aws-crypto/sha256-js'
       - '@aws-sdk/client-bedrock-agent-runtime'
@@ -7791,6 +7473,7 @@ packages:
       - cohere-ai
       - discord.js
       - dria
+      - duck-duck-scrape
       - encoding
       - firebase-admin
       - googleapis
@@ -8681,6 +8364,22 @@ packages:
       abort-controller: 3.0.0
       agentkeepalive: 4.5.0
       digest-fetch: 1.3.0
+      form-data-encoder: 1.7.2
+      formdata-node: 4.4.1
+      node-fetch: 2.7.0
+      web-streams-polyfill: 3.3.3
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  /openai@4.32.2:
+    resolution: {integrity: sha512-JXU5ttiL4liZJ2GRYvyqd/m9zA64bI8e6B5BtyKlbkcv5DAd5wiDgd0cQ1CIIdsEH90k5p3TdK6MyjnUhvOe7w==}
+    hasBin: true
+    dependencies:
+      '@types/node': 18.19.26
+      '@types/node-fetch': 2.6.11
+      abort-controller: 3.0.0
+      agentkeepalive: 4.5.0
       form-data-encoder: 1.7.2
       formdata-node: 4.4.1
       node-fetch: 2.7.0
@@ -9592,10 +9291,6 @@ packages:
       mdast-util-to-hast: 13.1.0
       unified: 11.0.4
       vfile: 6.0.1
-    dev: false
-
-  /remixicon@4.2.0:
-    resolution: {integrity: sha512-MF5wApNveRh3n0iMVM+lr2nSWrj/rBbSD2eWapuD9ReYRGs5naAUR1BqVBCHGqm286FIS6zwwmUf96QjHQ9l4w==}
     dev: false
 
   /resend@3.2.0:
@@ -10728,6 +10423,7 @@ packages:
 
   /uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    hasBin: true
     dev: false
 
   /v8-compile-cache-lib@3.0.1:

@@ -70,7 +70,7 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
         location: data.location,
         description: data.description,
       },
-      teamId: slug as string,
+      teamName: slug as string,
     });
   }
 

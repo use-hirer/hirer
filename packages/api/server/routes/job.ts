@@ -27,19 +27,29 @@ export const jobRouter = createTRPCRouter({
     }),
   create: protectedProcedure
     .input(
-      z.object({
-        details: z.object({
-          title: z.string(),
-          location: z.string(),
-          description: z.string(),
-        }),
-        teamId: z.string(),
-      })
+      z
+        .object({
+          details: z.object({
+            title: z.string(),
+            location: z.string(),
+            description: z.string(),
+          }),
+          teamId: z.string().optional(),
+          teamName: z.string().optional(),
+        })
+        .refine(
+          (data) =>
+            (data.teamId && !data.teamName) || (!data.teamId && data.teamName),
+          {
+            message: "Either teamId or teamName must be provided, but not both",
+          }
+        )
     )
     .mutation(async ({ ctx, input }) => {
       const team = await ctx.db.team.findUnique({
         where: {
           id: input.teamId,
+          slug: input.teamName,
         },
       });
 
@@ -52,8 +62,8 @@ export const jobRouter = createTRPCRouter({
 
       const job = await ctx.db.job.create({
         data: {
+          teamId: team.id,
           creatorUserId: ctx.session.userId,
-          teamId: input.teamId,
           title: input.details.title,
           location: input.details.location,
           description: input.details.description,
