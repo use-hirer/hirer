@@ -1,5 +1,4 @@
 "use client";
-
 import { Badge } from "@hirer/ui/badge";
 import { Separator } from "@hirer/ui/separator";
 import { Icon } from "@phosphor-icons/react";
@@ -17,10 +16,16 @@ import FeatureModal from "./feature-modal";
 import NavAction from "./nav-action";
 import NavLink from "./nav-link";
 
-function removeFirstPart(str: string): string {
-  const index = str.indexOf("/");
-  if (index !== -1) {
-    return str.slice(index + 1);
+function getSlug(urlPath: string): string | null {
+  const regex = /^\/([^\/]+)(\/|$)/;
+  const match = urlPath.match(regex);
+  return match ? match[1] : null;
+}
+
+function removeSlug(str: string): string {
+  const parts = str.split("/");
+  if (parts.length > 2) {
+    return "/" + parts.slice(2).join("/");
   }
   return str;
 }
@@ -53,36 +58,12 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
   const [interviewModal, setInterviewModal] = useState(false);
 
   const MenuLayout: MenuItem[] = [
-    {
-      title: "Home",
-      icon: House,
-      path: "/",
-      type: "Link",
-    },
-    {
-      title: "Activity",
-      icon: Calendar,
-      path: "/activity",
-      type: "Link",
-    },
-    {
-      type: "Separator",
-    },
-    {
-      title: "Jobs",
-      icon: Briefcase,
-      path: "/jobs",
-      type: "Link",
-    },
-    {
-      title: "Candidates",
-      icon: Users,
-      path: "/candidates",
-      type: "Link",
-    },
-    {
-      type: "Separator",
-    },
+    { title: "Home", icon: House, path: "/", type: "Link" },
+    { title: "Activity", icon: Calendar, path: "/activity", type: "Link" },
+    { type: "Separator" },
+    { title: "Jobs", icon: Briefcase, path: "/jobs", type: "Link" },
+    { title: "Candidates", icon: Users, path: "/candidates", type: "Link" },
+    { type: "Separator" },
     {
       title: "Screeners",
       icon: Webcam,
@@ -110,14 +91,18 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
     },
   ];
 
-  const isSelected = (path: string) => {
-    const modifiedPath = removeFirstPart(path);
+  const slug = getSlug(pathname);
+
+  function isSelected(path: string, slug: string | null) {
+    const modifiedPath = removeSlug(path);
+    const modifiedPathname = removeSlug(pathname);
+
     if (modifiedPath === "/") {
-      return pathname === "/";
+      return modifiedPathname === "/" || modifiedPathname === `/${slug}`;
     } else {
-      return pathname.startsWith(modifiedPath);
+      return modifiedPathname.startsWith(modifiedPath);
     }
-  };
+  }
 
   return (
     <>
@@ -129,9 +114,9 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
                 key={index}
                 icon={item.icon}
                 label={item.title}
-                href={item.path}
+                href={`/${slug}${item.path}`}
                 suffix={item.suffix}
-                selected={isSelected(item.path)} // Update this line
+                selected={isSelected(item.path, slug)}
                 collapsed={collapsed}
               />
             );
@@ -143,7 +128,7 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
                 label={item.title}
                 onClick={item.action}
                 suffix={item.suffix}
-                selected={isSelected(item.path)}
+                selected={isSelected(item.path, slug)}
                 collapsed={collapsed}
               />
             );

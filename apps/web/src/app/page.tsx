@@ -14,10 +14,14 @@ export default async function RootPage() {
     return redirect(`/${slug}/`);
   }
 
+  console.log(slug);
+
   const team = await prisma.team.findFirst({
     where: { members: { every: { userId: { equals: user.id } } } },
     select: { slug: true },
   });
+
+  console.log(team);
 
   return redirect(`/${team?.slug}/`);
 }
