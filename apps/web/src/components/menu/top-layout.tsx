@@ -10,17 +10,11 @@ import {
   Users,
   Webcam,
 } from "@phosphor-icons/react/dist/ssr";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import React, { useState } from "react";
 import FeatureModal from "./feature-modal";
 import NavAction from "./nav-action";
 import NavLink from "./nav-link";
-
-function getSlug(urlPath: string): string | null {
-  const regex = /^\/([^\/]+)(\/|$)/;
-  const match = urlPath.match(regex);
-  return match ? match[1] : null;
-}
 
 function removeSlug(str: string): string {
   const parts = str.split("/");
@@ -91,9 +85,9 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
     },
   ];
 
-  const slug = getSlug(pathname);
+  const { slug } = useParams() as { slug?: string };
 
-  function isSelected(path: string, slug: string | null) {
+  function isSelected(path: string, slug: string | undefined) {
     const modifiedPath = removeSlug(path);
     const modifiedPathname = removeSlug(pathname);
 

@@ -1,27 +1,16 @@
 import { authCheck } from "@/actions/auth";
-import prisma from "@hirer/database";
+import ScopeRedirect from "@/components/scope-redirect";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export const runtime = "edge";
-
 export default async function RootPage() {
-  const user = await authCheck(true);
+  const user = await authCheck();
 
-  const slug = cookies().get("scope")?.value;
+  const scope = cookies().get("scope")?.value;
 
-  if (slug) {
-    return redirect(`/${slug}/`);
+  if (scope) {
+    return redirect(`/${scope}`);
   }
 
-  console.log(slug);
-
-  const team = await prisma.team.findFirst({
-    where: { members: { every: { userId: { equals: user.id } } } },
-    select: { slug: true },
-  });
-
-  console.log(team);
-
-  return redirect(`/${team?.slug}/`);
+  return <ScopeRedirect userId={user.id} />;
 }

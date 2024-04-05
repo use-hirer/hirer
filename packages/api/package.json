@@ -12,15 +12,16 @@
   "dependencies": {
     "@hirer/auth": "workspace:*",
     "@hirer/database": "workspace:*",
-    "@langchain/community": "^0.0.43",
-    "@langchain/core": "^0.1.52",
-    "@tanstack/react-query": "^5.28.9",
+    "@langchain/community": "^0.0.44",
+    "@langchain/core": "^0.1.54",
+    "@tanstack/react-query": "^5.28.14",
     "@trpc/next": "11.0.0-next.327",
     "@trpc/server": "11.0.0-next.327",
-    "@upstash/ratelimit": "^1.0.1",
+    "@upstash/ratelimit": "^1.0.3",
     "@vercel/kv": "^1.0.1",
     "next": "^14.1.4",
     "superjson": "^2.2.1",
     "zod": "^3.22.4"
-  }
+  },
+  "devDependencies": {}
 }

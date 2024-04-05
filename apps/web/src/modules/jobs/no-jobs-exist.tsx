@@ -2,7 +2,7 @@
 
 import { Button } from "@hirer/ui/button";
 import { FlagPennant } from "@phosphor-icons/react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React from "react";
 
 interface NoJobsExistProps {
@@ -11,6 +11,7 @@ interface NoJobsExistProps {
 
 const NoJobsExist: React.FC<NoJobsExistProps> = ({ className }) => {
   const router = useRouter();
+  const { slug } = useParams() as { slug?: string };
 
   return (
     <>
@@ -24,7 +25,10 @@ const NoJobsExist: React.FC<NoJobsExistProps> = ({ className }) => {
             You currently have no jobs posted. Start hiring by creating a new
             job listing.
           </p>
-          <Button className="mt-4" onClick={() => router.push("/jobs/create")}>
+          <Button
+            className="mt-4"
+            onClick={() => router.push(`/${slug}/jobs/create`)}
+          >
             Create Job
           </Button>
         </div>
