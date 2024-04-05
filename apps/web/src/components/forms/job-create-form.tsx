@@ -25,6 +25,7 @@ import { Label } from "@hirer/ui/label";
 import { Textarea } from "@hirer/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleNotch } from "@phosphor-icons/react";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -49,6 +50,8 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
   const [additionalInformation, setAdditionalInformation] = useState("");
 
   const generateJobDescription = api.ai.generateJobDescription.useMutation({});
+  const createJob = api.job.create.useMutation({});
+  const { slug } = useParams() as { slug?: string };
 
   const form = useForm<JobFormValues>({
     resolver: zodResolver(jobFormSchema),
@@ -60,8 +63,15 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
     },
   });
 
-  function onSubmit(data: JobFormValues) {
-    console.log(data);
+  async function onSubmit(data: JobFormValues) {
+    const job = await createJob.mutateAsync({
+      details: {
+        title: data.position,
+        location: data.location,
+        description: data.description,
+      },
+      teamId: slug as string,
+    });
   }
 
   return (

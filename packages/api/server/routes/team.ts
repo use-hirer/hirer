@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { cookies } from "next/headers";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
@@ -76,5 +77,29 @@ export const teamRouter = createTRPCRouter({
       cookies().set("scope", team.slug);
 
       return team;
+    }),
+  getBySlug: protectedProcedure
+    .input(z.object({ slug: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const team = await ctx.db.team.findUnique({
+        where: { slug: input.slug },
+        select: {
+          id: true,
+          members: {
+            where: {
+              userId: ctx.session.userId,
+            },
+          },
+        },
+      });
+
+      if (!team || !team.members) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `The team could not be found.`,
+        });
+      }
+
+      return team.id;
     }),
 });
