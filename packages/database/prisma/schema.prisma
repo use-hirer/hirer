@@ -111,16 +111,42 @@ model Job {
   title         String
   location      String
   description   String
+  slug          String   @unique
   teamId        String
   creatorUserId String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  creator  User       @relation(fields: [creatorUserId], references: [id])
-  team     Team       @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  activity Activity[]
+  creator      User                   @relation(fields: [creatorUserId], references: [id])
+  team         Team                   @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  activity     Activity[]
+  applications CandidateApplication[]
 
   @@index([teamId])
+}
+
+model Candidate {
+  id        String   @id @default(cuid())
+  email     String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  applications CandidateApplication[]
+}
+
+model CandidateApplication {
+  id          String   @id @default(cuid())
+  candidateId String
+  jobId       String
+  notes       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  job       Job       @relation(fields: [jobId], references: [id])
+  candidate Candidate @relation(fields: [candidateId], references: [id])
+
+  @@unique([candidateId, jobId])
 }
 
 model Activity {
