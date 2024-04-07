@@ -21,7 +21,7 @@
     "@vercel/kv": "^1.0.1",
     "next": "^14.1.4",
     "superjson": "^2.2.1",
-    "zod": "^3.22.4"
-  },
-  "devDependencies": {}
+    "zod": "^3.22.4",
+    "zod-prisma-types": "^3.1.6"
+  }
 }

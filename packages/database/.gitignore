@@ -41,3 +41,5 @@ next-env.d.ts
 
 # Turbo
 .turbo
+
+prisma/generated

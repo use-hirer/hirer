@@ -11,3 +11,5 @@ export type ActivityDataType = {
   type: "JOB_CREATE" | "CANDIDATE_APPLY";
   message: string;
 };
+
+export * from "@prisma/client";

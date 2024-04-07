@@ -9,8 +9,11 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-generator json {
-  provider = "prisma-json-types-generator"
+generator zod {
+  provider                  = "zod-prisma-types"
+  output                    = "./generated/zod"
+  useMultipleFiles          = true
+  createRelationValuesTypes = true
 }
 
 model Account {
@@ -107,15 +110,16 @@ enum TeamMemberRole {
 }
 
 model Job {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   title         String
   location      String
   description   String
-  slug          String   @unique
+  slug          String    @unique
+  status        JobStatus @default(Draft)
   teamId        String
   creatorUserId String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   creator      User                   @relation(fields: [creatorUserId], references: [id])
   team         Team                   @relation(fields: [teamId], references: [id], onDelete: Cascade)
@@ -123,6 +127,12 @@ model Job {
   applications CandidateApplication[]
 
   @@index([teamId])
+}
+
+enum JobStatus {
+  Draft
+  Open
+  Closed
 }
 
 model Candidate {

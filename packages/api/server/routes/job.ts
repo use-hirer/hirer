@@ -25,6 +25,42 @@ export const jobRouter = createTRPCRouter({
 
       return job;
     }),
+  getMany: protectedProcedure
+    .input(
+      z.object({
+        teamId: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const team = await ctx.db.team.findUnique({
+        where: { slug: input.teamId },
+        select: {
+          id: true,
+          members: {
+            where: {
+              userId: ctx.session.userId,
+            },
+          },
+        },
+      });
+
+      if (!team || !team.members) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `The team could not be found.`,
+        });
+      }
+
+      const jobs = await ctx.db.job.findMany({
+        where: { teamId: team.id },
+        include: {
+          creator: { select: { name: true, id: true } },
+          _count: { select: { applications: true } },
+        },
+      });
+
+      return jobs;
+    }),
   create: protectedProcedure
     .input(
       z
@@ -60,9 +96,11 @@ export const jobRouter = createTRPCRouter({
         });
       }
 
+      // TODO: Fix Slug Generation
       const job = await ctx.db.job.create({
         data: {
           teamId: team.id,
+          slug: "123-frontend-engineer",
           creatorUserId: ctx.session.userId,
           title: input.details.title,
           location: input.details.location,
