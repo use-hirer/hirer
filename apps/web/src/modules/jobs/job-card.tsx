@@ -1,7 +1,7 @@
 "use client";
-
 import { RouterOutputs } from "@hirer/api";
 import { $Enums } from "@hirer/database/types";
+import { DotsThree } from "@phosphor-icons/react";
 import { Badge } from "@tremor/react";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
@@ -50,7 +50,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
   };
 
   return (
-    <div className="border rounded-sm p-4 shadow-sm hover:shadow-md duration-300 flex flex-col relative">
+    <div className="border rounded-md p-4 shadow-sm hover:shadow-md duration-150 flex flex-col relative">
       <div className="flex justify-between items-center mb-2">
         <Link
           className="font-bold text-md hover:underline"
@@ -58,9 +58,14 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
         >
           {job.title}
         </Link>
-        <Badge color={getStatusColor(job.status)}>
-          {getStatusText(job.status)}
-        </Badge>
+        <div className="flex items-center space-x-2">
+          <Badge color={getStatusColor(job.status)}>
+            {getStatusText(job.status)}
+          </Badge>
+          <button className="p-1 rounded-full hover:bg-gray-200">
+            <DotsThree size={16} />
+          </button>
+        </div>
       </div>
       <div className="text-xs">{job.location}</div>
       <div className="text-xs mt-2">

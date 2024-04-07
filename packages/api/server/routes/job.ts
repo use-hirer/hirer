@@ -29,11 +29,16 @@ export const jobRouter = createTRPCRouter({
     .input(
       z.object({
         teamId: z.string(),
+        title: z.string().optional(),
       })
     )
     .query(async ({ ctx, input }) => {
+      const whereClause = input.teamId.startsWith("tm_")
+        ? { id: input.teamId }
+        : { slug: input.teamId };
+
       const team = await ctx.db.team.findUnique({
-        where: { slug: input.teamId },
+        where: whereClause,
         select: {
           id: true,
           members: {
@@ -52,7 +57,10 @@ export const jobRouter = createTRPCRouter({
       }
 
       const jobs = await ctx.db.job.findMany({
-        where: { teamId: team.id },
+        where: {
+          teamId: team.id,
+          title: { contains: input.title, mode: "insensitive" },
+        },
         include: {
           creator: { select: { name: true, id: true } },
           _count: { select: { applications: true } },
