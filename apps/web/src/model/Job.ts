@@ -8,5 +8,7 @@ export interface Job {
   title: string;
   status: JobStatus;
   location: string;
+  department: string;
   published: string;
+  hiringManager: string;
 }
