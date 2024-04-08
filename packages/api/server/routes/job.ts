@@ -120,11 +120,11 @@ export const jobRouter = createTRPCRouter({
       }
 
       async function isSlugTaken(slug: string): Promise<boolean> {
-        const team = await ctx.db.team.findUnique({
+        const job = await ctx.db.job.findUnique({
           where: { slug },
         });
 
-        return !!team;
+        return !!job;
       }
 
       const slug = await generateJobSlug(input.details.title);
