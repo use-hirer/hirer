@@ -119,15 +119,15 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
         </Button>
       </div>
       {jobs.length > 0 ? (
-        <div>
+        <div className="flex h-full">
           {jobsApi.data?.length === 0 && !jobsApi.isLoading && (
             <NoJobsFound
               searchValue={debouncedSearchValue}
-              className="bg-zinc-50 py-12"
+              className="bg-zinc-50 flex-1"
             />
           )}
           {jobsApi.data && jobsApi.data?.length > 0 && (
-            <div>
+            <div className="w-full">
               {view === "TABLE" && (
                 <>
                   <div className="hidden md:block">

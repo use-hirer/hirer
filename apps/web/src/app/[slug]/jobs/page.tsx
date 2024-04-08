@@ -5,6 +5,7 @@ import NoJobsExist from "@/modules/jobs/no-jobs-exist";
 import { Separator } from "@hirer/ui/separator";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Hirer: Jobs",
@@ -38,6 +39,7 @@ export default async function JobsPage({
           <NoJobsExist className="h-full" />
         )}
       </div>
+      <Toaster richColors position="top-right" closeButton />
     </div>
   );
 }

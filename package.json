@@ -17,6 +17,6 @@
     "pnpm": ">=7.19.0"
   },
   "devDependencies": {
-    "turbo": "^1.13.0"
+    "turbo": "^1.13.2"
   }
 }

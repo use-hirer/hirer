@@ -1,11 +1,18 @@
 "use client";
 import { RouterOutputs } from "@hirer/api";
 import { $Enums } from "@hirer/database/types";
-import { DotsThree } from "@phosphor-icons/react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@hirer/ui/tooltip";
+import { Copy, DotsThree } from "@phosphor-icons/react";
 import { Badge } from "@tremor/react";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { toast } from "sonner";
 
 enum JobStatus {
   Draft = "Draft",
@@ -49,15 +56,44 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
     }
   };
 
+  function addToClipboard() {
+    const url = `https://${slug}.hirer.so/${job.slug}`;
+
+    navigator.clipboard.writeText(url).then(
+      () => {
+        toast.info(`Added URL, ${url} to clipboard.`);
+      },
+      () => {
+        toast.error("An error occurred copying URL to clipboard");
+      }
+    );
+  }
+
   return (
     <div className="border rounded-md p-4 shadow-sm hover:shadow-md duration-150 flex flex-col relative">
       <div className="flex justify-between items-center mb-2">
-        <Link
-          className="font-bold text-md hover:underline"
-          href={`/${slug}/job/${job.slug}`}
-        >
-          {job.title}
-        </Link>
+        <div className="flex items-center gap-1">
+          <Link
+            className="font-bold text-md hover:underline"
+            href={`/${slug}/job/${job.slug}`}
+          >
+            {job.title}
+          </Link>
+          <TooltipProvider>
+            <Tooltip delayDuration={200}>
+              <TooltipTrigger asChild>
+                <Copy
+                  size={12}
+                  className="text-zinc-400 cursor-pointer"
+                  onClick={addToClipboard}
+                />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Copy Public Link</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
         <div className="flex items-center space-x-2">
           <Badge color={getStatusColor(job.status)}>
             {getStatusText(job.status)}
