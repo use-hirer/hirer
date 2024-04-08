@@ -53,7 +53,7 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
       setPreviousResults(jobsApi.data);
     }
 
-    if (debouncedSearchValue === "") {
+    if (debouncedSearchValue === "" && jobsApi.data !== jobs) {
       setPreviousResults(jobs);
     }
   }, [
