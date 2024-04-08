@@ -131,7 +131,7 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
               {view === "TABLE" && (
                 <>
                   <div className="hidden md:block">
-                    <JobsTable />
+                    <JobsTable data={jobsApi.data} />
                   </div>
                   <div className="md:hidden">
                     <div className="grid grid-cols-1 gap-4">

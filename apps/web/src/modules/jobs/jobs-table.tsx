@@ -1,7 +1,6 @@
 "use client";
 
-import { JOB_DATA } from "@/components/tables/job-data";
-import { Job } from "@/model/Job";
+import { RouterOutputs } from "@hirer/api";
 import { Button } from "@hirer/ui/button";
 import {
   ColumnFiltersState,
@@ -19,7 +18,7 @@ import * as React from "react";
 import { JOBS_TABLE_COLUMNS } from "./job-columns";
 
 interface NavigationPanelProps {
-  table: Table<Job>;
+  table: Table<RouterOutputs["job"]["getMany"][number]>;
 }
 function NavigationPanel({ table }: NavigationPanelProps) {
   return (
@@ -48,9 +47,10 @@ function NavigationPanel({ table }: NavigationPanelProps) {
 
 interface JobsTableProps {
   preview?: boolean;
+  data: RouterOutputs["job"]["getMany"];
 }
 
-export function JobsTable({ preview }: JobsTableProps) {
+export function JobsTable({ preview, data }: JobsTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -59,7 +59,7 @@ export function JobsTable({ preview }: JobsTableProps) {
     React.useState<VisibilityState>({});
 
   const table = useReactTable({
-    data: JOB_DATA,
+    data: data,
     columns: JOBS_TABLE_COLUMNS,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,

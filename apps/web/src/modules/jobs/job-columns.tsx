@@ -1,6 +1,6 @@
 "use client";
-
-import { Job, JobStatus } from "@/model/Job";
+import { JobStatus } from "@/model/Job";
+import { RouterOutputs } from "@hirer/api";
 import { Button } from "@hirer/ui/button";
 import {
   DropdownMenu,
@@ -8,12 +8,21 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@hirer/ui/dropdown-menu";
-import { Copy } from "@phosphor-icons/react";
-import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@hirer/ui/tooltip";
+import { Copy, DotsThree } from "@phosphor-icons/react";
+import { CaretSortIcon } from "@radix-ui/react-icons";
 import { Column, ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@tremor/react";
+import { format } from "date-fns";
+import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
+import { toast } from "sonner";
 
 const JOB_STATUS_COLOUR: Record<JobStatus, string> = {
   ["Active"]: "emerald",
@@ -21,7 +30,7 @@ const JOB_STATUS_COLOUR: Record<JobStatus, string> = {
 };
 
 interface SortableColumnProps {
-  column: Column<Job>;
+  column: Column<RouterOutputs["job"]["getMany"][number]>;
   children: React.ReactNode;
 }
 
@@ -37,19 +46,47 @@ export function SortableColumn({ column, children }: SortableColumnProps) {
   );
 }
 
-export const JOBS_TABLE_COLUMNS: ColumnDef<Job>[] = [
+export const JOBS_TABLE_COLUMNS: ColumnDef<
+  RouterOutputs["job"]["getMany"][number]
+>[] = [
   {
     accessorKey: "title",
     header: ({ column }) => (
       <SortableColumn column={column}>Job Title</SortableColumn>
     ),
     cell: ({ row }) => (
-      <Link
-        className="text-left text-sm font-medium select-none hover:underline"
-        href={"/"}
-      >
-        {row.getValue("title")}
-      </Link>
+      <div className="flex items-center gap-1">
+        <Link
+          className="text-left text-sm font-medium select-none hover:underline"
+          href={`/${row.original.slug}`}
+        >
+          {row.getValue("title")}
+        </Link>
+        <TooltipProvider>
+          <Tooltip delayDuration={200}>
+            <TooltipTrigger asChild>
+              <Copy
+                size={12}
+                className="text-zinc-400 cursor-pointer"
+                onClick={() => {
+                  const url = `https://hirer.so/${row.original.slug}`;
+                  navigator.clipboard.writeText(url).then(
+                    () => {
+                      toast.info(`Added URL, ${url} to clipboard.`);
+                    },
+                    () => {
+                      toast.error("An error occurred copying URL to clipboard");
+                    }
+                  );
+                }}
+              />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Copy Public Link</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
     ),
   },
   {
@@ -76,13 +113,23 @@ export const JOBS_TABLE_COLUMNS: ColumnDef<Job>[] = [
     ),
   },
   {
+    accessorKey: "applications",
+    header: ({ column }) => (
+      <SortableColumn column={column}>Applications</SortableColumn>
+    ),
+    cell: ({ row }) => (
+      <div className="text-left text-sm">
+        {row.original._count.applications}
+      </div>
+    ),
+  },
+  {
     accessorKey: "department",
     header: ({ column }) => (
       <SortableColumn column={column}>Department</SortableColumn>
     ),
-    cell: ({ row }) => (
-      <div className="text-left text-sm">{row.getValue("department")}</div>
-    ),
+    // TODO: Update to include actual departments.
+    cell: ({ row }) => <div className="text-left text-sm">Engineering</div>,
   },
   {
     accessorKey: "hiringManager",
@@ -90,8 +137,30 @@ export const JOBS_TABLE_COLUMNS: ColumnDef<Job>[] = [
       <SortableColumn column={column}>Hiring Manager</SortableColumn>
     ),
     cell: ({ row }) => (
-      <div className="text-left text-sm">{row.getValue("hiringManager")}</div>
+      <div className="text-left text-sm flex gap-1 items-center">
+        <Image
+          src={row.original.creator.image as string}
+          height={24}
+          width={24}
+          alt="Avatar Image"
+          className="rounded-full"
+        />
+        {row.original.creator.name}
+      </div>
     ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: ({ column }) => (
+      <SortableColumn column={column}>Creation Date</SortableColumn>
+    ),
+    cell: ({ row }) => {
+      const createdAt = row.getValue("createdAt");
+      const formattedDate = format(createdAt as Date, "dd MMM yyyy h:mma");
+      return (
+        <div className="text-left text-sm text-zinc-500">{formattedDate}</div>
+      );
+    },
   },
   {
     id: "actions",
@@ -102,11 +171,24 @@ export const JOBS_TABLE_COLUMNS: ColumnDef<Job>[] = [
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
               <span className="sr-only">Open menu</span>
-              <DotsHorizontalIcon className="h-4 w-4" />
+              <DotsThree size={16} />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem className="flex gap-1">
+            <DropdownMenuItem
+              className="flex gap-1"
+              onClick={() => {
+                const url = `https://hirer.so/${row.original.slug}`;
+                navigator.clipboard.writeText(url).then(
+                  () => {
+                    toast.info(`Added URL, ${url} to clipboard.`);
+                  },
+                  () => {
+                    toast.error("An error occurred copying URL to clipboard");
+                  }
+                );
+              }}
+            >
               <div>Copy Link</div>
               <Copy />
             </DropdownMenuItem>

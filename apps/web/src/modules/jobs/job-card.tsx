@@ -33,7 +33,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
   const getStatusColor = (status: $Enums.JobStatus) => {
     switch (status) {
       case JobStatus.Draft:
-        return "gray";
+        return "blue";
       case JobStatus.Open:
         return "emerald";
       case JobStatus.Closed:

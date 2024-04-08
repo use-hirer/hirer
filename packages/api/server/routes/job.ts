@@ -62,7 +62,7 @@ export const jobRouter = createTRPCRouter({
           title: { contains: input.title, mode: "insensitive" },
         },
         include: {
-          creator: { select: { name: true, id: true } },
+          creator: { select: { name: true, id: true, image: true } },
           _count: { select: { applications: true } },
         },
       });
