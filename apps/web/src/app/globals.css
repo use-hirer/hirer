@@ -77,6 +77,7 @@
 
 .scroll-bar::-webkit-scrollbar {
   width: 10px; /* width of the entire scrollbar */
+  height: 10px; /* height of the horizontal scrollbar */
 }
 
 .scroll-bar::-webkit-scrollbar-track {
@@ -89,7 +90,9 @@
 }
 
 .scroll-bar::-webkit-scrollbar-thumb:hover {
-  background-color: #000; /* color of the scroll thumb when hovered over */
+  background-color: rgb(
+    113 113 122
+  ); /* color of the scroll thumb when hovered over */
 }
 
 .ProseMirror:focus {

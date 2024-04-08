@@ -5,13 +5,14 @@ import { RouterOutputs } from "@hirer/api";
 import { cn } from "@hirer/ui";
 import { Button } from "@hirer/ui/button";
 import {
+  ArrowClockwise,
   ListBullets,
   MagnifyingGlass,
   Plus,
   Spinner,
   SquaresFour,
 } from "@phosphor-icons/react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import JobCard from "./job-card";
@@ -25,7 +26,6 @@ interface JobsViewProps {
 
 const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { slug } = useParams() as { slug?: string };
   const [view, setView] = useState<"TABLE" | "CARD">("TABLE");
   const [searchValue, setSearchValue] = useState("");
@@ -40,6 +40,13 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
       enabled: !!debouncedSearchValue,
     }
   );
+
+  useEffect(() => {
+    const storedView = localStorage.getItem("jobsView");
+    if (storedView === "CARD" || storedView === "TABLE") {
+      setView(storedView);
+    }
+  }, []);
 
   useEffect(() => {
     if (jobsApi.isFetched && jobsApi.data !== previousResults) {
@@ -59,6 +66,7 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
 
   function switchView(view: "CARD" | "TABLE") {
     setView(view);
+    localStorage.setItem("jobsView", view);
   }
 
   return (
@@ -77,6 +85,16 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
             value={searchValue}
           />
         </div>
+        <Button
+          disabled={jobsApi.isRefetching}
+          onClick={async () => await jobsApi.refetch()}
+          className="flex items-center justify-center gap-1"
+        >
+          <ArrowClockwise
+            className={cn([jobsApi.isRefetching ? "animate-spin" : ""])}
+          />
+          <div className="hidden sm:block ml-1">Refresh</div>
+        </Button>
         <div className="md:flex gap-1 hidden">
           <Button
             size="icon"
@@ -106,7 +124,7 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
           className="flex items-center justify-center gap-1"
         >
           <Plus />
-          <div className="hidden sm:block">New Job</div>
+          <div className="hidden sm:block ml-1">New Job</div>
         </Button>
       </div>
       {jobs.length > 0 ? (

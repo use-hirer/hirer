@@ -10,12 +10,12 @@ export const jobRouter = createTRPCRouter({
       })
     )
     .query(async ({ ctx, input }) => {
-      const whereClause = input.id.startsWith("job_")
+      const jobClause = input.id.startsWith("job_")
         ? { id: input.id }
         : { slug: input.id };
 
       const job = await ctx.db.job.findUnique({
-        where: whereClause,
+        where: jobClause,
         include: {
           creator: { select: { id: true, name: true, image: true } },
           _count: { select: { applications: true } },
@@ -77,30 +77,22 @@ export const jobRouter = createTRPCRouter({
     }),
   create: protectedProcedure
     .input(
-      z
-        .object({
-          details: z.object({
-            title: z.string(),
-            location: z.string(),
-            description: z.string(),
-          }),
-          teamId: z.string().optional(),
-          teamName: z.string().optional(),
-        })
-        .refine(
-          (data) =>
-            (data.teamId && !data.teamName) || (!data.teamId && data.teamName),
-          {
-            message: "Either teamId or teamName must be provided, but not both",
-          }
-        )
+      z.object({
+        details: z.object({
+          title: z.string(),
+          location: z.string(),
+          description: z.string(),
+        }),
+        teamId: z.string(),
+      })
     )
     .mutation(async ({ ctx, input }) => {
+      const whereClause = input.teamId.startsWith("tm_")
+        ? { id: input.teamId }
+        : { slug: input.teamId };
+
       const team = await ctx.db.team.findUnique({
-        where: {
-          id: input.teamId,
-          slug: input.teamName,
-        },
+        where: whereClause,
       });
 
       if (!team) {
@@ -110,11 +102,37 @@ export const jobRouter = createTRPCRouter({
         });
       }
 
-      // TODO: Fix Slug Generation
+      async function generateJobSlug(jobName: string): Promise<string> {
+        const baseSlug = jobName
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "");
+
+        let slug = baseSlug;
+        let count = 1;
+
+        while (await isSlugTaken(slug)) {
+          slug = `${baseSlug}-${count}`;
+          count++;
+        }
+
+        return slug;
+      }
+
+      async function isSlugTaken(slug: string): Promise<boolean> {
+        const team = await ctx.db.team.findUnique({
+          where: { slug },
+        });
+
+        return !!team;
+      }
+
+      const slug = await generateJobSlug(input.details.title);
+
       const job = await ctx.db.job.create({
         data: {
           teamId: team.id,
-          slug: "123-frontend-engineer",
+          slug: slug,
           creatorUserId: ctx.session.userId,
           title: input.details.title,
           location: input.details.location,

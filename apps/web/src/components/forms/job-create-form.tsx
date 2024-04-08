@@ -25,7 +25,7 @@ import { Label } from "@hirer/ui/label";
 import { Textarea } from "@hirer/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleNotch } from "@phosphor-icons/react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -48,6 +48,9 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
   const [generateDescription, setGeneratingDescription] = useState(false);
   const [openGenerateModal, setOpenGenerateModal] = useState(false);
   const [additionalInformation, setAdditionalInformation] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const generateJobDescription = api.ai.generateJobDescription.useMutation({});
   const createJob = api.job.create.useMutation({});
@@ -64,14 +67,22 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
   });
 
   async function onSubmit(data: JobFormValues) {
-    const job = await createJob.mutateAsync({
-      details: {
-        title: data.position,
-        location: data.location,
-        description: data.description,
-      },
-      teamName: slug as string,
-    });
+    setLoading(true);
+    try {
+      const job = await createJob.mutateAsync({
+        details: {
+          title: data.position,
+          location: data.location,
+          description: data.description,
+        },
+        teamId: slug as string,
+      });
+
+      router.push(`/${slug}/job/${job.slug}`);
+    } catch (e) {
+      toast.error("An error occurred! Please try again.");
+      setLoading(false);
+    }
   }
 
   return (
@@ -160,7 +171,10 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
             )}
           />
           <div className="flex justify-end">
-            <Button type="submit">Create Job</Button>
+            <Button type="submit" disabled={loading}>
+              {loading && <CircleNotch className="mr-2 h-4 w-4 animate-spin" />}
+              Create Job
+            </Button>
           </div>
         </form>
       </Form>

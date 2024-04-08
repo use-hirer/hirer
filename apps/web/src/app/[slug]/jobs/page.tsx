@@ -1,7 +1,6 @@
 import { api } from "@/lib/api/server";
 import { validateRequest } from "@/lib/auth";
 import JobsView from "@/modules/jobs/jobs-view";
-import NoJobsExist from "@/modules/jobs/no-jobs-exist";
 import { Separator } from "@hirer/ui/separator";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
@@ -33,13 +32,7 @@ export default async function JobsPage({
         <Separator className="my-2" />
       </div>
       <div className="flex-1">
-        {jobs.length > 0 ? (
-          <div className="h-full">
-            <JobsView jobs={jobs} />
-          </div>
-        ) : (
-          <NoJobsExist className="h-full" />
-        )}
+        <JobsView jobs={jobs} />
       </div>
       <Toaster richColors position="top-right" closeButton />
     </div>

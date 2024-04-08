@@ -1,6 +1,9 @@
 -- CreateEnum
 CREATE TYPE "TeamMemberRole" AS ENUM ('Member', 'Owner');
 
+-- CreateEnum
+CREATE TYPE "JobStatus" AS ENUM ('Draft', 'Open', 'Closed');
+
 -- CreateTable
 CREATE TABLE "Account" (
     "provider" TEXT NOT NULL,
@@ -84,6 +87,7 @@ CREATE TABLE "Job" (
     "location" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
+    "status" "JobStatus" NOT NULL DEFAULT 'Draft',
     "teamId" TEXT NOT NULL,
     "creatorUserId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
