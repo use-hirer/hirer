@@ -1,4 +1,5 @@
 "use client";
+
 import { api } from "@/lib/api/react";
 import { RouterOutputs } from "@hirer/api";
 import { cn } from "@hirer/ui";
@@ -32,16 +33,6 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
   const [previousResults, setPreviousResults] =
     useState<RouterOutputs["job"]["getMany"]>(jobs);
 
-  useEffect(() => {
-    if (debouncedSearchValue) {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set("search", debouncedSearchValue);
-      router.push(`/${slug}/jobs?${params.toString()}`);
-    } else {
-      router.push(`/${slug}/jobs`);
-    }
-  }, [debouncedSearchValue, router, searchParams, slug]);
-
   const jobsApi = api.job.getMany.useQuery(
     { teamId: slug as string, title: debouncedSearchValue },
     {
@@ -66,8 +57,8 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
     jobs,
   ]);
 
-  function switchView() {
-    setView(view === "TABLE" ? "CARD" : "TABLE");
+  function switchView(view: "CARD" | "TABLE") {
+    setView(view);
   }
 
   return (
@@ -91,7 +82,7 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
             size="icon"
             className={cn([view === "TABLE" ? "bg-black" : "bg-white border"])}
             variant={view === "TABLE" ? "default" : "secondary"}
-            onClick={switchView}
+            onClick={() => switchView("TABLE")}
           >
             <ListBullets
               size={16}
@@ -102,7 +93,7 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
             size="icon"
             className={cn([view === "CARD" ? "bg-black" : "bg-white border"])}
             variant={view === "CARD" ? "default" : "secondary"}
-            onClick={switchView}
+            onClick={() => switchView("CARD")}
           >
             <SquaresFour
               size={16}

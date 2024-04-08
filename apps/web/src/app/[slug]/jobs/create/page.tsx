@@ -12,6 +12,7 @@ import {
 import { Separator } from "@hirer/ui/separator";
 import { HandsClapping } from "@phosphor-icons/react/dist/ssr";
 import { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Toaster } from "sonner";
 
@@ -19,7 +20,11 @@ export const metadata: Metadata = {
   title: "Hirer: Create a Job",
 };
 
-export default async function JobCreatePage() {
+export default async function JobsCreatePage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { user } = await validateRequest();
 
   if (!user) {
@@ -33,11 +38,15 @@ export default async function JobCreatePage() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                <BreadcrumbLink>
+                  <Link href={`/${params.slug}`}>Home</Link>
+                </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href="/jobs">Jobs</BreadcrumbLink>
+                <BreadcrumbLink>
+                  <Link href={`/${params.slug}/jobs`}>Jobs</Link>
+                </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>

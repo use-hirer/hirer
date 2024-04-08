@@ -22,7 +22,9 @@ export default async function JobsPage({
     return redirect("/login");
   }
 
-  const jobs = await api.job.getMany({ teamId: params.slug });
+  const jobs = await api.job.getMany({
+    teamId: params.slug,
+  });
 
   return (
     <div className="flex flex-col h-full">

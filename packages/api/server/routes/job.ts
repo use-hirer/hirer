@@ -10,9 +10,15 @@ export const jobRouter = createTRPCRouter({
       })
     )
     .query(async ({ ctx, input }) => {
+      const whereClause = input.id.startsWith("job_")
+        ? { id: input.id }
+        : { slug: input.id };
+
       const job = await ctx.db.job.findUnique({
-        where: {
-          id: input.id,
+        where: whereClause,
+        include: {
+          creator: { select: { id: true, name: true, image: true } },
+          _count: { select: { applications: true } },
         },
       });
 

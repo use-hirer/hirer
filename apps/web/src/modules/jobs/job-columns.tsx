@@ -58,7 +58,7 @@ export const JOBS_TABLE_COLUMNS: ColumnDef<
       <div className="flex items-center gap-1">
         <Link
           className="text-left text-sm font-medium select-none hover:underline"
-          href={`/${row.original.slug}`}
+          href={`job/${row.original.slug}`}
         >
           {row.getValue("title")}
         </Link>
