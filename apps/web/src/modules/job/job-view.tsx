@@ -12,7 +12,7 @@ const JobView = () => {
             <Tab value="2">Candidates</Tab>
             <Tab value="3">Configuration</Tab>
             <Tab value="3">Metrics</Tab>
-            <Tab value="3">Share</Tab>
+            <Tab value="3">Sharing</Tab>
           </TabList>
         </TabGroup>
       </div>
