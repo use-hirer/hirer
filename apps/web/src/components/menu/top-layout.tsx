@@ -93,6 +93,10 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
 
     if (modifiedPath === "/") {
       return modifiedPathname === "/" || modifiedPathname === `/${slug}`;
+    } else if (modifiedPath === "/jobs") {
+      return (
+        modifiedPathname === "/jobs" || modifiedPathname.startsWith("/job/")
+      );
     } else {
       return modifiedPathname.startsWith(modifiedPath);
     }
