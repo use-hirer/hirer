@@ -5,6 +5,7 @@ import { cache } from "react";
 
 import { createCaller } from "@hirer/api/server/app";
 import { createTRPCContext } from "@hirer/api/server/context";
+import { notFound } from "next/navigation";
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
@@ -19,4 +20,9 @@ const createContext = cache(async () => {
   });
 });
 
-export const api = createCaller(createContext);
+export const api = createCaller(createContext, {
+  onError: ({ error }) => {
+    if (error.code === "NOT_FOUND") notFound();
+    throw error; // rethrow other errors to be handled at the procedure call level
+  },
+});

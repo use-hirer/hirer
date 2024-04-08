@@ -23,6 +23,8 @@ export async function logout(): Promise<ActionResult> {
     sessionCookie.attributes
   );
 
+  cookies().delete("scope");
+
   return redirect("/login");
 }
 
