@@ -10,13 +10,7 @@ const JobTabs: React.FC = () => {
   const lastSegment = pathSegments[pathSegments.length - 1];
   const router = useRouter();
 
-  const tabValues = [
-    "/",
-    "/candidates",
-    "/configuration",
-    "/metrics",
-    "/sharing",
-  ];
+  const tabValues = ["/", "/candidates", "/config", "/metrics", "/sharing"];
 
   const defaultIndex = tabValues.findIndex(
     (value) => value === `/${lastSegment}`
@@ -35,7 +29,7 @@ const JobTabs: React.FC = () => {
       <TabList variant="line" color={"#000"}>
         <Tab value="/">Overview</Tab>
         <Tab value="/candidates">Candidates</Tab>
-        <Tab value="/configuration">Configuration</Tab>
+        <Tab value="/config">Configuration</Tab>
         <Tab value="/metrics">Metrics</Tab>
         <Tab value="/sharing">Sharing</Tab>
       </TabList>
