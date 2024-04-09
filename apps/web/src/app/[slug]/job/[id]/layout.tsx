@@ -22,35 +22,35 @@ export default async function JobLayout({
   const job = await api.job.get({ id: params.id });
 
   return (
-    <div className="flex items-center gap-2">
-      <div className="w-full">
-        <div className="py-1">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink>
-                  <Link href={`/${params.slug}`}>Home</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink>
-                  <Link href={`/${params.slug}/jobs`}>Jobs</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{job.title}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-        <Separator className="my-2" />
-        <div className="font-extrabold text-xl py-2 gt">{job.title}</div>
-        <Separator className="my-2" />
-        <JobTabs />
-        {children}
+    <div className="flex flex-col h-full">
+      <div className="py-1">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink>
+                <Link href={`/${params.slug}`}>Home</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink>
+                <Link href={`/${params.slug}/jobs`}>Jobs</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{job.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       </div>
+      <Separator className="my-2" />
+      <div className="font-extrabold text-xl py-2 gt">{job.title}</div>
+      <Separator className="my-2" />
+      <div className="flex-none">
+        <JobTabs />
+      </div>
+      <div className="flex-grow overflow-y-auto">{children}</div>
       <Toaster richColors position="top-right" closeButton />
     </div>
   );
