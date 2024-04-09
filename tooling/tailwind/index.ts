@@ -209,9 +209,5 @@ export default {
       `ui-selected:text-${customColor}`,
     ]),
   ],
-  plugins: [
-    require("tailwindcss-animate"),
-    require("@tailwindcss/typography"),
-    require("@headlessui/tailwindcss"),
-  ],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;
