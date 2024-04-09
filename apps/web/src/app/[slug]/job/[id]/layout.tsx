@@ -48,10 +48,7 @@ export default async function Layout({
         <Separator className="my-2" />
         <div className="font-extrabold text-xl py-2 gt">{job.title}</div>
         <Separator className="my-2" />
-        <div className="flex-none">
-          {children}
-          <div>{tabs}</div>
-        </div>
+        <div className="flex-grow overflow-y-auto">{tabs}</div>
       </div>
     </>
   );
