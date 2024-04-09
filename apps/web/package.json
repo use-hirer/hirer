@@ -68,8 +68,8 @@
   "devDependencies": {
     "@aws-sdk/types": "^3.535.0",
     "@hirer/tailwind-config": "workspace:*",
-    "@types/node": "^20.12.5",
-    "@types/react": "^18.2.74",
+    "@types/node": "^20.12.6",
+    "@types/react": "^18.2.75",
     "@types/react-dom": "^18.2.24",
     "@types/ws": "^8.5.10",
     "autoprefixer": "^10.4.19",
