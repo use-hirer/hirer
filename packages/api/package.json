@@ -12,8 +12,8 @@
   "dependencies": {
     "@hirer/auth": "workspace:*",
     "@hirer/database": "workspace:*",
-    "@langchain/community": "^0.0.44",
-    "@langchain/core": "^0.1.54",
+    "@langchain/community": "^0.0.45",
+    "@langchain/core": "^0.1.55",
     "@tanstack/react-query": "^5.29.0",
     "@trpc/next": "11.0.0-next.327",
     "@trpc/server": "11.0.0-next.327",
