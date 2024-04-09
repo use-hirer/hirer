@@ -4,23 +4,6 @@ import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { Item } from "./tab-group";
 
-<div className="flex gap-4">
-  <div className="p-2 border-b-2 border-black flex items-center">
-    <div className="text-sm">Overview</div>
-  </div>
-  <div className="p-2 border-b-2 border-transparent hover:border-zinc-500 flex items-center text-sm hover:text-zinc-800 text-zinc-500 cursor-pointer">
-    Candidates
-  </div>
-  <div className="p-2 border-b-2 border-transparent hover:border-zinc-500 flex items-center text-sm hover:text-zinc-800 text-zinc-500 cursor-pointer">
-    Configuration
-  </div>
-  <div className="p-2 border-b-2 border-transparent hover:border-zinc-500 flex items-center text-sm hover:text-zinc-800 text-zinc-500 cursor-pointer">
-    Metrics
-  </div>
-  <div className="p-2 border-b-2 border-transparent hover:border-zinc-500 flex items-center text-sm hover:text-zinc-800 text-zinc-500 cursor-pointer">
-    Sharing
-  </div>
-</div>;
 export const Tab = ({
   path,
   parallelRoutesKey,

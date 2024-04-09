@@ -18,8 +18,8 @@ const model = new BedrockChat({
   model: "anthropic.claude-3-haiku-20240307-v1:0",
   region: process.env.AWS_REGION,
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
   },
   temperature: 0.9,
   maxTokens: 8192,
