@@ -50,7 +50,7 @@ export default async function Layout({
         <Separator className="my-2" />
         <div className="flex-none">
           {children}
-          {tabs}
+          <div>{tabs}</div>
         </div>
       </div>
     </>

@@ -1,9 +1,26 @@
-import JobTabs from "@/modules/job/job-tabs";
+import { TabGroup } from "./tab-group";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: { slug: string; id: string };
+}) {
   return (
     <>
-      <JobTabs />
+      <div>
+        <TabGroup
+          path={`/${params.slug}/job/${params.id}`}
+          items={[
+            { text: "Overview" },
+            { text: "Candidates", slug: "candidates" },
+            { text: "Configuration", slug: "configuration" },
+            { text: "Metrics", slug: "metrics" },
+            { text: "Sharing", slug: "sharing" },
+          ]}
+        />
+      </div>
       {children}
     </>
   );
