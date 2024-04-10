@@ -24,13 +24,14 @@ const NoCandidatesExist: React.FC<NoCandidatesExistProps> = ({ className }) => {
             No Candidates Exist
           </h3>
           <p className="text-sm text-muted-foreground">
-            Create your first job for those applications start rolling in!
+            Add your first candidate manually to Hirer for tracking &
+            assessment.
           </p>
           <Button
             className="mt-4"
-            onClick={() => router.push(`/${slug}/jobs/create`)}
+            onClick={() => router.push(`/${slug}/candidates/create`)}
           >
-            Create Job
+            Add Candidate
           </Button>
         </div>
       </div>

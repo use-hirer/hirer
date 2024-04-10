@@ -35,7 +35,17 @@ export const candidateRouter = createTRPCRouter({
 
       const candidates = await ctx.db.candidate.findMany({
         where: { teamId: team.id },
-        include: { _count: { select: { applications: true } } },
+        include: {
+          _count: { select: { applications: true } },
+          applications: {
+            orderBy: { createdAt: "desc" },
+            take: 1,
+            select: {
+              createdAt: true,
+              notes: true,
+            },
+          },
+        },
       });
 
       return candidates;

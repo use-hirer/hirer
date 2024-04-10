@@ -15,6 +15,8 @@ import {
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
+import CandidateCard from "./candidate-card";
+import { CandidatesTable } from "./candidates-table";
 import NoCandidatesExist from "./no-candidates-exist";
 import NoCandidatesFound from "./no-candidates-found";
 
@@ -64,7 +66,7 @@ const CandidatesView: React.FC<CandidatesViewProps> = ({ candidates }) => {
 
   function switchView(view: "CARD" | "TABLE") {
     setView(view);
-    localStorage.setItem("jobsView", view);
+    localStorage.setItem("candidatesView", view);
   }
 
   return (
@@ -122,13 +124,41 @@ const CandidatesView: React.FC<CandidatesViewProps> = ({ candidates }) => {
           className="flex items-center justify-center gap-1"
         >
           <Plus />
-          <div className="hidden sm:block ml-1">New Job</div>
+          <div className="hidden sm:block ml-1">New Candidate</div>
         </Button>
       </div>
       {candidates.length > 0 ? (
         <div className="flex h-full">
           {candidatesApi.data?.length === 0 && !candidatesApi.isLoading && (
             <NoCandidatesFound className="bg-zinc-50 flex-1" />
+          )}
+          {candidatesApi.data && candidatesApi.data?.length > 0 && (
+            <div className="w-full">
+              {view === "TABLE" && (
+                <>
+                  <div className="hidden md:block">
+                    <CandidatesTable data={candidatesApi.data} />
+                  </div>
+                  <div className="md:hidden">
+                    <div className="grid grid-cols-1 gap-4">
+                      {candidatesApi.data.map((candidate) => (
+                        <CandidateCard
+                          key={candidate.id}
+                          candidate={candidate}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+              {view === "CARD" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                  {candidatesApi.data.map((candidate) => (
+                    <CandidateCard key={candidate.id} candidate={candidate} />
+                  ))}
+                </div>
+              )}
+            </div>
           )}
         </div>
       ) : (
