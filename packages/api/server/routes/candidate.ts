@@ -2,7 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
-export const userRouter = createTRPCRouter({
+export const candidateRouter = createTRPCRouter({
   getMany: protectedProcedure
     .input(
       z.object({
