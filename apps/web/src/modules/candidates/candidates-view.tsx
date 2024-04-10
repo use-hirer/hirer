@@ -80,7 +80,7 @@ const CandidatesView: React.FC<CandidatesViewProps> = ({ candidates }) => {
           )}
           <input
             className="w-full h-full transition-colors outline-none"
-            placeholder="Search Jobs ..."
+            placeholder="Search Candidates ..."
             onChange={(e) => setSearchValue(e.currentTarget.value)}
             value={searchValue}
           />
