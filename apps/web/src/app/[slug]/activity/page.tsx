@@ -1,3 +1,4 @@
+import { api } from "@/lib/api/server";
 import { validateRequest } from "@/lib/auth";
 import { Separator } from "@hirer/ui/separator";
 import { Metadata } from "next";
@@ -7,12 +8,22 @@ export const metadata: Metadata = {
   title: "Hirer: Activity Log",
 };
 
-export default async function ActivityPage() {
+export default async function ActivityPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { user } = await validateRequest();
 
   if (!user) {
     return redirect("/login");
   }
+
+  const activity = await api.activity.getActivityByOrgId({
+    teamId: params.slug,
+  });
+
+  console.log(activity);
 
   return (
     <div className="flex items-center gap-2">

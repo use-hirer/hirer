@@ -1,3 +1,4 @@
+import { activityRouter } from "./routes/activity";
 import { aiRouter } from "./routes/ai/router";
 import { candidateRouter } from "./routes/candidate";
 import { jobRouter } from "./routes/job";
@@ -11,6 +12,7 @@ export const appRouter = createTRPCRouter({
   user: userRouter,
   team: teamRouter,
   candidate: candidateRouter,
+  activity: activityRouter,
 });
 
 export const createCaller = createCallerFactory(appRouter);
