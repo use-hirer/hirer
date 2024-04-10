@@ -77,6 +77,7 @@ model Team {
   members     TeamMember[]
   teamInvites TeamInvite[]
   activity    Activity[]
+  candidate   Candidate[]
 }
 
 model TeamInvite {
@@ -141,7 +142,9 @@ model Candidate {
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  teamId    String
 
+  team         Team                   @relation(fields: [teamId], references: [id])
   applications CandidateApplication[]
 }
 
