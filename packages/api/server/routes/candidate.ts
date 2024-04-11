@@ -83,4 +83,48 @@ export const candidateRouter = createTRPCRouter({
 
       return candidate;
     }),
+  create: protectedProcedure
+    .input(
+      z.object({
+        teamId: z.string(),
+        name: z.string(),
+        email: z.string(),
+        notes: z.string().optional(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const whereClause = input.teamId.startsWith("tm_")
+        ? { id: input.teamId }
+        : { slug: input.teamId };
+
+      const team = await ctx.db.team.findUnique({
+        where: whereClause,
+        select: {
+          id: true,
+          members: {
+            where: {
+              userId: ctx.session.userId,
+            },
+          },
+        },
+      });
+
+      if (!team || !team.members) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `The team could not be found.`,
+        });
+      }
+
+      const candidate = await ctx.db.candidate.create({
+        data: {
+          name: input.name,
+          notes: input.notes,
+          email: input.email,
+          teamId: team.id,
+        },
+      });
+
+      return candidate;
+    }),
 });

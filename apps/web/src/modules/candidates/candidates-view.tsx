@@ -12,9 +12,10 @@ import {
   Spinner,
   SquaresFour,
 } from "@phosphor-icons/react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
+import AddCandidateSheet from "./add-candidate-sheet";
 import CandidateCard from "./candidate-card";
 import { CandidatesTable } from "./candidates-table";
 import NoCandidatesExist from "./no-candidates-exist";
@@ -27,9 +28,9 @@ interface CandidatesViewProps {
 const CandidatesView: React.FC<CandidatesViewProps> = ({ candidates }) => {
   const [searchValue, setSearchValue] = useState("");
   const [view, setView] = useState<"TABLE" | "CARD">("TABLE");
+  const [openCandidateSheet, setOpenCandidateSheet] = useState<boolean>(false);
   const [debouncedSearchValue] = useDebounce(searchValue, 500);
   const { slug } = useParams() as { slug?: string };
-  const router = useRouter();
   const [previousResults, setPreviousResults] =
     useState<RouterOutputs["candidate"]["getMany"]>(candidates);
 
@@ -120,7 +121,7 @@ const CandidatesView: React.FC<CandidatesViewProps> = ({ candidates }) => {
           </Button>
         </div>
         <Button
-          onClick={() => router.push(`/${slug}/jobs/create`)}
+          onClick={() => setOpenCandidateSheet(true)}
           className="flex items-center justify-center gap-1"
         >
           <Plus />
@@ -164,6 +165,10 @@ const CandidatesView: React.FC<CandidatesViewProps> = ({ candidates }) => {
       ) : (
         <NoCandidatesExist className="flex-1" />
       )}
+      <AddCandidateSheet
+        open={openCandidateSheet}
+        setOpen={setOpenCandidateSheet}
+      />
     </div>
   );
 };

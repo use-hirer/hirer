@@ -59,7 +59,6 @@ model User {
   sessions          Session[]
   teams             TeamMember[]
   verificationCodes VerificationCode[]
-  activity          Activity[]
   job               Job[]
 }
 
@@ -76,7 +75,6 @@ model Team {
   jobs        Job[]
   members     TeamMember[]
   teamInvites TeamInvite[]
-  activity    Activity[]
   candidate   Candidate[]
 }
 
@@ -124,7 +122,6 @@ model Job {
 
   creator      User                   @relation(fields: [creatorUserId], references: [id])
   team         Team                   @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  activity     Activity[]
   applications CandidateApplication[]
 
   @@index([teamId])
@@ -140,11 +137,23 @@ model Candidate {
   id        String   @id @default(cuid())
   email     String
   name      String
+  notes     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   teamId    String
 
   team         Team                   @relation(fields: [teamId], references: [id])
+  applications CandidateApplication[]
+  resumes      CandidateResume[]
+}
+
+model CandidateResume {
+  id          String  @id @default(cuid())
+  candidateId String
+  bucketId    String
+  notes       String?
+
+  candidate    Candidate              @relation(fields: [candidateId], references: [id])
   applications CandidateApplication[]
 }
 
@@ -155,30 +164,11 @@ model CandidateApplication {
   notes       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  resumeId    String?
 
-  job       Job       @relation(fields: [jobId], references: [id])
-  candidate Candidate @relation(fields: [candidateId], references: [id])
+  job       Job              @relation(fields: [jobId], references: [id])
+  candidate Candidate        @relation(fields: [candidateId], references: [id])
+  resume    CandidateResume? @relation(fields: [resumeId], references: [id])
 
   @@unique([candidateId, jobId])
-}
-
-model Activity {
-  id        String   @id @default(cuid())
-  type      String
-  /// [ActivityData]
-  data      Json
-  userId    String?
-  jobId     String?
-  teamId    String?
-  createdAt DateTime @default(now())
-
-  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
-  job  Job?  @relation(fields: [jobId], references: [id], onDelete: SetNull)
-  team Team? @relation(fields: [teamId], references: [id], onDelete: SetNull)
-
-  @@index([userId])
-  @@index([jobId])
-  @@index([teamId])
-  @@index([type])
-  @@index([createdAt])
 }
