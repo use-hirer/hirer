@@ -14,17 +14,19 @@ export const config = {
   ],
 };
 
-const APP_HOSTNAMES = new Set([`console.hirer.so`, "localhost:3000"]);
+const CONSOLE_HOSTNAMES = new Set([`console.hirer.so`, "localhost:3000"]);
 
 export default async function middleware(req: NextRequest) {
   const { domain, fullPath } = parse(req);
 
+  console.log(domain);
+
   // rewrites for app pages
-  if (APP_HOSTNAMES.has(domain)) {
+  if (CONSOLE_HOSTNAMES.has(domain)) {
     return NextResponse.rewrite(
       new URL(`/console.hirer.so${fullPath === "/" ? "" : fullPath}`, req.url)
     );
   }
 
-  return NextResponse.redirect("https://console.hirer.so");
+  return NextResponse.rewrite(new URL(`/`, req.url));
 }
