@@ -7,6 +7,7 @@ export const candidateRouter = createTRPCRouter({
     .input(
       z.object({
         teamId: z.string(),
+        name: z.string().optional(),
       })
     )
     .query(async ({ ctx, input }) => {
@@ -34,7 +35,10 @@ export const candidateRouter = createTRPCRouter({
       }
 
       const candidates = await ctx.db.candidate.findMany({
-        where: { teamId: team.id },
+        where: {
+          teamId: team.id,
+          name: { contains: input.name, mode: "insensitive" },
+        },
         include: {
           _count: { select: { applications: true } },
           applications: {

@@ -35,7 +35,7 @@ const CandidatesView: React.FC<CandidatesViewProps> = ({ candidates }) => {
     useState<RouterOutputs["candidate"]["getMany"]>(candidates);
 
   const candidatesApi = api.candidate.getMany.useQuery(
-    { teamId: slug as string },
+    { teamId: slug as string, name: debouncedSearchValue },
     {
       initialData: previousResults,
       enabled: !!debouncedSearchValue,
