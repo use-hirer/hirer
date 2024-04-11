@@ -1,3 +1,6 @@
+"use client";
+
+import { api } from "@/lib/api/react";
 import { Button } from "@hirer/ui/button";
 import {
   Form,
@@ -18,8 +21,10 @@ import {
 } from "@hirer/ui/sheet";
 import { Textarea } from "@hirer/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CircleNotch } from "@phosphor-icons/react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const MAX_FILE_SIZE = 1024 * 1024 * 2; // 2MB
@@ -39,13 +44,19 @@ type CandidateFormValues = z.infer<typeof candidateFormSchema>;
 interface AddCandidateSheetProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  orgId: string;
+  // TODO: Fix Type for Refetch
+  refetch: () => Promise<any>;
 }
 
 const AddCandidateSheet: React.FC<AddCandidateSheetProps> = ({
   open,
   setOpen,
+  orgId,
+  refetch,
 }) => {
   const [loading, setLoading] = useState(false);
+  const createCandidate = api.candidate.create.useMutation();
 
   const form = useForm<CandidateFormValues>({
     resolver: zodResolver(candidateFormSchema),
@@ -61,8 +72,22 @@ const AddCandidateSheet: React.FC<AddCandidateSheetProps> = ({
   async function onSubmit(data: CandidateFormValues) {
     setLoading(true);
 
-    console.log(data);
-    setOpen(false);
+    try {
+      await createCandidate.mutateAsync({
+        email: data.email,
+        name: data.name,
+        notes: data.notes,
+        teamId: orgId,
+      });
+
+      await refetch();
+
+      setOpen(false);
+      setLoading(false);
+    } catch (e) {
+      toast.error("An error ocurred adding the candidate, please try again.");
+      setLoading(false);
+    }
   }
 
   return (
@@ -75,7 +100,10 @@ const AddCandidateSheet: React.FC<AddCandidateSheetProps> = ({
           </SheetDescription>
         </SheetHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 pt-4"
+          >
             <FormField
               control={form.control}
               name="name"
@@ -151,7 +179,12 @@ const AddCandidateSheet: React.FC<AddCandidateSheetProps> = ({
               )}
             />
             <SheetFooter>
-              <Button type="submit">Save changes</Button>
+              <Button type="submit" disabled={loading}>
+                {loading && (
+                  <CircleNotch className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Add Candidate
+              </Button>
             </SheetFooter>
           </form>
         </Form>

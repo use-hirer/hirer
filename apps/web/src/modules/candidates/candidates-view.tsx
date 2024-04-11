@@ -168,6 +168,8 @@ const CandidatesView: React.FC<CandidatesViewProps> = ({ candidates }) => {
       <AddCandidateSheet
         open={openCandidateSheet}
         setOpen={setOpenCandidateSheet}
+        orgId={slug as string}
+        refetch={candidatesApi.refetch}
       />
     </div>
   );
