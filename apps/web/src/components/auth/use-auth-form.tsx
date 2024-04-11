@@ -33,10 +33,13 @@ export function UserAuthForm() {
     setSelectedMethod("Email");
     setIsLoading(true);
 
-    await emailLogin(email);
-    router.push("/login/verify-request");
-
-    setIsLoading(false);
+    try {
+      await emailLogin(email);
+      router.push("/login/verify-request");
+    } catch (e) {
+      toast.error("An error ocurred logging you in! Please try again.");
+      setIsLoading(false);
+    }
   }
 
   return (
