@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { emailLogin } from "@/app/(auth)/login/actions";
+import { emailLogin } from "@/app/console.hirer.so/login/actions";
 import { cn } from "@hirer/ui";
 import { Button } from "@hirer/ui/button";
 import { Input } from "@hirer/ui/input";

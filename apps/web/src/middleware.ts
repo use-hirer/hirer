@@ -1,3 +1,4 @@
+import { parse } from "@/lib/middleware";
 import { NextRequest, NextResponse } from "next/server";
 
 export const config = {
@@ -13,35 +14,16 @@ export const config = {
   ],
 };
 
+const APP_HOSTNAMES = new Set([`console.hirer.so`, "localhost:3000"]);
+
 export default async function middleware(req: NextRequest) {
-  const url = req.nextUrl;
-
-  // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
-  let hostname = req.headers
-    .get("host")!
-    .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
-
-  // special case for Vercel preview deployment URLs
-  if (
-    hostname.includes("---") &&
-    hostname.endsWith(`.${process.env.NEXT_PUBLIC_VERCEL_DEPLOYMENT_SUFFIX}`)
-  ) {
-    hostname = `${hostname.split("---")[0]}.${
-      process.env.NEXT_PUBLIC_ROOT_DOMAIN
-    }`;
-  }
+  const { domain, fullPath } = parse(req);
 
   // rewrites for app pages
-  if (hostname == `console.hirer.so`) {
-    return NextResponse.next();
-  }
-
-  // rewrite root application to `/home` folder
-  if (
-    hostname === "localhost:3000" ||
-    hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
-  ) {
-    return NextResponse.next();
+  if (APP_HOSTNAMES.has(domain)) {
+    return NextResponse.rewrite(
+      new URL(`/console.hirer.so${fullPath === "/" ? "" : fullPath}`, req.url)
+    );
   }
 
   return NextResponse.redirect("https://console.hirer.so");

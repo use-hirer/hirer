@@ -1,9 +1,9 @@
+import { UserAuthForm } from "@/components/auth/use-auth-form";
 import { validateRequest } from "@/lib/auth";
 import { Sparkle } from "@phosphor-icons/react/dist/ssr";
 import { Metadata } from "next";
 import { RedirectType, redirect } from "next/navigation";
 import { Toaster } from "sonner";
-import { UserAuthForm } from "../../../components/auth/use-auth-form";
 
 export const metadata: Metadata = {
   title: "Hirer | Login",
