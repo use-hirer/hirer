@@ -15,7 +15,7 @@ export const config = {
 };
 
 const CONSOLE_HOSTNAMES = new Set([
-  `console.hirer.so`,
+  "console.hirer.so",
   "console.localhost:3000",
 ]);
 
