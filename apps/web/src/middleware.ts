@@ -1,5 +1,6 @@
 import { parse } from "@/lib/middleware";
-import { NextRequest, NextResponse } from "next/server";
+import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
+import { recordClick } from "./lib/tinybird";
 
 export const config = {
   matcher: [
@@ -19,7 +20,7 @@ const CONSOLE_HOSTNAMES = new Set([
   "console.localhost:3000",
 ]);
 
-export default async function middleware(req: NextRequest) {
+export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
   const { domain, fullPath, path } = parse(req);
 
   // rewrites for app pages
@@ -28,6 +29,8 @@ export default async function middleware(req: NextRequest) {
       new URL(`/console.hirer.so${fullPath === "/" ? "" : fullPath}`, req.url)
     );
   }
+
+  ev.waitUntil(recordClick({ req, id: "123", url: domain }));
 
   return NextResponse.rewrite(new URL(`/${domain}${path}`, req.url));
 }

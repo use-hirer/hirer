@@ -52,7 +52,7 @@ export async function recordClick({
 
   return await Promise.allSettled([
     fetch(
-      `${process.env.TINYBIRD_API_URL}/v0/events?name=hirer_click_events&wait=true`,
+      "https://api.us-east.aws.tinybird.co/v0/events?name=hirer_click_events&wait=true",
       {
         method: "POST",
         headers: {
@@ -63,7 +63,6 @@ export async function recordClick({
           identity_hash,
           click_id: nanoid(16),
           link_id: id,
-          alias_link_id: "",
           url: url || "",
           ip:
             // only record IP if it's a valid IP and not from EU
