@@ -30,7 +30,9 @@ export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
     );
   }
 
-  ev.waitUntil(recordClick({ req, id: "123", url: domain }));
+  // TODO: Move this to page, not middleware.
+  // Need to store in Redis, Job URL, which will have keys ord_id & job_id.
+  ev.waitUntil(recordClick({ req, org_id: "123", job_id: "123", url: domain }));
 
   return NextResponse.rewrite(new URL(`/${domain}${path}`, req.url));
 }

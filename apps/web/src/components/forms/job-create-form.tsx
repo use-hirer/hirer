@@ -119,7 +119,6 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
               </FormItem>
             )}
           />
-
           <FormField
             name="description"
             control={form.control}

@@ -21,14 +21,14 @@ const ratelimit = new Ratelimit({
  **/
 export async function recordClick({
   req,
-  id,
   url,
-  root,
+  org_id,
+  job_id,
 }: {
   req: NextRequest;
-  id: string;
   url?: string;
-  root?: boolean;
+  org_id: string;
+  job_id: string;
 }) {
   const isBot = detectBot(req);
   if (isBot) {
@@ -43,7 +43,7 @@ export async function recordClick({
 
   // if in production / preview env, deduplicate clicks from the same IP address + link ID – only record 1 click per hour
   if (process.env.VERCEL === "1") {
-    const { success } = await ratelimit.limit(`recordClick:${ip}:${id}`);
+    const { success } = await ratelimit.limit(`recordClick:${ip}:${job_id}`);
 
     if (!success) {
       return null;
@@ -62,7 +62,8 @@ export async function recordClick({
           timestamp: new Date(Date.now()).toISOString(),
           identity_hash,
           click_id: nanoid(16),
-          link_id: id,
+          org_id: org_id,
+          job_id: job_id,
           url: url || "",
           ip:
             // only record IP if it's a valid IP and not from EU

@@ -1,3 +1,3 @@
-export default function DefaultTabPage() {
+export default function MetricsTab() {
   return <div>metrics tab</div>;
 }

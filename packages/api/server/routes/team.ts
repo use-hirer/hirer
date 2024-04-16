@@ -1,5 +1,5 @@
 import { TRPCError } from "@trpc/server";
-import { kv } from "@vercel/kv";
+import kv from "@vercel/kv";
 import { cookies } from "next/headers";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
