@@ -61,9 +61,9 @@ const SharingTabView: React.FC<SharingTabViewProps> = ({ job }) => {
 
   const link = `https://${slug}.hirer.so/job/${job.slug}`;
 
-  const copyToClipboard = () => {
+  const copyLinkToClipboard = () => {
     navigator.clipboard.writeText(link).then(() => {
-      toast.info("Public link has been copied to clipboard");
+      toast.info("Public link has been copied to clipboard.");
     });
   };
 
@@ -76,7 +76,9 @@ const SharingTabView: React.FC<SharingTabViewProps> = ({ job }) => {
   });
 
   async function onSubmit(data: SocialPostFormValues) {
-    console.log(data);
+    navigator.clipboard.writeText(data.post).then(() => {
+      toast.info("Social media post has been copied to clipboard.");
+    });
   }
 
   return (
@@ -94,7 +96,7 @@ const SharingTabView: React.FC<SharingTabViewProps> = ({ job }) => {
           >
             {link}
           </Link>
-          <Button size={"icon"} variant={"ghost"} onClick={copyToClipboard}>
+          <Button size={"icon"} variant={"ghost"} onClick={copyLinkToClipboard}>
             <Copy />
           </Button>
         </div>
