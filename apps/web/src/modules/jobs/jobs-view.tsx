@@ -162,7 +162,7 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
           )}
         </div>
       ) : (
-        <NoJobsExist className="flex-1" />
+        <NoJobsExist className="flex-1 bg-zinc-50" />
       )}
     </div>
   );
