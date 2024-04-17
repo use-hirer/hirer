@@ -25,7 +25,7 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          "h-[calc(100dvh) bg-zinc-50 font-sans antialiased overflow-y-hidden",
+          "h-[calc(100dvh)] bg-zinc-50 font-sans antialiased overflow-y-hidden",
           GeistSans.variable
         )}
       >

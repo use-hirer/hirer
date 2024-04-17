@@ -38,7 +38,7 @@ export default async function OrganisationPublicPage({
   }
 
   return (
-    <div className="h-[100dvh] overflow-y-auto">
+    <div className="h-full overflow-y-auto">
       <div className="container mt-8 p-2 max-w-[1000px]">
         <div className="flex justify-center">
           <Image
