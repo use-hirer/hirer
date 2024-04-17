@@ -3,7 +3,7 @@
 import { useCollapse } from "@/context/collapse-context";
 import type { User } from "@hirer/auth/lucia";
 import { Separator } from "@hirer/ui/separator";
-import { Sparkle } from "@phosphor-icons/react/dist/ssr";
+import Image from "next/image";
 import BottomMenuLayout from "./bottom-layout";
 import NavUser from "./nav-user";
 import TeamSwitcher from "./team-select";
@@ -26,11 +26,20 @@ const NavigationMenu: React.FC<{
             className="flex items-center data-[collapsed=true]:justify-center select-none cursor-pointer"
             onClick={toggleCollapse}
           >
-            <div className="flex items-center justify-center w-7 h-7 bg-black text-white rounded-full text-md font-extrabold">
-              <Sparkle />
-            </div>
-            {!isCollapsed && (
-              <div className="font-bold text-xl ml-1">Hirer</div>
+            {isCollapsed ? (
+              <Image
+                src={"/hirer-icon.png"}
+                alt="Hirer Icon"
+                width={30}
+                height={50}
+              />
+            ) : (
+              <Image
+                src={"/hirer-full-logo.png"}
+                alt="Hirer Logo"
+                width={80}
+                height={100}
+              />
             )}
           </div>
           <Separator className="my-3" />

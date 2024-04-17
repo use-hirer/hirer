@@ -1,7 +1,6 @@
 import { api } from "@/lib/api/server";
 import { Button } from "@hirer/ui/button";
 import { Separator } from "@hirer/ui/separator";
-import { Sparkle } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -97,15 +96,17 @@ export default async function OrganisationPublicPage({
         </div>
 
         <Link
-          className="flex justify-center gap-1 items-center py-6 cursor-pointer"
+          className="flex justify-center gap-2 items-center py-6 cursor-pointer"
           href={"https://hirer.so"}
         >
           <div className="text-xs">Powered by</div>
           <div className="flex items-center">
-            <div className="flex items-center justify-center w-6 h-6 bg-black text-white rounded-full text-md font-extrabold">
-              <Sparkle size={12} />
-            </div>
-            <div className="font-bold text-xl ml-[2px]">Hirer</div>
+            <Image
+              src={"/hirer-full-logo.png"}
+              alt="Hirer Logo"
+              width={70}
+              height={100}
+            />
           </div>
         </Link>
       </div>
