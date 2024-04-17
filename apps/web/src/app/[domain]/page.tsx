@@ -4,23 +4,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-function extractSubdomain(domain: string): string | null {
-  // Decode the domain in case it's URL encoded
-  const decodedDomain = decodeURIComponent(domain);
+function getSubdomain(domain: string) {
+  // Remove the port number if present
+  const [domainWithoutPort] = domain.split(":");
 
-  // Remove any port number if present
-  const domainWithoutPort = decodedDomain.split(":")[0];
+  // Decode the URL-encoded characters
+  const decodedDomain = decodeURIComponent(domainWithoutPort);
 
-  // Split the domain into parts
-  const parts = domainWithoutPort.split(".");
+  // Find the position of the first dot
+  const dotIndex = decodedDomain.indexOf(".");
 
-  // Check how many parts or segments are present in the domain
-  if (parts.length >= 2) {
-    // The subdomain will be all parts except the last one
-    return parts.slice(0, -1).join(".");
+  if (dotIndex !== -1) {
+    // Extract the substring from the start to the first dot
+    return decodedDomain.substring(0, dotIndex);
   } else {
-    // This scenario occurs if there is no '.' in the domain (very unusual)
-    return null;
+    // Return an empty string if no dot is found
+    return "";
   }
 }
 
@@ -29,7 +28,7 @@ export default async function OrganisationPublicPage({
 }: {
   params: { domain: string };
 }) {
-  const slug = extractSubdomain(params.domain);
+  const slug = getSubdomain(params.domain);
   const org = await api.public.getOrganisation({ id: slug as string });
 
   if (!org) {
