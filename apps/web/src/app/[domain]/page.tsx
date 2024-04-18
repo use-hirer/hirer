@@ -41,13 +41,13 @@ export default async function OrganisationPublicPage({
       <div className="container mt-8 p-2 max-w-[1000px]">
         <div className="flex justify-center">
           <Image
-            src={"/amazon.png"}
+            src={"/acme-logo.png"}
             alt="Amazon Logo"
             width={100}
             height={50}
           />
         </div>
-        <div className="bg-white shadow-sm container mt-6 rounded-2xl p-4 max-w-[1000px]">
+        <div className="bg-white shadow-sm container mt-3 rounded-2xl p-4 max-w-[1000px]">
           <div className="font-bold text-xl p-2">About Us</div>
           <div className="flex flex-col gap-4 text-sm p-2">
             <div>
