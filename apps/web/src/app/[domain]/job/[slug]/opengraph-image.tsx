@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { api } from "@/lib/api/server";
 import { ImageResponse } from "next/og";
 
@@ -45,19 +46,31 @@ export default async function Image({
           fontWeight: 600,
         }}
       >
-        <svg
-          width="75"
-          viewBox="0 0 75 65"
-          fill="#000"
-          style={{ margin: "0 75px" }}
+        <div
+          style={{
+            fontSize: 100,
+            color: "black",
+            background: "white",
+            width: "100%",
+            height: "100%",
+            padding: "50px 200px",
+            textAlign: "center",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          <path d="M37.59.25l36.95 64H.64l36.95-64z"></path>
-        </svg>
-        <div style={{ marginTop: 40 }}>{job?.title}</div>
+          💼
+        </div>
+        <div
+          style={{ marginTop: 40, fontSize: "24", fontFamily: "sans-serif" }}
+        >
+          {job?.title}
+        </div>
       </div>
     ),
     {
       ...size,
+      emoji: "twemoji",
     }
   );
 }
