@@ -1,13 +1,14 @@
 import { Providers } from "@/components/providers";
 import { cn } from "@hirer/ui";
 import { GeistSans } from "geist/font/sans";
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Hirer - Your Hiring Companion",
   description:
     "AI-driven hiring platform for efficient interviews, tailored questions, and enhanced, bias-reduced candidate assessments.",
+  metadataBase: new URL(process.env.AUTH_URL),
 };
 
 export default function RootLayout({
