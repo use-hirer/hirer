@@ -12,4 +12,13 @@ export const publicRouter = createTRPCRouter({
 
       return org;
     }),
+  getJob: publicProcedure
+    .input(z.object({ orgId: z.string(), jobId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const job = await ctx.db.job.findUnique({
+        where: { slug: input.jobId, team: { slug: input.orgId } },
+      });
+
+      return job;
+    }),
 });

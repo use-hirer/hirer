@@ -1,11 +1,9 @@
 import { api } from "@/lib/api/server";
-import { Button } from "@hirer/ui/button";
-import { Separator } from "@hirer/ui/separator";
+import JobsList from "@/modules/public/jobs-list";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ImageResponse } from "next/og";
 
 export async function generateMetadata(
   { params }: { params: { domain: string } },
@@ -14,53 +12,19 @@ export async function generateMetadata(
   const slug = getSubdomain(params.domain);
   const org = await api.public.getOrganisation({ id: slug as string });
 
-  // optionally access and extend (rather than replace) parent metadata
-  // const previousImages = (await parent).openGraph?.images || [];
-
   return {
-    title: org?.name,
-    openGraph: {
-      type: "website",
-      title: org?.name + ": Careers",
-      images: [
-        new ImageResponse(
-          (
-            <div
-              style={{
-                fontSize: 128,
-                background: "white",
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              About Acme
-            </div>
-          ),
-          { width: 1200, height: 630 }
-        ),
-      ],
-    },
+    title: org?.name + ": Careers",
   };
 }
 
 function getSubdomain(domain: string) {
-  // Remove the port number if present
   const [domainWithoutPort] = domain.split(":");
-
-  // Decode the URL-encoded characters
   const decodedDomain = decodeURIComponent(domainWithoutPort);
-
-  // Find the position of the first dot
   const dotIndex = decodedDomain.indexOf(".");
 
   if (dotIndex !== -1) {
-    // Extract the substring from the start to the first dot
     return decodedDomain.substring(0, dotIndex);
   } else {
-    // Return an empty string if no dot is found
     return "";
   }
 }
@@ -116,25 +80,7 @@ export default async function OrganisationPublicPage({
             </div>
           </div>
         </div>
-        <div className="bg-white shadow-sm container mt-6 rounded-2xl p-4 max-w-[1000px]">
-          {org.jobs.map((job, index) => (
-            <div key={job.id}>
-              <div className="p-2">
-                <div className="font-bold text-lg">{job.title}</div>
-                <div className="text-xs font-normal text-zinc-600">
-                  {job.location}
-                </div>
-              </div>
-              {org.jobs.length - 1 !== index && <Separator />}
-            </div>
-          ))}
-          <div className="flex items-center justify-center pt-4 gap-2">
-            <Button variant={"ghost"} disabled>
-              Back
-            </Button>
-            <Button variant={"outline"}>Next</Button>
-          </div>
-        </div>
+        <JobsList org={org} />
         <Link
           className="flex justify-center gap-2 items-center py-6 cursor-pointer"
           href={"https://hirer.so"}
