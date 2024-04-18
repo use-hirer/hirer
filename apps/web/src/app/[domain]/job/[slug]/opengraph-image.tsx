@@ -49,20 +49,17 @@ export default async function Image({
         <div
           style={{
             fontSize: 100,
-            color: "black",
-            background: "white",
-            width: "100%",
-            height: "100%",
-            padding: "50px 200px",
-            textAlign: "center",
-            justifyContent: "center",
-            alignItems: "center",
           }}
         >
           💼
         </div>
         <div
-          style={{ marginTop: 40, fontSize: "24", fontFamily: "sans-serif" }}
+          style={{
+            marginTop: 40,
+            fontSize: "24",
+            fontFamily: "sans-serif",
+            fontWeight: "bold",
+          }}
         >
           {job?.title}
         </div>
