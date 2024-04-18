@@ -2,6 +2,7 @@ import { api } from "@/lib/api/server";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 
 export async function generateMetadata(
@@ -41,6 +42,10 @@ export default async function JobPublicPage({
     jobId: params.slug as string,
     orgId: slug,
   });
+
+  if (!job) {
+    return notFound();
+  }
 
   return (
     <div className="h-full overflow-y-auto">
