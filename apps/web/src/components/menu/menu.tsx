@@ -26,14 +26,15 @@ const NavigationMenu: React.FC<{
             className="flex items-center data-[collapsed=true]:justify-center select-none cursor-pointer"
             onClick={toggleCollapse}
           >
-            {isCollapsed ? (
+            {isCollapsed && (
               <Image
                 src={"/hirer-icon.png"}
-                alt="Hirer Icon"
+                alt="Hirer Logo"
                 width={30}
-                height={50}
+                height={100}
               />
-            ) : (
+            )}
+            {!isCollapsed && (
               <Image
                 src={"/hirer-full-logo.png"}
                 alt="Hirer Logo"

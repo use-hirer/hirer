@@ -1,7 +1,7 @@
 import { UserAuthForm } from "@/components/auth/use-auth-form";
 import { validateRequest } from "@/lib/auth";
-import { Sparkle } from "@phosphor-icons/react/dist/ssr";
 import { Metadata } from "next";
+import Image from "next/image";
 import { RedirectType, redirect } from "next/navigation";
 import { Toaster } from "sonner";
 
@@ -23,8 +23,12 @@ export default async function AuthenticationPage() {
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-zinc-900" />
           <div className="relative z-20 flex items-center text-lg font-extrabold gap-1">
-            <Sparkle color="white" />
-            Hirer
+            <Image
+              src={"/hirer-full-logo-white.png"}
+              alt="Hirer Logo"
+              width={70}
+              height={100}
+            />
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
@@ -43,8 +47,13 @@ export default async function AuthenticationPage() {
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
               <div className="flex w-full justify-center">
-                <div className="lg:hidden flex items-center justify-center w-8 h-8 bg-black text-white rounded-full text-md font-extrabold">
-                  <Sparkle />
+                <div className="lg:hidden flex items-center justify-center w-8 h-8  rounded-full text-md font-extrabold">
+                  <Image
+                    src={"/hirer-icon.png"}
+                    alt="Hirer Logo"
+                    width={70}
+                    height={100}
+                  />{" "}
                 </div>
               </div>
               <h1 className="text-2xl font-semibold tracking-tight">
