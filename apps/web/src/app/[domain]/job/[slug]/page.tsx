@@ -1,3 +1,4 @@
+import HirerLogo from "@/components/icons/hirer-logo";
 import { api } from "@/lib/api/server";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
@@ -80,12 +81,7 @@ export default async function JobPublicPage({
         >
           <div className="text-xs">Powered by</div>
           <div className="flex items-center">
-            <Image
-              src={"/hirer-full-logo.png"}
-              alt="Hirer Logo"
-              width={70}
-              height={100}
-            />
+            <HirerLogo width={70} />
           </div>
         </Link>
       </div>

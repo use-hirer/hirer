@@ -1,3 +1,4 @@
+import HirerLogo from "@/components/icons/hirer-logo";
 import { api } from "@/lib/api/server";
 import JobsList from "@/modules/public/jobs-list";
 import { Metadata, ResolvingMetadata } from "next";
@@ -87,12 +88,7 @@ export default async function OrganisationPublicPage({
         >
           <div className="text-xs">Powered by</div>
           <div className="flex items-center">
-            <Image
-              src={"/hirer-full-logo.png"}
-              alt="Hirer Logo"
-              width={70}
-              height={100}
-            />
+            <HirerLogo width={70} />
           </div>
         </Link>
       </div>

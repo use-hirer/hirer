@@ -3,7 +3,8 @@
 import { useCollapse } from "@/context/collapse-context";
 import type { User } from "@hirer/auth/lucia";
 import { Separator } from "@hirer/ui/separator";
-import Image from "next/image";
+import HirerIcon from "../icons/hirer-icon";
+import HirerLogo from "../icons/hirer-logo";
 import BottomMenuLayout from "./bottom-layout";
 import NavUser from "./nav-user";
 import TeamSwitcher from "./team-select";
@@ -26,22 +27,8 @@ const NavigationMenu: React.FC<{
             className="flex items-center data-[collapsed=true]:justify-center select-none cursor-pointer"
             onClick={toggleCollapse}
           >
-            {isCollapsed && (
-              <Image
-                src={"/hirer-icon.png"}
-                alt="Hirer Logo"
-                width={30}
-                height={100}
-              />
-            )}
-            {!isCollapsed && (
-              <Image
-                src={"/hirer-full-logo.png"}
-                alt="Hirer Logo"
-                width={80}
-                height={100}
-              />
-            )}
+            {isCollapsed && <HirerIcon width={30} />}
+            {!isCollapsed && <HirerLogo width={80} />}
           </div>
           <Separator className="my-3" />
           {/* <Input className="bg-white h-8" placeholder="Search" /> */}
