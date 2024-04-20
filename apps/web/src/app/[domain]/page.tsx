@@ -42,6 +42,14 @@ export default async function OrganisationPublicPage({
     return notFound();
   }
 
+  fetch(`${process.env.AUTH_URL}/api/tracking/`, {
+    method: "POST",
+    body: JSON.stringify({ job_id: null, org_id: org.id }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
   return (
     <div className="h-full overflow-y-auto">
       <div className="container mt-8 p-2 max-w-[1000px]">

@@ -63,7 +63,7 @@ export async function recordClick({
           identity_hash,
           click_id: nanoid(16),
           org_id: org_id,
-          job_id: job_id,
+          job_id: job_id || "",
           url: url || "",
           ip:
             // only record IP if it's a valid IP and not from EU
