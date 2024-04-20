@@ -1,5 +1,6 @@
 import HirerLogo from "@/components/icons/hirer-logo";
 import { api } from "@/lib/api/server";
+import JobApplyForm from "@/modules/public/job-apply-form";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -73,6 +74,12 @@ export default async function JobPublicPage({
             <Markdown className="prose max-w-none font text-sm">
               {job?.description}
             </Markdown>
+          </div>
+        </div>
+        <div className="bg-white shadow-sm container mt-3 rounded-2xl p-4 max-w-[1000px]">
+          <div className="font-bold text-xl p-2">Apply</div>
+          <div className="flex flex-col gap-4 text-sm p-2">
+            <JobApplyForm />
           </div>
         </div>
         <Link
