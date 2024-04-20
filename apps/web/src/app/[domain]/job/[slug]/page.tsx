@@ -48,14 +48,6 @@ export default async function JobPublicPage({
     return notFound();
   }
 
-  fetch(`${process.env.AUTH_URL}/api/tracking/`, {
-    method: "POST",
-    body: JSON.stringify({ job_id: job.id, org_id: job.teamId }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
   return (
     <div className="h-full overflow-y-auto">
       <div className="container mt-8 p-2 max-w-[1000px]">
