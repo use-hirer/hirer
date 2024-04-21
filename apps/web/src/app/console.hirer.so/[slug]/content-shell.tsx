@@ -13,7 +13,7 @@ const ContentShell: React.FC<ContentShellProps> = ({ children }) => {
   return (
     <div
       data-collapsed={isCollapsed}
-      className="overflow-y-auto flex-auto bg-white mt-[7px] lg:rounded-tl-2xl shadow-sm border-zinc-950/5 border p-4 lg:ml-[250px] lg:data-[collapsed=true]:ml-[60px]"
+      className="overflow-y-auto flex-auto bg-white lg:mt-[7px] lg:rounded-tl-2xl shadow-sm border-zinc-950/5 border p-4 lg:ml-[250px] lg:data-[collapsed=true]:ml-[60px]"
     >
       {children}
     </div>
