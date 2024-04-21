@@ -2,6 +2,7 @@ import { api } from "@/lib/api/server";
 import { validateRequest } from "@/lib/auth";
 import CreateCandidateCard from "@/modules/activity/create-candidate-card";
 import CreateJobCard from "@/modules/activity/create-job-card";
+import NoActivityExists from "@/modules/activity/no-activity-exists";
 import { Separator } from "@hirer/ui/separator";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
@@ -47,34 +48,38 @@ export default async function ActivityPage({
   );
 
   return (
-    <div className="flex items-center gap-2">
-      <div className="w-full">
+    <div className="flex items-center gap-2 h-full">
+      <div className="w-full flex-1 h-full flex flex-col">
         <div className="font-extrabold text-xl">Activity</div>
         <Separator className="mt-2 mb-4" />
-        <div className="flex flex-col gap-1">
-          {Object.entries(groupedActivity).map(([date, items]) => (
-            <div key={date}>
-              <div className="font-bold">{date}</div>
-              <Separator className="mt-2 mb-4" />
-              {items.map((item, key) => (
-                <div key={key} className="mb-2">
-                  {item.event === "create_candidate" && (
-                    <CreateCandidateCard
-                      date={item.date}
-                      event_data={item.event_data}
-                    />
-                  )}
-                  {item.event === "create_job" && (
-                    <CreateJobCard
-                      date={item.date}
-                      event_data={item.event_data}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+        {activity.data.length > 0 ? (
+          <div className="flex flex-col gap-1">
+            {Object.entries(groupedActivity).map(([date, items]) => (
+              <div key={date}>
+                <div className="font-bold">{date}</div>
+                <Separator className="mt-2 mb-4" />
+                {items.map((item, key) => (
+                  <div key={key}>
+                    {item.event === "create_candidate" && (
+                      <CreateCandidateCard
+                        date={item.date}
+                        event_data={item.event_data}
+                      />
+                    )}
+                    {item.event === "create_job" && (
+                      <CreateJobCard
+                        date={item.date}
+                        event_data={item.event_data}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <NoActivityExists className="flex-1 bg-zinc-50" />
+        )}
       </div>
     </div>
   );

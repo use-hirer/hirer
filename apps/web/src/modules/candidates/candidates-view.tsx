@@ -163,7 +163,7 @@ const CandidatesView: React.FC<CandidatesViewProps> = ({ candidates }) => {
           )}
         </div>
       ) : (
-        <NoCandidatesExist className="flex-1" />
+        <NoCandidatesExist className="flex-1 bg-zinc-50" />
       )}
       <AddCandidateSheet
         open={openCandidateSheet}

@@ -8,7 +8,9 @@ export const publicRouter = createTRPCRouter({
       const org = await ctx.db.team.findUnique({
         where: { slug: input.id },
         include: {
-          jobs: { select: { title: true, location: true, slug: true } },
+          jobs: {
+            select: { title: true, location: true, slug: true, id: true },
+          },
           _count: { select: { jobs: true } },
         },
       });
