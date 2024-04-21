@@ -1,5 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { trackEvent } from "../../lib/tb";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const candidateRouter = createTRPCRouter({
@@ -127,6 +128,18 @@ export const candidateRouter = createTRPCRouter({
           email: input.email,
           teamId: team.id,
         },
+      });
+
+      await trackEvent({
+        date: new Date(),
+        event: "create_candidate",
+        org_id: team.id,
+        user_id: ctx.user.id,
+        event_data: JSON.stringify({
+          candidate_id: candidate.id,
+          candidate_name: input.name,
+          candidate_email: input.email,
+        }),
       });
 
       return candidate;

@@ -1,5 +1,6 @@
 import HirerLogo from "@/components/icons/hirer-logo";
 import { api } from "@/lib/api/server";
+import { getSubdomain } from "@/lib/functions/domains";
 import JobsList from "@/modules/public/jobs-list";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
@@ -16,18 +17,6 @@ export async function generateMetadata(
   return {
     title: org?.name + ": Careers",
   };
-}
-
-function getSubdomain(domain: string) {
-  const [domainWithoutPort] = domain.split(":");
-  const decodedDomain = decodeURIComponent(domainWithoutPort);
-  const dotIndex = decodedDomain.indexOf(".");
-
-  if (dotIndex !== -1) {
-    return decodedDomain.substring(0, dotIndex);
-  } else {
-    return "";
-  }
 }
 
 export default async function OrganisationPublicPage({

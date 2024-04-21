@@ -68,7 +68,11 @@ const JobApplyForm: React.FC<JobApplyFormProps> = () => {
                     Full Name <span className="text-red-600">*</span>
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="Johnny Appleseed" {...field} />
+                    <Input
+                      type="text"
+                      placeholder="Johnny Appleseed"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -83,7 +87,11 @@ const JobApplyForm: React.FC<JobApplyFormProps> = () => {
                     Email <span className="text-red-600">*</span>
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="Johnny Appleseed" {...field} />
+                    <Input
+                      type="email"
+                      placeholder="Johnny Appleseed"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

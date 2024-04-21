@@ -148,6 +148,9 @@ export const jobRouter = createTRPCRouter({
         user_id: ctx.user.id,
         event_data: JSON.stringify({
           job_id: job.id,
+          job_title: job.title,
+          job_slug: job.slug,
+          job_creator: job.creatorUserId,
         }),
       });
 

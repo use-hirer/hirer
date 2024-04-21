@@ -7,7 +7,10 @@ export const publicRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const org = await ctx.db.team.findUnique({
         where: { slug: input.id },
-        include: { jobs: true },
+        include: {
+          jobs: { select: { title: true, location: true, slug: true } },
+          _count: { select: { jobs: true } },
+        },
       });
 
       return org;

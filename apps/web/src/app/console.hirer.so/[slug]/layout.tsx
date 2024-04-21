@@ -1,4 +1,5 @@
 import { authCheck } from "@/actions/auth";
+import HirerLogo from "@/components/icons/hirer-logo";
 import NavigationMenu from "@/components/menu/menu";
 import Notifications from "@/components/menu/notifications";
 import { List } from "@phosphor-icons/react/dist/ssr";
@@ -18,7 +19,9 @@ export default async function DashboardLayout({
         <div className="lg:hidden px-4 pt-2 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <List weight="bold" size={20} />
-            <div className="font-bold">Hirer</div>
+            <div className="font-bold">
+              <HirerLogo width={60} />
+            </div>
           </div>
           <Notifications />
         </div>
