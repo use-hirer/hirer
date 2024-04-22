@@ -1,6 +1,8 @@
 import { parse } from "@/lib/middleware";
+import { kv } from "@vercel/kv";
 import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 import { getSubdomain } from "./lib/functions/domains";
+import { recordClick } from "./lib/tinybird";
 
 export const config = {
   matcher: [
@@ -35,13 +37,14 @@ export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
 
   if (domain.includes("hirer.so") || domain.includes("localhost:3000")) {
     const orgSlug = getSubdomain(domain);
-    // const orgId = kv.get(orgSlug)
-    // const jobSlug = getSlug(...)
-    // const jobId = kv.get(`${orgId}:${jobSlug}`)
-    // recordClick({req, org_id: orgId, job_id: jobId, url: fullPath })
-  }
 
-  // ev.waitUntil(recordClick({ req, org_id: "123", job_id: "123", url: domain }));
+    const jobId = path.replace("/job/", "").split("-")[0];
+    const orgId = (await kv.get(orgSlug)) as string;
+
+    ev.waitUntil(
+      recordClick({ req, org_id: orgId, job_id: jobId, url: domain + fullPath })
+    );
+  }
 
   return NextResponse.rewrite(new URL(`/${domain}${path}`, req.url));
 }

@@ -1,5 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import genId from "../../lib/id";
 import { trackEvent } from "../../lib/tb";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
@@ -103,35 +104,27 @@ export const jobRouter = createTRPCRouter({
         });
       }
 
-      async function generateJobSlug(jobName: string): Promise<string> {
+      async function generateJobSlug(
+        jobName: string,
+        id: string
+      ): Promise<string> {
         const baseSlug = jobName
           .toLowerCase()
           .replace(/[^a-z0-9]+/g, "-")
           .replace(/(^-|-$)/g, "");
 
         let slug = baseSlug;
-        let count = 1;
 
-        while (await isSlugTaken(slug)) {
-          slug = `${baseSlug}-${count}`;
-          count++;
-        }
-
-        return slug;
+        return id + "-" + slug;
       }
 
-      async function isSlugTaken(slug: string): Promise<boolean> {
-        const job = await ctx.db.job.findUnique({
-          where: { slug },
-        });
+      const id = genId({ type: "JOB" });
 
-        return !!job;
-      }
-
-      const slug = await generateJobSlug(input.details.title);
+      const slug = await generateJobSlug(input.details.title, id);
 
       const job = await ctx.db.job.create({
         data: {
+          id: id,
           teamId: team.id,
           slug: slug,
           creatorUserId: ctx.session.userId,
