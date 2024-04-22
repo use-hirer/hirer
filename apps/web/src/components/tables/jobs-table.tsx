@@ -1,7 +1,7 @@
 "use client";
 
 import { JOB_DATA } from "@/components/tables/job-data";
-import { Job } from "@/model/Job";
+import { Job } from "@/model/job";
 import { Button } from "@hirer/ui/button";
 import {
   DropdownMenu,

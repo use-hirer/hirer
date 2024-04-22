@@ -1,4 +1,4 @@
-import { Job } from "@/model/Job";
+import { Job } from "@/model/job";
 
 export const JOB_DATA: Job[] = [
   {

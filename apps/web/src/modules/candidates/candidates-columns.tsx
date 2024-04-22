@@ -1,5 +1,5 @@
 "use client";
-import { JobStatus } from "@/model/Job";
+import { JobStatus } from "@/model/job";
 import { RouterOutputs } from "@hirer/api";
 import { Button } from "@hirer/ui/button";
 import {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Job, JobStatus } from "@/model/Job";
+import { Job, JobStatus } from "@/model/job";
 import { Button } from "@hirer/ui/button";
 import {
   DropdownMenu,
