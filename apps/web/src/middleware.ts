@@ -38,12 +38,24 @@ export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
   if (domain.includes("hirer.so") || domain.includes("localhost:3000")) {
     const orgSlug = getSubdomain(domain);
 
-    const jobId = path.replace("/job/", "").split("-")[0];
+    let jobId = path.replace("/job/", "").split("-")[0];
     const orgId = (await kv.get(orgSlug)) as string;
+    const idRegex: RegExp = /^[0-9]{12}$/;
 
-    ev.waitUntil(
-      recordClick({ req, org_id: orgId, job_id: jobId, url: domain + fullPath })
-    );
+    if (orgId && (idRegex.test(jobId) || path === "/")) {
+      if (path === "/") {
+        jobId = "";
+      }
+
+      ev.waitUntil(
+        recordClick({
+          req,
+          org_id: orgId,
+          job_id: jobId,
+          url: domain + fullPath,
+        })
+      );
+    }
   }
 
   return NextResponse.rewrite(new URL(`/${domain}${path}`, req.url));
