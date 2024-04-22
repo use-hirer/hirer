@@ -40,7 +40,8 @@ export const getViewsByDayForOrg = tb.buildPipe({
   parameters: z.object({ org_id: z.string() }),
   data: z.object({
     date: z.string(),
-    count: z.number(),
+    total_views: z.number(),
+    unique_visitors: z.number(),
   }),
 });
 

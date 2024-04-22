@@ -41,17 +41,19 @@ export default async function DashboardPage({
   // Create the chart data object
   const chartData = dates
     .map((date) => {
-      const viewCount = viewData.find((item) => item.date === date)?.count || 0;
+      const viewItem = viewData.find((item) => item.date === date);
+      const visitors = viewItem?.unique_visitors || 0;
+      const views = viewItem?.total_views || 0;
       return {
         date: date.slice(5), // Extract the month and day (e.g., "Apr 22")
-        visitors: viewCount,
+        visitors,
+        views,
         applications: 0, // Set applications to 0 since no data is provided
       };
     })
     .reverse();
 
   const item = await api.analytics.getTotalViewsForOrg({ teamId: params.slug });
-  console.log(item);
 
   return (
     <>
@@ -115,10 +117,10 @@ export default async function DashboardPage({
             <LineChart
               data={chartData}
               className="mt-2"
-              categories={["visitors", "applications"]}
+              categories={["visitors", "views", "applications"]}
               index="date"
               curveType="monotone"
-              colors={["emerald", "indigo"]}
+              colors={["indigo", "pink", "emerald"]}
             />
           </Card>
           <div className="mt-4">
