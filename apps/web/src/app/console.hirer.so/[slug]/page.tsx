@@ -2,6 +2,7 @@ import { authCheck } from "@/actions/auth";
 import CandidatesTable from "@/components/dashboard/candidates-table";
 import KPICard from "@/components/dashboard/kpi-card";
 import { JobsTable } from "@/components/tables/jobs-table";
+import { api } from "@/lib/api/server";
 import { Button } from "@hirer/ui/button";
 import { Card } from "@hirer/ui/card";
 import { Separator } from "@hirer/ui/separator";
@@ -14,8 +15,20 @@ export const metadata: Metadata = {
   title: "Hirer: Dashboard",
 };
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   await authCheck();
+
+  const data = await api.analytics.getViewsByDayForOrg({
+    teamId: params.slug,
+  });
+  console.log(data);
+
+  const item = await api.analytics.getTotalViewsForOrg({ teamId: params.slug });
+  console.log(item);
 
   return (
     <>

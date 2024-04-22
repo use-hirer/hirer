@@ -1,4 +1,5 @@
 import { TRPCError } from "@trpc/server";
+import { kv } from "@vercel/kv";
 import { cookies } from "next/headers";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
@@ -75,6 +76,8 @@ export const teamRouter = createTRPCRouter({
       }
 
       cookies().set("scope", team.slug);
+
+      kv.set(team.slug, team.id);
 
       return team;
     }),

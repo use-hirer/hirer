@@ -34,3 +34,20 @@ export const getEventsByOrgId = tb.buildPipe({
     user_id: z.string(),
   }),
 });
+
+export const getViewsByDayForOrg = tb.buildPipe({
+  pipe: "get_org_views_by_day",
+  parameters: z.object({ org_id: z.string() }),
+  data: z.object({
+    date: z.string(),
+    count: z.number(),
+  }),
+});
+
+export const getTotalViewsForOrg = tb.buildPipe({
+  pipe: "get_org_views_total",
+  parameters: z.object({ org_id: z.string() }),
+  data: z.object({
+    total_views: z.number(),
+  }),
+});
