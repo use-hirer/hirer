@@ -25,7 +25,30 @@ export default async function DashboardPage({
   const data = await api.analytics.getViewsByDayForOrg({
     teamId: params.slug,
   });
-  console.log(data);
+
+  const { data: viewData } = data;
+
+  // Get the current date
+  const currentDate = new Date();
+
+  // Create an array of dates for the past 30 days
+  const dates = Array.from({ length: 30 }, (_, i) => {
+    const date = new Date(currentDate);
+    date.setDate(date.getDate() - i);
+    return date.toISOString().slice(0, 10);
+  });
+
+  // Create the chart data object
+  const chartData = dates
+    .map((date) => {
+      const viewCount = viewData.find((item) => item.date === date)?.count || 0;
+      return {
+        date: date.slice(5), // Extract the month and day (e.g., "Apr 22")
+        visitors: viewCount,
+        applications: 0, // Set applications to 0 since no data is provided
+      };
+    })
+    .reverse();
 
   const item = await api.analytics.getTotalViewsForOrg({ teamId: params.slug });
   console.log(item);
@@ -38,12 +61,29 @@ export default async function DashboardPage({
           <Separator className="mt-2 mb-4" />
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
             <KPICard
-              increase="positive"
-              percentageChange={3.7}
-              value="3277"
+              increase={
+                item.data[0].total_views_current >
+                item.data[0].total_views_previous
+                  ? "positive"
+                  : "negative"
+              }
+              percentageChange={
+                item.data[0].total_views_previous === 0
+                  ? 0
+                  : item.data[0].total_views_current /
+                    item.data[0].total_views_previous
+              }
+              value={String(item.data[0].total_views_current)}
               timePeriod="Last 4 weeks"
-              title="Vistors"
-              deltaType="moderateIncrease"
+              title="Visitors"
+              deltaType={
+                item.data[0].total_views_previous === 0
+                  ? "unchanged"
+                  : item.data[0].total_views_current >
+                    item.data[0].total_views_previous
+                  ? "moderateIncrease"
+                  : "moderateDecrease"
+              }
             />
             <KPICard
               increase="negative"
@@ -73,24 +113,11 @@ export default async function DashboardPage({
           <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm mt-4">
             <div className="font-bold text-sm">Visitor Statistics</div>
             <LineChart
-              data={[
-                { date: "Feb 23", visitors: 12, applications: 1 },
-                { date: "Mar 23", visitors: 41, applications: 3 },
-                { date: "Apr 23", visitors: 84, applications: 8 },
-                { date: "May 23", visitors: 138, applications: 12 },
-                { date: "Jun 23", visitors: 294, applications: 26 },
-                { date: "Jul 23", visitors: 83, applications: 11 },
-                { date: "Aug 23", visitors: 64, applications: 3 },
-                { date: "Sep 23", visitors: 132, applications: 14 },
-                { date: "Oct 23", visitors: 120, applications: 19 },
-                { date: "Nov 23", visitors: 187, applications: 22 },
-                { date: "Dec 23", visitors: 119, applications: 10 },
-                { date: "Jan 24", visitors: 14, applications: 1 },
-              ]}
+              data={chartData}
               className="mt-2"
               categories={["visitors", "applications"]}
               index="date"
-              curveType="natural"
+              curveType="monotone"
               colors={["emerald", "indigo"]}
             />
           </Card>

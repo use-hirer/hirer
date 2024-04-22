@@ -48,6 +48,7 @@ export const getTotalViewsForOrg = tb.buildPipe({
   pipe: "get_org_views_total",
   parameters: z.object({ org_id: z.string() }),
   data: z.object({
-    total_views: z.number(),
+    total_views_current: z.number(),
+    total_views_previous: z.number(),
   }),
 });
