@@ -16,7 +16,7 @@ export default async function DashboardLayout({
       <div className="h-screen w-full bg-zinc-50 flex flex-col lg:flex-row overflow-hidden">
         <NavigationMenu userSession={user} />
         <div className="lg:hidden flex items-center min-h-12 gap-2">
-          <div className="bg-black h-full flex items-center justify-center w-12 cursor-pointer">
+          <div className="bg-black h-full flex items-center justify-center w-12 cursor-pointer hover:bg-zinc-800">
             <List weight="bold" size={20} color="white" />
           </div>
           <div className="font-bold">

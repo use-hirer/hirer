@@ -1,15 +1,10 @@
 import { authCheck } from "@/actions/auth";
-import CandidatesTable from "@/components/dashboard/candidates-table";
 import KPICard from "@/components/dashboard/kpi-card";
-import { JobsTable } from "@/components/tables/jobs-table";
 import { api } from "@/lib/api/server";
-import { Button } from "@hirer/ui/button";
 import { Card } from "@hirer/ui/card";
 import { Separator } from "@hirer/ui/separator";
-import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { LineChart } from "@tremor/react";
 import { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Hirer: Dashboard",
@@ -57,7 +52,7 @@ export default async function DashboardPage({
 
   return (
     <>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 overflow-x-hidden">
         <div className="w-full">
           <div className="font-extrabold text-xl">Dashboard</div>
           <Separator className="mt-2 mb-4" />
@@ -123,42 +118,6 @@ export default async function DashboardPage({
               colors={["indigo", "pink", "emerald"]}
             />
           </Card>
-          <div className="mt-4">
-            <div className="flex gap-2 items-center justify-between">
-              <div className="font-bold text-xl flex w-full gap-2 items-center">
-                Jobs
-                <Link
-                  href={"/jobs"}
-                  className="flex items-center font-light text-xs text-neutral-700 gap-1"
-                >
-                  <div>view all jobs</div>
-                  <ArrowRight />
-                </Link>
-              </div>
-              <Button size="sm" variant="outline">
-                Create Job
-              </Button>
-            </div>
-            <JobsTable preview />
-          </div>
-          <div className="mt-4">
-            <div className="flex items-center justify-between">
-              <div className="font-bold text-xl flex gap-2 items-center">
-                Candidates
-                <Link
-                  href={"/candidates"}
-                  className="flex items-center font-light text-xs text-neutral-700 gap-1"
-                >
-                  <div>view all candidates</div>
-                  <ArrowRight />
-                </Link>
-              </div>
-              <Button size="sm" variant="outline">
-                Create Candidate
-              </Button>
-            </div>
-            <CandidatesTable />
-          </div>
         </div>
       </div>
     </>
