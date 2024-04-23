@@ -44,9 +44,9 @@ const NavigationMenu: React.FC<{
           <BottomMenuLayout collapsed={isCollapsed} />
           <Separator className="mt-2 mb-3" />
           <NavUser
-            avatarUrl={userSession.image || ""}
-            name={userSession.name}
-            email={userSession.email}
+            avatarUrl={userSession?.image || ""}
+            name={userSession?.name}
+            email={userSession?.email}
             role="Admin"
             collapsed={isCollapsed}
           />
