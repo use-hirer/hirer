@@ -1,5 +1,6 @@
 "use client";
 
+import { ResumeRespnseType } from "@/app/api/upload/autofill/route";
 import { Button } from "@hirer/ui/button";
 import {
   Form,
@@ -12,17 +13,18 @@ import {
 import { Input } from "@hirer/ui/input";
 import { Textarea } from "@hirer/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Lightning } from "@phosphor-icons/react";
+import { CircleNotch, Lightning } from "@phosphor-icons/react";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Toaster, toast } from "sonner";
 import { z } from "zod";
 
 interface JobApplyFormProps {}
 
 const JobApplyFormSchema = z.object({
   name: z.string(),
-  email: z.string(),
-  additionalInformation: z.string(),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  additionalInformation: z.string().optional(),
 });
 
 type JobApplyFormValues = z.infer<typeof JobApplyFormSchema>;
@@ -40,6 +42,7 @@ const JobApplyForm: React.FC<JobApplyFormProps> = () => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [processingFile, setProcessingFile] = useState(false);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -55,22 +58,40 @@ const JobApplyForm: React.FC<JobApplyFormProps> = () => {
     const uploadFile = async () => {
       if (!selectedFile) return;
 
-      const formdata = new FormData();
-      formdata.append("file", selectedFile);
-      formdata.append("data", JSON.stringify({ filename: selectedFile.name }));
+      setProcessingFile(true);
 
-      const result = await fetch("/api/upload/autofill", {
-        method: "POST",
-        body: formdata,
-      });
+      try {
+        const formdata = new FormData();
+        formdata.append("file", selectedFile);
+        formdata.append(
+          "data",
+          JSON.stringify({ filename: selectedFile.name })
+        );
 
-      const data = await result.json();
+        const result = await fetch("/api/upload/autofill", {
+          method: "POST",
+          body: formdata,
+        });
 
-      console.log(data);
+        const data = (await result.json()) as ResumeRespnseType;
+
+        // Check if the data contains any valid autofill items
+        if (!data.name && !data.email) {
+          toast.error("Unable to identify autofill items in resume.");
+          return;
+        }
+
+        form.setValue("name", data.name);
+        form.setValue("email", data.email);
+      } catch (e) {
+        toast.error("Unable to identify autofill items in resume.");
+      }
+
+      setProcessingFile(false);
     };
 
     uploadFile();
-  }, [selectedFile]);
+  }, [form, selectedFile]);
 
   return (
     <div>
@@ -93,8 +114,15 @@ const JobApplyForm: React.FC<JobApplyFormProps> = () => {
             onChange={handleFileChange}
           />
           <label htmlFor="fileInput">
-            <Button onClick={() => fileInputRef.current?.click()}>
-              Choose File
+            <Button
+              onClick={() => fileInputRef.current?.click()}
+              disabled={processingFile}
+            >
+              {processingFile ? (
+                <CircleNotch className="h-4 w-4 animate-spin" />
+              ) : (
+                "Choose File"
+              )}
             </Button>
           </label>
           <Input disabled={true} value={selectedFile?.name || ""} />
@@ -146,10 +174,7 @@ const JobApplyForm: React.FC<JobApplyFormProps> = () => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Additional Information{" "}
-                    <span className="text-red-600">*</span>
-                  </FormLabel>
+                  <FormLabel>Additional Information</FormLabel>
                   <FormControl>
                     <Textarea {...field} className="min-h-36" />
                   </FormControl>
@@ -163,6 +188,7 @@ const JobApplyForm: React.FC<JobApplyFormProps> = () => {
           </form>
         </Form>
       </div>
+      <Toaster richColors position="top-right" closeButton />
     </div>
   );
 };

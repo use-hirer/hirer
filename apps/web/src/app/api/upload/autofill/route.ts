@@ -8,6 +8,16 @@ import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
+export type ResumeRespnseType = {
+  name: string;
+  email: string;
+  phone_number: string;
+  location: string;
+  years_of_experience: string;
+  linkedin_profile_url: string;
+  personal_website_url: string;
+};
+
 export async function POST(request: NextRequest) {
   const ratelimit = new Ratelimit({
     redis: kv,
@@ -80,5 +90,5 @@ You must always output in the following JSON format:
     resume: JSON.stringify(docs),
   });
 
-  return NextResponse.json(body);
+  return NextResponse.json(JSON.parse(result));
 }
