@@ -3,6 +3,7 @@
 import { RouterOutputs } from "@hirer/api";
 import { Button } from "@hirer/ui/button";
 import { Separator } from "@hirer/ui/separator";
+import { Empty } from "@phosphor-icons/react";
 import Link from "next/link";
 
 interface JobsListProps {
@@ -10,8 +11,17 @@ interface JobsListProps {
 }
 
 const JobsList: React.FC<JobsListProps> = ({ org }) => {
+  if (org?.jobs.length === 0) {
+    return (
+      <div className="bg-white shadow-sm container mt-6 rounded-2xl p-4 max-w-[1000px] flex items-center justify-center min-h-28 flex-col gap-2 border">
+        <Empty size={24} weight="duotone" />
+        <div className="text-sm font-medium">No Active Jobs</div>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-white shadow-sm container mt-6 rounded-2xl p-4 max-w-[1000px]">
+    <div className="bg-white shadow-sm container mt-6 rounded-2xl p-4 max-w-[1000px] border">
       {org?.jobs.map((job, index) => (
         <Link
           key={job.id}

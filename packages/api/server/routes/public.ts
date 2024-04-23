@@ -10,6 +10,7 @@ export const publicRouter = createTRPCRouter({
         include: {
           jobs: {
             select: { title: true, location: true, slug: true, id: true },
+            where: { status: { equals: "Open" } },
           },
           _count: { select: { jobs: true } },
         },
@@ -21,7 +22,11 @@ export const publicRouter = createTRPCRouter({
     .input(z.object({ orgId: z.string(), jobId: z.string() }))
     .query(async ({ ctx, input }) => {
       const job = await ctx.db.job.findUnique({
-        where: { slug: input.jobId, team: { slug: input.orgId } },
+        where: {
+          slug: input.jobId,
+          team: { slug: input.orgId },
+          // status: { equals: "Open" }, TODO: Remove this when we have a better way to filter jobs
+        },
       });
 
       return job;

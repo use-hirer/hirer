@@ -161,7 +161,7 @@ model CandidateApplication {
   id          String   @id @default(cuid())
   candidateId String
   jobId       String
-  notes       String
+  notes       String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   resumeId    String?
