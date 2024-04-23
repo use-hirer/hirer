@@ -23,7 +23,7 @@ export default function MobileNav() {
         <HirerLogo width={80} />
       </div>
       <Sheet open={open} onOpenChange={() => setOpen(!open)}>
-        <SheetContent side={"left"}>
+        <SheetContent side={"left"} className="bg-zinc-50">
           <div className="flex items-center data-[collapsed=true]:justify-center select-none cursor-pointer">
             <HirerIcon width={30} />
           </div>

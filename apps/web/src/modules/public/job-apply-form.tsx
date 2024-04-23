@@ -13,6 +13,7 @@ import { Input } from "@hirer/ui/input";
 import { Textarea } from "@hirer/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Lightning } from "@phosphor-icons/react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -37,9 +38,39 @@ const JobApplyForm: React.FC<JobApplyFormProps> = () => {
     },
   });
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    setSelectedFile(file || null);
+    // Perform actions with the selected file
+  };
+
   async function onSubmit(data: JobApplyFormValues) {
     console.log(data);
   }
+
+  useEffect(() => {
+    const uploadFile = async () => {
+      if (!selectedFile) return;
+
+      const formdata = new FormData();
+      formdata.append("file", selectedFile);
+      formdata.append("data", JSON.stringify({ filename: selectedFile.name }));
+
+      const result = await fetch("/api/upload/autofill", {
+        method: "POST",
+        body: formdata,
+      });
+
+      const data = await result.json();
+
+      console.log(data);
+    };
+
+    uploadFile();
+  }, [selectedFile]);
 
   return (
     <div>
@@ -52,8 +83,21 @@ const JobApplyForm: React.FC<JobApplyFormProps> = () => {
         </div>
         <div className="pt-2">Save time by importing your resume (PDF)</div>
         <div className="flex gap-2 pt-4">
-          <Button variant={"outline"}>Choose File</Button>
-          <Input disabled={true} />
+          <input
+            ref={fileInputRef}
+            id="fileInput"
+            type="file"
+            accept=".pdf"
+            multiple={false}
+            className="hidden"
+            onChange={handleFileChange}
+          />
+          <label htmlFor="fileInput">
+            <Button onClick={() => fileInputRef.current?.click()}>
+              Choose File
+            </Button>
+          </label>
+          <Input disabled={true} value={selectedFile?.name || ""} />
         </div>
       </div>
       <div className="pt-4">

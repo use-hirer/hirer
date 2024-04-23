@@ -12,6 +12,7 @@ import { Copy } from "@phosphor-icons/react";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { Column, ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
+import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { toast } from "sonner";
@@ -47,11 +48,18 @@ export const CANDIDATES_TABLE_COLUMNS: ColumnDef<
       <SortableColumn column={column}>Name</SortableColumn>
     ),
     cell: ({ row }) => (
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1 h-8">
         <Link
-          className="text-left text-sm font-medium select-none hover:underline"
+          className="text-left text-sm font-medium select-none hover:underline flex items-center gap-1"
           href={`candidate/${row.original.id}`}
         >
+          <Image
+            src={"/user-image-default.png"}
+            height={24}
+            width={24}
+            alt="Avatar Image"
+            className="rounded-full mr-2"
+          />
           {row.getValue("name")}
         </Link>
         <TooltipProvider>
