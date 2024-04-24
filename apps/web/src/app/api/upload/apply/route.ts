@@ -1,7 +1,9 @@
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { trackEvent } from "@hirer/api/lib/tb";
 import prisma from "@hirer/database";
 import { Ratelimit } from "@upstash/ratelimit";
 import { kv } from "@vercel/kv";
+import { nanoid } from "nanoid";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -15,6 +17,8 @@ type ApplicationPayload = {
     additionalInformation: string;
   };
 };
+
+const s3 = new S3Client({ region: process.env.AWS_REGION });
 
 export async function POST(request: NextRequest) {
   const ratelimit = new Ratelimit({
@@ -39,8 +43,6 @@ export async function POST(request: NextRequest) {
   const body = Object.fromEntries(data);
 
   const payload: ApplicationPayload = JSON.parse(body.data as string);
-
-  console.log(payload);
 
   const job = await prisma.job.findUnique({
     where: {
@@ -71,6 +73,15 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    const resume = await prisma.candidateResume.create({
+      data: {
+        id: nanoid(16),
+        candidateId: candidate?.id as string,
+        bucketId: `resumes/${candidate?.id}/${nanoid(16)}.pdf`,
+        notes: "",
+      },
+    });
+
     await trackEvent({
       date: new Date(),
       event: "create_candidate",
@@ -87,9 +98,19 @@ export async function POST(request: NextRequest) {
       data: {
         candidateId: candidate.id,
         jobId: job.id,
+        resumeId: resume.id,
         notes: "",
       },
     });
+
+    const putObjectCommand = new PutObjectCommand({
+      Bucket: "hirer",
+      Key: resume.bucketId,
+      Body: (await (body.file as File).arrayBuffer()) as Buffer,
+      ContentType: "application/pdf",
+    });
+
+    await s3.send(putObjectCommand);
 
     await trackEvent({
       date: new Date(),
@@ -111,13 +132,32 @@ export async function POST(request: NextRequest) {
   });
 
   if (!application) {
+    const resume = await prisma.candidateResume.create({
+      data: {
+        id: nanoid(16),
+        candidateId: candidate?.id as string,
+        bucketId: `resumes/${candidate?.id}/${nanoid(16)}.pdf`,
+        notes: "",
+      },
+    });
+
     const application = await prisma.candidateApplication.create({
       data: {
         candidateId: candidate?.id as string,
         jobId: job.id,
+        resumeId: resume.id,
         notes: "",
       },
     });
+
+    const putObjectCommand = new PutObjectCommand({
+      Bucket: "hirer",
+      Key: resume.bucketId,
+      Body: (await (body.file as File).arrayBuffer()) as Buffer,
+      ContentType: "application/pdf",
+    });
+
+    await s3.send(putObjectCommand);
 
     await trackEvent({
       date: new Date(),
