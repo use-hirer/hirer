@@ -24,11 +24,10 @@ const SettingsView = () => {
             <Link href="#" className="font-semibold text-primary">
               General
             </Link>
-            <Link href="#">Security</Link>
-            <Link href="#">Integrations</Link>
+            <Link href="#">Team</Link>
+            <Link href="#">Domains</Link>
+            <Link href="#">Billing</Link>
             <Link href="#">Support</Link>
-            <Link href="#">Organizations</Link>
-            <Link href="#">Advanced</Link>
           </nav>
           <div className="grid gap-6">
             <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
@@ -43,7 +42,7 @@ const SettingsView = () => {
                   <Input placeholder="ACME Inc" />
                 </form>
               </CardContent>
-              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between">
+              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between rounded-b-md">
                 <div className="text-zinc-500 text-sm">
                   Please use 32 characters at maximum.
                 </div>
@@ -62,7 +61,7 @@ const SettingsView = () => {
                   <Input placeholder="acme-inc" />
                 </form>
               </CardContent>
-              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between">
+              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between rounded-b-md">
                 <div className="text-zinc-500 text-sm">
                   Please use 32 characters at maximum.
                 </div>
@@ -74,13 +73,13 @@ const SettingsView = () => {
                 <CardTitle>Organisation Logo</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="border border-dashed border-slate-300 rounded-md p-4 w-40 h-20 flex justify-center items-center">
+                <div className="border border-dashed border-slate-300 rounded-md p-4 w-40 h-20 flex justify-center items-center cursor-pointer">
                   <div className="text-xs font-light text-slate-500">
                     Add Logo
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-end">
+              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-end rounded-b-md">
                 <Button>Save</Button>
               </CardFooter>
             </Card>
