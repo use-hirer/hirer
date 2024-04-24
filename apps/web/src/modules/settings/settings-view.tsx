@@ -9,15 +9,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@hirer/ui/card";
-import { Checkbox } from "@hirer/ui/checkbox";
 import { Input } from "@hirer/ui/input";
 import Link from "next/link";
 
 const SettingsView = () => {
   return (
-    <div className="flex min-h-screen w-full flex-col">
-      <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 pt-8">
-        <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[140px_1fr]">
+    <div className="flex w-full flex-col">
+      <main className="flex flex-1 flex-col gap-4 pt-6">
+        <div className="ml-2 grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[140px_1fr]">
           <nav
             className="grid gap-4 text-sm text-muted-foreground"
             x-chunk="dashboard-04-chunk-0"
@@ -32,48 +31,56 @@ const SettingsView = () => {
             <Link href="#">Advanced</Link>
           </nav>
           <div className="grid gap-6">
-            <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm">
+            <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
               <CardHeader>
-                <CardTitle>Store Name</CardTitle>
+                <CardTitle>Organisation Name</CardTitle>
                 <CardDescription>
-                  Used to identify your store in the marketplace.
+                  Used to identify your organisation in Hirer.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form>
-                  <Input placeholder="Store Name" />
+                  <Input placeholder="ACME Inc" />
                 </form>
               </CardContent>
-              <CardFooter className="border-t px-6 py-4">
+              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between">
+                <div className="text-zinc-500 text-sm">
+                  Please use 32 characters at maximum.
+                </div>
                 <Button>Save</Button>
               </CardFooter>
             </Card>
-            <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm">
+            <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
               <CardHeader>
-                <CardTitle>Plugins Directory</CardTitle>
+                <CardTitle>Organisation Slug</CardTitle>
                 <CardDescription>
-                  The directory within your project, in which your plugins are
-                  located.
+                  Your businesses unique ID on hirer (e.g. acme-inc.hirer.so).
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form className="flex flex-col gap-4">
-                  <Input
-                    placeholder="Project Name"
-                    defaultValue="/content/plugins"
-                  />
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id="include" defaultChecked />
-                    <label
-                      htmlFor="include"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Allow administrators to change the directory.
-                    </label>
-                  </div>
+                <form>
+                  <Input placeholder="acme-inc" />
                 </form>
               </CardContent>
-              <CardFooter className="border-t px-6 py-4">
+              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between">
+                <div className="text-zinc-500 text-sm">
+                  Please use 32 characters at maximum.
+                </div>
+                <Button>Save</Button>
+              </CardFooter>
+            </Card>
+            <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
+              <CardHeader>
+                <CardTitle>Organisation Logo</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="border border-dashed border-slate-300 rounded-md p-4 w-40 h-20 flex justify-center items-center">
+                  <div className="text-xs font-light text-slate-500">
+                    Add Logo
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-end">
                 <Button>Save</Button>
               </CardFooter>
             </Card>
