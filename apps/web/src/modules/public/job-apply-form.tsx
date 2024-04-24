@@ -19,17 +19,20 @@ import { useForm } from "react-hook-form";
 import { Toaster, toast } from "sonner";
 import { z } from "zod";
 
-interface JobApplyFormProps {}
+interface JobApplyFormProps {
+  orgId: string;
+  jobId: string;
+}
 
 const JobApplyFormSchema = z.object({
-  name: z.string(),
+  name: z.string().min(1, { message: "Please enter your name." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   additionalInformation: z.string().optional(),
 });
 
 type JobApplyFormValues = z.infer<typeof JobApplyFormSchema>;
 
-const JobApplyForm: React.FC<JobApplyFormProps> = () => {
+const JobApplyForm: React.FC<JobApplyFormProps> = ({ orgId, jobId }) => {
   const form = useForm<JobApplyFormValues>({
     resolver: zodResolver(JobApplyFormSchema),
     mode: "onChange",
@@ -43,6 +46,7 @@ const JobApplyForm: React.FC<JobApplyFormProps> = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [processingFile, setProcessingFile] = useState(false);
+  const [submittingResume, setSubmittingResume] = useState(false);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -51,7 +55,33 @@ const JobApplyForm: React.FC<JobApplyFormProps> = () => {
   };
 
   async function onSubmit(data: JobApplyFormValues) {
-    console.log(data);
+    if (!selectedFile) {
+      toast.error("Please select a resume file to upload.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    formData.append(
+      "data",
+      JSON.stringify({
+        jobId: jobId.replace("/job/", "").split("-")[0],
+        orgId: orgId,
+        application: {
+          filename: selectedFile.name,
+          name: data.name,
+          email: data.email,
+          additionalInformation: data.additionalInformation,
+        },
+      })
+    );
+
+    const result = await fetch("/api/upload/apply", {
+      method: "POST",
+      body: formData,
+    });
+
+    const response = await result.json();
   }
 
   useEffect(() => {
@@ -183,7 +213,16 @@ const JobApplyForm: React.FC<JobApplyFormProps> = () => {
               )}
             />
             <div className="flex justify-end">
-              <Button className="w-full">Apply</Button>
+              <Button
+                disabled={submittingResume || processingFile}
+                className="w-full"
+              >
+                {processingFile || submittingResume ? (
+                  <CircleNotch className="h-4 w-4 animate-spin" />
+                ) : (
+                  "Submit Application"
+                )}
+              </Button>
             </div>
           </form>
         </Form>

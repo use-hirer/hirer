@@ -1,5 +1,6 @@
 import prisma from "@hirer/database";
 import { initTRPC } from "@trpc/server";
+import { NextRequest } from "next/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import { validateRequest } from "../lib/auth";
@@ -16,12 +17,13 @@ import { validateRequest } from "../lib/auth";
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { headers: Headers }) => {
+export const createTRPCContext = async (opts: NextRequest) => {
   const { session, user } = await validateRequest();
   return {
     session,
     user,
     db: prisma,
+    req: opts,
     headers: opts.headers,
   };
 };

@@ -79,7 +79,7 @@ export default async function JobPublicPage({
         <div className="bg-white shadow-sm container mt-3 rounded-2xl p-4 max-w-[1000px] border">
           <div className="font-bold text-xl p-2">Apply</div>
           <div className="flex flex-col gap-4 text-sm p-2">
-            <JobApplyForm />
+            <JobApplyForm orgId={slug as string} jobId={job?.slug} />
           </div>
         </div>
         <Link

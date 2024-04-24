@@ -7,7 +7,7 @@ import { type NextRequest } from "next/server";
  * handling a HTTP request (e.g. when you make requests from Client Components).
  */
 const createContext = async (req: NextRequest) => {
-  return createTRPCContext({ headers: req.headers });
+  return createTRPCContext(req);
 };
 
 const handler = (req: NextRequest) =>
