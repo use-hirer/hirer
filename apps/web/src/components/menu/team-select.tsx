@@ -36,21 +36,9 @@ import {
   CheckIcon,
   PlusCircledIcon,
 } from "@radix-ui/react-icons";
+import { useParams } from "next/navigation";
 import * as React from "react";
-
-const groups = [
-  {
-    label: "Teams",
-    teams: [
-      {
-        label: "Acme Inc.",
-        value: "acme-inc",
-      },
-    ],
-  },
-];
-
-type Team = (typeof groups)[number]["teams"][number];
+import { useEffect, useState } from "react";
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<
   typeof PopoverTrigger
@@ -59,13 +47,43 @@ type PopoverTriggerProps = React.ComponentPropsWithoutRef<
 interface TeamSwitcherProps extends PopoverTriggerProps {}
 
 export default function TeamSwitcher({ className }: TeamSwitcherProps) {
-  const [open, setOpen] = React.useState(false);
-  const [showNewTeamDialog, setShowNewTeamDialog] = React.useState(false);
-  const [selectedTeam, setSelectedTeam] = React.useState<Team>(
-    groups[0].teams[0]
-  );
+  const params = useParams<{ slug: string }>();
+  const [open, setOpen] = useState(false);
+  const [showNewTeamDialog, setShowNewTeamDialog] = useState(false);
+  const [organisations, setOrganisations] = useState<
+    { label: string; value: string }[]
+  >([]);
+  const [selectedTeam, setSelectedTeam] = useState<{
+    label: string;
+    value: string;
+  } | null>(null);
 
   const orgs = api.user.getOrgs.useQuery();
+
+  useEffect(() => {
+    if (orgs.isSuccess) {
+      // setSelectedTeam(groups[0].teams[0]);
+
+      if (orgs.data?.length > 0) {
+        const newOrganisations = orgs.data.map((org) => ({
+          label: org.name,
+          value: org.id,
+        }));
+        setOrganisations(newOrganisations);
+
+        const matchedTeam = newOrganisations.find(
+          (team) => team.label === params.slug
+        );
+
+        if (matchedTeam) {
+          setSelectedTeam(matchedTeam);
+        } else {
+          // Set a default team if no match is found
+          setSelectedTeam(newOrganisations[0]);
+        }
+      }
+    }
+  }, [orgs.data, orgs.data?.length, orgs.isSuccess, params.slug]);
 
   if (orgs.isLoading) {
     return <Skeleton className="h-9 w-[225px]" />;
@@ -84,13 +102,13 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
           >
             <Avatar className="mr-2 h-5 w-5">
               <AvatarImage
-                src={`https://avatar.vercel.sh/${selectedTeam.value}.png`}
-                alt={selectedTeam.label}
+                src={`https://avatar.vercel.sh/${selectedTeam?.label}.png`}
+                alt={selectedTeam?.label}
                 className="grayscale"
               />
               <AvatarFallback>acme-inc</AvatarFallback>
             </Avatar>
-            {selectedTeam.label}
+            {selectedTeam?.label}
             <CaretSortIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -99,38 +117,36 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
             <CommandList>
               <CommandInput placeholder="Search team..." />
               <CommandEmpty>No team found.</CommandEmpty>
-              {groups.map((group) => (
-                <CommandGroup key={group.label} heading={group.label}>
-                  {group.teams.map((team) => (
-                    <CommandItem
-                      key={team.value}
-                      onSelect={() => {
-                        setSelectedTeam(team);
-                        setOpen(false);
-                      }}
-                      className="text-sm"
-                    >
-                      <Avatar className="mr-2 h-5 w-5">
-                        <AvatarImage
-                          src={`https://avatar.vercel.sh/${team.value}.png`}
-                          alt={team.label}
-                          className="grayscale"
-                        />
-                        <AvatarFallback>SC</AvatarFallback>
-                      </Avatar>
-                      {team.label}
-                      <CheckIcon
-                        className={cn(
-                          "ml-auto h-4 w-4",
-                          selectedTeam.value === team.value
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
+              <CommandGroup key="organisation" heading="Organisations">
+                {organisations.map((organisation) => (
+                  <CommandItem
+                    key={organisation.value}
+                    onSelect={() => {
+                      setSelectedTeam(organisation);
+                      setOpen(false);
+                    }}
+                    className="text-sm"
+                  >
+                    <Avatar className="mr-2 h-5 w-5">
+                      <AvatarImage
+                        src={`https://avatar.vercel.sh/${organisation.value}.png`}
+                        alt={organisation.label}
+                        className="grayscale"
                       />
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              ))}
+                      <AvatarFallback>SC</AvatarFallback>
+                    </Avatar>
+                    {organisation.label}
+                    <CheckIcon
+                      className={cn(
+                        "ml-auto h-4 w-4",
+                        organisation.value === organisation.value
+                          ? "opacity-100"
+                          : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
             </CommandList>
             <CommandSeparator />
             <CommandList>
