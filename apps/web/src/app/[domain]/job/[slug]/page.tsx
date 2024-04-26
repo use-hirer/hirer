@@ -55,7 +55,7 @@ export default async function JobPublicPage({
         <div className="flex justify-center">
           <Link href={"/"}>
             <Image
-              src={"/acme-logo.png"}
+              src={job.team.avatar as string}
               alt="ACME Inc Logo"
               width={100}
               height={50}

@@ -21,20 +21,17 @@ const OrganisationLogoCard: React.FC<OrganisationLogoCardProps> = ({
   logo,
 }) => {
   const params = useParams() as { slug: string };
-  const updateName = api.settings.updateOrganisationName.useMutation();
   const utils = api.useUtils();
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
     if (!file) {
       return;
     }
-
-    console.log("selected file", file);
 
     setSelectedFile(file);
 
@@ -46,6 +43,13 @@ const OrganisationLogoCard: React.FC<OrganisationLogoCardProps> = ({
         orgId: params.slug,
       })
     );
+
+    const result = await fetch("/api/upload/org-logo", {
+      method: "POST",
+      body: formData,
+    });
+
+    utils.settings.getGeneral.invalidate();
   };
 
   return (
@@ -74,9 +78,9 @@ const OrganisationLogoCard: React.FC<OrganisationLogoCardProps> = ({
           >
             <Image
               alt="Logo"
-              src={URL.createObjectURL(selectedFile!)}
-              width={200}
-              height={200}
+              src={logo ? logo : URL.createObjectURL(selectedFile!)}
+              width={100}
+              height={70}
             />
           </div>
         ) : (

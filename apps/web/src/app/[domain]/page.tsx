@@ -37,7 +37,7 @@ export default async function OrganisationPublicPage({
       <div className="container mt-8 p-2 max-w-[1000px]">
         <div className="flex justify-center">
           <Image
-            src={"/acme-logo.png"}
+            src={org.avatar as string}
             alt="Amazon Logo"
             width={100}
             height={50}

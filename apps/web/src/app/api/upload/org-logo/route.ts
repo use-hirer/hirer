@@ -1,18 +1,13 @@
 import { validateRequest } from "@/lib/auth";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import prisma from "@hirer/database";
 import { Ratelimit } from "@upstash/ratelimit";
 import { kv } from "@vercel/kv";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-export type ResumeRespnseType = {
-  name: string;
-  email: string;
-  phone_number: string;
-  location: string;
-  years_of_experience: string;
-  linkedin_profile_url: string;
-  personal_website_url: string;
+export type LogoAddPayload = {
+  orgId: string;
 };
 
 const s3 = new S3Client({ region: process.env.AWS_REGION });
@@ -45,17 +40,48 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  console.log("HELLLLO!!!");
+
   const data = await request.formData();
   let body = Object.fromEntries(data);
 
-  const file = await (body.file as File).arrayBuffer();
+  const payload: LogoAddPayload = JSON.parse(body.data as string);
+
+  const org = await prisma.team.findUnique({
+    where: { slug: payload.orgId },
+    select: {
+      id: true,
+      members: {
+        where: {
+          userId: user.id,
+        },
+      },
+    },
+  });
+
+  if (!org || !org.members) {
+    return new Response(null, {
+      status: 404,
+      statusText: "Team not found.",
+    });
+  }
+
+  const fileExtension = (body.file as File).name.split(".").pop();
 
   const putObjectCommand = new PutObjectCommand({
     Bucket: "hirer-assets",
-    Key: "/organisation/",
+    Key: `organisations/${org.id}/logo.${fileExtension}`,
     Body: (await (body.file as File).arrayBuffer()) as Buffer,
-    ContentType: "application/pdf",
   });
 
-  return NextResponse.json(body);
+  await s3.send(putObjectCommand);
+
+  await prisma.team.update({
+    where: { slug: payload.orgId },
+    data: {
+      avatar: `https://assets.hirer.so/organisations/${org.id}/logo.${fileExtension}`,
+    },
+  });
+
+  return NextResponse.json(JSON.stringify({ success: true }));
 }
