@@ -3,7 +3,7 @@ import KPICard from "@/components/dashboard/kpi-card";
 import { api } from "@/lib/api/server";
 import { Card } from "@hirer/ui/card";
 import { Separator } from "@hirer/ui/separator";
-import { LineChart } from "@tremor/react";
+import { AreaChart } from "@tremor/react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -109,7 +109,7 @@ export default async function DashboardPage({
           </div>
           <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm mt-4">
             <div className="font-bold text-sm">Visitor Statistics</div>
-            <LineChart
+            <AreaChart
               data={chartData}
               className="mt-2"
               categories={["visitors", "views", "applications"]}

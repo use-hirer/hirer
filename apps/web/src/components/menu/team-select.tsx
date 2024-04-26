@@ -9,33 +9,11 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
 } from "@hirer/ui/command";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@hirer/ui/dialog";
-import { Input } from "@hirer/ui/input";
-import { Label } from "@hirer/ui/label";
+import { Dialog } from "@hirer/ui/dialog";
 import { Popover, PopoverContent, PopoverTrigger } from "@hirer/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@hirer/ui/select";
 import { Skeleton } from "@hirer/ui/skeleton";
-import {
-  CaretSortIcon,
-  CheckIcon,
-  PlusCircledIcon,
-} from "@radix-ui/react-icons";
+import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import { useParams } from "next/navigation";
 import * as React from "react";
 import { useEffect, useState } from "react";
@@ -70,18 +48,19 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
       if (orgs.data?.length > 0) {
         const newOrganisations = orgs.data.map((org) => ({
           label: org.name,
-          value: org.id,
+          value: org.slug,
           avatar: org.avatar,
         }));
         setOrganisations(newOrganisations);
 
         const matchedTeam = newOrganisations.find(
-          (team) => team.label === params.slug
+          (team) => team.value === params.slug
         );
 
         if (matchedTeam) {
           setSelectedTeam(matchedTeam);
         } else {
+          console.log("not found");
           // Set a default team if no match is found
           setSelectedTeam(newOrganisations[0]);
         }
@@ -141,7 +120,6 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
                           `https://avatar.vercel.sh/${selectedTeam?.label}.png`
                         }
                         alt={organisation.label}
-                        className="grayscale"
                       />
                       <AvatarFallback>SC</AvatarFallback>
                     </Avatar>
@@ -158,69 +136,9 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
                 ))}
               </CommandGroup>
             </CommandList>
-            <CommandSeparator />
-            <CommandList>
-              <CommandGroup>
-                <DialogTrigger asChild>
-                  <CommandItem
-                    onSelect={() => {
-                      setOpen(false);
-                      setShowNewTeamDialog(true);
-                    }}
-                  >
-                    <PlusCircledIcon className="mr-2 h-5 w-5" />
-                    Create Team
-                  </CommandItem>
-                </DialogTrigger>
-              </CommandGroup>
-            </CommandList>
           </Command>
         </PopoverContent>
       </Popover>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Create team</DialogTitle>
-          <DialogDescription>
-            Add a new team to manage products and customers.
-          </DialogDescription>
-        </DialogHeader>
-        <div>
-          <div className="space-y-4 py-2 pb-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Team name</Label>
-              <Input id="name" placeholder="Acme Inc." />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="plan">Subscription plan</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a plan" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="free">
-                    <span className="font-medium">Free</span> -{" "}
-                    <span className="text-muted-foreground">
-                      Trial for two weeks
-                    </span>
-                  </SelectItem>
-                  <SelectItem value="pro">
-                    <span className="font-medium">Pro</span> -{" "}
-                    <span className="text-muted-foreground">
-                      $9/month per user
-                    </span>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </div>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => setShowNewTeamDialog(false)}>
-            Cancel
-          </Button>
-          <Button type="submit">Continue</Button>
-        </DialogFooter>
-      </DialogContent>
     </Dialog>
   );
 }
