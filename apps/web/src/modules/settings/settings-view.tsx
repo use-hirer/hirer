@@ -15,6 +15,7 @@ import {
 import { Input } from "@hirer/ui/input";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { Toaster } from "sonner";
 import OrganisationNameCard from "./cards/organisation-name";
 
 interface SettingsViewProps {
@@ -112,6 +113,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({ org }) => {
           </div>
         </div>
       </main>
+      <Toaster richColors position="top-right" closeButton />
     </div>
   );
 };

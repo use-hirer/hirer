@@ -19,8 +19,11 @@ import {
 } from "@hirer/ui/form";
 import { Input } from "@hirer/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CircleNotch } from "@phosphor-icons/react";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const organisationNameSchema = z.object({
@@ -42,6 +45,7 @@ const OrganisationNameCard: React.FC<OrganisationNameCardProps> = ({
   const params = useParams() as { slug: string };
   const updateName = api.settings.updateOrganisationName.useMutation();
   const utils = api.useUtils();
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<OrganisationFormValues>({
     resolver: zodResolver(organisationNameSchema),
@@ -52,16 +56,21 @@ const OrganisationNameCard: React.FC<OrganisationNameCardProps> = ({
   });
 
   async function onSubmit(data: OrganisationFormValues) {
-    console.log(data);
-    console.log(params);
+    setLoading(true);
 
-    await updateName.mutateAsync({
-      orgId: params.slug,
-      name: data.name,
-    });
+    try {
+      await updateName.mutateAsync({
+        orgId: params.slug,
+        name: data.name,
+      });
 
-    await utils.user.getOrgs.invalidate();
-    await utils.settings.getGeneral.invalidate();
+      await utils.user.getOrgs.invalidate();
+      await utils.settings.getGeneral.invalidate();
+    } catch (e) {
+      toast.error("An error occurred! Please try again.");
+    }
+
+    setLoading(false);
   }
 
   return (
@@ -94,7 +103,9 @@ const OrganisationNameCard: React.FC<OrganisationNameCardProps> = ({
         <div className="text-zinc-500 text-sm">
           Please use 32 characters at maximum.
         </div>
-        <Button onClick={form.handleSubmit(onSubmit)}>Save</Button>
+        <Button onClick={form.handleSubmit(onSubmit)} disabled={loading}>
+          {loading ? <CircleNotch className="h-4 w-4 animate-spin" /> : "Save"}
+        </Button>
       </CardFooter>
     </Card>
   );
