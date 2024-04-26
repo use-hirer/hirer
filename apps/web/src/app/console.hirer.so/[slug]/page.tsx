@@ -68,6 +68,8 @@ export default async function DashboardPage({
                 <Link
                   className="font-medium hover:text-blue-700 hover:underline"
                   href={`https://${params.slug}.hirer.so`}
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   https://{params.slug}.hirer.so
                 </Link>
