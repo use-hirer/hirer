@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import * as cdk from "aws-cdk-lib";
+import { Aspects } from "aws-cdk-lib";
+import { AwsSolutionsChecks } from "cdk-nag";
 import "source-map-support/register";
 import { HirerStack } from "../lib/infra-stack";
 
@@ -11,3 +13,4 @@ new HirerStack(app, "HirerStack", {
   },
   terminationProtection: true,
 });
+Aspects.of(app).add(new AwsSolutionsChecks());
