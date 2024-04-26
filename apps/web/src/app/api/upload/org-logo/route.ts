@@ -1,4 +1,5 @@
 import { validateRequest } from "@/lib/auth";
+import { nanoid } from "@/lib/functions/nanoid";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import prisma from "@hirer/database";
 import { Ratelimit } from "@upstash/ratelimit";
@@ -40,8 +41,6 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  console.log("HELLLLO!!!");
-
   const data = await request.formData();
   let body = Object.fromEntries(data);
 
@@ -68,9 +67,11 @@ export async function POST(request: NextRequest) {
 
   const fileExtension = (body.file as File).name.split(".").pop();
 
+  const key = `organisations/${org.id}/logo-${nanoid()}.${fileExtension}`;
+
   const putObjectCommand = new PutObjectCommand({
     Bucket: "hirer-assets",
-    Key: `organisations/${org.id}/logo.${fileExtension}`,
+    Key: key,
     Body: (await (body.file as File).arrayBuffer()) as Buffer,
   });
 
@@ -79,7 +80,7 @@ export async function POST(request: NextRequest) {
   await prisma.team.update({
     where: { slug: payload.orgId },
     data: {
-      avatar: `https://assets.hirer.so/organisations/${org.id}/logo.${fileExtension}`,
+      avatar: `https://assets.hirer.so/${key}`,
     },
   });
 

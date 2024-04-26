@@ -1,6 +1,7 @@
 "use client";
 
 import { api } from "@/lib/api/react";
+import { Button } from "@hirer/ui/button";
 import {
   Card,
   CardContent,
@@ -9,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@hirer/ui/card";
+import { CircleNotch } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { ChangeEvent, useRef, useState } from "react";
@@ -25,6 +27,7 @@ const OrganisationLogoCard: React.FC<OrganisationLogoCardProps> = ({
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const removeLogo = api.settings.removeOrganisationLogo.useMutation();
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -32,6 +35,8 @@ const OrganisationLogoCard: React.FC<OrganisationLogoCardProps> = ({
     if (!file) {
       return;
     }
+
+    setLoading(true);
 
     setSelectedFile(file);
 
@@ -44,12 +49,14 @@ const OrganisationLogoCard: React.FC<OrganisationLogoCardProps> = ({
       })
     );
 
-    const result = await fetch("/api/upload/org-logo", {
+    await fetch("/api/upload/org-logo", {
       method: "POST",
       body: formData,
     });
 
-    utils.settings.getGeneral.invalidate();
+    await utils.settings.getGeneral.invalidate();
+
+    setLoading(false);
   };
 
   return (
@@ -71,32 +78,72 @@ const OrganisationLogoCard: React.FC<OrganisationLogoCardProps> = ({
           className="hidden"
           onChange={handleFileChange}
         />
-        {logo || selectedFile ? (
-          <div
-            onClick={() => fileInputRef.current?.click()}
-            className="cursor-pointer"
-          >
-            <Image
-              alt="Logo"
-              src={logo ? logo : URL.createObjectURL(selectedFile!)}
-              width={100}
-              height={70}
-            />
-          </div>
+        {loading ? (
+          <CircleNotch className="h-4 w-4 animate-spin" />
         ) : (
-          <div
-            className="border border-dashed border-slate-300 rounded-md p-4 w-40 h-20 flex justify-center items-center cursor-pointer"
-            onClick={() => fileInputRef.current?.click()}
-          >
-            <div className="text-xs font-light text-slate-500">
-              Click to add logo
-            </div>
-          </div>
+          <>
+            {logo || selectedFile ? (
+              <div
+                onClick={() => fileInputRef.current?.click()}
+                className="cursor-pointer"
+              >
+                <Image
+                  alt="Logo"
+                  src={logo ? logo : URL.createObjectURL(selectedFile!)}
+                  width={100}
+                  height={70}
+                />
+              </div>
+            ) : (
+              <div
+                className="border border-dashed border-slate-300 rounded-md p-4 w-40 h-20 flex justify-center items-center cursor-pointer"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <div className="text-xs font-light text-slate-500">
+                  Click to add logo
+                </div>
+              </div>
+            )}
+          </>
         )}
       </CardContent>
-      <CardFooter className="border-t py-4 bg-zinc-50 flex justify-start rounded-b-md">
+      <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between rounded-b-md">
         <div className="text-zinc-500 text-sm">
           A logo is optional but strongly recommended.
+        </div>
+        <div className="flex gap-1">
+          {logo && (
+            <Button
+              disabled={loading}
+              variant={"outline"}
+              onClick={async () => {
+                setLoading(true);
+                await removeLogo.mutateAsync({
+                  orgId: params.slug,
+                });
+
+                await utils.settings.getGeneral.invalidate();
+
+                setLoading(false);
+              }}
+            >
+              {loading ? (
+                <CircleNotch className="h-4 w-4 animate-spin" />
+              ) : (
+                "Remove"
+              )}
+            </Button>
+          )}
+          <Button
+            disabled={loading}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            {loading ? (
+              <CircleNotch className="h-4 w-4 animate-spin" />
+            ) : (
+              <>{logo ? "Replace" : "Add"}</>
+            )}
+          </Button>
         </div>
       </CardFooter>
     </Card>

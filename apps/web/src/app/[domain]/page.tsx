@@ -36,12 +36,18 @@ export default async function OrganisationPublicPage({
     <div className="h-full overflow-y-auto">
       <div className="container mt-8 p-2 max-w-[1000px]">
         <div className="flex justify-center">
-          <Image
-            src={org.avatar as string}
-            alt="Amazon Logo"
-            width={100}
-            height={50}
-          />
+          {org.avatar !== null ? (
+            <Image
+              src={org.avatar as string}
+              alt={`${org.name} Logo`}
+              width={100}
+              height={50}
+            />
+          ) : (
+            <div className="font-extrabold text-3xl text-slate-500">
+              {org.name}
+            </div>
+          )}
         </div>
         <div className="bg-white shadow-sm container mt-3 rounded-2xl p-4 max-w-[1000px] border">
           <div className="font-bold text-xl p-2">About Us</div>

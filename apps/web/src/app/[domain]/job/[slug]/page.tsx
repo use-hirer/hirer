@@ -54,12 +54,18 @@ export default async function JobPublicPage({
       <div className="container mt-8 p-2 max-w-[1000px]">
         <div className="flex justify-center">
           <Link href={"/"}>
-            <Image
-              src={job.team.avatar as string}
-              alt="ACME Inc Logo"
-              width={100}
-              height={50}
-            />
+            {job.team.avatar !== null ? (
+              <Image
+                src={job.team.avatar as string}
+                alt={`${job.team.name} Logo`}
+                width={100}
+                height={50}
+              />
+            ) : (
+              <div className="font-extrabold text-3xl text-slate-500">
+                {job.team.name}
+              </div>
+            )}
           </Link>
         </div>
         <div className="font-bold text-xl p-2 items-center w-full flex flex-col">

@@ -76,4 +76,25 @@ export const settingsRouter = createTRPCRouter({
 
       return org.bio;
     }),
+  removeOrganisationLogo: protectedProcedure
+    .input(z.object({ orgId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const org = await ctx.db.team.findUnique({
+        where: { slug: input.orgId },
+      });
+
+      if (!org) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `The org could not be found.`,
+        });
+      }
+
+      await ctx.db.team.update({
+        where: { id: org.id },
+        data: { avatar: null },
+      });
+
+      return org.avatar;
+    }),
 });

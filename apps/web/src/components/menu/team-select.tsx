@@ -51,11 +51,12 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
   const [open, setOpen] = useState(false);
   const [showNewTeamDialog, setShowNewTeamDialog] = useState(false);
   const [organisations, setOrganisations] = useState<
-    { label: string; value: string }[]
+    { label: string; value: string; avatar: string | null }[]
   >([]);
   const [selectedTeam, setSelectedTeam] = useState<{
     label: string;
     value: string;
+    avatar: string | null;
   } | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -70,6 +71,7 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
         const newOrganisations = orgs.data.map((org) => ({
           label: org.name,
           value: org.id,
+          avatar: org.avatar,
         }));
         setOrganisations(newOrganisations);
 
@@ -105,9 +107,11 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
           >
             <Avatar className="mr-2 h-5 w-5">
               <AvatarImage
-                src={`https://avatar.vercel.sh/${selectedTeam?.label}.png`}
+                src={
+                  selectedTeam?.avatar ||
+                  `https://avatar.vercel.sh/${selectedTeam?.label}.png`
+                }
                 alt={selectedTeam?.label}
-                className="grayscale"
               />
               <AvatarFallback>acme-inc</AvatarFallback>
             </Avatar>
@@ -132,7 +136,10 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
                   >
                     <Avatar className="mr-2 h-5 w-5">
                       <AvatarImage
-                        src={`https://avatar.vercel.sh/${organisation.value}.png`}
+                        src={
+                          selectedTeam?.avatar ||
+                          `https://avatar.vercel.sh/${selectedTeam?.label}.png`
+                        }
                         alt={organisation.label}
                         className="grayscale"
                       />
