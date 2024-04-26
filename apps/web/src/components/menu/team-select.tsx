@@ -1,12 +1,4 @@
-"use client";
-
-import {
-  CaretSortIcon,
-  CheckIcon,
-  PlusCircledIcon,
-} from "@radix-ui/react-icons";
-import * as React from "react";
-
+import { api } from "@/lib/api/react";
 import { cn } from "@hirer/ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@hirer/ui/avatar";
 import { Button } from "@hirer/ui/button";
@@ -38,6 +30,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@hirer/ui/select";
+import { Skeleton } from "@hirer/ui/skeleton";
+import {
+  CaretSortIcon,
+  CheckIcon,
+  PlusCircledIcon,
+} from "@radix-ui/react-icons";
+import * as React from "react";
 
 const groups = [
   {
@@ -46,10 +45,6 @@ const groups = [
       {
         label: "Acme Inc.",
         value: "acme-inc",
-      },
-      {
-        label: "Monsters Inc.",
-        value: "monsters",
       },
     ],
   },
@@ -69,6 +64,12 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
   const [selectedTeam, setSelectedTeam] = React.useState<Team>(
     groups[0].teams[0]
   );
+
+  const orgs = api.user.getOrgs.useQuery();
+
+  if (orgs.isLoading) {
+    return <Skeleton className="h-9 w-[225px]" />;
+  }
 
   return (
     <Dialog open={showNewTeamDialog} onOpenChange={setShowNewTeamDialog}>

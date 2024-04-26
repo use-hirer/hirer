@@ -34,4 +34,21 @@ export const userRouter = createTRPCRouter({
         },
       });
     }),
+  getOrgs: protectedProcedure.query(async ({ ctx }) => {
+    const orgs = await ctx.db.team.findMany({
+      where: {
+        members: {
+          every: {
+            userId: ctx.session.userId,
+          },
+        },
+      },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+
+    return orgs;
+  }),
 });

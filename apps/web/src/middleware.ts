@@ -23,7 +23,7 @@ const CONSOLE_HOSTNAMES = new Set([
 ]);
 
 export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
-  const { domain, fullPath, path, fullKey } = parse(req);
+  const { domain, fullPath, path } = parse(req);
 
   // rewrites for app pages
   if (CONSOLE_HOSTNAMES.has(domain)) {

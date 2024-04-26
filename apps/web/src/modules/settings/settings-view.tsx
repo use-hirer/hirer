@@ -1,5 +1,6 @@
 "use client";
 
+import Editor from "@/components/editor/editor";
 import { Button } from "@hirer/ui/button";
 import {
   Card,
@@ -80,6 +81,34 @@ const SettingsView = () => {
                 </div>
               </CardContent>
               <CardFooter className="border-t py-4 bg-zinc-50 flex justify-end rounded-b-md">
+                <Button>Save</Button>
+              </CardFooter>
+            </Card>
+            <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
+              <CardHeader>
+                <CardTitle>Organisation Description</CardTitle>
+                <CardDescription>
+                  This description will be displayed on the homepage of your job
+                  board. <br />
+                  <span>
+                    No description will remove the description section from the
+                    public page.
+                  </span>
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form>
+                  <div className="border rounded-md">
+                    <Editor
+                      value=""
+                      setValue={() => {}}
+                      placeholder="Enter a description for your organisation"
+                    />
+                  </div>
+                </form>
+              </CardContent>
+              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between rounded-b-md">
+                <div className="text-zinc-500 text-sm"></div>
                 <Button>Save</Button>
               </CardFooter>
             </Card>
