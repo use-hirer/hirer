@@ -1,10 +1,13 @@
 import { authCheck } from "@/actions/auth";
 import KPICard from "@/components/dashboard/kpi-card";
 import { api } from "@/lib/api/server";
+import { Alert, AlertDescription, AlertTitle } from "@hirer/ui/alert";
 import { Card } from "@hirer/ui/card";
 import { Separator } from "@hirer/ui/separator";
+import { HandWaving } from "@phosphor-icons/react/dist/ssr";
 import { AreaChart } from "@tremor/react";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Hirer: Dashboard",
@@ -56,6 +59,29 @@ export default async function DashboardPage({
         <div className="w-full">
           <div className="font-extrabold text-xl">Dashboard</div>
           <Separator className="mt-2 mb-4" />
+          <div className="my-4 text-sm">
+            <Alert className="bg-zinc-50">
+              <HandWaving className="h-5 w-5" />
+              <AlertTitle>We&apos;re glad to have you here!</AlertTitle>
+              <AlertDescription>
+                Here&apos;s where you can find your public job board,{" "}
+                <Link
+                  className="font-medium hover:text-blue-700 hover:underline"
+                  href={`https://${params.slug}.hirer.so`}
+                >
+                  https://{params.slug}.hirer.so
+                </Link>
+                . Click{" "}
+                <Link
+                  className="hover:underline"
+                  href={`https://console.hirer.so/${params.slug}/jobs/create`}
+                >
+                  here
+                </Link>{" "}
+                to create a new job.
+              </AlertDescription>
+            </Alert>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
             <KPICard
               increase={

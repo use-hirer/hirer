@@ -6,7 +6,7 @@ export default function Layout({
   params,
 }: {
   children: React.ReactNode;
-  params: { slug: string; id: string };
+  params: { slug: string };
 }) {
   return (
     <>
