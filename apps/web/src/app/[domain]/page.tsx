@@ -6,6 +6,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Markdown from "react-markdown";
 
 export async function generateMetadata(
   { params }: { params: { domain: string } },
@@ -45,29 +46,9 @@ export default async function OrganisationPublicPage({
         <div className="bg-white shadow-sm container mt-3 rounded-2xl p-4 max-w-[1000px] border">
           <div className="font-bold text-xl p-2">About Us</div>
           <div className="flex flex-col gap-4 text-sm p-2">
-            <div>
-              Join us in our mission to build the largest platform for learning
-              programming interactively for the{" "}
-              <span className="font-bold">
-                next billion aspiring developers
-              </span>
-              . We are building the foundations of interactive learning
-              technology globally at scale, with technology and community
-              working at maximum efficiency.
-            </div>
-            <div>
-              We&apos;re an ed-tech company. We want to improve computer
-              programming education ten-fold with technology. This involves:
-            </div>
-            <div>
-              <ul>
-                <li>✦ Making it cheaper globally</li>
-                <li>✦ Compensating instructors for their efforts</li>
-                <li>
-                  ✦ Saving time of people in learning by maximum efficiency
-                </li>
-              </ul>
-            </div>
+            <Markdown className="prose max-w-none font text-sm">
+              {org?.bio}
+            </Markdown>
           </div>
         </div>
         <JobsList org={org} />

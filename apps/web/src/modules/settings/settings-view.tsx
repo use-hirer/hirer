@@ -1,22 +1,21 @@
 "use client";
 
-import Editor from "@/components/editor/editor";
 import { api } from "@/lib/api/react";
 import { RouterOutputs } from "@hirer/api";
 import { Button } from "@hirer/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@hirer/ui/card";
-import { Input } from "@hirer/ui/input";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Toaster } from "sonner";
+import OrganisationDescriptionCard from "./cards/organisation-description";
 import OrganisationNameCard from "./cards/organisation-name";
+import OrganisationSlugCard from "./cards/organisation-slug";
 
 interface SettingsViewProps {
   org: RouterOutputs["settings"]["getGeneral"];
@@ -48,25 +47,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({ org }) => {
           </nav>
           <div className="grid gap-6">
             <OrganisationNameCard name={orgClient.data!.name} />
-            <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
-              <CardHeader>
-                <CardTitle>Organisation Slug</CardTitle>
-                <CardDescription>
-                  Your businesses unique ID on hirer (e.g. acme-inc.hirer.so).
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form>
-                  <Input placeholder="acme-inc" value={org?.slug} />
-                </form>
-              </CardContent>
-              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between rounded-b-md">
-                <div className="text-zinc-500 text-sm">
-                  Please use 32 characters at maximum.
-                </div>
-                <Button>Save</Button>
-              </CardFooter>
-            </Card>
+            <OrganisationSlugCard slug={orgClient.data!.slug} />
             <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
               <CardHeader>
                 <CardTitle>Organisation Logo</CardTitle>
@@ -82,34 +63,9 @@ const SettingsView: React.FC<SettingsViewProps> = ({ org }) => {
                 <Button>Save</Button>
               </CardFooter>
             </Card>
-            <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
-              <CardHeader>
-                <CardTitle>Organisation Description</CardTitle>
-                <CardDescription>
-                  This description will be displayed on the homepage of your job
-                  board. <br />
-                  <span>
-                    No description will remove the description section from the
-                    public page.
-                  </span>
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form>
-                  <div className="border rounded-md">
-                    <Editor
-                      value=""
-                      setValue={() => {}}
-                      placeholder="Enter a description for your organisation"
-                    />
-                  </div>
-                </form>
-              </CardContent>
-              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between rounded-b-md">
-                <div className="text-zinc-500 text-sm"></div>
-                <Button>Save</Button>
-              </CardFooter>
-            </Card>
+            <OrganisationDescriptionCard
+              description={orgClient.data!.bio || ""}
+            />
           </div>
         </div>
       </main>
