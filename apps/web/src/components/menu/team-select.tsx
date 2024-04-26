@@ -57,10 +57,12 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
     label: string;
     value: string;
   } | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const orgs = api.user.getOrgs.useQuery();
 
   useEffect(() => {
+    setLoading(true);
     if (orgs.isSuccess) {
       // setSelectedTeam(groups[0].teams[0]);
 
@@ -82,10 +84,11 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
           setSelectedTeam(newOrganisations[0]);
         }
       }
+      setLoading(false);
     }
   }, [orgs.data, orgs.data?.length, orgs.isSuccess, params.slug]);
 
-  if (orgs.isLoading) {
+  if (loading) {
     return <Skeleton className="h-9 w-[225px]" />;
   }
 

@@ -1,6 +1,8 @@
 "use client";
 
 import Editor from "@/components/editor/editor";
+import { api } from "@/lib/api/react";
+import { RouterOutputs } from "@hirer/api";
 import { Button } from "@hirer/ui/button";
 import {
   Card,
@@ -12,8 +14,21 @@ import {
 } from "@hirer/ui/card";
 import { Input } from "@hirer/ui/input";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import OrganisationNameCard from "./cards/organisation-name";
 
-const SettingsView = () => {
+interface SettingsViewProps {
+  org: RouterOutputs["settings"]["getGeneral"];
+}
+
+const SettingsView: React.FC<SettingsViewProps> = ({ org }) => {
+  const params = useParams() as { slug: string };
+
+  const orgClient = api.settings.getGeneral.useQuery(
+    { orgId: params.slug as string },
+    { initialData: org }
+  );
+
   return (
     <div className="flex w-full flex-col">
       <main className="flex flex-1 flex-col gap-4 pt-6">
@@ -31,25 +46,7 @@ const SettingsView = () => {
             <Link href="#">Support</Link>
           </nav>
           <div className="grid gap-6">
-            <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
-              <CardHeader>
-                <CardTitle>Organisation Name</CardTitle>
-                <CardDescription>
-                  Used to identify your organisation in Hirer.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form>
-                  <Input placeholder="ACME Inc" />
-                </form>
-              </CardContent>
-              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between rounded-b-md">
-                <div className="text-zinc-500 text-sm">
-                  Please use 32 characters at maximum.
-                </div>
-                <Button>Save</Button>
-              </CardFooter>
-            </Card>
+            <OrganisationNameCard name={orgClient.data!.name} />
             <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
               <CardHeader>
                 <CardTitle>Organisation Slug</CardTitle>
@@ -59,7 +56,7 @@ const SettingsView = () => {
               </CardHeader>
               <CardContent>
                 <form>
-                  <Input placeholder="acme-inc" />
+                  <Input placeholder="acme-inc" value={org?.slug} />
                 </form>
               </CardContent>
               <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between rounded-b-md">
