@@ -58,6 +58,11 @@ const OrganisationNameCard: React.FC<OrganisationNameCardProps> = ({
   async function onSubmit(data: OrganisationFormValues) {
     setLoading(true);
 
+    if (data.name === name) {
+      setLoading(false);
+      return;
+    }
+
     try {
       await updateName.mutateAsync({
         orgId: params.slug,

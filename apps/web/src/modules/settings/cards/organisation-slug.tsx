@@ -60,6 +60,11 @@ const OrganisationSlugCard: React.FC<OrganisationSlugCardProps> = ({
   async function onSubmit(data: OrganisationFormValues) {
     setLoading(true);
 
+    if (data.slug === slug) {
+      setLoading(false);
+      return;
+    }
+
     try {
       await updateName.mutateAsync({
         orgId: params.slug,

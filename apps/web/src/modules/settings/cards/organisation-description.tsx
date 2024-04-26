@@ -56,6 +56,11 @@ const OrganisationDescriptionCard: React.FC<
   async function onSubmit(data: OrganisationFormValues) {
     setLoading(true);
 
+    if (data.description === description) {
+      setLoading(false);
+      return;
+    }
+
     try {
       await updateDescription.mutateAsync({
         orgId: params.slug,

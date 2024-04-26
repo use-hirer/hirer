@@ -2,18 +2,11 @@
 
 import { api } from "@/lib/api/react";
 import { RouterOutputs } from "@hirer/api";
-import { Button } from "@hirer/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@hirer/ui/card";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Toaster } from "sonner";
 import OrganisationDescriptionCard from "./cards/organisation-description";
+import OrganisationLogoCard from "./cards/organisation-logo";
 import OrganisationNameCard from "./cards/organisation-name";
 import OrganisationSlugCard from "./cards/organisation-slug";
 
@@ -48,21 +41,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({ org }) => {
           <div className="grid gap-6">
             <OrganisationNameCard name={orgClient.data!.name} />
             <OrganisationSlugCard slug={orgClient.data!.slug} />
-            <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
-              <CardHeader>
-                <CardTitle>Organisation Logo</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="border border-dashed border-slate-300 rounded-md p-4 w-40 h-20 flex justify-center items-center cursor-pointer">
-                  <div className="text-xs font-light text-slate-500">
-                    Add Logo
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="border-t py-4 bg-zinc-50 flex justify-end rounded-b-md">
-                <Button>Save</Button>
-              </CardFooter>
-            </Card>
+            <OrganisationLogoCard logo={orgClient.data!.avatar} />
             <OrganisationDescriptionCard
               description={orgClient.data!.bio || ""}
             />
