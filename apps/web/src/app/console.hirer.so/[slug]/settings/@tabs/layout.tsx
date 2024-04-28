@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Toaster } from "sonner";
+import TabGroup from "./tab-group";
 
 export default function Layout({
   children,
@@ -24,6 +25,7 @@ export default function Layout({
               <Link href="#">Domains</Link>
               <Link href="#">Billing</Link>
               <Link href="#">Support</Link>
+              <TabGroup />
             </nav>
             <div className="grid gap-6">{children}</div>
           </div>
