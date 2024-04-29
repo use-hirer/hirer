@@ -45,18 +45,16 @@ interface AddCandidateSheetProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   orgId: string;
-  // TODO: Fix Type for Refetch
-  refetch: () => Promise<any>;
 }
 
 const AddCandidateSheet: React.FC<AddCandidateSheetProps> = ({
   open,
   setOpen,
   orgId,
-  refetch,
 }) => {
   const [loading, setLoading] = useState(false);
   const createCandidate = api.candidate.create.useMutation();
+  const utils = api.useUtils();
 
   const form = useForm<CandidateFormValues>({
     resolver: zodResolver(candidateFormSchema),
@@ -80,7 +78,7 @@ const AddCandidateSheet: React.FC<AddCandidateSheetProps> = ({
         teamId: orgId,
       });
 
-      await refetch();
+      await utils.candidate.getMany.invalidate();
 
       setOpen(false);
       setLoading(false);

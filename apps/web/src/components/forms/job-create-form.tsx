@@ -54,6 +54,7 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
 
   const generateJobDescription = api.ai.generateJobDescription.useMutation({});
   const createJob = api.job.create.useMutation({});
+  const utils = api.useUtils();
   const { slug } = useParams() as { slug?: string };
 
   const form = useForm<JobFormValues>({
@@ -77,6 +78,8 @@ const JobCreateForm: React.FC<JobCreateFormProps> = () => {
         },
         teamId: slug as string,
       });
+
+      await utils.job.getMany.invalidate();
 
       router.push(`/${slug}/job/${job.slug}`);
     } catch (e) {
