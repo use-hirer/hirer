@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Hirer: Settings",
 };
 
-export default async function TeamSettingsPage({
+export default async function SupportSettingsPage({
   params,
 }: {
   params: { slug: string };
@@ -22,5 +22,5 @@ export default async function TeamSettingsPage({
     orgId: params.slug as string,
   });
 
-  return <div>Team: Settings Page</div>;
+  return <div>Support: Settings Page</div>;
 }
