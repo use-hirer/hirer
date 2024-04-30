@@ -1,5 +1,5 @@
-import { api } from "@/lib/api/server";
 import { validateRequest } from "@/lib/auth";
+import DomainsSettingsView from "@/modules/settings/domain-settings";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
@@ -18,9 +18,5 @@ export default async function DomainSettingsPage({
     return redirect("/login");
   }
 
-  const org = await api.settings.getGeneral({
-    orgId: params.slug as string,
-  });
-
-  return <div>Domain: Settings Page</div>;
+  return <DomainsSettingsView />;
 }
