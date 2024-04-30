@@ -145,15 +145,36 @@ export default async function MetricsTab({
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-4">
         <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm">
           <div className="font-bold text-sm">Locations</div>
-          <BarList className="mt-4" data={countriesData} />
+          {countriesData.length > 0 && (
+            <BarList className="mt-4" data={countriesData} />
+          )}
+          {countriesData.length === 0 && (
+            <div className="text-center text-sm min-h-[120px] flex items-center justify-center text-zinc-500">
+              No location data available.
+            </div>
+          )}
         </Card>
         <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm">
           <div className="font-bold text-sm">Referrers</div>
-          <BarList className="mt-4" color="amber" data={referrersData} />
+          {referrersData.length > 0 && (
+            <BarList className="mt-4" color="amber" data={referrersData} />
+          )}
+          {referrersData.length === 0 && (
+            <div className="text-center text-sm min-h-[120px] flex items-center justify-center text-zinc-500">
+              No referrers data available.
+            </div>
+          )}
         </Card>
         <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm">
           <div className="font-bold text-sm">Devices</div>
-          <BarList className="mt-4" color="green" data={devicesData} />
+          {devicesData.length > 0 && (
+            <BarList className="mt-4" color="green" data={devicesData} />
+          )}
+          {devicesData.length === 0 && (
+            <div className="text-center text-sm min-h-[120px] flex items-center justify-center text-zinc-500">
+              No devices data available.
+            </div>
+          )}
         </Card>
       </div>
     </div>
