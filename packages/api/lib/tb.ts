@@ -53,3 +53,49 @@ export const getTotalViewsForOrg = tb.buildPipe({
     total_views_previous: z.number(),
   }),
 });
+
+export const getTotalViewsForJob = tb.buildPipe({
+  pipe: "get_job_views_total",
+  parameters: z.object({ org_id: z.string(), job_id: z.string() }),
+  data: z.object({
+    total_views_current: z.number(),
+    total_views_previous: z.number(),
+  }),
+});
+
+export const getViewsByDayForJob = tb.buildPipe({
+  pipe: "get_job_views_by_day",
+  parameters: z.object({ org_id: z.string(), job_id: z.string() }),
+  data: z.object({
+    date: z.string(),
+    total_views: z.number(),
+    unique_visitors: z.number(),
+  }),
+});
+
+export const getReferrersForJob = tb.buildPipe({
+  pipe: "get_job_referrers_total",
+  parameters: z.object({ org_id: z.string(), job_id: z.string() }),
+  data: z.object({
+    referer: z.string(),
+    count: z.number(),
+  }),
+});
+
+export const getCountriesForJob = tb.buildPipe({
+  pipe: "get_job_country_total",
+  parameters: z.object({ org_id: z.string(), job_id: z.string() }),
+  data: z.object({
+    country: z.string(),
+    count: z.number(),
+  }),
+});
+
+export const getDevicesForJob = tb.buildPipe({
+  pipe: "get_job_devices_total",
+  parameters: z.object({ org_id: z.string(), job_id: z.string() }),
+  data: z.object({
+    device: z.string(),
+    count: z.number(),
+  }),
+});
