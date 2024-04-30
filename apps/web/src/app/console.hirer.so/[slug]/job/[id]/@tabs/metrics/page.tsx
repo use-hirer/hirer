@@ -1,8 +1,10 @@
 import KPICard from "@/components/dashboard/kpi-card";
 import { api } from "@/lib/api/server";
-import { COUNTRIES } from "@/lib/constants/countries";
+import DeviceMetricsCard from "@/modules/job/metrics/device-metrics-card";
+import LocationsMetricsCard from "@/modules/job/metrics/locations-metrics-card";
+import ReferrersMetricsCard from "@/modules/job/metrics/referrers-metrics-card";
 import { Card } from "@hirer/ui/card";
-import { AreaChart, BarList } from "@tremor/react";
+import { AreaChart } from "@tremor/react";
 
 export default async function MetricsTab({
   params,
@@ -48,36 +50,6 @@ export default async function MetricsTab({
     teamId: params.slug,
     jobId: id.split("-")[0],
   });
-
-  const referrers = await api.analytics.getReferrersForJob({
-    teamId: params.slug,
-    jobId: id.split("-")[0],
-  });
-
-  const referrersData = referrers.data.map(({ referer, count }) => ({
-    name: referer,
-    value: count,
-  }));
-
-  const countries = await api.analytics.getCountriesForJob({
-    teamId: params.slug,
-    jobId: id.split("-")[0],
-  });
-
-  const countriesData = countries.data.map(({ country, count }) => ({
-    name: COUNTRIES[country] || country,
-    value: count,
-  }));
-
-  const devices = await api.analytics.getDevicesForJob({
-    teamId: params.slug,
-    jobId: id.split("-")[0],
-  });
-
-  const devicesData = devices.data.map(({ device, count }) => ({
-    name: device,
-    value: count,
-  }));
 
   return (
     <div className="mt-4">
@@ -143,39 +115,9 @@ export default async function MetricsTab({
         />
       </Card>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-4">
-        <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm">
-          <div className="font-bold text-sm">Locations</div>
-          {countriesData.length > 0 && (
-            <BarList className="mt-4" data={countriesData} />
-          )}
-          {countriesData.length === 0 && (
-            <div className="text-center text-sm min-h-[120px] flex items-center justify-center text-zinc-500">
-              No location data available.
-            </div>
-          )}
-        </Card>
-        <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm">
-          <div className="font-bold text-sm">Referrers</div>
-          {referrersData.length > 0 && (
-            <BarList className="mt-4" color="amber" data={referrersData} />
-          )}
-          {referrersData.length === 0 && (
-            <div className="text-center text-sm min-h-[120px] flex items-center justify-center text-zinc-500">
-              No referrers data available.
-            </div>
-          )}
-        </Card>
-        <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm">
-          <div className="font-bold text-sm">Devices</div>
-          {devicesData.length > 0 && (
-            <BarList className="mt-4" color="green" data={devicesData} />
-          )}
-          {devicesData.length === 0 && (
-            <div className="text-center text-sm min-h-[120px] flex items-center justify-center text-zinc-500">
-              No devices data available.
-            </div>
-          )}
-        </Card>
+        <LocationsMetricsCard orgId={params.slug} jobId={id} />
+        <ReferrersMetricsCard orgId={params.slug} jobId={id} />
+        <DeviceMetricsCard orgId={params.slug} jobId={id} />
       </div>
     </div>
   );
