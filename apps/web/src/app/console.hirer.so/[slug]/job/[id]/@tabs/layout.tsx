@@ -9,7 +9,7 @@ export default function Layout({
 }) {
   return (
     <>
-      <div className="flex flex-col h-full">
+      <div className="">
         <div>
           <TabGroup
             path={`/${params.slug}/job/${params.id}`}

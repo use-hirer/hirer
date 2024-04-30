@@ -23,7 +23,7 @@ export default async function Layout({
 
   return (
     <>
-      <div className="flex flex-col h-full">
+      <div className="scroll-bar">
         <div className="py-1">
           <Breadcrumb>
             <BreadcrumbList>
