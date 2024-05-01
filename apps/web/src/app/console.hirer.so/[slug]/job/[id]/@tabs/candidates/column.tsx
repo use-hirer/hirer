@@ -23,6 +23,7 @@ export type Item = {
 
 export type ColumnType = {
   title: string;
+  color?: string;
   columnId: string;
   items: Item[];
 };
@@ -94,7 +95,11 @@ export const Column = memo(function Column({ column }: { column: ColumnType }) {
       ref={columnRef}
     >
       <div ref={headerRef}>
-        <ColumnHeading title="To Review" />
+        <ColumnHeading
+          title={column.title}
+          badgeColor={column.color}
+          itemCount={column.items.length}
+        />
       </div>
       <div
         className={cn(
@@ -114,9 +119,11 @@ export const Column = memo(function Column({ column }: { column: ColumnType }) {
 const ColumnHeading = ({
   title,
   badgeColor,
+  itemCount,
 }: {
   title: string;
   badgeColor?: string;
+  itemCount: number;
 }) => {
   return (
     <div className="font-medium text-md flex items-center gap-2 pt-3 pl-4">
@@ -127,7 +134,8 @@ const ColumnHeading = ({
         ])}
         style={{ backgroundColor: badgeColor }}
       />
-      {title} <span className="text-sm text-zinc-500 font-light">0</span>
+      {title}{" "}
+      <span className="text-sm text-zinc-500 font-light">{itemCount}</span>
     </div>
   );
 };

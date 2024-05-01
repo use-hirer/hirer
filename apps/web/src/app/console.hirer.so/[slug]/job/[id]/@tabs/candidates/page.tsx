@@ -26,13 +26,45 @@ export default function CandidateTab() {
           { itemId: "2", name: "Zick", location: "Melbourne" },
         ],
       },
-      shortlist: {
-        title: "Shortlist",
-        columnId: "shortlist",
+      "pre-select": {
+        title: "Pre-Select",
+        color: "#ED843A",
+        columnId: "pre-select",
+        items: [],
+      },
+      interview: {
+        title: "Interview",
+        color: "#646FD9",
+        columnId: "interview",
+        items: [],
+      },
+      assignment: {
+        title: "Assignment",
+        color: "#35795F",
+        columnId: "assignment",
+        items: [],
+      },
+      hired: {
+        title: "Hired",
+        color: "#67D374",
+        columnId: "hired",
+        items: [],
+      },
+      rejected: {
+        title: "Rejected",
+        color: "#FF6961",
+        columnId: "rejected",
         items: [],
       },
     },
-    orderedColumnIds: ["to-review", "shortlist"],
+    orderedColumnIds: [
+      "to-review",
+      "pre-select",
+      "interview",
+      "assignment",
+      "hired",
+      "rejected",
+    ],
   });
 
   const ref = useRef<HTMLDivElement | null>(null);
