@@ -11,7 +11,9 @@ import {
   dropTargetForElements,
 } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { cn } from "@hirer/ui";
+import { Button } from "@hirer/ui/button";
 import { Card as UICard } from "@hirer/ui/card";
+import { Badge } from "@tremor/react";
 import { memo, useEffect, useRef, useState } from "react";
 import invariant from "tiny-invariant";
 import { Item } from "./column";
@@ -77,12 +79,33 @@ export const Card = memo(function Card({ item }: { item: Item }) {
       {closestEdge === "top" && <div className="h-[1px] bg-blue-500" />}
       <UICard
         className={cn([
-          "shadow-sm rounded-sm p-1 text-xs",
+          "shadow-sm rounded-sm py-2 px-3 text-xs",
           state === "dragging" && "opacity-50",
         ])}
         ref={ref}
       >
-        <div>{name}</div>
+        <div className="font-medium">{name}</div>
+        <Badge size={"xs"} color={"green"} className="mt-2">
+          84% Match
+        </Badge>
+        <div className="flex items-center gap-2 pt-2">
+          <div className="text-[10px] text-zinc-500">Location</div>
+          <div className="text-[10px] text-black">{location}</div>
+        </div>
+        <div className="pt-2 flex gap-1">
+          <Button
+            className="text-[8px] font-normal h-2 w-1"
+            variant={"outline"}
+          >
+            move
+          </Button>
+          <Button
+            className="text-[8px] font-normal h-2 w-1"
+            variant={"outline"}
+          >
+            info
+          </Button>
+        </div>
       </UICard>
       {closestEdge === "bottom" && <div className="h-[1px] bg-blue-500" />}
     </>

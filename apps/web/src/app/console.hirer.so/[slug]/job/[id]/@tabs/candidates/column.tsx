@@ -104,7 +104,7 @@ export const Column = memo(function Column({ column }: { column: ColumnType }) {
       <div
         className={cn(
           "p-2 flex-1 overflow-y-auto flex gap-1 flex-col",
-          isDragging && "bg-zinc-100"
+          isDragging && "bg-zinc-100 rounded-md"
         )}
         ref={cardListRef}
       >
@@ -130,7 +130,7 @@ const ColumnHeading = ({
       <div
         className={cn([
           badgeColor === undefined && "border border-zinc-700 border-dashed",
-          "w-3 h-3 rounded-full  flex items-center",
+          "w-3 h-3 rounded-full flex items-center",
         ])}
         style={{ backgroundColor: badgeColor }}
       />

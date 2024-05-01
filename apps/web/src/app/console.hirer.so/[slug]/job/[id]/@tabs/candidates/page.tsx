@@ -22,8 +22,11 @@ export default function CandidateTab() {
         title: "To Review",
         columnId: "to-review",
         items: [
-          { itemId: "1", name: "Nick", location: "Melbourne" },
-          { itemId: "2", name: "Zick", location: "Melbourne" },
+          {
+            itemId: "1",
+            name: "Nick Mandylas",
+            location: "Melbourne, Australia",
+          },
         ],
       },
       "pre-select": {
