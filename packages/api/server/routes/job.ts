@@ -134,6 +134,52 @@ export const jobRouter = createTRPCRouter({
         },
       });
 
+      await ctx.db.jobStage.createMany({
+        data: [
+          {
+            jobId: job.id,
+            name: "To Review",
+            system: true,
+            order: 1,
+          },
+          {
+            jobId: job.id,
+            name: "Pre Select",
+            color: "#ED843A",
+            system: true,
+            order: 2,
+          },
+          {
+            jobId: job.id,
+            name: "Interview",
+            color: "#646FD9",
+            system: true,
+            order: 3,
+          },
+          {
+            jobId: job.id,
+            name: "Assignment",
+            color: "#35795F",
+            system: false,
+            order: 4,
+          },
+          {
+            jobId: job.id,
+            name: "Hired",
+            color: "#67D374",
+            system: true,
+            order: 5,
+          },
+          {
+            jobId: job.id,
+            name: "Rejected",
+            color: "#FF6961",
+            system: true,
+            order: 6,
+          },
+        ],
+      });
+
       await trackEvent({
         date: new Date(),
         event: "create_job",
@@ -150,11 +196,27 @@ export const jobRouter = createTRPCRouter({
       return job;
     }),
   delete: protectedProcedure
-    .input(z.object({ id: z.string() }))
+    .input(z.object({ orgId: z.string(), id: z.string() }))
     .mutation(async ({ ctx, input }) => {
+      const whereClause = input.orgId.startsWith("tm_")
+        ? { id: input.orgId }
+        : { slug: input.orgId };
+
+      const team = await ctx.db.team.findUnique({
+        where: whereClause,
+      });
+
+      if (!team) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `The team with id ${input.orgId} could not be found.`,
+        });
+      }
+
       const job = await ctx.db.job.findUnique({
         where: {
           id: input.id,
+          teamId: team.id,
         },
       });
 
@@ -165,6 +227,33 @@ export const jobRouter = createTRPCRouter({
         });
       }
 
-      await ctx.db.job.delete({ where: { id: input.id } });
+      await ctx.db.job.delete({ where: { id: job.id } });
+    }),
+  getCandidatesByStage: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const job = await ctx.db.job.findUnique({
+        where: {
+          slug: input.id,
+        },
+      });
+
+      if (!job) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `The job with id ${input.id} could not be found.`,
+        });
+      }
+
+      const stages = await ctx.db.jobStage.findMany({
+        where: { jobId: job.id },
+        include: {
+          applications: {
+            include: { candidate: { select: { name: true, id: true } } },
+          },
+        },
+      });
+
+      return stages;
     }),
 });
