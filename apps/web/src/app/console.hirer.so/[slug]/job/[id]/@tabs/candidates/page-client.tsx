@@ -252,7 +252,7 @@ export default function CandidatesBoard({
         },
       })
     );
-  }, [data, isCustomAutoScrollEnabled]);
+  }, [data, isCustomAutoScrollEnabled, updateApplicantStage]);
 
   return (
     <div className="h-full min-h-[calc(100vh-201px)] overflow-x-auto border rounded-md bg-zinc-50 shadow-sm scroll-bar mt-4">

@@ -94,8 +94,13 @@ export async function POST(request: NextRequest) {
       }),
     });
 
+    const stage = await prisma.jobStage.findFirst({
+      where: { jobId: job.id, order: 1 },
+    });
+
     const application = await prisma.candidateApplication.create({
       data: {
+        stageId: stage?.id as string,
         candidateId: candidate.id,
         jobId: job.id,
         resumeId: resume.id,
