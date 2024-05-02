@@ -46,7 +46,12 @@ export default async function Layout({
           </Breadcrumb>
         </div>
         <Separator className="my-2" />
-        <div className="font-extrabold text-xl py-2 gt">{job.title}</div>
+        <div className="font-extrabold text-xl py-2 flex items-center gap-2">
+          {job.title}{" "}
+          <span className="font-normal text-xs text-zinc-500 mt-1">
+            (ID: {job.id})
+          </span>
+        </div>
         <Separator className="my-2" />
         <div className="flex-grow overflow-y-auto">{tabs}</div>
       </div>
