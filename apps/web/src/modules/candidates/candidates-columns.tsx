@@ -1,5 +1,4 @@
 "use client";
-import { JobStatus } from "@/model/job";
 import { RouterOutputs } from "@hirer/api";
 import { Button } from "@hirer/ui/button";
 import {
@@ -16,11 +15,6 @@ import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { toast } from "sonner";
-
-const JOB_STATUS_COLOUR: Record<JobStatus, string> = {
-  ["Active"]: "emerald",
-  ["Closed"]: "orange",
-};
 
 interface SortableColumnProps {
   column: Column<RouterOutputs["candidate"]["getMany"][number]>;
