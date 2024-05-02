@@ -123,6 +123,7 @@ model Job {
   creator      User                   @relation(fields: [creatorUserId], references: [id])
   team         Team                   @relation(fields: [teamId], references: [id], onDelete: Cascade)
   applications CandidateApplication[]
+  stages       JobStage[]
 
   @@index([teamId])
 }
@@ -165,10 +166,25 @@ model CandidateApplication {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   resumeId    String?
+  stageId     String
 
   job       Job              @relation(fields: [jobId], references: [id])
   candidate Candidate        @relation(fields: [candidateId], references: [id])
   resume    CandidateResume? @relation(fields: [resumeId], references: [id])
+  stage     JobStage         @relation(fields: [stageId], references: [id])
 
   @@unique([candidateId, jobId])
+}
+
+model JobStage {
+  id        String   @id @default(cuid())
+  name      String
+  color     String?
+  system    Boolean  @default(false)
+  jobId     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  job          Job                    @relation(fields: [jobId], references: [id])
+  applications CandidateApplication[]
 }

@@ -26,6 +26,7 @@ export default function CandidateTab() {
             itemId: "1",
             name: "Nick Mandylas",
             location: "Melbourne, Australia",
+            score: 84,
           },
         ],
       },
@@ -33,7 +34,14 @@ export default function CandidateTab() {
         title: "Pre-Select",
         color: "#ED843A",
         columnId: "pre-select",
-        items: [],
+        items: [
+          {
+            itemId: "2",
+            name: "Zick Mandylas",
+            location: "Melbourne, Australia",
+            score: 28,
+          },
+        ],
       },
       interview: {
         title: "Interview",
@@ -199,6 +207,7 @@ export default function CandidateTab() {
               setData({ ...data, columnMap: updatedMap });
               console.log("moving card to end position of another column", {
                 startIndex: itemIndex,
+                ColumnId: destinationColumn.columnId,
                 destinationIndex: updatedMap[
                   destinationColumn.columnId
                 ].items.findIndex((i) => i.itemId === itemId),

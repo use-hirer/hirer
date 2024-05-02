@@ -18,6 +18,7 @@ import { Card } from "./card";
 export type Item = {
   name: string;
   location: string;
+  score: number;
   itemId: string;
 };
 
