@@ -25,7 +25,7 @@ import * as React from "react";
 import { toast } from "sonner";
 
 const JOB_STATUS_COLOUR: Record<JobStatus, string> = {
-  ["Active"]: "emerald",
+  ["Open"]: "emerald",
   ["Closed"]: "orange",
 };
 

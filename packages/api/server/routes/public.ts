@@ -25,7 +25,7 @@ export const publicRouter = createTRPCRouter({
         where: {
           slug: input.jobId,
           team: { slug: input.orgId },
-          // status: { equals: "Open" }, TODO: Remove this when we have a better way to filter jobs
+          status: { equals: "Open" },
         },
         include: {
           team: { select: { avatar: true, name: true } },

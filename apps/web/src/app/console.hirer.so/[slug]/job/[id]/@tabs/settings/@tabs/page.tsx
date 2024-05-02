@@ -1,3 +1,4 @@
+import { api } from "@/lib/api/server";
 import { validateRequest } from "@/lib/auth";
 import GeneralJobConfigurationView from "@/modules/job/configuration/general-configuration-view";
 import { Metadata } from "next";
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 export default async function SettingsPage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string; id: string };
 }) {
   const { user } = await validateRequest();
 
@@ -18,5 +19,7 @@ export default async function SettingsPage({
     return redirect("/login");
   }
 
-  return <GeneralJobConfigurationView />;
+  const job = await api.job.get({ id: params.id });
+
+  return <GeneralJobConfigurationView job={job} />;
 }

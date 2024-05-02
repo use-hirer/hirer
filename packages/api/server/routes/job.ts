@@ -256,4 +256,34 @@ export const jobRouter = createTRPCRouter({
 
       return stages;
     }),
+  updateStatus: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        status: z.union([
+          z.literal("Open"),
+          z.literal("Draft"),
+          z.literal("Closed"),
+        ]),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const job = await ctx.db.job.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+
+      if (!job) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `The job with id ${input.id} could not be found.`,
+        });
+      }
+
+      await ctx.db.job.update({
+        where: { id: job.id },
+        data: { status: input.status },
+      });
+    }),
 });
