@@ -61,6 +61,12 @@ const OrganisationDescriptionCard: React.FC<
       return;
     }
 
+    // Prevent submitting form if only whitespace is entered
+    if (data.description?.trim() === "") {
+      setLoading(false);
+      return;
+    }
+
     try {
       await updateDescription.mutateAsync({
         orgId: params.slug,
@@ -79,7 +85,7 @@ const OrganisationDescriptionCard: React.FC<
   return (
     <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
       <CardHeader>
-        <CardTitle>Organisation Name</CardTitle>
+        <CardTitle>Organisation Description</CardTitle>
         <CardDescription>
           This description will be displayed on the homepage of your job board.{" "}
           <br />

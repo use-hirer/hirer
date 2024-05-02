@@ -49,14 +49,16 @@ export default async function OrganisationPublicPage({
             <div className="font-extrabold text-3xl text-black">{org.name}</div>
           )}
         </div>
-        <div className="bg-white shadow-sm container mt-3 rounded-2xl p-4 max-w-[1000px] border">
-          <div className="font-bold text-xl p-2">About Us</div>
-          <div className="flex flex-col gap-4 text-sm p-2">
-            <Markdown className="prose max-w-none font text-sm">
-              {org?.bio}
-            </Markdown>
+        {org.bio && (
+          <div className="bg-white shadow-sm container mt-3 rounded-2xl p-4 max-w-[1000px] border">
+            <div className="font-bold text-xl p-2">About Us</div>
+            <div className="flex flex-col gap-4 text-sm p-2">
+              <Markdown className="prose max-w-none font text-sm">
+                {org?.bio}
+              </Markdown>
+            </div>
           </div>
-        </div>
+        )}
         <JobsList org={org} />
         <Link
           className="flex justify-center gap-2 items-center py-6 cursor-pointer"
