@@ -61,16 +61,10 @@ const OrganisationDescriptionCard: React.FC<
       return;
     }
 
-    // Prevent submitting form if only whitespace is entered
-    if (data.description?.trim() === "") {
-      setLoading(false);
-      return;
-    }
-
     try {
       await updateDescription.mutateAsync({
         orgId: params.slug,
-        description: data.description,
+        description: data.description?.trim() === "" ? "" : data.description,
       });
 
       await utils.user.getOrgs.invalidate();
