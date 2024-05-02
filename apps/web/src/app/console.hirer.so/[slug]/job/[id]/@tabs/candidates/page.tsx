@@ -29,7 +29,5 @@ export default async function CandidatesTab({
 
   const columnOrder = Object.values(list).map((column) => column.columnId);
 
-  console.log(list);
-
   return <CandidatesBoard stageData={list} columnOrder={columnOrder} />;
 }

@@ -16,9 +16,9 @@ export default function Layout({
             items={[
               { text: "Overview" },
               { text: "Candidates", slug: "candidates" },
-              { text: "Configuration", slug: "configuration" },
               { text: "Metrics", slug: "metrics" },
               { text: "Sharing", slug: "sharing" },
+              { text: "Settings", slug: "settings" },
             ]}
           />
         </div>

@@ -117,13 +117,10 @@ export const Card = memo(function Card({ item }: { item: Item }) {
       </UICard>
       {closestEdge === "bottom" && <div className="h-[1px] bg-blue-500" />}
       <Sheet open={open} onOpenChange={() => setOpen(!open)}>
-        <SheetContent>
+        <SheetContent className="min-w-[500px]">
           <SheetHeader>
-            <SheetTitle>Are you absolutely sure?</SheetTitle>
-            <SheetDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </SheetDescription>
+            <SheetTitle>{name}</SheetTitle>
+            <SheetDescription>Candidate Information</SheetDescription>
           </SheetHeader>
         </SheetContent>
       </Sheet>

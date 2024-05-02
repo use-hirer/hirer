@@ -15,6 +15,8 @@ export async function generateMetadata(
   const slug = getSubdomain(params.domain);
   const org = await api.public.getOrganisation({ id: slug as string });
 
+  // TODO: Handle 404 case
+
   return {
     title: org?.name + ": Careers",
   };
@@ -44,9 +46,7 @@ export default async function OrganisationPublicPage({
               height={50}
             />
           ) : (
-            <div className="font-extrabold text-3xl text-slate-500">
-              {org.name}
-            </div>
+            <div className="font-extrabold text-3xl text-black">{org.name}</div>
           )}
         </div>
         <div className="bg-white shadow-sm container mt-3 rounded-2xl p-4 max-w-[1000px] border">

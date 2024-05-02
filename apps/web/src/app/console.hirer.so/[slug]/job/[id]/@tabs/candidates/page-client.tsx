@@ -85,14 +85,6 @@ export default function CandidatesBoard({
               axis: "horizontal",
             });
 
-            console.log("reordering column", {
-              startIndex,
-              destinationIndex: updated.findIndex(
-                (columnId) => columnId === target.data.columnId
-              ),
-              closestEdgeOfTarget,
-            });
-
             setData({ ...data, orderedColumnIds: updated });
           }
           // Dragging a card
@@ -133,13 +125,7 @@ export default function CandidatesBoard({
                   },
                 };
                 setData({ ...data, columnMap: updatedMap });
-                console.log("moving card to end position in same column", {
-                  startIndex: itemIndex,
-                  destinationIndex: updated.findIndex(
-                    (i) => i.itemId === itemId
-                  ),
-                  edge: null,
-                });
+
                 return;
               }
 
@@ -157,14 +143,6 @@ export default function CandidatesBoard({
               };
 
               setData({ ...data, columnMap: updatedMap });
-              console.log("moving card to end position of another column", {
-                startIndex: itemIndex,
-                ColumnId: destinationColumn.columnId,
-                destinationIndex: updatedMap[
-                  destinationColumn.columnId
-                ].items.findIndex((i) => i.itemId === itemId),
-                edge: null,
-              });
 
               updateApplicantStage.mutate({
                 stageId: destinationColumn.columnId,
@@ -206,13 +184,7 @@ export default function CandidatesBoard({
                   ...data.columnMap,
                   [sourceColumn.columnId]: updatedSourceColumn,
                 };
-                console.log("dropping relative to card in the same column", {
-                  startIndex: itemIndex,
-                  destinationIndex: updated.findIndex(
-                    (i) => i.itemId === itemId
-                  ),
-                  closestEdgeOfTarget,
-                });
+
                 setData({ ...data, columnMap: updatedMap });
                 return;
               }
@@ -239,14 +211,13 @@ export default function CandidatesBoard({
                 [sourceColumn.columnId]: updatedSourceColumn,
                 [destinationColumn.columnId]: updatedDestinationColumn,
               };
-              console.log("dropping on a card in different column", {
-                sourceColumn: sourceColumn.columnId,
-                destinationColumn: destinationColumn.columnId,
-                startIndex: itemIndex,
-                destinationIndex,
-                closestEdgeOfTarget,
-              });
+
               setData({ ...data, columnMap: updatedMap });
+
+              updateApplicantStage.mutate({
+                stageId: destinationColumn.columnId,
+                applicationId: item.itemId,
+              });
             }
           }
         },

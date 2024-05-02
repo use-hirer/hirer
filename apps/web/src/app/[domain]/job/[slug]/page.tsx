@@ -62,7 +62,7 @@ export default async function JobPublicPage({
                 height={50}
               />
             ) : (
-              <div className="font-extrabold text-3xl text-slate-500">
+              <div className="font-extrabold text-3xl text-black">
                 {job.team.name}
               </div>
             )}
