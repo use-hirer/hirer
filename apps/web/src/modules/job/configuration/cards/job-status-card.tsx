@@ -81,9 +81,10 @@ const JobStatusCard: React.FC<OrganisationNameCardProps> = ({ status }) => {
   return (
     <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
       <CardHeader>
-        <CardTitle>Organisation Name</CardTitle>
+        <CardTitle>Job Status</CardTitle>
         <CardDescription>
-          Used to identify your organisation in Hirer.
+          Changing the job status to Open, will make the job visible to all
+          applicants.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -116,10 +117,7 @@ const JobStatusCard: React.FC<OrganisationNameCardProps> = ({ status }) => {
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="border-t py-4 bg-zinc-50 flex justify-between rounded-b-md">
-        <div className="text-zinc-500 text-sm">
-          Please use 32 characters at maximum.
-        </div>
+      <CardFooter className="border-t py-4 bg-zinc-50 flex justify-end rounded-b-md">
         <Button onClick={form.handleSubmit(onSubmit)} disabled={loading}>
           {loading ? <CircleNotch className="h-4 w-4 animate-spin" /> : "Save"}
         </Button>
