@@ -17,13 +17,7 @@ import {
   FormItem,
   FormMessage,
 } from "@hirer/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@hirer/ui/select";
+import { Input } from "@hirer/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleNotch } from "@phosphor-icons/react";
 import { useParams } from "next/navigation";
@@ -32,42 +26,42 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const jobStatusSchema = z.object({
-  status: z.union([z.literal("Open"), z.literal("Draft"), z.literal("Closed")]),
+const jobNameSchema = z.object({
+  name: z.string().min(1, { message: "Please use at least 1 character." }),
 });
 
-type JobStatusFormValues = z.infer<typeof jobStatusSchema>;
+type JobNameFormValues = z.infer<typeof jobNameSchema>;
 
-interface JobStatusCardProps {
-  status: "Open" | "Draft" | "Closed";
+interface JobNameCardProps {
+  name: string;
 }
 
-const JobStatusCard: React.FC<JobStatusCardProps> = ({ status }) => {
+const JobNameCard: React.FC<JobNameCardProps> = ({ name }) => {
   const params = useParams() as { slug: string; id: string };
-  const updateStatus = api.job.updateStatus.useMutation();
+  const updateName = api.job.updateName.useMutation();
   const utils = api.useUtils();
   const [loading, setLoading] = useState(false);
 
-  const form = useForm<JobStatusFormValues>({
-    resolver: zodResolver(jobStatusSchema),
+  const form = useForm<JobNameFormValues>({
+    resolver: zodResolver(jobNameSchema),
     mode: "onChange",
     defaultValues: {
-      status: status,
+      name: name,
     },
   });
 
-  async function onSubmit(data: JobStatusFormValues) {
+  async function onSubmit(data: JobNameFormValues) {
     setLoading(true);
 
-    if (data.status === status) {
+    if (data.name === name) {
       setLoading(false);
       return;
     }
 
     try {
-      await updateStatus.mutateAsync({
+      await updateName.mutateAsync({
         id: params.id.split("-")[0],
-        status: data.status,
+        name: data.name,
       });
       await utils.job.getMany.invalidate();
       await utils.job.get.invalidate({ id: params.id });
@@ -81,10 +75,9 @@ const JobStatusCard: React.FC<JobStatusCardProps> = ({ status }) => {
   return (
     <Card className="rounded-md border-neutral-200 flex-grow-0 shadow-sm">
       <CardHeader>
-        <CardTitle>Job Status</CardTitle>
+        <CardTitle>Job Title</CardTitle>
         <CardDescription>
-          Changing the job status to Open, will make the job visible to all
-          applicants.
+          Changing the job title will also update the job slug.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -92,24 +85,12 @@ const JobStatusCard: React.FC<JobStatusCardProps> = ({ status }) => {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
-              name="status"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a verified email to display" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="Open">Open</SelectItem>
-                      <SelectItem value="Draft">Draft</SelectItem>
-                      <SelectItem value="Closed">Closed</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <FormControl>
+                    <Input placeholder="Software Engineer" {...field} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -126,4 +107,4 @@ const JobStatusCard: React.FC<JobStatusCardProps> = ({ status }) => {
   );
 };
 
-export default JobStatusCard;
+export default JobNameCard;

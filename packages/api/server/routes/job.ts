@@ -286,4 +286,46 @@ export const jobRouter = createTRPCRouter({
         data: { status: input.status },
       });
     }),
+  updateName: protectedProcedure
+    .input(z.object({ id: z.string(), name: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const job = await ctx.db.job.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+
+      if (!job) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `The job with id ${input.id} could not be found.`,
+        });
+      }
+
+      await ctx.db.job.update({
+        where: { id: job.id },
+        data: { title: input.name },
+      });
+    }),
+  updateDescription: protectedProcedure
+    .input(z.object({ id: z.string(), description: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const job = await ctx.db.job.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+
+      if (!job) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `The job with id ${input.id} could not be found.`,
+        });
+      }
+
+      await ctx.db.job.update({
+        where: { id: job.id },
+        data: { description: input.description },
+      });
+    }),
 });

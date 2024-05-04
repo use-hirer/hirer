@@ -67,7 +67,7 @@ export const JOBS_TABLE_COLUMNS: ColumnDef<
             <TooltipTrigger asChild>
               <Copy
                 size={12}
-                className="text-zinc-400 cursor-pointer"
+                className="text-zinc-400 cursor-pointer flex-shrink-0"
                 onClick={() => {
                   const url = `https://hirer.so/${row.original.slug}`;
                   navigator.clipboard.writeText(url).then(
