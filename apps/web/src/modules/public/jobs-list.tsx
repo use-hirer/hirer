@@ -1,7 +1,6 @@
 "use client";
 
 import { RouterOutputs } from "@hirer/api";
-import { Button } from "@hirer/ui/button";
 import { Separator } from "@hirer/ui/separator";
 import { Empty } from "@phosphor-icons/react";
 import Link from "next/link";
@@ -37,12 +36,12 @@ const JobsList: React.FC<JobsListProps> = ({ org }) => {
           {org.jobs.length - 1 !== index && <Separator />}
         </Link>
       ))}
-      <div className="flex items-center justify-center pt-4 gap-2">
+      {/* <div className="flex items-center justify-center pt-4 gap-2">
         <Button variant={"ghost"} disabled>
           Back
         </Button>
         <Button variant={"outline"}>Next</Button>
-      </div>
+      </div> */}
     </div>
   );
 };
