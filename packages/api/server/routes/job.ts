@@ -230,7 +230,7 @@ export const jobRouter = createTRPCRouter({
       await ctx.db.job.delete({ where: { id: job.id } });
     }),
   getCandidatesByStage: protectedProcedure
-    .input(z.object({ id: z.string() }))
+    .input(z.object({ id: z.string(), name: z.string().optional() }))
     .query(async ({ ctx, input }) => {
       const job = await ctx.db.job.findUnique({
         where: {
@@ -246,7 +246,16 @@ export const jobRouter = createTRPCRouter({
       }
 
       const stages = await ctx.db.jobStage.findMany({
-        where: { jobId: job.id },
+        where: {
+          jobId: job.id,
+          applications: {
+            every: {
+              candidate: {
+                name: { contains: input.name, mode: "insensitive" },
+              },
+            },
+          },
+        },
         include: {
           applications: {
             include: { candidate: { select: { name: true, id: true } } },

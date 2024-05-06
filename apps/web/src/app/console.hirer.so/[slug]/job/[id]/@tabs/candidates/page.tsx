@@ -9,7 +9,9 @@ export default async function CandidatesTab({
 }: {
   params: { slug: string; id: string };
 }) {
-  const stage = await api.job.getCandidatesByStage({ id: params.id });
+  const stage = await api.job.getCandidatesByStage({
+    id: params.id,
+  });
 
   const list: ColumnMap = {};
 
@@ -29,5 +31,11 @@ export default async function CandidatesTab({
 
   const columnOrder = Object.values(list).map((column) => column.columnId);
 
-  return <CandidatesBoard stageData={list} columnOrder={columnOrder} />;
+  return (
+    <CandidatesBoard
+      jobId={params.id}
+      stageData={list}
+      columnOrder={columnOrder}
+    />
+  );
 }

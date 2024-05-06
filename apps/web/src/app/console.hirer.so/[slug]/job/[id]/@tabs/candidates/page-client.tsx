@@ -9,6 +9,9 @@ import {
 import { reorderWithEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge";
 import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { cn } from "@hirer/ui";
+import { Button } from "@hirer/ui/button";
+import { Kanban, ListBullets, MagnifyingGlass } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
 import invariant from "tiny-invariant";
 import { Column, ColumnMap, ColumnType, Item } from "./column";
@@ -16,10 +19,23 @@ import { Column, ColumnMap, ColumnType, Item } from "./column";
 export default function CandidatesBoard({
   stageData,
   columnOrder,
+  jobId,
 }: {
+  jobId: string;
   stageData: ColumnMap;
   columnOrder: string[];
 }) {
+  const [searchValue, setSearchValue] = useState("");
+  const [view, setView] = useState<"TABLE" | "CARD">("TABLE");
+
+  const candidatesController = api.job.getCandidatesByStage.useQuery(
+    { id: jobId, name: searchValue },
+    {
+      // initialData: stageData,
+      enabled: !!searchValue,
+    }
+  );
+
   const [data, setData] = useState<{
     columnMap: ColumnMap;
     orderedColumnIds: string[];
@@ -29,6 +45,11 @@ export default function CandidatesBoard({
   });
 
   const updateApplicantStage = api.stage.moveCandidate.useMutation();
+
+  function switchView(view: "CARD" | "TABLE") {
+    setView(view);
+    localStorage.setItem(`candidatesView-${jobId}`, view);
+  }
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -226,11 +247,46 @@ export default function CandidatesBoard({
   }, [data, isCustomAutoScrollEnabled, updateApplicantStage]);
 
   return (
-    <div className="h-full min-h-[calc(100vh-201px)] overflow-x-auto border rounded-md bg-zinc-50 shadow-sm scroll-bar mt-4">
-      <div className="flex gap-1 flex-row h-full" ref={ref}>
-        {data.orderedColumnIds.map((columnId) => {
-          return <Column column={data.columnMap[columnId]} key={columnId} />;
-        })}
+    <div>
+      <div className="mt-4 flex gap-2">
+        <div className="flex items-center gap-2 h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50">
+          <MagnifyingGlass />
+          <input
+            className="w-full h-full transition-colors outline-none"
+            placeholder="Search Candidates ..."
+          />
+        </div>
+        <div className="md:flex gap-1 hidden">
+          <Button
+            size="icon"
+            className={cn([view === "TABLE" ? "bg-black" : "bg-white border"])}
+            variant={view === "TABLE" ? "default" : "secondary"}
+            onClick={() => switchView("TABLE")}
+          >
+            <Kanban
+              size={16}
+              className={cn([view === "TABLE" ? "text-white" : "text-black"])}
+            />
+          </Button>
+          <Button
+            size="icon"
+            className={cn([view === "CARD" ? "bg-black" : "bg-white border"])}
+            variant={view === "CARD" ? "default" : "secondary"}
+            onClick={() => switchView("CARD")}
+          >
+            <ListBullets
+              size={16}
+              className={cn([view === "CARD" ? "text-white" : "text-black"])}
+            />
+          </Button>
+        </div>
+      </div>
+      <div className="h-full min-h-[calc(100vh-201px)] overflow-x-auto border rounded-md bg-zinc-50 shadow-sm scroll-bar mt-4">
+        <div className="flex gap-1 flex-row h-full" ref={ref}>
+          {data.orderedColumnIds.map((columnId) => {
+            return <Column column={data.columnMap[columnId]} key={columnId} />;
+          })}
+        </div>
       </div>
     </div>
   );
