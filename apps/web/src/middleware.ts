@@ -25,15 +25,17 @@ const CONSOLE_HOSTNAMES = new Set([
 export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
   const { domain, fullPath, path } = parse(req);
 
-  // rewrites for app pages
+  if (domain === "hirer.so" || domain === "localhost:3000") {
+    return NextResponse.rewrite(
+      new URL(`/hirer.so${fullPath === "/" ? "" : fullPath}`, req.url)
+    );
+  }
+
   if (CONSOLE_HOSTNAMES.has(domain)) {
     return NextResponse.rewrite(
       new URL(`/console.hirer.so${fullPath === "/" ? "" : fullPath}`, req.url)
     );
   }
-
-  // TODO: Move this to page, not middleware.
-  // Need to store in Redis, Job URL, which will have keys ord_id & job_id.
 
   if (domain.includes("hirer.so") || domain.includes("localhost:3000")) {
     const orgSlug = getSubdomain(domain);
