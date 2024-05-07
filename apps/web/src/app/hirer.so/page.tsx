@@ -105,8 +105,8 @@ export default function HirerPage() {
             <div className="space-y-6">
               <HirerLogo width={100} />
               <p className="max-w-xs text-sm text-gray-500">
-                Giving modern marketing teams superpowers with short links that
-                stand out.
+                The modern recruiting platform for businesses to hire the best
+                talent.
               </p>
               <p className="text-sm leading-5 text-gray-400">© 2024 Hirer</p>
               <div className="flex items-center space-x-3">
