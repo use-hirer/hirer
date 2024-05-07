@@ -1,26 +1,12 @@
 import HirerLogo from "@/components/icons/hirer-logo";
+import { carousel } from "@/lib/constants/carousel";
 import { Button } from "@hirer/ui/button";
-import { CheckCircle } from "@phosphor-icons/react/dist/ssr";
+import { CheckCircle, PlayCircle } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
-
-const carousel = [
-  { title: "Secure Transactions" },
-  { title: "Proxy Voting Capabilities" },
-  { title: "Swift and Effortless Account Setup" },
-  { title: "Merging Identical Entries" },
-  { title: "Customized Domain Options" },
-  { title: "Allow Guest Financial Insights" },
-  { title: "Advanced Textual Analysis Tools" },
-  { title: "Tailored Brand Color Schemes" },
-  { title: "Define Financial Profile Images" },
-  { title: "Choose Between Dark and Light Finance Views" },
-  { title: "Priority Account Alerts" },
-  { title: "Internal Financial Discussions" },
-];
 
 export default function HirerPage() {
   return (
-    <div className="overflow-y-auto">
+    <div className="overflow-y-auto h-screen pb-16">
       <div className="container bg-zinc-50">
         <div className="flex py-4 px-4 justify-between items-center">
           <HirerLogo width={80} />
@@ -36,7 +22,7 @@ export default function HirerPage() {
             </Button>
           </div>
         </div>
-        <div className="w-full mx-auto px-4 md:px-8 h-screen bg-white rounded-lg shadow-md border">
+        <div className="w-full mx-auto px-4 md:px-8 bg-white rounded-lg shadow-md border">
           <div className="pt-12">
             <h1 className="text-5xl md:text-8xl text-balance">
               The Open-Source Hiring Platform
@@ -55,18 +41,19 @@ export default function HirerPage() {
                   Book a demo
                 </Button>
               </Link>
-              <Link
-                href={"https://console.hirer.so"}
-                target="_blank"
-                className="font-medium"
-              >
+              <Link href={"https://console.hirer.so"} className="font-medium">
                 <Button size={"lg"} className="rounded-3xl">
                   Start Hiring
                 </Button>
               </Link>
             </div>
           </div>
-          <div className="pt-24">
+          <div className="pt-16">
+            <div className="bg-zinc-50 rounded-lg border h-[250px] md:h-[500px] flex items-center justify-center">
+              <PlayCircle size={50} weight="thin" className="text-zinc-300" />
+            </div>
+          </div>
+          <div className="pt-8">
             <div className="relative max-w-screen-xl mx-auto">
               <div className="relative py-12 mx-auto overflow-hidden overflow-x-hidden 2xl:max-w-screen-xl">
                 <div className="flex flex-col gap-4">
