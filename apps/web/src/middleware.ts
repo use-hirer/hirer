@@ -22,10 +22,16 @@ const CONSOLE_HOSTNAMES = new Set([
   "console.localhost:3000",
 ]);
 
+const LANDING_HOSTNAMES = new Set([
+  "hirer.so",
+  "www.hirer.so",
+  "localhost:3000",
+]);
+
 export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
   const { domain, fullPath, path } = parse(req);
 
-  if (domain === "hirer.so" || domain === "localhost:3000") {
+  if (LANDING_HOSTNAMES.has(domain)) {
     return NextResponse.rewrite(
       new URL(`/hirer.so${fullPath === "/" ? "" : fullPath}`, req.url)
     );
