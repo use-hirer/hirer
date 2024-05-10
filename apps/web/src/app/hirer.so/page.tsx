@@ -5,6 +5,7 @@ import DemoVideo from "./_components/demo-video";
 import FeatureMarquee from "./_components/feature-marquee";
 import Footer from "./_components/footer";
 import Hero from "./_components/hero";
+import Pricing from "./_components/pricing";
 
 export default function HirerPage() {
   return (
@@ -33,6 +34,9 @@ export default function HirerPage() {
           </div>
           <div className="py-8">
             <FeatureMarquee />
+          </div>
+          <div className="pb-16">
+            <Pricing />
           </div>
         </div>
         <div className="py-8 px-2 md:px-8">

@@ -17,7 +17,7 @@ export default function FeatureMarquee() {
           Explore a wide range of hiring tools, features, and support for your
           businesses goals
         </p>
-      </div>{" "}
+      </div>
       <div className="relative max-w-screen-xl mx-auto">
         <div className="relative py-12 mx-auto overflow-hidden overflow-x-hidden 2xl:max-w-screen-xl">
           <div className="flex flex-col gap-4">
