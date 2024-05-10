@@ -10,7 +10,7 @@ export default function HirerPage() {
   return (
     <div className="overflow-y-auto h-screen">
       <div className="container bg-zinc-50 px-2 md:px-8">
-        <div className="flex py-4 px-8 justify-between items-center">
+        <div className="flex py-4 px-2 md:px-8 justify-between items-center">
           <HirerLogo width={80} />
           <div className="flex gap-4 items-center">
             <Link href={"https://console.hirer.so"} className="font-medium">
@@ -35,7 +35,7 @@ export default function HirerPage() {
             <FeatureMarquee />
           </div>
         </div>
-        <div className="py-8 px-4 md:px-8">
+        <div className="py-8 px-2 md:px-8">
           <Footer />
         </div>
       </div>
