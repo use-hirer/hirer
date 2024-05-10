@@ -11,7 +11,7 @@ export default function Hero() {
       </h1>
       <p className="text-xl md:text-2xl mt-8 text-balance max-w-3xl">
         Hirer is a modern recruiting platform with customisable job board,
-        real-time analytics, AI assessments, and and full white-labeling.
+        real-time analytics, AI assessments, and full white-labeling.
       </p>
       <div className="pt-8 space-x-2">
         <Link
