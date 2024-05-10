@@ -14,6 +14,7 @@ const features = {
   ],
   pro: [
     { title: "Team Management (Unlimited Users)" },
+    { title: "API Access" },
     { title: "Custom Domains" },
     { title: "Priority Support" },
   ],
