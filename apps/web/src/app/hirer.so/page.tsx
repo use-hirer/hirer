@@ -9,7 +9,7 @@ import Pricing from "./_components/pricing";
 
 export default function HirerPage() {
   return (
-    <div className="overflow-y-auto h-screen">
+    <div className="">
       <div className="container bg-zinc-50 px-2 md:px-8">
         <div className="flex py-4 px-2 md:px-8 justify-between items-center">
           <HirerLogo width={80} />

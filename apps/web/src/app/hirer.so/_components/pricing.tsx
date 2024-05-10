@@ -152,7 +152,7 @@ export default function Pricing() {
             <div className="text-4xl font-medium">Talk to Us</div>
           </div>
           <div className="flex-shrink-0 mt-auto">
-            <a href="https://console.hirer.so">
+            <a href="https://cal.com/hirer/15min">
               <Button variant={"outline"} className="w-full h-11 shadow-none">
                 Schedule a Call
               </Button>
