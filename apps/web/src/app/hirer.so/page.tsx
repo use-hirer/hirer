@@ -1,11 +1,18 @@
 import HirerLogo from "@/components/icons/hirer-logo";
 import { Button } from "@hirer/ui/button";
+import type { Metadata } from "next";
 import Link from "next/link";
 import DemoVideo from "./_components/demo-video";
 import FeatureMarquee from "./_components/feature-marquee";
 import Footer from "./_components/footer";
 import Hero from "./_components/hero";
 import Pricing from "./_components/pricing";
+
+export const metadata: Metadata = {
+  title: "Hirer | The Open-Source Hiring Platform",
+  description:
+    "Hirer is a modern recruiting platform with customisable job board, real-time analytics, AI assessments, and full white-labeling.",
+};
 
 export default function HirerPage() {
   return (

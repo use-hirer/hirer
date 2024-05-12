@@ -16,13 +16,13 @@ const features = {
     { title: "Team Management (Unlimited Users)" },
     { title: "API Access" },
     { title: "Custom Domains" },
+    { title: "Removed Hirer Branding" },
     { title: "Priority Support" },
   ],
   proUpcoming: [
     { title: "AI Screening/Video Assessment" },
     { title: "AI Interview Platform" },
     { title: "Interview Scheduler" },
-    { title: "Candidate Background Verification" },
     { title: "Many More Features" },
   ],
   enterprise: [
