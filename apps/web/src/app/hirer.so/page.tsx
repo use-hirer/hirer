@@ -24,12 +24,14 @@ export default function HirerPage() {
             <Link href={"https://console.hirer.so"} className="font-medium">
               Login
             </Link>
-            <Button
-              size={"sm"}
-              className="text-sm rounded-xl hover:shadow-md hover:shadow-gray-400 font-medium"
-            >
-              Sign Up
-            </Button>
+            <Link href={"https://console.hirer.so"} className="font-medium">
+              <Button
+                size={"sm"}
+                className="text-sm rounded-xl hover:shadow-md hover:shadow-gray-400 font-medium"
+              >
+                Sign Up
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="w-full mx-auto px-4 md:px-8 bg-white rounded-lg shadow-md border">
