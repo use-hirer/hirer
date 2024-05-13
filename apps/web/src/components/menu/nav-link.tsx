@@ -47,11 +47,6 @@ const NavLink: React.FC<NavLinkProps> = ({
             </TooltipTrigger>
             <TooltipContent side="right" className="flex items-center gap-4">
               {label}
-              {/* {link.label && (
-              <span className="ml-auto text-muted-foreground">
-                {link.label}
-              </span>
-            )} */}
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

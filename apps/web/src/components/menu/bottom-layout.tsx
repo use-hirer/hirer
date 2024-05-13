@@ -33,7 +33,7 @@ const BottomMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
       <NavLink
         icon={Info}
         label="Help"
-        href={`/${slug}/settings`}
+        href={`/${slug}/help`}
         selected={isSelected("/help", slug)}
         collapsed={collapsed}
       />

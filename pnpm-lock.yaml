@@ -185,6 +185,9 @@ importers:
       react-markdown:
         specifier: ^9.0.1
         version: 9.0.1(@types/react@18.2.75)(react@18.2.0)
+      react-sparkly-text:
+        specifier: ^0.0.44
+        version: 0.0.44(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       remark:
         specifier: ^15.0.1
         version: 15.0.1
@@ -5825,6 +5828,12 @@ packages:
       prop-types: ^15.6.0
       react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
       react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+
+  react-sparkly-text@0.0.44:
+    resolution: {integrity: sha512-0DPCm9MD3H/ptaqtFIG8qgzSs/Yf95Moo+qr1IegH9Eo56FiCjr52a8uWE4VhmqdBv0sCd9tITRLu990nx2kCQ==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
 
   react-style-singleton@2.2.1:
     resolution: {integrity: sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g==}
@@ -12635,6 +12644,11 @@ snapshots:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-transition-group: 2.9.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
+  react-sparkly-text@0.0.44(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
 
   react-style-singleton@2.2.1(@types/react@18.2.75)(react@18.2.0):
     dependencies:

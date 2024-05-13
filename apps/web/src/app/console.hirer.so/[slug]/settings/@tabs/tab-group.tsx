@@ -9,7 +9,6 @@ const tabs = [
   { title: "Team", href: "team" },
   { title: "Domains", href: "domains" },
   { title: "Billing", href: "billing" },
-  { title: "Support", href: "support" },
 ];
 
 const TabGroup: React.FC<{ parallelRoutesKey?: string }> = ({}) => {
