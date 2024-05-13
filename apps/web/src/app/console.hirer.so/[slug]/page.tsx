@@ -4,8 +4,14 @@ import { api } from "@/lib/api/server";
 import { Alert, AlertDescription, AlertTitle } from "@hirer/ui/alert";
 import { Card } from "@hirer/ui/card";
 import { Separator } from "@hirer/ui/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@hirer/ui/tooltip";
 import { HandWaving } from "@phosphor-icons/react/dist/ssr";
-import { AreaChart } from "@tremor/react";
+import { AreaChart, BadgeDelta } from "@tremor/react";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -126,14 +132,31 @@ export default async function DashboardPage({
               title="Active Applications"
               deltaType="increase"
             />
-            <KPICard
-              increase="positive"
-              percentageChange={0}
-              value="89"
-              timePeriod="Last 4 weeks"
-              title="Total Followers"
-              deltaType="unchanged"
-            />
+            <TooltipProvider>
+              <Tooltip delayDuration={200}>
+                <TooltipTrigger asChild>
+                  <Card className="rounded p-4 border-neutral-200 border-dashed flex-grow-0 shadow-sm bg-zinc-50">
+                    <div className="font-bold text-sm">Followers</div>
+                    <div className="text-xs font-light text-zinc-500">
+                      Last 4 Weeks
+                    </div>
+                    <div className="flex justify-between items-center pt-2">
+                      <div className="text-3xl font-extrabold">0</div>
+                      <BadgeDelta
+                        deltaType="unchanged"
+                        size="xs"
+                        className="rounded-md"
+                      >
+                        +0%
+                      </BadgeDelta>
+                    </div>
+                  </Card>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Feature In Progress 🚧</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           <Card className="rounded p-4 border-neutral-200 flex-grow-0 shadow-sm mt-4">
             <div className="font-bold text-sm">Visitor Statistics</div>
