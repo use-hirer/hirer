@@ -1,5 +1,6 @@
 import { api } from "@/lib/api/server";
 import { validateRequest } from "@/lib/auth";
+import { MoneyWavy } from "@phosphor-icons/react/dist/ssr";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
@@ -22,5 +23,12 @@ export default async function BillingSettingsPage({
     orgId: params.slug as string,
   });
 
-  return <div>Billing: Settings Page</div>;
+  return (
+    <div className="flex gap-6 flex-col">
+      <div className="shadow-sm border p-4 bg-zinc-50 rounded-md border-dashed flex items-center justify-center min-h-48 text-zinc-500 text-sm flex-col gap-2">
+        <MoneyWavy size={24} />
+        Pro & Enterprise plans are not yet available.
+      </div>
+    </div>
+  );
 }

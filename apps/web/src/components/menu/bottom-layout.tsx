@@ -30,6 +30,18 @@ const BottomMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
 
   return (
     <>
+      <div className="p-4 border border-orange-300 rounded-md bg-orange-100 mb-3 text-xs">
+        Hirer is in Alpha. We&apos;re actively working on improving the
+        experience. If you have any feedback, please reach out to us on{" "}
+        <a
+          href="https://cal.com/hirer/feedback"
+          target="_blank"
+          className="text-blue-500 underline"
+        >
+          Cal.com
+        </a>
+        .
+      </div>
       <NavLink
         icon={Info}
         label="Help"
