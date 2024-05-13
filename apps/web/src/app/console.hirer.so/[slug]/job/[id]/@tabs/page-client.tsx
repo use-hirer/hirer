@@ -14,7 +14,7 @@ import { Button } from "@hirer/ui/button";
 import { Kanban, ListBullets, MagnifyingGlass } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
 import invariant from "tiny-invariant";
-import { Column, ColumnMap, ColumnType, Item } from "./column";
+import { Column, ColumnMap, ColumnType, Item } from "./candidates/column";
 
 export default function CandidatesBoard({
   stageData,

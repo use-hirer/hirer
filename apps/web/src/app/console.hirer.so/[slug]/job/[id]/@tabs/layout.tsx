@@ -14,8 +14,7 @@ export default function Layout({
           <TabGroup
             path={`/${params.slug}/job/${params.id}`}
             items={[
-              { text: "Overview" },
-              { text: "Candidates", slug: "candidates" },
+              { text: "Candidates" },
               { text: "Metrics", slug: "metrics" },
               { text: "Sharing", slug: "sharing" },
               { text: "Settings", slug: "settings" },
