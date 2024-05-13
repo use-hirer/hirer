@@ -12,29 +12,30 @@ import {
   Spinner,
   SquaresFour,
 } from "@phosphor-icons/react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
-import JobCard from "./job-card";
-import { JobsTable } from "./jobs-table";
-import NoJobsExist from "./no-jobs-exist";
-import NoJobsFound from "./no-jobs-found";
+import AddCandidateSheet from "./_components/add-candidate-sheet";
+import CandidateCard from "./_components/candidate-card";
+import { CandidatesTable } from "./_components/candidates-table";
+import NoCandidatesExist from "./_components/no-candidates-exist";
+import NoCandidatesFound from "./_components/no-candidates-found";
 
-interface JobsViewProps {
-  jobs: RouterOutputs["job"]["getMany"];
+interface CandidatesViewProps {
+  candidates: RouterOutputs["candidate"]["getMany"];
 }
 
-const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
-  const router = useRouter();
-  const { slug } = useParams() as { slug?: string };
-  const [view, setView] = useState<"TABLE" | "CARD">("TABLE");
+const CandidatesView: React.FC<CandidatesViewProps> = ({ candidates }) => {
   const [searchValue, setSearchValue] = useState("");
+  const [view, setView] = useState<"TABLE" | "CARD">("TABLE");
+  const [openCandidateSheet, setOpenCandidateSheet] = useState<boolean>(false);
   const [debouncedSearchValue] = useDebounce(searchValue, 500);
+  const { slug } = useParams() as { slug?: string };
   const [previousResults, setPreviousResults] =
-    useState<RouterOutputs["job"]["getMany"]>(jobs);
+    useState<RouterOutputs["candidate"]["getMany"]>(candidates);
 
-  const jobsApi = api.job.getMany.useQuery(
-    { teamId: slug as string, title: debouncedSearchValue },
+  const candidatesApi = api.candidate.getMany.useQuery(
+    { teamId: slug as string, name: debouncedSearchValue },
     {
       initialData: previousResults,
       enabled: !!debouncedSearchValue,
@@ -42,56 +43,56 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
   );
 
   useEffect(() => {
-    const storedView = localStorage.getItem("jobsView");
+    const storedView = localStorage.getItem("candidatesView");
     if (storedView === "CARD" || storedView === "TABLE") {
       setView(storedView);
     }
   }, []);
 
   useEffect(() => {
-    if (jobsApi.isFetched && jobsApi.data !== previousResults) {
-      setPreviousResults(jobsApi.data);
+    if (candidatesApi.isFetched && candidatesApi.data !== previousResults) {
+      setPreviousResults(candidatesApi.data);
     }
 
-    if (debouncedSearchValue === "" && jobsApi.data !== jobs) {
-      setPreviousResults(jobs);
+    if (debouncedSearchValue === "" && candidatesApi.data !== candidates) {
+      setPreviousResults(candidatesApi.data);
     }
   }, [
-    jobsApi.isFetched,
-    jobsApi.data,
+    candidatesApi.isFetched,
+    candidatesApi.data,
     previousResults,
     debouncedSearchValue,
-    jobs,
+    candidates,
   ]);
 
   function switchView(view: "CARD" | "TABLE") {
     setView(view);
-    localStorage.setItem("jobsView", view);
+    localStorage.setItem("candidatesView", view);
   }
 
   return (
     <div className="flex flex-col h-full">
       <div className="flex gap-2 pb-4">
         <div className="flex items-center gap-2 h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50">
-          {jobsApi.isFetching ? (
+          {candidatesApi.isFetching ? (
             <Spinner className="animate-spin" />
           ) : (
             <MagnifyingGlass />
           )}
           <input
             className="w-full h-full transition-colors outline-none"
-            placeholder="Search Jobs ..."
+            placeholder="Search Candidates ..."
             onChange={(e) => setSearchValue(e.currentTarget.value)}
             value={searchValue}
           />
         </div>
         <Button
-          disabled={jobsApi.isRefetching}
-          onClick={async () => await jobsApi.refetch()}
+          disabled={candidatesApi.isRefetching}
+          onClick={async () => await candidatesApi.refetch()}
           className="flex items-center justify-center gap-1"
         >
           <ArrowClockwise
-            className={cn([jobsApi.isRefetching ? "animate-spin" : ""])}
+            className={cn([candidatesApi.isRefetching ? "animate-spin" : ""])}
           />
           <div className="hidden sm:block ml-1">Refresh</div>
         </Button>
@@ -120,32 +121,32 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
           </Button>
         </div>
         <Button
-          onClick={() => router.push(`/${slug}/jobs/create`)}
+          onClick={() => setOpenCandidateSheet(true)}
           className="flex items-center justify-center gap-1"
         >
           <Plus />
-          <div className="hidden sm:block ml-1">New Job</div>
+          <div className="hidden sm:block ml-1">New Candidate</div>
         </Button>
       </div>
-      {jobs.length > 0 ? (
+      {candidates.length > 0 ? (
         <div className="flex h-full">
-          {jobsApi.data?.length === 0 && !jobsApi.isLoading && (
-            <NoJobsFound
-              searchValue={debouncedSearchValue}
-              className="bg-zinc-50 flex-1"
-            />
+          {candidatesApi.data?.length === 0 && !candidatesApi.isLoading && (
+            <NoCandidatesFound className="bg-zinc-50 flex-1" />
           )}
-          {jobsApi.data && jobsApi.data?.length > 0 && (
+          {candidatesApi.data && candidatesApi.data?.length > 0 && (
             <div className="w-full">
               {view === "TABLE" && (
                 <>
                   <div className="hidden md:block">
-                    <JobsTable data={jobsApi.data} />
+                    <CandidatesTable data={candidatesApi.data} />
                   </div>
                   <div className="md:hidden">
                     <div className="grid grid-cols-1 gap-4">
-                      {jobsApi.data.map((job) => (
-                        <JobCard key={job.id} job={job} />
+                      {candidatesApi.data.map((candidate) => (
+                        <CandidateCard
+                          key={candidate.id}
+                          candidate={candidate}
+                        />
                       ))}
                     </div>
                   </div>
@@ -153,8 +154,8 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
               )}
               {view === "CARD" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                  {jobsApi.data.map((job) => (
-                    <JobCard key={job.id} job={job} />
+                  {candidatesApi.data.map((candidate) => (
+                    <CandidateCard key={candidate.id} candidate={candidate} />
                   ))}
                 </div>
               )}
@@ -162,10 +163,15 @@ const JobsView: React.FC<JobsViewProps> = ({ jobs }) => {
           )}
         </div>
       ) : (
-        <NoJobsExist className="flex-1 bg-zinc-50" />
+        <NoCandidatesExist className="flex-1 bg-zinc-50" />
       )}
+      <AddCandidateSheet
+        open={openCandidateSheet}
+        setOpen={setOpenCandidateSheet}
+        orgId={slug as string}
+      />
     </div>
   );
 };
 
-export default JobsView;
+export default CandidatesView;

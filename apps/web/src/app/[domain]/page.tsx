@@ -1,12 +1,12 @@
 import HirerLogo from "@/components/icons/hirer-logo";
 import { api } from "@/lib/api/server";
 import { getSubdomain } from "@/lib/functions/domains";
-import JobsList from "@/modules/public/jobs-list";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
+import JobsList from "./_components/jobs-list";
 
 export async function generateMetadata(
   { params }: { params: { domain: string } },

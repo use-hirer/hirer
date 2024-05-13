@@ -1,8 +1,8 @@
 import { api } from "@/lib/api/server";
 import { validateRequest } from "@/lib/auth";
-import GeneralSettingsView from "@/modules/settings/general-settings";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import GeneralSettingsView from "../_components/general-settings";
 
 export const metadata: Metadata = {
   title: "Hirer: Settings",

@@ -1,8 +1,8 @@
 import { api } from "@/lib/api/server";
 import { validateRequest } from "@/lib/auth";
-import GeneralJobConfigurationView from "@/modules/job/configuration/general-configuration-view";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import GeneralJobConfigurationView from "../../../_components/configuration/general-configuration-view";
 
 export const metadata: Metadata = {
   title: "Hirer: Settings",

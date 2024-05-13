@@ -1,10 +1,10 @@
 import { api } from "@/lib/api/server";
 import { validateRequest } from "@/lib/auth";
-import CandidatesView from "@/modules/candidates/candidates-view";
 import { Separator } from "@hirer/ui/separator";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Toaster } from "sonner";
+import CandidatesView from "./page-client";
 
 export const metadata: Metadata = {
   title: "Hirer: Candidates",

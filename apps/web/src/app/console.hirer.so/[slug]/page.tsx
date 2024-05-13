@@ -1,5 +1,5 @@
 import { authCheck } from "@/actions/auth";
-import KPICard from "@/components/dashboard/kpi-card";
+import KPICard from "@/components/kpi-card";
 import { api } from "@/lib/api/server";
 import { Alert, AlertDescription, AlertTitle } from "@hirer/ui/alert";
 import { Card } from "@hirer/ui/card";

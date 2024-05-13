@@ -1,5 +1,5 @@
 import { api } from "@/lib/api/server";
-import JobConfigurationClientPage from "./client-page";
+import JobConfigurationClientPage from "./page-client";
 
 export default async function JobConfigurationTab({
   params,

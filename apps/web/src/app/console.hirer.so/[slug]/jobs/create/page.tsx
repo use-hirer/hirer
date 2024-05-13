@@ -1,4 +1,3 @@
-import JobCreateForm from "@/components/forms/job-create-form";
 import { validateRequest } from "@/lib/auth";
 import { Alert, AlertDescription, AlertTitle } from "@hirer/ui/alert";
 import {
@@ -15,6 +14,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Toaster } from "sonner";
+import JobCreateForm from "../_forms/job-create-form";
 
 export const metadata: Metadata = {
   title: "Hirer: Create a Job",

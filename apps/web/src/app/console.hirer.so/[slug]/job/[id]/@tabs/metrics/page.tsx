@@ -1,10 +1,10 @@
-import KPICard from "@/components/dashboard/kpi-card";
+import KPICard from "@/components/kpi-card";
 import { api } from "@/lib/api/server";
-import DeviceMetricsCard from "@/modules/job/metrics/device-metrics-card";
-import LocationsMetricsCard from "@/modules/job/metrics/locations-metrics-card";
-import ReferrersMetricsCard from "@/modules/job/metrics/referrers-metrics-card";
 import { Card } from "@hirer/ui/card";
 import { AreaChart } from "@tremor/react";
+import DeviceMetricsCard from "../../_components/metrics/device-metrics-card";
+import LocationsMetricsCard from "../../_components/metrics/locations-metrics-card";
+import ReferrersMetricsCard from "../../_components/metrics/referrers-metrics-card";
 
 export default async function MetricsTab({
   params,

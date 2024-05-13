@@ -1,11 +1,11 @@
 import { api } from "@/lib/api/server";
 import { validateRequest } from "@/lib/auth";
-import CreateCandidateCard from "@/modules/activity/create-candidate-card";
-import CreateJobCard from "@/modules/activity/create-job-card";
-import NoActivityExists from "@/modules/activity/no-activity-exists";
 import { Separator } from "@hirer/ui/separator";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import CreateCandidateCard from "./_components/create-candidate-card";
+import CreateJobCard from "./_components/create-job-card";
+import NoActivityExists from "./_components/no-activity-exists";
 
 export const metadata: Metadata = {
   title: "Hirer: Activity Log",

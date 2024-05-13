@@ -1,7 +1,7 @@
 import { validateRequest } from "@/lib/auth";
-import DomainsSettingsView from "@/modules/settings/domain-settings";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import DomainsSettingsView from "../../_components/domain-settings";
 
 export const metadata: Metadata = {
   title: "Hirer: Settings",

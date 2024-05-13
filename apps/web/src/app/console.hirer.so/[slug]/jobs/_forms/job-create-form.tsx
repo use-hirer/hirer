@@ -1,5 +1,6 @@
 "use client";
 
+import Editor from "@/components/editor/editor";
 import { api } from "@/lib/api/react";
 import { Button } from "@hirer/ui/button";
 import {
@@ -30,7 +31,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import Editor from "../editor/editor";
 
 const jobFormSchema = z.object({
   position: z.string().min(1, "Every job needs a title."),

@@ -1,11 +1,11 @@
 import HirerLogo from "@/components/icons/hirer-logo";
 import { api } from "@/lib/api/server";
-import JobApplyForm from "@/modules/public/job-apply-form";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
+import JobApplyForm from "../../_components/job-apply-form";
 
 export async function generateMetadata(
   { params }: { params: { domain: string; slug: string } },
