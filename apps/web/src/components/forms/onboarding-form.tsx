@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatedLogo } from "@/components/logo";
 import StepIndicator from "@/components/steps-indicator";
 import { api } from "@/lib/api/react";
 import { Button } from "@hirer/ui/button";
@@ -20,6 +19,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
+import HirerLogo from "../icons/hirer-logo";
 
 const FormSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
@@ -73,7 +73,7 @@ export default function OnboardingForm() {
             name="fullName"
             render={({ field, fieldState }) => (
               <>
-                <div className="bg-white rounded-xl shadow-sm border-zinc-950/5 border p-4 min-w-[300px]">
+                <div className="bg-white rounded-xl shadow-sm border p-4 min-w-[300px]">
                   <Input
                     autoComplete="off"
                     placeholder="Elon Musk"
@@ -108,7 +108,7 @@ export default function OnboardingForm() {
             name="role"
             render={({ field }) => (
               <>
-                <div className="bg-white rounded-xl shadow-sm border-zinc-950/5 border p-4 min-w-[300px]">
+                <div className="bg-white rounded-xl shadow-sm border p-4 min-w-[300px]">
                   <Select
                     defaultValue={field.value}
                     onValueChange={field.onChange}
@@ -155,7 +155,7 @@ export default function OnboardingForm() {
             name="referral"
             render={({ field }) => (
               <>
-                <div className="bg-white rounded-xl shadow-sm border-zinc-950/5 border p-4 min-w-[300px]">
+                <div className="bg-white rounded-xl shadow-sm border p-4 min-w-[300px]">
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -201,13 +201,13 @@ export default function OnboardingForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="flex items-center justify-center">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col items-center"
         >
-          <AnimatedLogo />
+          <HirerLogo width={100} className="mb-4" />
           <div className="flex flex-col items-center mb-4">
             <div className="font-light text-sm">
               {step === 1 && "Can you introduce yourself first 👋"}

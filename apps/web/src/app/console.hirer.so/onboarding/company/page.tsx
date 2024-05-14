@@ -1,7 +1,6 @@
 import CompanyProfileForm from "@/components/forms/company-profile-form";
-import { AnimatedLogo } from "@/components/logo";
+import HirerLogo from "@/components/icons/hirer-logo";
 import { validateRequest } from "@/lib/auth";
-import { Button } from "@hirer/ui/button";
 import { redirect } from "next/navigation";
 
 export default async function OnboardingCompanyPage() {
@@ -17,18 +16,17 @@ export default async function OnboardingCompanyPage() {
 
   return (
     <>
-      <AnimatedLogo />
-      <div className="flex flex-col items-center mb-4">
+      <HirerLogo width={100} className="mb-4" />
+      <div className="flex flex-col items-center">
         <div className="font-light text-sm">
           Now let&apos;s get to know your business 📈
         </div>
       </div>
-      <div className="bg-white rounded-xl shadow-sm border-zinc-950/5 border p-4 min-w-[500px] overflow-y-auto">
-        <CompanyProfileForm />
+      <div className="p-4 max-w-[500px] container overflow-y-auto">
+        <div className="bg-white border rounded-xl shadow-sm p-4">
+          <CompanyProfileForm />
+        </div>
       </div>
-      <Button className="mt-4" variant="ghost">
-        Join Existing Business
-      </Button>
     </>
   );
 }

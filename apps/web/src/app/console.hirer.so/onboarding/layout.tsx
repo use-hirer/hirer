@@ -18,7 +18,7 @@ export default async function OnboardingLayout({
 
   return (
     <>
-      <div className="h-screen w-full bg-zinc-50 flex flex-col items-center justify-center">
+      <div className="h-[100dvh] w-full bg-zinc-50 flex flex-col items-center justify-center">
         {children}
       </div>
     </>
