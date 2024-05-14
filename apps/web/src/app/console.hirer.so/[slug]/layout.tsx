@@ -2,7 +2,6 @@ import { authCheck } from "@/actions/auth";
 import ChatSidebar from "@/components/chat-sidebar";
 import NavigationMenu from "@/components/menu/menu";
 import MobileNav from "@/components/menu/mobile/mobile-nav";
-import "@copilotkit/react-ui/styles.css";
 import ContentShell from "./content-shell";
 
 export default async function DashboardLayout({

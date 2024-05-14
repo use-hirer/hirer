@@ -74,71 +74,73 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
   }
 
   return (
-    <Dialog open={showNewTeamDialog} onOpenChange={setShowNewTeamDialog}>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            role="combobox"
-            aria-expanded={open}
-            aria-label="Select a team"
-            className={cn("w-full px-3 justify-between bg-white", className)}
-          >
-            <Avatar className="mr-2 h-5 w-5">
-              <AvatarImage
-                src={
-                  selectedTeam?.avatar ||
-                  `https://avatar.vercel.sh/${selectedTeam?.label}.png`
-                }
-                alt={selectedTeam?.label}
-              />
-              <AvatarFallback>acme-inc</AvatarFallback>
-            </Avatar>
-            {selectedTeam?.label}
-            <CaretSortIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-[225px] p-0">
-          <Command>
-            <CommandList>
-              <CommandInput placeholder="Search team..." />
-              <CommandEmpty>No team found.</CommandEmpty>
-              <CommandGroup key="organisation" heading="Organisations">
-                {organisations.map((organisation) => (
-                  <CommandItem
-                    key={organisation.value}
-                    onSelect={() => {
-                      setSelectedTeam(organisation);
-                      setOpen(false);
-                    }}
-                    className="text-sm"
-                  >
-                    <Avatar className="mr-2 h-5 w-5">
-                      <AvatarImage
-                        src={
-                          selectedTeam?.avatar ||
-                          `https://avatar.vercel.sh/${selectedTeam?.label}.png`
-                        }
-                        alt={organisation.label}
+    <div className="bg-white">
+      <Dialog open={showNewTeamDialog} onOpenChange={setShowNewTeamDialog}>
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={open}
+              aria-label="Select a team"
+              className={cn("w-full px-3 justify-between bg-white", className)}
+            >
+              <Avatar className="mr-2 h-5 w-5">
+                <AvatarImage
+                  src={
+                    selectedTeam?.avatar ||
+                    `https://avatar.vercel.sh/${selectedTeam?.label}.png`
+                  }
+                  alt={selectedTeam?.label}
+                />
+                <AvatarFallback>acme-inc</AvatarFallback>
+              </Avatar>
+              {selectedTeam?.label}
+              <CaretSortIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-[225px] p-0">
+            <Command>
+              <CommandList>
+                <CommandInput placeholder="Search team..." />
+                <CommandEmpty>No team found.</CommandEmpty>
+                <CommandGroup key="organisation" heading="Organisations">
+                  {organisations.map((organisation) => (
+                    <CommandItem
+                      key={organisation.value}
+                      onSelect={() => {
+                        setSelectedTeam(organisation);
+                        setOpen(false);
+                      }}
+                      className="text-sm"
+                    >
+                      <Avatar className="mr-2 h-5 w-5">
+                        <AvatarImage
+                          src={
+                            selectedTeam?.avatar ||
+                            `https://avatar.vercel.sh/${selectedTeam?.label}.png`
+                          }
+                          alt={organisation.label}
+                        />
+                        <AvatarFallback>SC</AvatarFallback>
+                      </Avatar>
+                      {organisation.label}
+                      <CheckIcon
+                        className={cn(
+                          "ml-auto h-4 w-4",
+                          organisation.value === organisation.value
+                            ? "opacity-100"
+                            : "opacity-0"
+                        )}
                       />
-                      <AvatarFallback>SC</AvatarFallback>
-                    </Avatar>
-                    {organisation.label}
-                    <CheckIcon
-                      className={cn(
-                        "ml-auto h-4 w-4",
-                        organisation.value === organisation.value
-                          ? "opacity-100"
-                          : "opacity-0"
-                      )}
-                    />
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
-    </Dialog>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
+      </Dialog>
+    </div>
   );
 }

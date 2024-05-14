@@ -19,8 +19,7 @@ const NavigationMenu: React.FC<{
     <>
       <nav
         data-collapsed={isCollapsed}
-        // Weird chrome bug fix where the menu is not visible when extended
-        className="invisible lg:visible lg:flex flex-shrink-0 flex-col top-0 left-0 justify-between h-screen fixed w-[250px] pt-5 px-3 overflow-y-auto scroll-bar data-[collapsed=true]:w-[60px] data-[collapsed=true]:overflow-y-hidden"
+        className="hidden lg:flex flex-shrink-0 flex-col top-0 left-0 justify-between h-screen fixed w-[250px] pt-5 px-3 overflow-y-auto scroll-bar data-[collapsed=true]:w-[60px]"
       >
         <div>
           <div
@@ -32,7 +31,6 @@ const NavigationMenu: React.FC<{
             {!isCollapsed && <HirerLogo width={80} />}
           </div>
           <Separator className="my-3" />
-          {/* <Input className="bg-white h-8" placeholder="Search" /> */}
           {!isCollapsed && (
             <>
               <TeamSwitcher />

@@ -21,6 +21,19 @@ export async function POST(request: NextRequest) {
   return copilotKit.response(
     request,
     new LangChainAdapter(async (forwardedProps) => {
+      //   const model = new BedrockChat({
+      //     model: "anthropic.claude-3-haiku-20240307-v1:0",
+      //     region: process.env.AWS_REGION,
+      //     credentials: {
+      //       accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
+      //       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
+      //     },
+      //     temperature: 0.9,
+      //     maxTokens: 8192,
+      //   });
+
+      //   return model.stream(forwardedProps.messages);
+
       return "🚧 We're currently developing our AI chat functionality. Please check back soon!";
     })
   );
