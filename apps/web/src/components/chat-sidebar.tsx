@@ -41,7 +41,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = () => {
           )}
           Header={({ setOpen }) => (
             <div className="rounded-none bg-zinc-50 h-[50px] flex items-center justify-center md:rounded-t-lg border-b">
-              <HirerLogo width={50} height={40} />
+              <HirerLogo width={60} height={50} />
               <Button
                 className="absolute right-4"
                 variant={"ghost"}
