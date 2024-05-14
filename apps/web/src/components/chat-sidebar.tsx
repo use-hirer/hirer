@@ -60,7 +60,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = () => {
             <div
               className={cn([
                 open ? "flex" : "hidden",
-                "origin-bottom-right bottom-20 right-4 top-auto left-auto fixed mb-2 w-[400px] min-h-[200px] h-[600px] bg-white border rounded-lg shadow-md flex-col",
+                "origin-bottom-right bottom-20 right-4 top-auto left-auto fixed mb-2 w-[400px] min-h-[200px] h-[600px] max-h-[calc(100vh_-_6rem)] bg-white border rounded-lg shadow-md flex-col",
               ])}
             >
               {children}
@@ -94,7 +94,7 @@ const InputField: React.FC<InputProps> = ({ inProgress, onSend }) => {
         onKeyDown={handleKeyDown}
       />
       <Button
-        disabled={inProgress}
+        disabled={inProgress || !input || input.trim().length === 0}
         className="flex gap-2"
         onClick={() => {
           onSend(input);
