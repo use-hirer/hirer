@@ -40,7 +40,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = () => {
             </TooltipProvider>
           )}
           Header={({ setOpen }) => (
-            <div className="rounded-none bg-white h-[50px] flex items-center justify-center md:rounded-t-lg border-b">
+            <div className="rounded-none bg-zinc-50 h-[50px] flex items-center justify-center md:rounded-t-lg border-b">
               <HirerLogo width={50} height={40} />
               <Button
                 className="absolute right-4"
@@ -86,9 +86,9 @@ const InputField: React.FC<InputProps> = ({ inProgress, onSend }) => {
   };
 
   return (
-    <div className="border-t flex p-2 gap-2 bg-white">
+    <div className="border-t flex p-2 gap-2 bg-zinc-50 md:rounded-b-lg">
       <Input
-        className="border"
+        className="border bg-white"
         disabled={inProgress}
         value={input}
         onChange={(e) => setInput(e.currentTarget.value)}
