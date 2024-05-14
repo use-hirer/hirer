@@ -12,9 +12,10 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { useParams, usePathname } from "next/navigation";
 import React, { useState } from "react";
-import FeatureModal from "./feature-modal";
+import InterviewFeatureModal from "./interview-feature-modal";
 import NavAction from "./nav-action";
 import NavLink from "./nav-link";
+import ScreenerFeatureModal from "./screener-feature-modal";
 
 function removeSlug(str: string): string {
   const parts = str.split("/");
@@ -50,6 +51,7 @@ type MenuItem = LinkMenuItem | SeparatorMenuItem | ActionMenuItem;
 const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
   const pathname = usePathname();
   const [interviewModal, setInterviewModal] = useState(false);
+  const [screenerModal, setScreenerModal] = useState(false);
 
   const MenuLayout: MenuItem[] = [
     { title: "Home", icon: House, path: "/", type: "Link" },
@@ -62,7 +64,10 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
       title: "Screeners",
       icon: Webcam,
       path: "/screeners",
-      type: "Link",
+      type: "Action",
+      action: () => {
+        setScreenerModal(true);
+      },
       suffix: (
         <Badge variant="outline" className="ml-2 text-[10px]">
           Coming Soon
@@ -97,6 +102,11 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
       return (
         modifiedPathname.startsWith("/jobs") ||
         modifiedPathname.startsWith("/job")
+      );
+    } else if (modifiedPath === "/candidates") {
+      return (
+        modifiedPathname.startsWith("/candidates") ||
+        modifiedPathname.startsWith("/candidate")
       );
     } else {
       return modifiedPathname.startsWith(modifiedPath);
@@ -135,7 +145,11 @@ const TopMenuLayout: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
             return <Separator className="my-2" key={index} />;
         }
       })}
-      <FeatureModal open={interviewModal} setOpen={setInterviewModal} />
+      <ScreenerFeatureModal open={screenerModal} setOpen={setScreenerModal} />
+      <InterviewFeatureModal
+        open={interviewModal}
+        setOpen={setInterviewModal}
+      />
     </>
   );
 };
