@@ -19,7 +19,7 @@ const NavigationMenu: React.FC<{
     <>
       <nav
         data-collapsed={isCollapsed}
-        className="hidden lg:flex flex-shrink-0 flex-col top-0 left-0 justify-between h-screen fixed w-[250px] pt-5 px-3 overflow-y-auto scroll-bar data-[collapsed=true]:w-[60px]"
+        className="sm:hidden lg:flex flex-shrink-0 flex-col top-0 left-0 justify-between h-screen fixed w-[250px] pt-5 px-3 overflow-y-auto scroll-bar data-[collapsed=true]:w-[60px]"
       >
         <div>
           <div
