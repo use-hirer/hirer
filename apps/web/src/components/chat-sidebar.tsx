@@ -40,7 +40,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = () => {
             </TooltipProvider>
           )}
           Header={({ setOpen }) => (
-            <div className="h-[50px] flex items-center justify-center rounded-t-lg border-b">
+            <div className="rounded-none bg-white h-[50px] flex items-center justify-center md:rounded-t-lg border-b">
               <HirerLogo width={50} height={40} />
               <Button
                 className="absolute right-4"
@@ -59,8 +59,9 @@ const ChatSidebar: React.FC<ChatSidebarProps> = () => {
           Window={({ open, children }) => (
             <div
               className={cn([
+                "fixed inset-0 origin-bottom flex flex-col",
                 open ? "flex" : "hidden",
-                "origin-bottom-right bottom-20 right-4 top-auto left-auto fixed mb-2 w-[400px] min-h-[200px] h-[600px] max-h-[calc(100vh_-_6rem)] bg-white border rounded-lg shadow-md flex-col",
+                "md:origin-bottom-right md:bottom-20 md:right-4 md:top-auto md:left-auto md:fixed md:mb-2 md:w-[400px] md:min-h-[200px] md:h-[600px] md:max-h-[calc(100vh_-_6rem)] md:bg-white md:border md:rounded-lg md:shadow-md md:flex-col",
               ])}
             >
               {children}
@@ -85,7 +86,7 @@ const InputField: React.FC<InputProps> = ({ inProgress, onSend }) => {
   };
 
   return (
-    <div className="border-t flex p-2 gap-2">
+    <div className="border-t flex p-2 gap-2 bg-white">
       <Input
         className="border"
         disabled={inProgress}
