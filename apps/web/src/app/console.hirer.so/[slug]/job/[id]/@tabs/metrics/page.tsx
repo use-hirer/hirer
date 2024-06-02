@@ -63,8 +63,11 @@ export default async function MetricsTab({
           percentageChange={
             item.data[0].total_views_previous === 0
               ? 0
-              : item.data[0].total_views_current /
-                item.data[0].total_views_previous
+              : Math.round(
+                  (item.data[0].total_views_current /
+                    item.data[0].total_views_previous) *
+                    10
+                ) / 10
           }
           value={String(item.data[0].total_views_current)}
           timePeriod="Last 4 weeks"
