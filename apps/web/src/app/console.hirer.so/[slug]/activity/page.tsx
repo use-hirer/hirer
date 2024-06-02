@@ -21,6 +21,35 @@ interface GroupedActivity {
   [date: string]: ActivityItem[];
 }
 
+function formatDate(dateString: string): string {
+  const options: Intl.DateTimeFormatOptions = {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  };
+  const date = new Date(dateString);
+  const formattedDate = date.toLocaleDateString("en-US", options);
+  const day = date.getDate();
+  const daySuffix = getDaySuffix(day);
+  return formattedDate.replace(`${day}`, `${day}${daySuffix}`);
+}
+
+function getDaySuffix(day: number): string {
+  if (day >= 11 && day <= 13) {
+    return "th";
+  }
+  switch (day % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
+}
+
 export default async function ActivityPage({
   params,
 }: {
@@ -37,7 +66,7 @@ export default async function ActivityPage({
 
   const groupedActivity: GroupedActivity = activity.data.reduce(
     (acc: GroupedActivity, item: ActivityItem) => {
-      const date = new Date(item.date).toLocaleDateString();
+      const date = formatDate(item.date);
       if (!acc[date]) {
         acc[date] = [];
       }
@@ -47,33 +76,50 @@ export default async function ActivityPage({
     {}
   );
 
+  const invoices = [
+    {
+      invoice: "INV001",
+      paymentStatus: "Paid",
+      totalAmount: "$250.00",
+      paymentMethod: "Credit Card",
+    },
+  ];
+
   return (
     <div className="flex items-center gap-2 h-full">
       <div className="w-full flex-1 h-full flex flex-col">
-        <div className="font-extrabold text-xl">Activity</div>
+        <div className="font-extrabold text-xl flex items-center gap-2">
+          Activity <span className="text-xs font-normal">(Last 30 Days)</span>
+        </div>
         <Separator className="mt-2 mb-4" />
         {activity.data.length > 0 ? (
           <div className="flex flex-col gap-1">
             {Object.entries(groupedActivity).map(([date, items]) => (
               <div key={date}>
-                <div className="font-bold">{date}</div>
-                <Separator className="mt-2 mb-4" />
-                {items.map((item, key) => (
-                  <div key={key}>
-                    {item.event === "create_candidate" && (
-                      <CreateCandidateCard
-                        date={item.date}
-                        event_data={item.event_data}
-                      />
-                    )}
-                    {item.event === "create_job" && (
-                      <CreateJobCard
-                        date={item.date}
-                        event_data={item.event_data}
-                      />
-                    )}
-                  </div>
-                ))}
+                <div className="font-bold bg-zinc-50 rounded-md border p-2 text-sm shadow-sm">
+                  {date}
+                </div>
+                {/* <Separator className="mt-2 mb-4" /> */}
+                {/* Add a table here */}
+
+                <div className="py-2 rounded-md flex gap-y-1 flex-col">
+                  {items.map((item, key) => (
+                    <div key={key}>
+                      {item.event === "create_candidate" && (
+                        <CreateCandidateCard
+                          date={item.date}
+                          event_data={item.event_data}
+                        />
+                      )}
+                      {item.event === "create_job" && (
+                        <CreateJobCard
+                          date={item.date}
+                          event_data={item.event_data}
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
