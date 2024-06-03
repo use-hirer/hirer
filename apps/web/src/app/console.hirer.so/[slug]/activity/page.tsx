@@ -89,7 +89,10 @@ export default async function ActivityPage({
     <div className="flex items-center gap-2 h-full">
       <div className="w-full flex-1 h-full flex flex-col">
         <div className="font-extrabold text-xl flex items-center gap-2">
-          Activity <span className="text-xs font-normal">(Last 30 Days)</span>
+          Activity
+          <span className="font-normal text-xs text-zinc-500 mt-1">
+            (Last 30 Days)
+          </span>
         </div>
         <Separator className="mt-2 mb-4" />
         {activity.data.length > 0 ? (
@@ -99,9 +102,6 @@ export default async function ActivityPage({
                 <div className="font-bold bg-zinc-50 rounded-md border p-2 text-sm shadow-sm">
                   {date}
                 </div>
-                {/* <Separator className="mt-2 mb-4" /> */}
-                {/* Add a table here */}
-
                 <div className="py-2 rounded-md flex gap-y-1 flex-col">
                   {items.map((item, key) => (
                     <div key={key}>
