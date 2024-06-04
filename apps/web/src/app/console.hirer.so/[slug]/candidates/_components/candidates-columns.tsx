@@ -48,7 +48,7 @@ export const CANDIDATES_TABLE_COLUMNS: ColumnDef<
           href={`candidate/${row.original.id}`}
         >
           <Image
-            src={"/user-image-default.png"}
+            src={`https://avatar.vercel.sh/${row.original.name}?size=24`}
             height={24}
             width={24}
             alt="Avatar Image"
