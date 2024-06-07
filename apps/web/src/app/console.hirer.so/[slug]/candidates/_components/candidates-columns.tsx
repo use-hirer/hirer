@@ -79,7 +79,7 @@ export const CANDIDATES_TABLE_COLUMNS: ColumnDef<
               <p>Copy Candidate Link</p>
             </TooltipContent>
           </Tooltip>
-        </TooltipProvider>{" "}
+        </TooltipProvider>
       </div>
     ),
   },
