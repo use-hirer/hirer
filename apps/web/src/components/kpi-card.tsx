@@ -36,7 +36,7 @@ const KPICard: React.FC<KPICardProps> = ({
           size="xs"
           className="rounded-md"
         >
-          {increase === "positive" ? "+" : "-"}
+          {percentageChange !== 0 ? (increase === "positive" ? "+" : "-") : ""}
           {percentageChange}%
         </BadgeDelta>
       </div>

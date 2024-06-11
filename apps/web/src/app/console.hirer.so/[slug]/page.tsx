@@ -58,6 +58,8 @@ export default async function DashboardPage({
     .reverse();
 
   const item = await api.analytics.getTotalViewsForOrg({ teamId: params.slug });
+  console.log("CURRENT", item.data[0].total_views_current);
+  console.log("PREVIOUS", item.data[0].total_views_previous);
 
   return (
     <>
@@ -99,7 +101,9 @@ export default async function DashboardPage({
                   : "negative"
               }
               percentageChange={
-                item.data[0].total_views_previous === 0
+                item.data[0].total_views_previous === 0 ||
+                item.data[0].total_views_current ===
+                  item.data[0].total_views_previous
                   ? 0
                   : Math.round(
                       (item.data[0].total_views_current /
@@ -111,7 +115,9 @@ export default async function DashboardPage({
               timePeriod="Last 4 weeks"
               title="Visitors"
               deltaType={
-                item.data[0].total_views_previous === 0
+                item.data[0].total_views_previous === 0 ||
+                item.data[0].total_views_current ===
+                  item.data[0].total_views_previous
                   ? "unchanged"
                   : item.data[0].total_views_current >
                     item.data[0].total_views_previous
@@ -150,7 +156,7 @@ export default async function DashboardPage({
                         size="xs"
                         className="rounded-md"
                       >
-                        +0%
+                        0%
                       </BadgeDelta>
                     </div>
                   </Card>
