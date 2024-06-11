@@ -10,7 +10,17 @@ import Hero from "./_components/hero";
 import Pricing from "./_components/pricing";
 
 export const metadata: Metadata = {
-  title: "Hirer | The Open-Source Hiring Platform",
+  title: "Hirer | The Modern Open-Source Hiring Platform.",
+  category: "Recruitment",
+  keywords: [
+    "recruitment",
+    "job board",
+    "open source",
+    "hiring",
+    "software",
+    "AI",
+  ],
+  robots: "index, follow",
   description:
     "Hirer is a modern recruiting platform with customisable job board, real-time analytics, AI assessments, and full white-labeling.",
 };
