@@ -248,16 +248,14 @@ export const jobRouter = createTRPCRouter({
       const stages = await ctx.db.jobStage.findMany({
         where: {
           jobId: job.id,
+        },
+        include: {
           applications: {
-            every: {
+            where: {
               candidate: {
                 name: { contains: input.name, mode: "insensitive" },
               },
             },
-          },
-        },
-        include: {
-          applications: {
             include: { candidate: { select: { name: true, id: true } } },
           },
         },

@@ -9,40 +9,87 @@ import {
 import { reorderWithEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge";
 import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { RouterOutputs } from "@hirer/api";
 import { cn } from "@hirer/ui";
 import { Button } from "@hirer/ui/button";
-import { Kanban, ListBullets, MagnifyingGlass } from "@phosphor-icons/react";
+import {
+  Kanban,
+  ListBullets,
+  MagnifyingGlass,
+  Spinner,
+} from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
 import invariant from "tiny-invariant";
+import { useDebounce } from "use-debounce";
 import { Column, ColumnMap, ColumnType, Item } from "./candidates/column";
 
 export default function CandidatesBoard({
-  stageData,
-  columnOrder,
   jobId,
+  apiData,
 }: {
   jobId: string;
-  stageData: ColumnMap;
-  columnOrder: string[];
+  apiData: RouterOutputs["job"]["getCandidatesByStage"];
 }) {
   const [searchValue, setSearchValue] = useState("");
+  const [debouncedSearchValue] = useDebounce(searchValue, 500);
   const [view, setView] = useState<"TABLE" | "CARD">("TABLE");
 
-  const candidatesController = api.job.getCandidatesByStage.useQuery(
-    { id: jobId, name: searchValue },
+  const candidatesApi = api.job.getCandidatesByStage.useQuery(
+    { id: jobId, name: debouncedSearchValue },
     {
-      // initialData: stageData,
-      enabled: !!searchValue,
+      initialData: apiData,
+      enabled: !!debouncedSearchValue,
     }
   );
+
+  const stage = candidatesApi.data;
 
   const [data, setData] = useState<{
     columnMap: ColumnMap;
     orderedColumnIds: string[];
-  }>({
-    columnMap: stageData,
-    orderedColumnIds: columnOrder,
+  }>(() => {
+    const list: ColumnMap = {};
+    stage.map((stage) => {
+      list[stage.id] = {
+        title: stage.name,
+        color: stage.color || undefined,
+        items: stage.applications.map((application) => ({
+          name: application.candidate.name,
+          location: "Melbourne, Australia",
+          score: 84,
+          itemId: application.id,
+        })),
+        columnId: stage.id,
+      };
+    });
+    const columnOrder = Object.values(list).map((column) => column.columnId);
+    return {
+      columnMap: list,
+      orderedColumnIds: columnOrder,
+    };
   });
+
+  useEffect(() => {
+    const list: ColumnMap = {};
+    stage.map((stage) => {
+      list[stage.id] = {
+        title: stage.name,
+        color: stage.color || undefined,
+        items: stage.applications.map((application) => ({
+          name: application.candidate.name,
+          location: "Melbourne, Australia",
+          score: 84,
+          itemId: application.id,
+        })),
+        columnId: stage.id,
+      };
+    });
+    const columnOrder = Object.values(list).map((column) => column.columnId);
+    setData({
+      columnMap: list,
+      orderedColumnIds: columnOrder,
+    });
+  }, [stage]);
 
   const updateApplicantStage = api.stage.moveCandidate.useMutation();
 
@@ -250,10 +297,15 @@ export default function CandidatesBoard({
     <div>
       <div className="mt-4 flex gap-2">
         <div className="flex items-center gap-2 h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50">
-          <MagnifyingGlass />
+          {candidatesApi.isFetching ? (
+            <Spinner className="animate-spin" />
+          ) : (
+            <MagnifyingGlass />
+          )}{" "}
           <input
             className="w-full h-full transition-colors outline-none"
             placeholder="Search Candidates ..."
+            onChange={(e) => setSearchValue(e.currentTarget.value)}
           />
         </div>
         <div className="md:flex gap-1 hidden">
@@ -273,6 +325,7 @@ export default function CandidatesBoard({
             className={cn([view === "CARD" ? "bg-black" : "bg-white border"])}
             variant={view === "CARD" ? "default" : "secondary"}
             onClick={() => switchView("CARD")}
+            disabled={true}
           >
             <ListBullets
               size={16}
