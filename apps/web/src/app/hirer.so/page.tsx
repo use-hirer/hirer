@@ -3,6 +3,7 @@ import { validateRequest } from "@/lib/auth";
 import { Button } from "@hirer/ui/button";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Toaster } from "sonner";
 import DemoVideo from "./_components/demo-video";
 import FeatureMarquee from "./_components/feature-marquee";
 import Footer from "./_components/footer";
@@ -78,6 +79,7 @@ export default async function HirerPage() {
           <Footer />
         </div>
       </div>
+      <Toaster position="top-right" />
     </div>
   );
 }
