@@ -17,7 +17,7 @@ export default function Layout({
             <div className="grid gap-6">{children}</div>
           </div>
         </main>
-        <Toaster richColors position="top-right" closeButton />
+        <Toaster richColors position="top-right" />
       </div>
     </>
   );

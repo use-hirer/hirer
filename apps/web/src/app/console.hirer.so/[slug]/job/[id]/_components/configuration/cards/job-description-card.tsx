@@ -66,6 +66,8 @@ const JobNameCard: React.FC<JobNameCardProps> = ({ description }) => {
       });
       await utils.job.getMany.invalidate();
       await utils.job.get.invalidate({ id: params.id });
+
+      toast.success("Job description updated successfully.");
     } catch (e) {
       toast.error("An error occurred! Please try again.");
     }
