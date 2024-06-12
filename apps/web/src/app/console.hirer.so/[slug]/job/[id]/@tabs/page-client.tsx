@@ -38,12 +38,14 @@ export default function CandidatesBoard({
 }) {
   const [searchValue, setSearchValue] = useState("");
   const [debouncedSearchValue] = useDebounce(searchValue, 500);
+  const [previousResults, setPreviousResults] =
+    useState<RouterOutputs["job"]["getCandidatesByStage"]>(apiData);
   const [view, setView] = useState<"TABLE" | "CARD">("TABLE");
 
   const candidatesApi = api.job.getCandidatesByStage.useQuery(
     { id: jobId, name: debouncedSearchValue },
     {
-      initialData: apiData,
+      initialData: previousResults,
       enabled: !!debouncedSearchValue,
     }
   );
@@ -96,6 +98,22 @@ export default function CandidatesBoard({
       orderedColumnIds: columnOrder,
     });
   }, [stage]);
+
+  useEffect(() => {
+    if (candidatesApi.isFetched && candidatesApi.data !== previousResults) {
+      setPreviousResults(candidatesApi.data);
+    }
+
+    if (debouncedSearchValue === "" && candidatesApi.data !== apiData) {
+      setPreviousResults(apiData);
+    }
+  }, [
+    apiData,
+    candidatesApi.data,
+    candidatesApi.isFetched,
+    debouncedSearchValue,
+    previousResults,
+  ]);
 
   const updateApplicantStage = api.stage.moveCandidate.useMutation();
 
