@@ -13,6 +13,12 @@ import { RouterOutputs } from "@hirer/api";
 import { cn } from "@hirer/ui";
 import { Button } from "@hirer/ui/button";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@hirer/ui/tooltip";
+import {
   Kanban,
   ListBullets,
   MagnifyingGlass,
@@ -301,7 +307,7 @@ export default function CandidatesBoard({
             <Spinner className="animate-spin" />
           ) : (
             <MagnifyingGlass />
-          )}{" "}
+          )}
           <input
             className="w-full h-full transition-colors outline-none"
             placeholder="Search Candidates ..."
@@ -320,18 +326,32 @@ export default function CandidatesBoard({
               className={cn([view === "TABLE" ? "text-white" : "text-black"])}
             />
           </Button>
-          <Button
-            size="icon"
-            className={cn([view === "CARD" ? "bg-black" : "bg-white border"])}
-            variant={view === "CARD" ? "default" : "secondary"}
-            onClick={() => switchView("CARD")}
-            disabled={true}
-          >
-            <ListBullets
-              size={16}
-              className={cn([view === "CARD" ? "text-white" : "text-black"])}
-            />
-          </Button>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  size="icon"
+                  className={cn([
+                    view === "CARD"
+                      ? "bg-black"
+                      : "bg-white border cursor-not-allowed",
+                  ])}
+                  variant={view === "CARD" ? "default" : "secondary"}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ListBullets
+                    size={16}
+                    className={cn([
+                      view === "CARD" ? "text-white" : "text-black",
+                    ])}
+                  />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>List view coming soon 🚧</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </div>
       <div className="h-full min-h-[calc(100vh-201px)] overflow-x-auto border rounded-md bg-zinc-50 shadow-sm scroll-bar mt-4">
