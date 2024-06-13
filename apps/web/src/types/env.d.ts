@@ -10,6 +10,11 @@ declare global {
       AWS_REGION: string;
       AWS_ACCESS_KEY_ID: string;
       AWS_SECRET_ACCESS_KEY: string;
+      TINYBIRD_API_KEY: string;
+      KV_URL: string;
+      KV_REST_API_URL: string;
+      KV_REST_API_TOKEN: string;
+      KV_REST_API_READ_ONLY_TOKEN: string;
     }
   }
 }
