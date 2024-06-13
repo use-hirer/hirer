@@ -63,11 +63,27 @@ const CompanyProfileForm: React.FC<CompanyProfileFormProps> = () => {
     setLoading(true);
 
     try {
-      await createCompany.mutateAsync({
+      const team = await createCompany.mutateAsync({
         name: data.name,
         bio: data.description,
         website: data.website,
       });
+
+      if (data.logo) {
+        const formData = new FormData();
+        formData.append("file", data.logo);
+        formData.append(
+          "data",
+          JSON.stringify({
+            orgId: team.slug,
+          })
+        );
+
+        await fetch("/api/upload/org-logo", {
+          method: "POST",
+          body: formData,
+        });
+      }
 
       router.push("/");
     } catch (e) {
