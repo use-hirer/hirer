@@ -1,9 +1,9 @@
 "use server";
 
-export default async function CandidatesTab({
+export default async function CandidateOverview({
   params,
 }: {
   params: { slug: string; id: string };
 }) {
-  return <div>hello</div>;
+  return <div>Overview</div>;
 }
