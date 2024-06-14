@@ -58,8 +58,6 @@ export default async function DashboardPage({
     .reverse();
 
   const item = await api.analytics.getTotalViewsForOrg({ teamId: params.slug });
-  console.log("CURRENT", item.data[0].total_views_current);
-  console.log("PREVIOUS", item.data[0].total_views_previous);
 
   return (
     <>

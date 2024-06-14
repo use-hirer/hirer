@@ -88,12 +88,12 @@ const NavUser: React.FC<NavUserProps> = ({
           <div className="text-xs font-normal">{email}</div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => router.push("/profile")}>
+        <DropdownMenuItem onClick={() => router.push("profile")}>
           Profile
           <User className="ml-auto" />
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => router.push("/settings")}>
+        <DropdownMenuItem onClick={() => router.push("settings")}>
           Settings
           <Gear className="ml-auto" />
         </DropdownMenuItem>
