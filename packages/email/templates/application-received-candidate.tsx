@@ -22,7 +22,7 @@ interface ApplicationReceivedProps {
   jobLink: string;
 }
 
-export const ApplicationReceived = ({
+export const ApplicationReceivedCandidate = ({
   email = "test@email.com",
   name = "Nick Mandylas",
   orgName = "ACME Inc",
@@ -30,7 +30,7 @@ export const ApplicationReceived = ({
   jobTitle = "Frontend Engineer",
   jobLink = "https://acme-inc.hirer.so",
 }: ApplicationReceivedProps) => {
-  const previewText = `Application for ${jobTitle} at ${orgName} received!`;
+  const previewText = `Thank you for applying to ${orgName}!`;
 
   return (
     <Html>
@@ -55,7 +55,7 @@ export const ApplicationReceived = ({
               )}
             </Section>
             <Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
-              Job Application Received!
+              We've received your application!
             </Heading>
             <Text className="text-black text-[14px] leading-[24px]">
               Hi {name}!
@@ -85,4 +85,4 @@ export const ApplicationReceived = ({
   );
 };
 
-export default ApplicationReceived;
+export default ApplicationReceivedCandidate;
