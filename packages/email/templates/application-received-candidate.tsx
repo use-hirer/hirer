@@ -17,7 +17,7 @@ interface ApplicationReceivedProps {
   email: string;
   name: string;
   orgName: string;
-  orgLogo: string;
+  orgLogo?: string;
   jobTitle: string;
   jobLink: string;
 }
