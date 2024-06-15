@@ -14,7 +14,7 @@ import {
   Text,
 } from "@react-email/components";
 
-interface VercelInviteUserEmailProps {
+interface LoginMagicLinkProps {
   email: string;
   loginLink: string;
 }
@@ -22,7 +22,7 @@ interface VercelInviteUserEmailProps {
 export const MagicLink = ({
   email = "test@email.com",
   loginLink = "https://console.hirer.so/",
-}: VercelInviteUserEmailProps) => {
+}: LoginMagicLinkProps) => {
   const previewText = `Your Hirer Login Link`;
   let baseUrl: string;
 
