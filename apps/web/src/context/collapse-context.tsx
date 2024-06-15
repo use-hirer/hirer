@@ -7,6 +7,8 @@ import React, { createContext, useContext, useState } from "react";
 interface CollapseContextProps {
   isCollapsed: boolean;
   toggleCollapse: () => void;
+  isMobileMenuOpen: boolean;
+  toggleMobileMenu: () => void;
 }
 
 // Create the context
@@ -34,6 +36,11 @@ export const CollapseProvider: React.FC<{ children: React.ReactNode }> = ({
       : false;
 
   const [isCollapsed, setIsCollapsed] = useState<boolean>(defaultCollapse);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   const toggleCollapse = () => {
     const newState = !isCollapsed;
@@ -42,7 +49,14 @@ export const CollapseProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <CollapseContext.Provider value={{ isCollapsed, toggleCollapse }}>
+    <CollapseContext.Provider
+      value={{
+        isCollapsed,
+        toggleCollapse,
+        isMobileMenuOpen,
+        toggleMobileMenu,
+      }}
+    >
       {children}
     </CollapseContext.Provider>
   );

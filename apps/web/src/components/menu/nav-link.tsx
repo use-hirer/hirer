@@ -1,3 +1,4 @@
+import { useCollapse } from "@/context/collapse-context";
 import { cn } from "@hirer/ui";
 import {
   Tooltip,
@@ -15,6 +16,7 @@ interface NavLinkProps {
   selected?: boolean;
   href: string;
   collapsed?: boolean;
+  mobile?: boolean;
 }
 
 const NavLink: React.FC<NavLinkProps> = ({
@@ -24,7 +26,10 @@ const NavLink: React.FC<NavLinkProps> = ({
   selected = false,
   href,
   collapsed = false,
+  mobile = false,
 }) => {
+  const { isMobileMenuOpen, toggleMobileMenu } = useCollapse();
+
   return (
     <>
       {collapsed ? (
@@ -32,6 +37,11 @@ const NavLink: React.FC<NavLinkProps> = ({
           <Tooltip delayDuration={0}>
             <TooltipTrigger asChild>
               <Link
+                onClick={() => {
+                  if (isMobileMenuOpen) {
+                    toggleMobileMenu();
+                  }
+                }}
                 className={cn([
                   "flex items-center justify-center px-2 py-2 rounded-md cursor-pointer",
                   selected && "bg-black",
@@ -58,6 +68,11 @@ const NavLink: React.FC<NavLinkProps> = ({
             !selected && "hover:bg-zinc-300/30",
           ])}
           href={href}
+          onClick={() => {
+            if (isMobileMenuOpen) {
+              toggleMobileMenu();
+            }
+          }}
         >
           <Icon className="h-4 w-4" color={selected ? "white" : "black"} />
           <div
