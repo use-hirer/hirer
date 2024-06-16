@@ -35,7 +35,7 @@ export default function MobileNav() {
             <div className="flex-grow">
               <MobileMenuLayout />
             </div>
-            <div className="flex justify-center mb-4">
+            <div className="flex justify-center">
               <Button
                 className="w-full"
                 disabled={loading}
