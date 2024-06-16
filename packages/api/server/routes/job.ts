@@ -335,4 +335,40 @@ export const jobRouter = createTRPCRouter({
         data: { description: input.description },
       });
     }),
+  updateAssessmentCriteria: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        assessmentCriteria: z.string().optional(),
+        includeDescriptionInAssessment: z.boolean().optional(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const job = await ctx.db.job.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+
+      if (!job) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `The job with id ${input.id} could not be found.`,
+        });
+      }
+
+      let jobDescriptionAssessment = input.includeDescriptionInAssessment;
+
+      if (!input.assessmentCriteria) {
+        jobDescriptionAssessment = true;
+      }
+
+      await ctx.db.job.update({
+        where: { id: job.id },
+        data: {
+          assessmentCriteria: input.assessmentCriteria,
+          includeDescriptionInAssessment: jobDescriptionAssessment,
+        },
+      });
+    }),
 });

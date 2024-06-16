@@ -19,7 +19,12 @@ const CVAssessmentView: React.FC<SettingsViewProps> = ({ job }) => {
 
   return (
     <div className="flex gap-6 flex-col">
-      <AssessmentCriteriaCard name={jobClient.data.title} />
+      <AssessmentCriteriaCard
+        assessmentCriteria={jobClient.data.assessmentCriteria || undefined}
+        includeDescriptionInAssessment={
+          jobClient.data.includeDescriptionInAssessment
+        }
+      />
     </div>
   );
 };

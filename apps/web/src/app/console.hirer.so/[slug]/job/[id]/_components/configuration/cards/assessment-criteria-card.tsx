@@ -29,19 +29,24 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const jobNameSchema = z.object({
-  name: z.string().optional(),
+  assessmentCriteria: z.string().optional(),
   includeJobDescription: z.boolean(),
 });
 
 type JobNameFormValues = z.infer<typeof jobNameSchema>;
 
 interface JobNameCardProps {
-  name: string;
+  assessmentCriteria?: string;
+  includeDescriptionInAssessment: boolean;
 }
 
-const AssessmentCriteriaCard: React.FC<JobNameCardProps> = ({ name }) => {
+const AssessmentCriteriaCard: React.FC<JobNameCardProps> = ({
+  assessmentCriteria,
+  includeDescriptionInAssessment,
+}) => {
   const params = useParams() as { slug: string; id: string };
-  const updateName = api.job.updateName.useMutation();
+  const updateAssessmentCriteria =
+    api.job.updateAssessmentCriteria.useMutation();
   const utils = api.useUtils();
   const [loading, setLoading] = useState(false);
 
@@ -49,36 +54,40 @@ const AssessmentCriteriaCard: React.FC<JobNameCardProps> = ({ name }) => {
     resolver: zodResolver(jobNameSchema),
     mode: "onChange",
     defaultValues: {
-      name: name,
-      includeJobDescription: true,
+      assessmentCriteria: assessmentCriteria,
+      includeJobDescription: includeDescriptionInAssessment,
     },
   });
 
   useEffect(() => {
-    const name = form.getValues("name");
-    if (name?.length === 0) {
+    const name = form.getValues("assessmentCriteria");
+    if (assessmentCriteria?.length === 0) {
       console.log("name is empty");
       form.setValue("includeJobDescription", true);
     }
-  }, [form, form.getValues("name")]);
+  }, [assessmentCriteria?.length, form]);
 
   async function onSubmit(data: JobNameFormValues) {
     setLoading(true);
 
-    if (data.name === name) {
+    if (
+      data.assessmentCriteria === assessmentCriteria &&
+      data.includeJobDescription === includeDescriptionInAssessment
+    ) {
       setLoading(false);
       return;
     }
 
     try {
-      //   await updateName.mutateAsync({
-      //     id: params.id.split("-")[0],
-      //     name: data.name,
-      //   });
-      await utils.job.getMany.invalidate();
+      await updateAssessmentCriteria.mutateAsync({
+        id: params.id.split("-")[0],
+        assessmentCriteria: data.assessmentCriteria,
+        includeDescriptionInAssessment: data.includeJobDescription,
+      });
+
       await utils.job.get.invalidate({ id: params.id });
 
-      toast.success("Job name updated successfully.");
+      toast.success("Assessment criteria updated successfully.");
     } catch (e) {
       toast.error("An error occurred! Please try again.");
     }
@@ -102,7 +111,7 @@ const AssessmentCriteriaCard: React.FC<JobNameCardProps> = ({ name }) => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               control={form.control}
-              name="name"
+              name="assessmentCriteria"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Assessment Criteria</FormLabel>
@@ -129,14 +138,17 @@ const AssessmentCriteriaCard: React.FC<JobNameCardProps> = ({ name }) => {
                     <Checkbox
                       checked={field.value}
                       onCheckedChange={(checked) => {
-                        const name = form.getValues("name");
-                        if (name?.length === 0) {
+                        const assessmentCriteria =
+                          form.getValues("assessmentCriteria");
+                        if (assessmentCriteria?.length === 0) {
                           // Prevent unchecking when name is empty
                           return;
                         }
                         field.onChange(checked);
                       }}
-                      disabled={form.getValues("name")?.length === 0}
+                      disabled={
+                        form.getValues("assessmentCriteria")?.length === 0
+                      }
                     />
                   </FormControl>
                   <FormMessage />
