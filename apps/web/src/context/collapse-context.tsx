@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 // Define the context shape
 interface CollapseContextProps {
@@ -47,6 +47,22 @@ export const CollapseProvider: React.FC<{ children: React.ReactNode }> = ({
     setIsCollapsed(newState);
     localStorage.setItem("hirer:collapsed", String(newState));
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        // md breakpoint in Tailwind CSS
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <CollapseContext.Provider
