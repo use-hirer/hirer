@@ -55,7 +55,7 @@ export class HirerStack extends cdk.Stack {
         certificate: acm.Certificate.fromCertificateArn(
           this,
           "assets-certificate",
-          "arn:aws:acm:us-east-1:590183998571:certificate/09fa0b93-439d-4c1c-8c40-d5447e0606af"
+          `arn:aws:acm:us-east-1:${props?.env?.account}:certificate/09fa0b93-439d-4c1c-8c40-d5447e0606af`
         ),
         logFilePrefix: "assets-distribution-logs/",
       }
