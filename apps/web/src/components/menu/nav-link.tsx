@@ -16,7 +16,6 @@ interface NavLinkProps {
   selected?: boolean;
   href: string;
   collapsed?: boolean;
-  mobile?: boolean;
 }
 
 const NavLink: React.FC<NavLinkProps> = ({
@@ -26,7 +25,6 @@ const NavLink: React.FC<NavLinkProps> = ({
   selected = false,
   href,
   collapsed = false,
-  mobile = false,
 }) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useCollapse();
 

@@ -93,7 +93,6 @@ const MobileMenuLayout: React.FC<{}> = ({}) => {
                 href={`/${slug}${item.path}`}
                 suffix={item.suffix}
                 selected={isSelected(item.path, slug)}
-                mobile={true}
               />
             );
           case "Separator":
