@@ -34,7 +34,7 @@ importers:
         version: 3.556.0
       '@copilotkit/backend':
         specifier: ^0.9.0
-        version: 0.9.0(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(fast-xml-parser@4.2.5)(html-to-text@9.0.5)(ignore@5.3.0)(lodash@4.17.21)(pdf-parse@1.1.1)(ws@8.11.0)
+        version: 0.9.0(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(fast-xml-parser@4.2.5)(html-to-text@9.0.5)(ignore@5.3.0)(lodash@4.17.21)(neo4j-driver@5.21.0)(pdf-parse@1.1.1)(ws@8.11.0)
       '@copilotkit/react-core':
         specifier: ^0.25.0
         version: 0.25.0(react@18.2.0)
@@ -70,7 +70,7 @@ importers:
         version: 3.3.4(react-hook-form@7.51.2(react@18.2.0))
       '@langchain/community':
         specifier: ^0.0.48
-        version: 0.0.48(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(html-to-text@9.0.5)(lodash@4.17.21)(ws@8.11.0)
+        version: 0.0.48(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(html-to-text@9.0.5)(lodash@4.17.21)(neo4j-driver@5.21.0)(ws@8.11.0)
       '@langchain/core':
         specifier: ^0.1.57
         version: 0.1.57
@@ -172,10 +172,13 @@ importers:
         version: 1.3.0(next@14.2.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       langchain:
         specifier: ^0.1.33
-        version: 0.1.33(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(fast-xml-parser@4.2.5)(html-to-text@9.0.5)(ignore@5.3.0)(lodash@4.17.21)(pdf-parse@1.1.1)(ws@8.11.0)
+        version: 0.1.33(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(fast-xml-parser@4.2.5)(html-to-text@9.0.5)(ignore@5.3.0)(lodash@4.17.21)(neo4j-driver@5.21.0)(pdf-parse@1.1.1)(ws@8.11.0)
       nanoid:
         specifier: ^5.0.7
         version: 5.0.7
+      neo4j-driver:
+        specifier: ^5.21.0
+        version: 5.21.0
       next:
         specifier: 14.2.3
         version: 14.2.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -321,7 +324,7 @@ importers:
         version: link:../database
       '@langchain/community':
         specifier: ^0.0.48
-        version: 0.0.48(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(html-to-text@9.0.5)(lodash@4.17.21)(ws@8.11.0)
+        version: 0.0.48(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(html-to-text@9.0.5)(lodash@4.17.21)(neo4j-driver@5.21.0)(ws@8.11.0)
       '@langchain/core':
         specifier: ^0.1.57
         version: 0.1.57
@@ -3751,6 +3754,9 @@ packages:
   buffer@5.7.1:
     resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
 
+  buffer@6.0.3:
+    resolution: {integrity: sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==}
+
   busboy@1.6.0:
     resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
     engines: {node: '>=10.16.0'}
@@ -5823,6 +5829,15 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
+  neo4j-driver-bolt-connection@5.21.0:
+    resolution: {integrity: sha512-CHNZYJ2PhRyG89iPR+IarPjce9eW2ZFSbHwd9+22WiwWeyBnxQc/GZ3biReQGDC0VpOotlvQy9gBWk+4E7fC7A==}
+
+  neo4j-driver-core@5.21.0:
+    resolution: {integrity: sha512-YhbaKcDZU3JIzxNH+GIPhsPVvGaLoRhAkqJrgWPhviqOmMON/OggLmnH/x1bms5zvAJMG/7m9BBxC/J8Z3Lkgg==}
+
+  neo4j-driver@5.21.0:
+    resolution: {integrity: sha512-bysAvMmoGCRImbLS/nNlMehXzm10fJfNxqmvzoSmdaU48jXxR73Jk8DxUtBd8UDN8MWQHOaXe+udLIeiKbsBOw==}
+
   next@14.1.0:
     resolution: {integrity: sha512-wlzrsbfeSU48YQBjZhDzOwhWhGsy+uQycR8bHAOt1LY1bn3zZEcDyHQOEoN3aWzQ8LHCAJ1nqrWCc9XF2+O45Q==}
     engines: {node: '>=18.17.0'}
@@ -6511,6 +6526,9 @@ packages:
 
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
+
+  rxjs@7.8.1:
+    resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
 
   sade@1.8.1:
     resolution: {integrity: sha512-xal3CZX1Xlo/k4ApwCFrHVACi9fBqJ7V+mwhBsuf/1IOKbBy098Fex+Wa/5QMubw09pSZ/u8EY8PWgevJsXp1A==}
@@ -7967,13 +7985,13 @@ snapshots:
     dependencies:
       zod: 3.22.4
 
-  '@copilotkit/backend@0.9.0(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(fast-xml-parser@4.2.5)(html-to-text@9.0.5)(ignore@5.3.0)(lodash@4.17.21)(pdf-parse@1.1.1)(ws@8.11.0)':
+  '@copilotkit/backend@0.9.0(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(fast-xml-parser@4.2.5)(html-to-text@9.0.5)(ignore@5.3.0)(lodash@4.17.21)(neo4j-driver@5.21.0)(pdf-parse@1.1.1)(ws@8.11.0)':
     dependencies:
       '@copilotkit/shared': 0.9.0
       '@langchain/core': 0.1.63
       '@langchain/openai': 0.0.28
       js-tiktoken: 1.0.10
-      langchain: 0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(fast-xml-parser@4.2.5)(html-to-text@9.0.5)(ignore@5.3.0)(lodash@4.17.21)(pdf-parse@1.1.1)(ws@8.11.0)
+      langchain: 0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(fast-xml-parser@4.2.5)(html-to-text@9.0.5)(ignore@5.3.0)(lodash@4.17.21)(neo4j-driver@5.21.0)(pdf-parse@1.1.1)(ws@8.11.0)
       openai: 4.46.1
       zod: 3.23.8
     transitivePeerDependencies:
@@ -8343,7 +8361,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@langchain/community@0.0.48(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(html-to-text@9.0.5)(lodash@4.17.21)(ws@8.11.0)':
+  '@langchain/community@0.0.48(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(html-to-text@9.0.5)(lodash@4.17.21)(neo4j-driver@5.21.0)(ws@8.11.0)':
     dependencies:
       '@langchain/core': 0.1.57
       '@langchain/openai': 0.0.28
@@ -8364,6 +8382,7 @@ snapshots:
       '@vercel/kv': 1.0.1
       html-to-text: 9.0.5
       lodash: 4.17.21
+      neo4j-driver: 5.21.0
       ws: 8.11.0
     transitivePeerDependencies:
       - encoding
@@ -10930,6 +10949,11 @@ snapshots:
       base64-js: 1.5.1
       ieee754: 1.2.1
 
+  buffer@6.0.3:
+    dependencies:
+      base64-js: 1.5.1
+      ieee754: 1.2.1
+
   busboy@1.6.0:
     dependencies:
       streamsearch: 1.1.0
@@ -12376,10 +12400,10 @@ snapshots:
 
   kleur@4.1.5: {}
 
-  langchain@0.1.33(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(fast-xml-parser@4.2.5)(html-to-text@9.0.5)(ignore@5.3.0)(lodash@4.17.21)(pdf-parse@1.1.1)(ws@8.11.0):
+  langchain@0.1.33(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(fast-xml-parser@4.2.5)(html-to-text@9.0.5)(ignore@5.3.0)(lodash@4.17.21)(neo4j-driver@5.21.0)(pdf-parse@1.1.1)(ws@8.11.0):
     dependencies:
       '@anthropic-ai/sdk': 0.9.1
-      '@langchain/community': 0.0.48(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(html-to-text@9.0.5)(lodash@4.17.21)(ws@8.11.0)
+      '@langchain/community': 0.0.48(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(html-to-text@9.0.5)(lodash@4.17.21)(neo4j-driver@5.21.0)(ws@8.11.0)
       '@langchain/core': 0.1.57
       '@langchain/openai': 0.0.28
       binary-extensions: 2.2.0
@@ -12473,10 +12497,10 @@ snapshots:
       - vectordb
       - voy-search
 
-  langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(fast-xml-parser@4.2.5)(html-to-text@9.0.5)(ignore@5.3.0)(lodash@4.17.21)(pdf-parse@1.1.1)(ws@8.11.0):
+  langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(fast-xml-parser@4.2.5)(html-to-text@9.0.5)(ignore@5.3.0)(lodash@4.17.21)(neo4j-driver@5.21.0)(pdf-parse@1.1.1)(ws@8.11.0):
     dependencies:
       '@anthropic-ai/sdk': 0.9.1
-      '@langchain/community': 0.0.48(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(html-to-text@9.0.5)(lodash@4.17.21)(ws@8.11.0)
+      '@langchain/community': 0.0.48(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(@upstash/redis@1.29.0)(@vercel/kv@1.0.1)(html-to-text@9.0.5)(lodash@4.17.21)(neo4j-driver@5.21.0)(ws@8.11.0)
       '@langchain/core': 0.1.63
       '@langchain/openai': 0.0.28
       '@langchain/textsplitters': 0.0.0
@@ -13353,6 +13377,20 @@ snapshots:
   negotiator@0.6.3: {}
 
   neo-async@2.6.2: {}
+
+  neo4j-driver-bolt-connection@5.21.0:
+    dependencies:
+      buffer: 6.0.3
+      neo4j-driver-core: 5.21.0
+      string_decoder: 1.3.0
+
+  neo4j-driver-core@5.21.0: {}
+
+  neo4j-driver@5.21.0:
+    dependencies:
+      neo4j-driver-bolt-connection: 5.21.0
+      neo4j-driver-core: 5.21.0
+      rxjs: 7.8.1
 
   next@14.1.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
@@ -14309,6 +14347,10 @@ snapshots:
   run-parallel@1.2.0:
     dependencies:
       queue-microtask: 1.2.3
+
+  rxjs@7.8.1:
+    dependencies:
+      tslib: 2.6.2
 
   sade@1.8.1:
     dependencies:
