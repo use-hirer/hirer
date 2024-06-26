@@ -15,6 +15,9 @@ declare global {
       KV_REST_API_URL: string;
       KV_REST_API_TOKEN: string;
       KV_REST_API_READ_ONLY_TOKEN: string;
+      TRIGGER_API_KEY: string;
+      TRIGGER_API_URL: string;
+      NEXT_PUBLIC_TRIGGER_PUBLIC_API_KEY: string;
     }
   }
 }
